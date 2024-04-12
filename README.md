@@ -1,10 +1,18 @@
-# GDA
+## Gerenciador De Arquivos
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 17.3.4.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+## Servidor de Desenvolvimento
 
-## Development server
+Execute `ng serve` para iniciar o servidor de desenvolvimento. Navegue até `http://localhost:4200/`. A aplicação será recarregada automaticamente se você modificar qualquer um dos arquivos de origem.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+ng serve
+
+
+## Componentes Flowbite
+
+Este projeto utiliza componentes do [Flowbite](https://flowbite.com/#components) para a interface do usuário.
+
 
 ## Code scaffolding
 
