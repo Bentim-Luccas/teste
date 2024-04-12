@@ -1,22 +1,34 @@
-## Gerenciador De Arquivos
+<p align="center">
+  <a href="https://angular.io/" target="blank"><img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200" alt="Angular Logo" /></a>
+</p>
+
+<p align="center">Um framework moderno para construção de aplicações web eficientes e escaláveis.</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/v/@angular/core.svg" alt="NPM Version" /></a>
+  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/l/@angular/core" alt="Package License" /></a>
+  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/dm/@angular/common.svg" alt="NPM Downloads" /></a>
+</p>
+
+## Description
+
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 17.3.4.
 
-## Servidor de Desenvolvimento
-
-Execute `ng serve` para iniciar o servidor de desenvolvimento. Navegue até `http://localhost:4200/`. A aplicação será recarregada automaticamente se você modificar qualquer um dos arquivos de origem.
+## Instalação
 
 ```bash
-ng serve
+$ npm install
+```
 
+# modo de desenvolvimento
+```bash
+$ ng serve
+```
+Navigate to `http://localhost:4200/`
 
-## Componentes Flowbite
+# Componentes Flowbite
 
 Este projeto utiliza componentes do [Flowbite](https://flowbite.com/#components) para a interface do usuário.
-
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
