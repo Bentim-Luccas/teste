@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './grafico.component.css'
 })
 export class GraficoComponent {
+  
 
 }
