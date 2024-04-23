@@ -1,0 +1,56 @@
+.card{
+  width: 292.08px;
+  height: 200px;
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.1);
+
+  h2{
+    font-weight: bold;
+    color: red;
+    margin-bottom: 10px;
+  }
+}
+
+.secao-cima{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+
+  .bloco1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: red; */
+    align-items: center;
+  }
+  .bloco2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: red; */
+    align-items: center;
+  }
+
+}
+
+.secao-baixo{
+  display: flex;
+  justify-content: space-around;
+
+  .bloco3{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: red; */
+    align-items: center;
+  }
+  .bloco4{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: red; */
+    align-items: center;
+  }
+}
