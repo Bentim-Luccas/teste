@@ -1,0 +1,40 @@
+/* Div Principal */
+.principal{
+  height: 150px;
+  width: 900px;
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+
+}
+
+/* Estilos Card */
+.bg-cards{
+  background-color: #E5ECF6;
+}
+
+.max-w-custom{
+  max-width: 200px;
+  max-height: 150px;
+
+  h3{
+    font-weight: bold;
+
+  }
+}
+
+/* Estilos Ícones */
+.position-icon{
+  padding: 0;
+  width: 150px;
+  height: 20px;
+  display: flex;
+  justify-content: end;
+
+  svg{
+    margin: 0;
+
+  }
+}
+
+/* Estilos Texto */
