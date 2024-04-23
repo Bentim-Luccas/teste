@@ -7,7 +7,7 @@ header{
 
 
 /* Meio */
-section{
+.meio{
   display: flex;
   justify-content: space-between;
 

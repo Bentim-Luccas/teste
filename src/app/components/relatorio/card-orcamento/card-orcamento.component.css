@@ -1,0 +1,18 @@
+
+/* Card */
+.bg-custom{
+  background: #E3F5FF;
+}
+.max-w-custom{
+  max-width: 400px;
+  max-height: 150px;
+
+  p {
+    font-weight: bold;
+    font-size: 30px;
+  }
+}
+
+/* Fontes */
+
+
