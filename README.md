@@ -1,39 +1,68 @@
 <p align="center">
-  <a href="https://angular.io/" target="blank"><img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200" alt="Angular Logo" /></a>
+  <a href="http://angular.io/" target="blank"><img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200" alt="Angular Logo" /></a>
 </p>
-
-<p align="center">Um framework moderno para construção de aplicações web eficientes e escaláveis.</p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/v/@angular/core.svg" alt="NPM Version" /></a>
-  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/l/@angular/core" alt="Package License" /></a>
-  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/dm/@angular/common.svg" alt="NPM Downloads" /></a>
+  A web application framework for crafting dynamic single-page applications.
+</p>
+<p align="center">
+  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/v/@angular/core" alt="NPM Version" /></a>
+  <a href="https://github.com/angular/angular-cli" target="_blank"><img src="https://img.shields.io/badge/angular-cli-blue.svg" alt="Angular CLI" /></a>
+  <a href="https://angular.io/guide/license" target="_blank"><img src="https://img.shields.io/npm/l/@angular/core" alt="License" /></a>
+  <a href="https://github.com/angular/angular-cli/actions/workflows/build.yml" target="_blank"><img src="https://github.com/angular/angular-cli/actions/workflows/build.yml/badge.svg" alt="Build Status" /></a>
 </p>
 
-## Description
 
-Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 17.3.4.
 
-## Instalação
+
+# Gerenciador de Arquivos 
+
+Este projeto foi gerado com  [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+
+## Installation
 
 ```bash
 $ npm install
 ```
 
-# modo de desenvolvimento
+## Servidor de Desenvolvimento
+
+Execute
 ```bash
 $ ng serve
 ```
-Navigate to `http://localhost:4200/`
+para iniciar o servidor de desenvolvimento. Navegue para `http://localhost:4200/`. O aplicativo irá recarregar automaticamente se você modificar qualquer um dos arquivos fonte.
 
-# Componentes Flowbite
-
-Este projeto utiliza componentes do [Flowbite](https://flowbite.com/#components) para a interface do usuário.
-
+## Bibloteca de Componentes 
+- [Flowbite ](https://flowbite.com/#components)
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Execute 
+```bash
+$ ng build
+```
+para construir o projeto. Os artefatos de construção serão armazenados no diretório `dist/`.
 
-## Further help
+## Executando Testes de Unidade
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Execute 
+```bash
+$ ng test
+```
+para executar os testes de unidade via [Karma](https://karma-runner.github.io).
+
+## Executando Testes End-to-End
+
+Execute 
+```bash
+$ ng e2e
+```
+para executar os testes end-to-end através de uma plataforma de sua escolha. Para usar este comando, você precisa primeiro adicionar um pacote que implemente capacidades de teste end-to-end.
+
+## Ajuda Adicional
+
+Para obter mais ajuda sobre o Angular CLI, use 
+```bash
+$ ng help
+```
+ou consulte a página [Angular CLI Overview and Command Reference](https://angular.io/cli).
