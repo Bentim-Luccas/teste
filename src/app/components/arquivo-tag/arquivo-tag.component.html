@@ -1,0 +1,7 @@
+<div class="flex flex-row p-2">
+  @for (tag of tags; track tag) {
+    <div class="text-{{tag.color}} p-2 m-1 bg-gray-400 rounded-full border-{{tag.color}}">
+      {{tag.nome}}
+    </div>
+  }
+</div>

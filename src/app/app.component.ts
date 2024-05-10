@@ -6,7 +6,6 @@ import { initFlowbite } from 'flowbite';
 import {  PLATFORM_ID, Inject } from '@angular/core';
 
 import { isPlatformBrowser } from "@angular/common";
-import { GerenciamentoArquivosComponent } from './components/gerenciamento-arquivos/gerenciamento-arquivos.component';
 
 @Component({
   selector: 'app-root',

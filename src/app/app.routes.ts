@@ -1,11 +1,15 @@
 import { Routes } from '@angular/router';
-import { GerenciamentoArquivosComponent } from './components/gerenciamento-arquivos/gerenciamento-arquivos.component';
+import { HomeComponent } from './pages/home/home.component';
+import { GerenciamentoArquivosComponent } from './pages/gerenciamento-arquivos/gerenciamento-arquivos.component'
 
 export const routes: Routes = [
     {
-        path:'',
+        path:'page',
         loadComponent : () => import('./components/comentario/comentario.component')
 
+    },
+    {
+        path:'' ,component:HomeComponent
     },
     {
       path: 'arquivos',
