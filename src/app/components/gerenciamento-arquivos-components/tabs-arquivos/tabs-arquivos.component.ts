@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import ComentarioComponent from '../comentario/comentario.component';
+import ComentarioComponent from '../../comentario/comentario.component';
 import { VisualizacaoArquivoComponent } from '../visualizacao-arquivo/visualizacao-arquivo.component'
 
 @Component({

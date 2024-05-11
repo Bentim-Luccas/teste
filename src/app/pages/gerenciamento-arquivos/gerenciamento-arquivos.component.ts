@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ArquivoTagComponent } from '../../components/arquivo-tag/arquivo-tag.component'
-import { BarraPesquisaComponent } from '../../components/barra-pesquisa/barra-pesquisa.component'
+import { ArquivoTagComponent } from '../../components/gerenciamento-arquivos-components/arquivo-tag/arquivo-tag.component'
+import { BarraPesquisaComponent } from '../../components/gerenciamento-arquivos-components/barra-pesquisa/barra-pesquisa.component'
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component'
-import { ModalButtonComponent, ModalEnviarArquivoComponent } from '../../components/modal-enviar-arquivo/modal-enviar-arquivo.component'
-import { ModalMudarAcessoComponent } from '../../components/modal-mudar-acesso/modal-mudar-acesso.component'
-import { TabelaArquivosComponent } from '../../components/tabela-arquivos/tabela-arquivos.component'
+import { ModalButtonComponent, ModalEnviarArquivoComponent } from '../../components/gerenciamento-arquivos-components/modal-enviar-arquivo/modal-enviar-arquivo.component'
+import { ModalMudarAcessoComponent } from '../../components/gerenciamento-arquivos-components/modal-mudar-acesso/modal-mudar-acesso.component'
+import { TabelaArquivosComponent } from '../../components/gerenciamento-arquivos-components/tabela-arquivos/tabela-arquivos.component'
 import { NavbarComponent } from '../../components/navbar/navbar.component'
 
 @Component({
