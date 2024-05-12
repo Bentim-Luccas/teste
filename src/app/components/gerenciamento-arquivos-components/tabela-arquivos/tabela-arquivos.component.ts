@@ -3,6 +3,7 @@ import { ArquivoMenuDropdownComponent } from '../arquivo-menu-dropdown/arquivo-m
 import { TabsArquivosComponent } from '../tabs-arquivos/tabs-arquivos.component'
 import { ArquivoService } from '../../../service/arquivo.service';
 import { Arquivo } from '../../../interface/arquivo';
+import { log } from 'console';
 
 @Component({
   selector: 'app-tabela-arquivos',
@@ -22,22 +23,14 @@ export class TabelaArquivosComponent implements OnInit {
   ngOnInit() {
     this.arquivoService.findAll().subscribe((data) => {
       this.listaArquivos = data
-      console.log(this.listaArquivos);
-
     })
-
   }
 
+  exibirDetalhes(arquivo: Arquivo) {
+    console.log("setando o arquivo ", arquivo);
+    this.arquivoService.setArquivoSelecionado(arquivo);
 
-
-
-
-
-
-
-
-
-
+  }
 
 
 

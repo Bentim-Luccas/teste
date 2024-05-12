@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { ArquivoTagComponent } from '../arquivo-tag/arquivo-tag.component'
+import { Subscription } from 'rxjs';
+import { Arquivo } from '../../../interface/arquivo';
+import { ArquivoService } from '../../../service/arquivo.service';
+import { Usuario } from '../../../interface/usuario';
+import { UsuarioService } from '../../../service/usuario.service';
 
 @Component({
   selector: 'app-visualizacao-arquivo',
@@ -8,23 +13,38 @@ import { ArquivoTagComponent } from '../arquivo-tag/arquivo-tag.component'
   templateUrl: './visualizacao-arquivo.component.html',
   styleUrl: './visualizacao-arquivo.component.css'
 })
-export class VisualizacaoArquivoComponent {
+export class VisualizacaoArquivoComponent implements OnDestroy {
 
-  visualizacoes: Visualização[] = [
-    {
-      nomeArquivo: 'document1',
-      dataCriacao: '20/04/2024',
-      dataModificacao: '28/04/2024',
+  arquivoSelecionado: Arquivo | null = null;
+  private arquivoSubscription: Subscription;
+  autor: Usuario | null = null;
+
+  constructor(private arquivoService: ArquivoService, private usuarioService: UsuarioService) {
+    this.arquivoSubscription = this.arquivoService.arquivoSelecionado$.subscribe(
+      arquivo => {
+        this.arquivoSelecionado = arquivo;
+        if (arquivo) {
+          this.buscarAutor(arquivo.usuario_id); // Chame a função para buscar o autor quando um novo arquivo for selecionado
+        }
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.arquivoSubscription.unsubscribe();
+    if (this.autor) {
+      this.autor = null // Certifique-se de cancelar a inscrição ao destruir o componente
     }
+  }
 
-  ]
-
-  autores: Autor[] =[
-    {
-      nome: 'Neil Sims',
-      cargo: 'Arquiteto G+P'
-    }
-  ]
+  buscarAutor(usuarioId: number) {
+    this.usuarioService.findByid(usuarioId).subscribe(
+      data => {
+        this.autor = data;
+        console.log(this.autor); // Certifique-se de que o autor foi buscado com sucesso
+      }
+    );
+  }
 
 
   revisores: Revisor[] = [
@@ -39,15 +59,6 @@ export class VisualizacaoArquivoComponent {
   ]
 }
 
-export class Visualização {
-  nomeArquivo!: string;
-  dataCriacao!: string;
-  dataModificacao!: string;
-}
-export class Autor {
-  nome!: string;
-  cargo!: string;
-}
 export class Revisor {
   nome!: string;
   cargo!: string;

@@ -6,14 +6,14 @@
       <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
           <li class="py-3 sm:py-4">
               <div class="flex items-center">
-                @for ( visualizacao of visualizacoes ; track visualizacao) {
+                @if (arquivoSelecionado) {
                   <div class="">
                     <div class="flex p-1">
                       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.005 11.19V12l6.998 4.042L19 12v-.81M5 16.15v.81L11.997 21l6.998-4.042v-.81M12.003 3 5.005 7.042l6.998 4.042L19 7.042 12.003 3Z"/>
                       </svg>
                       <p class="text-base ml-1 font-medium text-gray-900 truncate dark:text-white">
-                          {{visualizacao.nomeArquivo}}
+                          {{arquivoSelecionado.arquivo_descricao}}
                       </p>
                     </div>
                     <div class="flex p-1">
@@ -21,7 +21,7 @@
                         <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/>
                       </svg>
                       <p class="text-base ml-1 font-medium text-gray-900 truncate dark:text-white">
-                        Criado em: {{visualizacao.dataCriacao}}
+                        Criado em: {{arquivoSelecionado.arquivo_data}}
                     </p>
                     </div>
                     <div class="flex p-1">
@@ -29,7 +29,7 @@
                         <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/>
                       </svg>
                       <p class="text-base ml-1 font-medium text-gray-900 truncate dark:text-white">
-                        Revisão em: {{visualizacao.dataModificacao}}
+                        Revisão em: {{arquivoSelecionado.arquivo_data}}
                       </p>
                     </div>
                   </div>
@@ -43,16 +43,16 @@
       <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
           <li class="py-3 sm:py-4">
               <div class="flex items-center">
-                @for (autor of autores; track autor) {
+                @if (autor) {
                 <div class="flex-shrink-0">
                   <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
                 </div>
                 <div class="flex-1 min-w-0 ms-4">
                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {{autor.nome}}
+                        {{autor.usuario_nome}}
                     </p>
                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {{autor.cargo}}
+                        {{autor.usuario_cargo}}
                     </p>
                 </div>
                 }
