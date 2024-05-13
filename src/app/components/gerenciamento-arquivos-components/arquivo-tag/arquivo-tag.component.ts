@@ -8,25 +8,33 @@ import { Component } from '@angular/core';
   styleUrl: './arquivo-tag.component.css'
 })
 export class ArquivoTagComponent {
+  tags: string[] = [
 
-  tags: Tag[] = [
-    {
-      nome: 'subsolo',
-      color: 'gray-300'
-    },
-    {
-      nome: 'projeto legal',
-      color: 'red-400'
-    },
-    {
-      nome: 'liberado para obra',
-      color: 'green-400'
-    },
+      'subsolo',
+      // color: 'gray-300'
+
+     'projeto legal',
+      // color: 'red-400'
+
+
+   'liberado para obra',
+      // color: 'green-400'
+
   ]
-}
 
-export class Tag {
-  nome!: string;
-  color!: string;
+  setTagColor(nome: string): string {
+    if (nome === 'subsolo') {
+      return 'gray-300'
+    }
+    if (nome === 'projeto legal') {
+      return 'red-400'
+    }
+    if (nome === 'liberado para obra') {
+      return 'green-400'
+    }
+    return 'white'
+  }
+
+
 }
 
