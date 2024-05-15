@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/homeArquivos/homeArquivos.component';
+import { ListaCompartilhadaComponent } from './pages/lista-compartilhada/lista-compartilhada.component';
 export const routes: Routes = [
     {
         path:'page',
@@ -7,7 +8,12 @@ export const routes: Routes = [
 
     },
     {
-        path:'' ,component:HomeComponent
+        path:'' ,
+        component:HomeComponent
+    },
+    {
+        path:'listaCompartilhada',
+        component: ListaCompartilhadaComponent
     }
 
 ];

@@ -1,0 +1,49 @@
+<div class="w-full h-[64px]">
+    <app-navbar></app-navbar>
+  </div>
+  
+  <div id="container-1" class="grid grid-cols-12">
+    <div id="SidBar" class="col-span-2">
+      <app-menu-lateral></app-menu-lateral>
+    </div>  
+  </div>
+  
+  <div class="flex justify-center mt-64 ml-20">
+    <table class="bg-red-600 w-90 h-64 rounded-lg overflow-hidden">
+      <thead class="bg-black text-xs uppercase">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-white">ID</th>
+          <th scope="col" class="px-6 py-3 text-white">Descrição</th>
+          <th scope="col" class="px-6 py-3 text-white">Data</th>
+          <th scope="col" class="px-6 py-3 text-white">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ListaCompartilhada">
+          <td class="px-6 py-4">
+            <button type="button" class="flex items-center w-full text-black hover:bg-gray-600 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+              {{ item.lista_compartilhada_id }}
+            </button>
+          </td>
+          <td class="px-6 py-4">
+            <button type="button" class="flex items-center w-full text-white hover:bg-gray-600 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+              {{ item.lista_compartilhada_descricao }}
+            </button>
+          </td>
+          <td class="px-6 py-4">
+            <button type="button" class="flex items-center w-full text-white hover:bg-gray-600 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+              {{ item.lista_compartilhada_data }}
+            </button>
+          </td>
+          <td class="px-6 py-4">
+            <button type="button" class="flex items-center w-full text-white hover:bg-gray-600 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+              {{ item.lista_compartilhada_status }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
