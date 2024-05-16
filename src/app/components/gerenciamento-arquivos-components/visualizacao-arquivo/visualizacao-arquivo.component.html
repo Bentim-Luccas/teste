@@ -1,5 +1,20 @@
 <div class="w-full max-w p-4 bg-white dark:bg-gray-800 dark:border-gray-700">
 
+
+  <div class="flex flex-wrap">
+    @for (arquivoExtensor of arquivosExtensores; track arquivoExtensor) {
+      <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-2 mb-4">
+        <img class="rounded-t-lg" src="" alt="{{arquivoExtensor.nome}}" />
+        <div class="p-5">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{arquivoExtensor.nome}}</h5>
+        </div>
+      </div>
+    }
+  </div>
+
+
+
+
   <app-arquivo-tag></app-arquivo-tag>
 
  <div class="flow-root">

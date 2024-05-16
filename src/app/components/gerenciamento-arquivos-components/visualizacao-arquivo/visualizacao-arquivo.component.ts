@@ -57,9 +57,33 @@ export class VisualizacaoArquivoComponent implements OnDestroy {
       cargo: 'Fisiculturista G+P'
     },
   ]
+
+  arquivosExtensores: ArquivoExt[] = [
+    {
+      foto: 'Excel',
+      nome: 'Excel'
+    },
+    {
+      foto: 'PDF',
+      nome: 'PDF'
+    },
+    {
+      foto: 'Word',
+      nome: 'Word'
+    },
+    {
+      foto: 'xlsx',
+      nome: 'xlsx'
+    },
+  ]
+
 }
 
 export class Revisor {
   nome!: string;
   cargo!: string;
+}
+export class ArquivoExt {
+  foto!: string;
+  nome!: string;
 }

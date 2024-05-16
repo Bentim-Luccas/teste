@@ -9,4 +9,7 @@ export interface Arquivo {
   projeto_id:        number | null;
   etapa_id:          number | null;
   arquivo_id_pai:    string | null;
+
+  // Mockado
+  mostrarDetalhes?: boolean;
 }

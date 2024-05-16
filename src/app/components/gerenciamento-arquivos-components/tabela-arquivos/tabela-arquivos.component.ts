@@ -20,11 +20,18 @@ export class TabelaArquivosComponent implements OnInit {
   constructor(private arquivoService: ArquivoService) { }
 
 
+  // ngOnInit() {
+  //   this.arquivoService.findAll().subscribe((data) => {
+  //     this.listaArquivos = data
+  //   })
+  // }
+
   ngOnInit() {
     this.arquivoService.findAll().subscribe((data) => {
-      this.listaArquivos = data
-    })
+      this.listaArquivos = data.map(arquivo => ({ ...arquivo, mostrarDetalhes: false }));
+    });
   }
+
 
   exibirDetalhes(arquivo: Arquivo) {
     console.log("setando o arquivo ", arquivo);
@@ -46,10 +53,49 @@ export class TabelaArquivosComponent implements OnInit {
     },
   ]
 
+    arquivosMockados: ArquivoMockado =
+    {
+      mostrarDetalhes: false,
+    }
+  ;
+
+  versoes: Versao[] = [
+      {
+        arquivo_descricao: 'teste 1',
+        arquivo_data: '01/04/2024',
+        arquivo_versao: 1.1,
+        arquivo_status: 'Aprovado'
+      },
+      {
+        arquivo_descricao: 'teste 2',
+        arquivo_data: '05/04/2024',
+        arquivo_versao: 1.2,
+        arquivo_status: 'Aprovado'
+      },
+      {
+        arquivo_descricao: 'teste 3',
+        arquivo_data: '15/04/2024',
+        arquivo_versao: 1.3,
+        arquivo_status: 'Aprovado'
+      },
+    ]
+
+    mostrarVersoes(arquivo: Arquivo) {
+      arquivo.mostrarDetalhes = !arquivo.mostrarDetalhes;
+    }
 
 }
 export class Pasta {
   nome!: string;
 }
 
+export class ArquivoMockado {
+  mostrarDetalhes!: boolean;
+}
 
+export class Versao {
+  arquivo_descricao!: string;
+  arquivo_data!: string;
+  arquivo_versao!: number;
+  arquivo_status!: string;
+}
