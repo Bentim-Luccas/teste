@@ -27,7 +27,7 @@
         </div>
         <div class="w-full ps-3">
             <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">{{notifica.notificacao_descricao}} </div>
-            <div class="text-xs text-blue-600 dark:text-blue-500">{{notifica.notificacao_data}}</div>
+            <div class="text-xs text-blue-600 dark:text-blue-500">{{ notifica.notificacao_data | date:'dd/MM/yyyy HH:mm:ss' }}</div>
         </div>
       </a>
     }

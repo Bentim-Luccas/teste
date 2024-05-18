@@ -20,7 +20,7 @@ export default class ComentarioComponent implements OnInit {
     arquivo_id: '1',
     arquivo_comentario_nivel: 1,
   };
-
+  
   postarComentario(){
     this.comentarioService.post(this.comentario).subscribe((comentario) => {
       this.comentarios.push(comentario);

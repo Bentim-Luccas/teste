@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+
+import { environment } from '../../environments/environment.development';
+import { catchError, Observable, throwError } from 'rxjs';
 
 
 
@@ -8,12 +10,33 @@ import { Observable } from "rxjs";
     providedIn:'root'
 })
 export class EmpresaService{
-constructor(private httpCliente:HttpClient){ }
+    private readonly baseUrl: string;
+
+
+    constructor(private http: HttpClient) {
+      this.baseUrl = environment.apiServer + 'Empresa';
+    }
     getEmpresa(): Observable<any>{
-        return this.httpCliente.get("http://academico3.rj.senac.br/Empresa",{});
+        return this.http.get<any[]>(this.baseUrl).pipe(
+            catchError(this.handleError) // Handle potential errors
+          );
+        
     }
 
-
+    private handleError(error: any): Observable<never> {
+        // Use 'never' instead of 'void' for error handling
+        let errorMessage: string;
+        if (error.error instanceof ErrorEvent) {
+          // Erro do lado do cliente ou da rede. Trate de acordo com a necessidade.
+          errorMessage = 'Ocorreu um erro: ' + error.error.message;
+        } else {
+          // O backend retornou um código de resposta sem sucesso.
+          // O corpo da resposta pode conter pistas sobre o que deu errado.
+          errorMessage = `O backend retornou o código ${error.status}: ${error.message}`;
+        }
+        console.error(errorMessage); // Registra o erro no console
+        return throwError(errorMessage); // Dispara um novo erro como um observável
+      }
 
 
 }
