@@ -42,7 +42,7 @@ export class TabelaArquivosComponent implements OnInit {
 
   }
 
-  stringToDate(stringDate: string): Date {
+  stringToDate(stringDate: string | Date): Date {
     return new Date(stringDate);
   }
 
@@ -59,18 +59,7 @@ export class TabelaArquivosComponent implements OnInit {
       nome: 'Planta Projeto'
     },
   ]
-
-    arquivosMockados: ArquivoMockado =
-    {
-      mostrarDetalhes: false,
-    }
   ;
-
-
-
-    mostrarVersoes(arquivo: Arquivo) {
-      arquivo.mostrarDetalhes = !arquivo.mostrarDetalhes;
-    }
 
 }
 export class Pasta {

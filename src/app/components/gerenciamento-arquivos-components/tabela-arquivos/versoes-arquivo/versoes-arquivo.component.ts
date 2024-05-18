@@ -60,7 +60,7 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
     );
   }
 
-  stringToDate(dateString: string): Date {
+  stringToDate(dateString: string | Date): Date {
     return new Date(dateString);
   }
 

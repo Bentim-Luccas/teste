@@ -48,7 +48,7 @@ export class VisualizacaoArquivoComponent implements OnDestroy {
     );
   }
 
-  stringToDate(dateString: string): Date {
+  stringToDate(dateString: string | Date): Date {
     return new Date(dateString);
   }
 

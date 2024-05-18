@@ -32,6 +32,10 @@ export class ArquivoService {
     return this.http.get<Arquivo[]>(`${this.baseUrl}/versoes/${arquivoId}`)
   }
 
+  postArquivo(arquivo: Arquivo) {
+    return this.http.post<Arquivo>(this.baseUrl, arquivo, httpOptions)
+  }
+
   setArquivoSelecionado(arquivo: Arquivo | null) {
     this.arquivoSelecionadoSubject.next(arquivo);
   }
