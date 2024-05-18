@@ -71,7 +71,6 @@ export class ModalEnviarArquivoComponent implements OnInit{
     this.arquivo.arquivo_status = 0
     this.arquivo.usuario_id = 5
     this.arquivo.etapa_id = 1
-    this.arquivo.arquivo_versao = 0.0
     this.arquivo.projeto_id = 4
     console.log(this.selectedFile)
     console.log(this.arquivo)
