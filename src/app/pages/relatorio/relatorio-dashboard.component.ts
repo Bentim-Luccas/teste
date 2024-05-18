@@ -8,6 +8,7 @@ import { BadgeAtivoComponent } from '../../components/relatorio/badge-ativo/badg
 import { CalendarComponent } from '../../components/relatorio/calendar/calendar.component';
 import { GraficoComponent } from '../../components/relatorio/grafico/grafico.component';
 import { UserInfoComponent } from '../../components/relatorio/user-info/user-info.component';
+import { ArquivosRecentesComponent } from '../../components/relatorio/arquivos-recentes/arquivos-recentes.component';
 
 @Component({
     selector: 'app-relatorio',
@@ -23,7 +24,8 @@ import { UserInfoComponent } from '../../components/relatorio/user-info/user-inf
         BadgeAtivoComponent,
         CalendarComponent,
         GraficoComponent,
-        UserInfoComponent
+        UserInfoComponent,
+        ArquivosRecentesComponent
     ]
 })
 export class RelatorioComponent {
