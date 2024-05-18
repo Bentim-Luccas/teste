@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { Etapa } from '../../interface/etapa/etapa';
 import { EtapaService } from '../../service/etapa.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-etapa',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [],
   templateUrl: './etapa.component.html',
   styleUrl: './etapa.component.css'
 })
@@ -67,6 +65,3 @@ export class EtapaComponent {
   }
 
 }
-
-
-
