@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NotificationService } from '../../service/notification.service';
 import { initFlowbite } from 'flowbite';
-
+import { Notificacao } from '../../interface/notificacao';
 @Component({
   selector: 'app-notification',
   standalone: true,
@@ -10,20 +10,17 @@ import { initFlowbite } from 'flowbite';
   styleUrl: './notification.component.css'
 })
 export class NotificationComponent implements OnInit {
-  CardResponse!: any;
-  private CardService = inject(NotificationService)
+
+  constructor(private notificationService: NotificationService){}
+
+ notificacoes: Notificacao[] = [];
+
   ngOnInit(): void {
-    initFlowbite();
-    this.getMessage();
+    this.notificationService.findAll().subscribe((notifica) => {
+      this.notificacoes = notifica;
+    });
   }
 
-  getMessage():void{
-    this.CardService.getNotification().subscribe({
-      next:(response: any)=> {
-        response && (this.CardResponse = response);
-        console.log(this.CardResponse);
-      },
-      error: (error: any)=> console.log(error),
-    })
-  }
+  
+  
 }
