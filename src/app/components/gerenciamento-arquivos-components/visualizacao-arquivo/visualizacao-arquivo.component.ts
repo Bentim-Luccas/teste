@@ -5,11 +5,12 @@ import { Arquivo } from '../../../interface/arquivo';
 import { ArquivoService } from '../../../service/arquivo.service';
 import { Usuario } from '../../../interface/usuario';
 import { UsuarioService } from '../../../service/usuario.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-visualizacao-arquivo',
   standalone: true,
-  imports: [ArquivoTagComponent],
+  imports: [ArquivoTagComponent, CommonModule],
   templateUrl: './visualizacao-arquivo.component.html',
   styleUrl: './visualizacao-arquivo.component.css'
 })
@@ -42,8 +43,13 @@ export class VisualizacaoArquivoComponent implements OnDestroy {
       data => {
         this.autor = data;
         console.log(this.autor); // Certifique-se de que o autor foi buscado com sucesso
+        this.usuarioService.setUsuarioSelecionado(this.autor)
       }
     );
+  }
+
+  stringToDate(dateString: string): Date {
+    return new Date(dateString);
   }
 
 
