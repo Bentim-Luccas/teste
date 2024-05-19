@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ComentarioService } from '../../service/comentario.service';
-import { Comentario } from '../../interface/comentario';
+import { Comentario } from '../../interface/comentario/comentario';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 @Component({
@@ -20,7 +20,7 @@ export default class ComentarioComponent implements OnInit {
     arquivo_id: '1',
     arquivo_comentario_nivel: 1,
   };
-  
+
   postarComentario(){
     this.comentarioService.post(this.comentario).subscribe((comentario) => {
       this.comentarios.push(comentario);
