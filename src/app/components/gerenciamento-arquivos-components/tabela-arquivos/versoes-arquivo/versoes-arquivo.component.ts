@@ -32,7 +32,7 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
         }
       }
     );
-    this.autorSubscription = this.usuarioService.usuarioSelecionado$.subscribe(
+    this.autorSubscription = this.usuarioService.autor$.subscribe(
       usuario => {
         this.autor = usuario
       }

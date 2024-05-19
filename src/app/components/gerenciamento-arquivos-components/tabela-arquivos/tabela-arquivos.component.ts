@@ -24,7 +24,7 @@ export class TabelaArquivosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.arquivoService.findAll().subscribe((data) => {
+    this.arquivoService.getArquivosPais().subscribe((data) => {
       this.listaArquivos = data
     })
   }
@@ -38,6 +38,11 @@ export class TabelaArquivosComponent implements OnInit {
 
   detalharArquivo(arquivo: Arquivo) {
     console.log("setando o arquivo ", arquivo);
+    // this.arquivoService.getVersaoRecente(4, arquivo.arquivo_descricao).subscribe(data => {
+    //  console.log("setando o recente:", data)
+    //  this.arquivoService.setArquivoRecente(data)
+    // })
+
     this.arquivoService.setArquivoSelecionado(arquivo);
 
   }

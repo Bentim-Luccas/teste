@@ -19,77 +19,60 @@ export class VisualizacaoArquivoComponent implements OnDestroy {
   arquivoSelecionado: Arquivo | null = null;
   private arquivoSubscription: Subscription;
   autor: Usuario | null = null;
+  arquivoRecente!: Arquivo;
+  extensao: string = '';
 
   constructor(private arquivoService: ArquivoService, private usuarioService: UsuarioService) {
+
     this.arquivoSubscription = this.arquivoService.arquivoSelecionado$.subscribe(
       arquivo => {
         this.arquivoSelecionado = arquivo;
+        console.log('Arquivo selecionado: ', this.arquivoSelecionado);
         if (arquivo) {
-          this.buscarAutor(arquivo.usuario_id); // Chame a função para buscar o autor quando um novo arquivo for selecionado
+          this.buscarAutor(arquivo.usuario_id);
+          this.arquivoService.getVersaoRecente(4, this.arquivoSelecionado!.arquivo_descricao).subscribe(data => {
+            this.arquivoRecente = data[0]
+            console.log('arquivo recente', this.arquivoRecente);
+            this.extensao = this.getFileExtension(this.arquivoRecente.arquivo_descricao)!.toUpperCase()
+            console.log('extensao:',this.extensao)
+          })
         }
       }
     );
+    // this.arquivoService.getVersaoRecente(4, this.arquivoSelecionado!.arquivo_descricao)
   }
 
   ngOnDestroy() {
     this.arquivoSubscription.unsubscribe();
     if (this.autor) {
-      this.autor = null // Certifique-se de cancelar a inscrição ao destruir o componente
+      this.autor = null
     }
   }
+
+
 
   buscarAutor(usuarioId: number) {
     this.usuarioService.findByid(usuarioId).subscribe(
       data => {
         this.autor = data;
-        console.log(this.autor); // Certifique-se de que o autor foi buscado com sucesso
-        this.usuarioService.setUsuarioSelecionado(this.autor)
+        console.log('autor', this.autor);
+        this.usuarioService.setAutor(this.autor)
       }
     );
   }
+
+  getFileExtension(filename: string) {
+    const parts = filename.split('.');
+    return parts.length > 1 ? parts.pop() : '';
+  }
+
 
   stringToDate(dateString: string | Date): Date {
     return new Date(dateString);
   }
 
 
-  revisores: Revisor[] = [
-    {
-      nome: 'Bonnie Green',
-      cargo: 'Projetista G+P'
-    },
-    {
-      nome: 'Chris Bumstead',
-      cargo: 'Fisiculturista G+P'
-    },
-  ]
 
-  arquivosExtensores: ArquivoExt[] = [
-    {
-      foto: 'Excel',
-      nome: 'Excel'
-    },
-    {
-      foto: 'PDF',
-      nome: 'PDF'
-    },
-    {
-      foto: 'Word',
-      nome: 'Word'
-    },
-    {
-      foto: 'xlsx',
-      nome: 'xlsx'
-    },
-  ]
 
 }
 
-export class Revisor {
-  nome!: string;
-  cargo!: string;
-}
-export class ArquivoExt {
-  foto!: string;
-  nome!: string;
-}
