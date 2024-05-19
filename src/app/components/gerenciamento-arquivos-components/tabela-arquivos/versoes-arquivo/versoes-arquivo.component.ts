@@ -64,4 +64,9 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
     return new Date(dateString);
   }
 
+  getExtensao(descricao: string): string {
+    let partes = descricao.split('.');
+    return partes[partes.length - 1];
+  }
+
 }
