@@ -9,6 +9,7 @@ import { CalendarComponent } from "./calendar/calendar.component";
 import { GraficoComponent } from "./grafico/grafico.component";
 import { UserInfoComponent } from "./user-info/user-info.component";
 import { ArquivosRecentesComponent } from "./arquivos-recentes/arquivos-recentes.component";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
     selector: 'app-relatorio',
@@ -25,7 +26,8 @@ import { ArquivosRecentesComponent } from "./arquivos-recentes/arquivos-recentes
         CalendarComponent,
         GraficoComponent,
         UserInfoComponent,
-        ArquivosRecentesComponent
+        ArquivosRecentesComponent,
+        NavbarComponent
     ]
 })
 export class RelatorioComponent {

@@ -9,6 +9,7 @@ import { CalendarComponent } from '../../components/relatorio/calendar/calendar.
 import { GraficoComponent } from '../../components/relatorio/grafico/grafico.component';
 import { UserInfoComponent } from '../../components/relatorio/user-info/user-info.component';
 import { ArquivosRecentesComponent } from '../../components/relatorio/arquivos-recentes/arquivos-recentes.component';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
 
 @Component({
     selector: 'app-relatorio',
@@ -25,7 +26,8 @@ import { ArquivosRecentesComponent } from '../../components/relatorio/arquivos-r
         CalendarComponent,
         GraficoComponent,
         UserInfoComponent,
-        ArquivosRecentesComponent
+        ArquivosRecentesComponent,
+        NavbarComponent
     ]
 })
 export class RelatorioComponent {
