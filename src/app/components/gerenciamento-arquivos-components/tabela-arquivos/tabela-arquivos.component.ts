@@ -6,6 +6,7 @@ import { Arquivo } from '../../../interface/arquivo';
 import { log } from 'console';
 import { CommonModule } from '@angular/common';
 import { VersoesArquivoComponent } from './versoes-arquivo/versoes-arquivo.component';
+import { FiltroService } from '../../../service/filtro.service';
 
 @Component({
   selector: 'app-tabela-arquivos',
@@ -17,15 +18,22 @@ import { VersoesArquivoComponent } from './versoes-arquivo/versoes-arquivo.compo
 export class TabelaArquivosComponent implements OnInit {
 
   listaArquivos: Arquivo[] = []
-  usuarioId!: number;
+  listaFiltrada: Arquivo[] = []
+  termoPesquisa: string = ''
+  usuarioId!: number
 
 
-  constructor(private arquivoService: ArquivoService) { }
+  constructor(private arquivoService: ArquivoService, private filtroService: FiltroService) {
+    this.filtroService.obterTermoPesquisa().subscribe(termo => {
+      this.onPesquisaChange(termo);
+    });
+  }
 
 
   ngOnInit() {
     this.arquivoService.findAll().subscribe((data) => {
-      this.listaArquivos = data
+      this.listaArquivos = data;
+      this.listaFiltrada = data;
     })
   }
 
@@ -46,7 +54,19 @@ export class TabelaArquivosComponent implements OnInit {
     return new Date(stringDate);
   }
 
+  atualizarFiltro() {
+    if (this.termoPesquisa) {
+      this.listaFiltrada = this.listaArquivos.filter(arquivo => 
+        arquivo.arquivo_descricao?.toLowerCase().includes(this.termoPesquisa.toLowerCase()));
+    } else {
+      this.listaFiltrada = this.listaArquivos;
+    }
+  }
 
+  onPesquisaChange(novoValor: string) {
+    this.termoPesquisa = novoValor;
+    this.atualizarFiltro();
+  }
 
 
 
