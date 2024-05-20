@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      azulButton: '#4993bc',
+      hoverAzulButton: '#4993bce6'
+    }
   },
   plugins: [
     require('flowbite/plugin')
