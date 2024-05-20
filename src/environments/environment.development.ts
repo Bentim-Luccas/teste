@@ -3,3 +3,4 @@ export const environment = {
     //apiServer: 'http://localhost:4200/',
     apiServer:'http://academico3.rj.senac.br/'
   };
+
