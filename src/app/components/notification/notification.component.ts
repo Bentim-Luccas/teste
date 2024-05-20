@@ -17,7 +17,7 @@ export class NotificationComponent implements OnInit {
  notificacoes: Notificacao[] = [];
 
   ngOnInit(): void {
-    this.notificationService.findAll().subscribe((notifica) => {
+    this.notificationService.getNotificationUserId(5).subscribe((notifica) => {
       this.notificacoes = notifica;
     });
   }

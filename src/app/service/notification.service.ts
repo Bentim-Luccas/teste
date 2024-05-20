@@ -24,7 +24,7 @@ export class NotificationService {
   }
 
   getNotificationUserId(usuario_id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${usuario_id}`);
+    return this.http.get(`${this.baseUrl}/naolidas/${usuario_id}`);
   }
 
   getNotificationId(id: number): Observable<any> {
