@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ComentarioService } from '../../service/comentario.service';
-import { Comentario } from '../../interface/comentario';
+import { Comentario } from '../../interface/comentario/comentario';
 
 @Component({
   selector: 'app-comentario',

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './pages/homeArquivos/homeArquivos.component';
 import { LoginemailComponent } from './components/loginemail/loginemail.component';
 import { emailGuard } from './guard/email.guard';
 import { LogintokenComponent } from './components/logintoken/logintoken.component';
