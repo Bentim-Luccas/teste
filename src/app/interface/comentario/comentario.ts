@@ -6,5 +6,5 @@ export interface Comentario {
   arquivo_comentario_id_pai?: number | null;
   arquivo_comentario_nivel: number;
   arquivo_comentario_data?: Date | null;
-  arquivo_comentario_status?: string | null;
+  arquivo_comentario_status?: number | null;
 }

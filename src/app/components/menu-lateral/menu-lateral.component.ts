@@ -1,7 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { EmpresaService } from '../../service/empresa.service';
-import { Empresa } from '../../interface/empresa';
+import { Empresa } from '../../interface/empresa/empresa';
+
 
 @Component({
   selector: 'app-menu-lateral',
@@ -12,10 +13,6 @@ import { Empresa } from '../../interface/empresa';
   styleUrl: './menu-lateral.component.css'
 })
 export class MenuLateralComponent implements OnInit  {
-
-  
-
-
 
   constructor ( private empresaservice :EmpresaService){}
 
