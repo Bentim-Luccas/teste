@@ -10,11 +10,23 @@ import { Comentario } from '../../interface/comentario/comentario';
   styleUrl: './comentario.component.css',
 })
 export default class ComentarioComponent implements OnInit {
+  constructor(private comentarioService: ComentarioService) {}
+
 
   comentarios: Comentario[] = [];
   @ViewChild('novoComentario') novoComentarioInput!: ElementRef;
 
-  constructor(private comentarioService: ComentarioService) {}
+   comentario: Comentario = {
+    arquivo_comentario_descricao: 'Teste',
+    arquivo_id: '1',
+    arquivo_comentario_nivel: 1,
+  };
+
+  postarComentario(){
+    this.comentarioService.post(this.comentario).subscribe((comentario) => {
+      this.comentarios.push(comentario);
+    });
+  }
 
   ngOnInit(): void {
     this.carregarComentarios();

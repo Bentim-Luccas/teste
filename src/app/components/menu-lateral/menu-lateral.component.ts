@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { EmpresaService } from '../../service/empresa.service';
-import { Empresa } from '../../interface/empresa/empresa';
+import { Empresa } from '../../interface/empresa';
 
 
 @Component({
@@ -28,5 +28,5 @@ export class MenuLateralComponent implements OnInit  {
         error: (error) => console.log(error),
     })
   }
-  
+
 }
