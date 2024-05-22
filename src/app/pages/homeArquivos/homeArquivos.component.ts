@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import ComentarioComponent from '../../components/comentario/comentario.component';
 import { TabsComponent } from '../../components/tabs/tabs.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { ModalEditComponent } from '../../components/etapa/modal-edit/modal-edit.component';
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
 import { ModalEditarProjetoComponent } from '../../components/modal-editar-projeto/modal-editar-projeto.component';
 @Component({
