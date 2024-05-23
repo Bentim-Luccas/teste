@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment.development";
 import { Observable, catchError, throwError } from "rxjs";
-import { Etapa } from "../interface/etapa/etapa";
+import { Etapa } from "../interface/etapa";
 
 const httpOptions = {
     headers: new HttpHeaders({

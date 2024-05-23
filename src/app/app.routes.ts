@@ -1,23 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/homeArquivos/homeArquivos.component';
-<<<<<<< HEAD
-import { GerenciamentoDisciplinaComponent } from './pages/gerenciamento-disciplina/gerenciamento-disciplina.component';
-
-export const routes: Routes = [
-  {
-    path: 'page',
-    loadComponent: () => import('./components/comentario/comentario.component'),
-  },
-  {
-    path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'disciplina',
-    component: GerenciamentoDisciplinaComponent
-  }
-=======
-
 import { ListaCompartilhadaComponent } from './components/lista-compartilhada/lista-compartilhada.component';
 import { LoginemailComponent } from './components/loginemail/loginemail.component';
 import { emailGuard } from './guard/email.guard';
@@ -28,26 +10,24 @@ import { inicialGuard } from './guard/inicial.guard';
 import { LoginjwtComponent } from './components/loginjwt/loginjwt.component';
 import { GerenciamentoArquivosComponent } from './pages/gerenciamento-arquivos/gerenciamento-arquivos.component';
 export const routes: Routes = [
-    {
-        path:'page',
-        loadComponent : () => import('./components/comentario/comentario.component')
+  {
+    path: 'page',
+    loadComponent: () => import('./components/comentario/comentario.component')
 
-    },
-    {
+  },
+  {
 
-        path:'' ,
-        component:HomeComponent
-    },
-    {path:'listaCompartilhada', component: ListaCompartilhadaComponent},
-    {path:'loginemail', component:LoginemailComponent,canActivate:[emailGuard] },
-    {path:'logintoken', component:LogintokenComponent, canActivate:[tokenGuard]},
-    {path:'inicial',component:InicialComponent, canActivate:[inicialGuard]},
-    {path:'loginjwt/:jwt',component:LoginjwtComponent},
-    {
-      path: 'arquivos',
-      component: GerenciamentoArquivosComponent
-    }
+    path: '',
+    component: HomeComponent
+  },
+  { path: 'listaCompartilhada', component: ListaCompartilhadaComponent },
+  { path: 'loginemail', component: LoginemailComponent, canActivate: [emailGuard] },
+  { path: 'logintoken', component: LogintokenComponent, canActivate: [tokenGuard] },
+  { path: 'inicial', component: InicialComponent, canActivate: [inicialGuard] },
+  { path: 'loginjwt/:jwt', component: LoginjwtComponent },
+  {
+    path: 'arquivos',
+    component: GerenciamentoArquivosComponent
+  }
 
-
->>>>>>> master
 ];
