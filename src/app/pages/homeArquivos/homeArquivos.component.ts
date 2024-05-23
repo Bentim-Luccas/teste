@@ -10,6 +10,7 @@ import { ListaCompartilhadaComponent } from '../../components/lista-compartilhad
   imports: [ComentarioComponent,TabsComponent,NavbarComponent,MenuLateralComponent, ListaCompartilhadaComponent],
   templateUrl: './homeArquivos.component.html',
   styleUrl: './homeArquivos.component.css'
+
 })
 export class HomeComponent {
 

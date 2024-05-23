@@ -4,6 +4,7 @@ import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
@@ -36,3 +37,5 @@ export class MenuLateralComponent implements OnInit  {
   }
   
 }
+
+
