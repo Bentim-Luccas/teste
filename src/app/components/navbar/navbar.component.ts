@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [NotificationComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
+
 export class NavbarComponent implements OnInit  {
   open = false;
   dropdown_open = false;
-  
+
   ngOnInit(): void {
   }
 
@@ -18,3 +20,4 @@ export class NavbarComponent implements OnInit  {
     this.dropdown_open = !this.dropdown_open;
   }
 }
+
