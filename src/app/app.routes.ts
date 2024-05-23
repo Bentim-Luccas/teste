@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/homeArquivos/homeArquivos.component';
+
+import { ListaCompartilhadaComponent } from './components/lista-compartilhada/lista-compartilhada.component';
 import { LoginemailComponent } from './components/loginemail/loginemail.component';
 import { emailGuard } from './guard/email.guard';
 import { LogintokenComponent } from './components/logintoken/logintoken.component';
@@ -15,8 +17,11 @@ export const routes: Routes = [
 
     },
     {
-        path:'' ,component:HomeComponent
+
+        path:'' ,
+        component:HomeComponent
     },
+    {path:'listaCompartilhada', component: ListaCompartilhadaComponent},
     {path:'loginemail', component:LoginemailComponent,canActivate:[emailGuard] },
     {path:'logintoken', component:LogintokenComponent, canActivate:[tokenGuard]},
     {path:'inicial',component:InicialComponent, canActivate:[inicialGuard]},

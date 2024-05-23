@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,9 @@ import { Empresa } from '../../interface/empresa';
 })
 export class MenuLateralComponent implements OnInit  {
 
-  constructor ( private empresaservice :EmpresaService){}
+  constructor ( private empresaservice :EmpresaService, 
+    private router: Router
+  ){}
 
  empresa! : Empresa[];
   ngOnInit(): void {
@@ -29,4 +32,10 @@ export class MenuLateralComponent implements OnInit  {
     })
   }
 
+  listaCompartilhada(){
+    this.router.navigate(['/listaCompartilhada'])
+  }
+  
 }
+
+
