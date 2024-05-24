@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CardsComponent } from "./cards/cards.component";
-import { CardOrcamentoComponent } from "./card-orcamento/card-orcamento.component";
 import { BreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
 import { IndicadorComponent } from "./indicador/indicador.component";
 import { DropdownComponent } from "./dropdown/dropdown.component";
@@ -10,6 +9,7 @@ import { GraficoComponent } from "./grafico/grafico.component";
 import { UserInfoComponent } from "./user-info/user-info.component";
 import { ArquivosRecentesComponent } from "./arquivos-recentes/arquivos-recentes.component";
 import { NavbarComponent } from "../navbar/navbar.component";
+import { MenuLateralComponent } from "../menu-lateral/menu-lateral.component";
 
 @Component({
     selector: 'app-relatorio',
@@ -18,7 +18,6 @@ import { NavbarComponent } from "../navbar/navbar.component";
     styleUrl: './relatorio.component.css',
     imports: [
         CardsComponent,
-        CardOrcamentoComponent,
         BreadcrumbComponent,
         IndicadorComponent,
         DropdownComponent,
@@ -27,7 +26,8 @@ import { NavbarComponent } from "../navbar/navbar.component";
         GraficoComponent,
         UserInfoComponent,
         ArquivosRecentesComponent,
-        NavbarComponent
+        NavbarComponent,
+        MenuLateralComponent
     ]
 })
 export class RelatorioComponent {

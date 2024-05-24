@@ -31,5 +31,5 @@ export const routes: Routes = [
       path: 'arquivos',
       component: GerenciamentoArquivosComponent
     }
-    { path: 'relatorio', component: RelatorioComponent },
+    ,{ path: 'relatorio', component: RelatorioComponent },
 ];
