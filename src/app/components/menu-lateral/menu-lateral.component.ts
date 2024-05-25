@@ -35,9 +35,6 @@ export class MenuLateralComponent implements OnInit  {
   listaCompartilhada(){
     this.router.navigate(['/listaCompartilhada'])
   }
-  relatorio(){
-    this.router.navigate(['/relatorio'])
-  }
 }
 
 

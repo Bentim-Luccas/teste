@@ -4,10 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    /* Estilos para o navbar */
+    app-navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000; /* Certifique-se de que o z-index seja maior do que outros elementos na página */
+    }
+  </style>
 </head>
 <body>
+
+<app-navbar></app-navbar>
+
+<div id="SidBar" class="col-span-2">
   <app-menu-lateral></app-menu-lateral>
-  <app-navbar />
+</div>
+
+<div class="p-4 sm:ml-64 bg-gray-100">
   <div class="meio">
     <div class="barra-esquerda"></div>
     <section>
@@ -18,9 +33,7 @@
         <app-calendar />
         <app-badge-ativo />
       </div>
-
       <app-cards />
-
       <div class="secao2">
         <div class="bloco-orcamento-user">
           <!-- <app-card-orcamento /> -->
@@ -28,16 +41,14 @@
         </div>
         <div class="bloco-grafico">
           <app-grafico />
-
         </div>
       </div>
-
     </section>
     <aside>
       <app-arquivos-recentes />
     </aside>
   </div>
+</div>
 
 </body>
 </html>
-

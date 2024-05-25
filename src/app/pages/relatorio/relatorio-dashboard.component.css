@@ -1,17 +1,8 @@
 /* Topo */
-header{
-  height: 50px;
-  width: 100%;
-  background-color: black;
-}
 
 
-/* Meio */
-.meio{
-  display: flex;
-  justify-content: space-between;
 
-}
+
 
 section{
   padding: 10px;
@@ -49,16 +40,5 @@ section{
   }
 }
 
-.barra-esquerda{
-  height: 678.21;
-  width: 100px;
-  background-color: black;
-}
-
-aside{
-  height: 678.21;
-  width: 300px;
-  background-color: grey;
-}
 
 
