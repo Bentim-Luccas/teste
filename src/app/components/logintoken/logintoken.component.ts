@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { Token } from '../model/token';
+import { AuthService } from '../../service/auth.service';
+import { Token } from '../../interface/token';
 import { CommonModule} from '@angular/common';
-import { JWT_Token } from '../model/jwt_token';
+import { JWT_Token } from '../../interface/jwt_token';
 
 @Component({
   selector: 'app-logintoken',
