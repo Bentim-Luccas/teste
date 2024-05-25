@@ -10,6 +10,7 @@ import { InicialComponent } from './components/inicial/inicial.component';
 import { inicialGuard } from './guard/inicial.guard';
 import { LoginjwtComponent } from './components/loginjwt/loginjwt.component';
 import { GerenciamentoArquivosComponent } from './pages/gerenciamento-arquivos/gerenciamento-arquivos.component';
+import { RelatorioComponent } from './pages/relatorio/relatorio-dashboard.component';
 export const routes: Routes = [
     {
         path:'page',
@@ -30,6 +31,5 @@ export const routes: Routes = [
       path: 'arquivos',
       component: GerenciamentoArquivosComponent
     }
-
-
+    ,{ path: 'relatorio', component: RelatorioComponent },
 ];

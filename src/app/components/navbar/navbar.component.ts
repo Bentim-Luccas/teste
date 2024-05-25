@@ -10,6 +10,10 @@ import { NotificationComponent } from '../notification/notification.component';
 })
 
 export class NavbarComponent implements OnInit  {
+  router: any;
+  relatorio(){
+    this.router.navigate(['/relatorio'])
+  }
   open = false;
   dropdown_open = false;
 
