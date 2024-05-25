@@ -1,9 +1,9 @@
-  import { Component } from '@angular/core';
-  import { FormsModule, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-  import { CommonModule } from '@angular/common';
-  import { Router } from '@angular/router';
-  import { AuthService } from '../../service/auth.service';
-  import { Email } from '../../interface/email';
+import { Component } from '@angular/core';
+import { FormsModule, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
+import { Email } from '../../interface/email';
 import { EmailTokenRecebido } from '../../interface/emailtoken_recebido';
 import { catchError, throwError } from 'rxjs';
 
@@ -17,22 +17,16 @@ import { catchError, throwError } from 'rxjs';
   export class LoginemailComponent {
     emailFormControl = new FormControl('', [Validators.required, Validators.email]);
     credencias = false;
-    msgErro='ola '
+    msgErro='ola'
+    formEnviado = false;
   
     constructor(private router: Router, private authservice: AuthService) { }
   
     submitApp() {
-
-      console.log('Email FormControl:', this.emailFormControl.value);
-      console.log('Touched:', this.emailFormControl.touched);
-      console.log('Invalid:', this.emailFormControl.invalid);
-
-      this.emailFormControl.markAsTouched();
+      this.formEnviado = true;
       if (this.emailFormControl.valid) {
         this.msgErro=''
-        this.emailFormControl.setErrors({
-          credenciais:false
-        })
+        this.emailFormControl.setErrors(null)
         const email = new Email(this.emailFormControl.value);
         this.authservice.loginEmail(email).subscribe({
           next:(email: EmailTokenRecebido) => {
