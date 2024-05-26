@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 })
 export class MenuLateralComponent implements OnInit  {
 
-  constructor ( private empresaservice :EmpresaService, 
+
+  constructor ( private empresaservice :EmpresaService,
     private router: Router
   ){}
 
@@ -35,7 +36,7 @@ export class MenuLateralComponent implements OnInit  {
   listaCompartilhada(){
     this.router.navigate(['/listaCompartilhada'])
   }
-  
+
 }
 
 

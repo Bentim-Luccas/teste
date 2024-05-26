@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <app-navbar />
+  <div class="meio">
+    <app-menu-lateral></app-menu-lateral>
+    <div class="barra-esquerda">
+      <div id="SidBar" class="col-span-2"></div>
+    </div>
+    <section>
+      <app-breadcrumb />
+      <div class="secao1">
+        <app-indicador />
+        <app-dropdown />
+        <app-calendar />
+        <app-badge-ativo />
+      </div>
+
+      <app-cards />
+
+      <div class="secao2">
+        <div class="bloco-orcamento-user">
+          <!-- <app-card-orcamento /> -->
+          <app-user-info />
+        </div>
+        <div class="bloco-grafico">
+          <app-grafico />
+
+        </div>
+      </div>
+
+    </section>
+    <aside>
+      <app-arquivos-recentes />
+    </aside>
+  </div>
+
+</body>
+</html>
+
