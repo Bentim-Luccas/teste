@@ -11,6 +11,7 @@ import { LoginjwtComponent } from './components/loginjwt/loginjwt.component';
 import { GerenciamentoArquivosComponent } from './pages/gerenciamento-arquivos/gerenciamento-arquivos.component';
 import { RelatorioComponent } from './pages/relatorio/relatorio-dashboard.component';
 import { GerenciamentoDisciplinasComponent } from './pages/gerenciamento-disciplinas/gerenciamento-disciplinas.component';
+import { GerenciamentoEtapasComponent } from './pages/gerenciamento-etapas/gerenciamento-etapas.component';
 export const routes: Routes = [
   {
     path: 'page',
@@ -26,10 +27,14 @@ export const routes: Routes = [
   { path: 'logintoken', component: LogintokenComponent, canActivate: [tokenGuard] },
   { path: 'inicial', component: InicialComponent, canActivate: [inicialGuard] },
   {
+    path: 'etapas',
+    component: GerenciamentoEtapasComponent
+  },
+  { path: 'loginjwt/:jwt', component: LoginjwtComponent },
+  {
     path: 'disciplinas',
     component: GerenciamentoDisciplinasComponent
   },
-  { path: 'loginjwt/:jwt', component: LoginjwtComponent },
   {
     path: 'arquivos',
     component: GerenciamentoArquivosComponent

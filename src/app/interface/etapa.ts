@@ -7,4 +7,5 @@ export interface Etapa {
     etapa_status?: number;
     disciplina_id: number;
     etapa_id_pai?: number;
+    dropdownOpen: boolean;
 }
