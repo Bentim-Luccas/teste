@@ -10,12 +10,11 @@ import { inicialGuard } from './guard/inicial.guard';
 import { LoginjwtComponent } from './components/loginjwt/loginjwt.component';
 import { GerenciamentoArquivosComponent } from './pages/gerenciamento-arquivos/gerenciamento-arquivos.component';
 import { RelatorioComponent } from './pages/relatorio/relatorio-dashboard.component';
+import { GerenciamentoDisciplinaComponent } from './pages/gerenciamento-disciplina/gerenciamento-disciplina.component';
 export const routes: Routes = [
   {
     path: 'page',
     loadComponent: () => import('./components/comentario/comentario.component')
-
-<<<<<<< HEAD
   },
   {
 
@@ -26,28 +25,14 @@ export const routes: Routes = [
   { path: 'loginemail', component: LoginemailComponent, canActivate: [emailGuard] },
   { path: 'logintoken', component: LogintokenComponent, canActivate: [tokenGuard] },
   { path: 'inicial', component: InicialComponent, canActivate: [inicialGuard] },
+  {
+    path: 'disciplinas',
+    component: GerenciamentoDisciplinaComponent
+  },
   { path: 'loginjwt/:jwt', component: LoginjwtComponent },
   {
     path: 'arquivos',
     component: GerenciamentoArquivosComponent
   }
-
-=======
-    },
-    {
-
-        path:'' ,
-        component:HomeComponent
-    },
-    {path:'listaCompartilhada', component: ListaCompartilhadaComponent},
-    {path:'loginemail', component:LoginemailComponent,canActivate:[emailGuard] },
-    {path:'logintoken', component:LogintokenComponent, canActivate:[tokenGuard]},
-    {path:'inicial',component:InicialComponent, canActivate:[inicialGuard]},
-    {path:'loginjwt/:jwt',component:LoginjwtComponent},
-    {
-      path: 'arquivos',
-      component: GerenciamentoArquivosComponent
-    }
-    ,{ path: 'relatorio', component: RelatorioComponent },
->>>>>>> master
+  , { path: 'relatorio', component: RelatorioComponent },
 ];

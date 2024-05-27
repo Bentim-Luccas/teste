@@ -3,4 +3,5 @@ export interface Disciplina {
     disciplina_descricao?: string;
     disciplina_status?: number;
     projeto_id: number;
+    dropdownOpen: boolean;
 }
