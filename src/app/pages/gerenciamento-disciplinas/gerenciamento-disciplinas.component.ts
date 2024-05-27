@@ -11,10 +11,10 @@ import { ModalExcluirDisciplinaComponent } from "../../components/gerenciamento-
 @Component({
     selector: 'app-gerenciamento-disciplina',
     standalone: true,
-    templateUrl: './gerenciamento-disciplina.component.html',
-    styleUrl: './gerenciamento-disciplina.component.css',
+    templateUrl: './gerenciamento-disciplinas.component.html',
+    styleUrl: './gerenciamento-disciplinas.component.css',
     imports: [NavbarComponent, MenuLateralDisciplinaComponent, BreadcrumbDisciplinaComponent, BarraPesquisaComponent, ModalCriarDisciplinaComponent, GerenciamentoDisciplinaComponentsComponent, ModalEditarDisciplinaComponent, ModalExcluirDisciplinaComponent]
 })
-export class GerenciamentoDisciplinaComponent {
+export class GerenciamentoDisciplinasComponent {
 
 }

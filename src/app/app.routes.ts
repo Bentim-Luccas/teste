@@ -10,7 +10,7 @@ import { inicialGuard } from './guard/inicial.guard';
 import { LoginjwtComponent } from './components/loginjwt/loginjwt.component';
 import { GerenciamentoArquivosComponent } from './pages/gerenciamento-arquivos/gerenciamento-arquivos.component';
 import { RelatorioComponent } from './pages/relatorio/relatorio-dashboard.component';
-import { GerenciamentoDisciplinaComponent } from './pages/gerenciamento-disciplina/gerenciamento-disciplina.component';
+import { GerenciamentoDisciplinasComponent } from './pages/gerenciamento-disciplinas/gerenciamento-disciplinas.component';
 export const routes: Routes = [
   {
     path: 'page',
@@ -27,7 +27,7 @@ export const routes: Routes = [
   { path: 'inicial', component: InicialComponent, canActivate: [inicialGuard] },
   {
     path: 'disciplinas',
-    component: GerenciamentoDisciplinaComponent
+    component: GerenciamentoDisciplinasComponent
   },
   { path: 'loginjwt/:jwt', component: LoginjwtComponent },
   {
