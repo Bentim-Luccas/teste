@@ -62,4 +62,13 @@ export class ProjetoService {
     }
 
 
+    /* ======================= Services Baseados no Usuário ====================== */
+
+    findProjetosDaEmpresaDoUsuarioId(idUsuario: number): Observable<Projeto[]> {
+      return this.http.get<Projeto[]>(`${this.baseUrl}/projetosDaEmpresaDoUsuarioId/${idUsuario}`).pipe(
+          catchError(this.handleError)
+      );
+    }
+
+
 }

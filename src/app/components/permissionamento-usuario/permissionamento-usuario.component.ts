@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { EtapaService } from './../../service/etapa.service';
+import { Projeto } from '../../interface/projeto';
+import { ProjetoService } from './../../service/projeto.service';
+import { Component, OnInit } from '@angular/core';
+import { DisciplinaService } from '../../service/disciplina.service';
 
 @Component({
   selector: 'app-permissionamento-usuario',
@@ -7,6 +11,40 @@ import { Component } from '@angular/core';
   templateUrl: './permissionamento-usuario.component.html',
   styleUrl: './permissionamento-usuario.component.css'
 })
-export class PermissionamentoUsuarioComponent {
+export class PermissionamentoUsuarioComponent implements OnInit {
+constructor (private projetoService: ProjetoService, private disciplinaService: DisciplinaService, private etapaService: EtapaService) {}
+
+  projetos: Projeto[] = [];
+  ngOnInit(): void {
+    this.getProjetosDaEmpresaDoUsuarioId(4);
+  }
+
+  getProjetosDaEmpresaDoUsuarioId(usuarioId: number) : void{
+    //Obter os projetos do usuario baseado na empresaId
+    this.projetoService.findProjetosDaEmpresaDoUsuarioId(usuarioId).subscribe({
+      next: (response)=> {
+        response && (this.projetos = response);
+        this.projetos.forEach(projeto => {
+          //Obter as disciplinas de cada projeto
+          this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(usuarioId, <number>projeto.projeto_id).subscribe({
+            next: (response1)=> {
+              projeto.disciplinas = response1;
+              projeto.disciplinas.forEach(disciplina => {
+                //Obter as etapas de cada disciplina
+                this.etapaService.findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(usuarioId, <number>disciplina.disciplina_id).subscribe({
+                  next: (response2)=> {
+                    disciplina.etapas = response2;
+                  }
+                })
+              })
+            }
+          })
+        });
+        console.log(this.projetos)
+      },
+      error: (error)=> console.log(error),
+    });
+
+  }
 
 }

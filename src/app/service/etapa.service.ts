@@ -60,4 +60,14 @@ export class EtapaService {
         console.error(errorMessage);
         return throwError(errorMessage);
     }
+
+    /* ======================= Services Baseados no Usuário ====================== */
+
+    findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario: number, idDisciplina: number): Observable<Etapa[]> {
+      return this.http.get<Etapa[]>(`${this.baseUrl}/etapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId/${idUsuario}/${idDisciplina}`).pipe(
+          catchError(this.handleError)
+      );
+    }
+
+
 }

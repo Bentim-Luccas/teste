@@ -60,4 +60,12 @@ export class DisciplinaService {
         console.error(errorMessage);
         return throwError(errorMessage);
     }
+
+    /* ======================= Services Baseados no Usuário ====================== */
+
+    findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario: number, idProjeto: number): Observable<Disciplina[]> {
+      return this.http.get<Disciplina[]>(`${this.baseUrl}/disciplinasDeProjetoIdDaEmpresaDoUsuarioId/${idUsuario}/${idProjeto}`).pipe(
+          catchError(this.handleError)
+      );
+    }
 }
