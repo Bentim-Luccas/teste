@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 export class ListaCompartilhadaService{
 constructor(private httpCliente:HttpClient){ }
     getListaCompartilhada(): Observable<any>{
-        return this.httpCliente.get("http://academico3.rj.senac.br/lista-compartilhada",{}); 
+        return this.httpCliente.get("http:////localhost:3000/lista-compartilhada",{}); // Mudar a URL de Localhost para Academico3
     }
 
 
