@@ -20,6 +20,12 @@ export class DisciplinaService {
         this.baseUrl = environment.apiServer + 'disciplina';
     }
 
+    getDisciplina(): Observable<any>{
+      return this.http.get<any[]>(this.baseUrl).pipe(
+          catchError(this.handleError) // Handle potential errors
+        );
+    }
+
     post(disciplina: Disciplina): Observable<Disciplina> {
         return this.http.post<Disciplina>(this.baseUrl, disciplina, httpOptions).pipe(
             catchError(this.handleError)
