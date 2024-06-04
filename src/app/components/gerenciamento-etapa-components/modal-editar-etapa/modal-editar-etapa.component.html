@@ -5,7 +5,8 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
+            <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600"
+              style="height: 40px; padding-top: 25px">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                     Editar Etapa
                 </h3>
@@ -25,36 +26,26 @@
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div>
                         <label for="project-name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome da
-                            Etapa</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome
+                        </label>
                         <input type="text" name="project-name" id="project-name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Informe o nome da etapa" required>
                     </div>
                     <div>
                         <label for="start-date"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data de Cadastro</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data de Início</label>
                         <input type="text" name="start-date" id="start-date"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="DD/MM/AAAA" required>
                     </div>
-                    <div>
-                        <label for="start-date"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome da Disciplina</label>
-                        <input type="text" name="start-date" id="start-date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Informe o nome da disciplina" required>
-                    </div>
                 </div>
-                <div class="flex justify-between space-x-4">
+                <div class="flex justify-between space-x-4"
+                style="display: flex; justify-content: center; align-items: center;">
                     <button type="submit"
-                        class="text-white inline-flex justify-center items-center bg-[color:var(--cinza-principal-escuro)] hover:bg-[color:var(--cinza-principal-medio)] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mt-5" >
-                        Salvar
-                    </button>
-                    <button type="button"
                         class="text-white inline-flex justify-center items-center bg-[color:var(--cinza-principal-escuro)] hover:bg-[color:var(--cinza-principal-medio)] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mt-5"
-                        data-modal-toggle="modal-edit">
-                        Cancelar
+                        style="width:100%; background-color: #4381A7;">
+                        Salvar
                     </button>
                 </div>
             </form>
