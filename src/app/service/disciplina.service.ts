@@ -14,6 +14,9 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class DisciplinaService {
+    delete(id: number) {
+      throw new Error('Method not implemented.');
+    }
     private readonly baseUrl: string;
 
     constructor(private http: HttpClient) {

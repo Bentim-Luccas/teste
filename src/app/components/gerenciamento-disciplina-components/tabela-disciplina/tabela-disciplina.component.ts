@@ -8,7 +8,7 @@ import { Disciplina } from '../../../interface/disciplina';
   selector: 'app-tabela-disciplina',
   standalone: true,
   imports: [NgFor],
-  template: `<li *ngFor="let usuarios of usuarioresponse"></li>`,
+  template: `<li *ngFor="let disciplinas of disciplina"></li>`,
   templateUrl: './tabela-disciplina.component.html',
   styleUrl: './tabela-disciplina.component.css'
 })
@@ -23,6 +23,7 @@ export class TabelaDisciplinaComponent implements OnInit  {
   ngOnInit(): void {
     this.getDisciplina();
   }
+
   getDisciplina():void{
     this.disciplinaservice.getDisciplina().subscribe({
       next:(response) =>{
@@ -32,7 +33,13 @@ export class TabelaDisciplinaComponent implements OnInit  {
     })
   }
 
-  listaCompartilhada(){
-    this.router.navigate(['/listaCompartilhada'])
+  removeDisciplina(id: number): void {
+    this.disciplinaservice.remove(id).subscribe({
+      next: () => {
+        this.disciplina = this.disciplina.filter(disciplina => disciplina.disciplina_id !== id);
+      },
+      error: (error: any) => console.log(error),
+    });
   }
+
 }
