@@ -1,3 +1,4 @@
+import { GerenciamentoUsuarioComponent } from './pages/gerenciamento-usuario/gerenciamento-usuario.component';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/homeArquivos/homeArquivos.component';
 import { ListaCompartilhadaComponent } from './components/lista-compartilhada/lista-compartilhada.component';
@@ -34,6 +35,10 @@ export const routes: Routes = [
   {
     path: 'disciplinas',
     component: GerenciamentoDisciplinasComponent
+  },
+  {
+    path: 'usuarios',
+    component: GerenciamentoUsuarioComponent
   },
   {
     path: 'arquivos',
