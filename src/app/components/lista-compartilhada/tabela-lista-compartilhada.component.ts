@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class TabelaListaCompartilhadaComponent implements OnInit {
 
-
   constructor(
     private listaCompartilhadaService: ListaCompartilhadaService,
     private router: Router
@@ -22,6 +21,7 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
   ListaCompartilhada: listaCompartilhada[] = [];
   ngOnInit(): void {
     this.getListaCompartilhada();
+    console.log(this.ListaCompartilhada);
   }
 
   getListaCompartilhada(): void {
@@ -50,5 +50,16 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
 
   listaCompartilhada(): void {
     this.router.navigate(['/listaCompartilhada']);
+  }
+
+  async redirecionarArquivo(dado:any): Promise<void>{
+
+    const idSelecionado = this.ListaCompartilhada.find(lista => lista.lista_compartilhada_id === dado.lista_compartilhada_id);
+
+    if (idSelecionado) {
+      await this.router.navigate(['/arquivos'], { queryParams: { id: idSelecionado.lista_compartilhada_id } });
+  } else {
+      console.error('Elemento não encontrado na lista compartilhada.');
+  }
   }
 }
