@@ -14,10 +14,19 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class DisciplinaService {
+    delete(id: number) {
+      throw new Error('Method not implemented.');
+    }
     private readonly baseUrl: string;
 
     constructor(private http: HttpClient) {
         this.baseUrl = environment.apiServer + 'disciplina';
+    }
+
+    getDisciplina(): Observable<any>{
+      return this.http.get<any[]>(this.baseUrl).pipe(
+          catchError(this.handleError) // Handle potential errors
+        );
     }
 
     post(disciplina: Disciplina): Observable<Disciplina> {
