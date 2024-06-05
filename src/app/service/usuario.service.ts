@@ -19,8 +19,10 @@ const API = environment.apiServer
 export class UsuarioService {
 
   private readonly baseUrl = `${API}usuario`
-  private usuarioSelecionadoSubject = new BehaviorSubject<Usuario | null>(null);
-  usuarioSelecionado$ = this.usuarioSelecionadoSubject.asObservable();
+  private autorSelecionadoSubject = new BehaviorSubject<Usuario | null>(null);
+  autor$ = this.autorSelecionadoSubject.asObservable();
+  private revisorSelecionadoSubject = new BehaviorSubject<Usuario | null>(null);
+  revisor$ = this.revisorSelecionadoSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -32,8 +34,12 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseUrl}/${id}`, httpOptions)
   }
 
-  setUsuarioSelecionado(usuario: Usuario | null) {
-    this.usuarioSelecionadoSubject.next(usuario);
+  setAutor(usuario: Usuario | null) {
+    this.autorSelecionadoSubject.next(usuario);
+  }
+
+  setRevisor(usuario: Usuario | null) {
+    this.revisorSelecionadoSubject.next(usuario);
   }
 
 }

@@ -32,7 +32,7 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
         }
       }
     );
-    this.autorSubscription = this.usuarioService.usuarioSelecionado$.subscribe(
+    this.autorSubscription = this.usuarioService.autor$.subscribe(
       usuario => {
         this.autor = usuario
       }
@@ -62,6 +62,11 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
 
   stringToDate(dateString: string | Date): Date {
     return new Date(dateString);
+  }
+
+  getExtensao(descricao: string): string {
+    let partes = descricao.split('.');
+    return partes[partes.length - 1];
   }
 
 }

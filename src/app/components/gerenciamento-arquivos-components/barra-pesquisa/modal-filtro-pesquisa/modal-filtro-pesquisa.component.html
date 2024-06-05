@@ -10,38 +10,66 @@
                     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-[color:var(--cinza-principal-escuro)] border border-[color:var(--cinza-border)] bg-white hover:bg-[color:var(--cinza-principal-escuro)] hover:text-white focus:outline-none focus:border-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">{{itensOrdenar[0]}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>
-                    </button>
-                </div>
+                      </button>
+                      <!-- Dropdown menu -->
+                      <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                          @for (item of itensOrdenar; track item) {
+                              <li>
+                                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item}}</a>
+                              </li>
+                          }
+                          </ul>
+                      </div>
+                  </div>
 
-                <!-- Dropdown menu -->
-                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                    @for (item of itensOrdenar; track item) {
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{item}}</a>
-                        </li>
-                    }
-                    </ul>
-                </div>
-
-                <h6 class="text-sm font-medium text-gray-900 dark:text-white">
-                    Status
-                </h6>
-                <app-arquivo-tag></app-arquivo-tag>
+                  <div class="flex justify-between h-full">
+                      <div>
+                          <h6 class="text-sm font-medium text-gray-900 dark:text-white">
+                              Status
+                          </h6>
+                          <ul class="pb-3 flex space-b-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="RadioButton">
+                              @for (st of status; track st) {
+                                  <li class="mb-2">
+                                      <div class="flex items-center">
+                                          <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-[color:var(--cinza-principal-escuro)] bg-gray-100 border-gray-300 focus:ring-[color:var(--cinza-principal-escuro)] dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                          <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{st}}</label>
+                                      </div>
+                                  </li>
+                              }
+                          </ul>
+                      </div>
+                      <div>
+                          <h6 class="mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                              Última modificação
+                          </h6>
+                      </div>
+                  </div>
 
                 <h6 class="mb-1 text-sm font-medium text-gray-900 dark:text-white">
-                    Última modificação
+                  Tamanho do Arquivo
                 </h6>
-                <ul class="pb-3 space-b-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="RadioButton">
-                    @for (data of datas; track data) {
-                        <li class="mb-2">
-                            <div class="flex items-center">
-                                <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-[color:var(--cinza-principal-escuro)] bg-gray-100 border-gray-300 focus:ring-[color:var(--cinza-principal-escuro)] dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{data}}</label>
-                            </div>
-                        </li>
-                    }
-                </ul>
+                <div class="relative mb-6">
+                  <label for="labels-range-input" class="sr-only">Labels range</label>
+                  <input id="labels-range-input" type="range" value="1000" min="100" max="1500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                  <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min ($100)</span>
+                  <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$500</span>
+                  <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span>
+                  <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ($1500)</span>
+                </div>
+                <h6 class="mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                  Tipo de Arquivo
+                </h6>
+                <div class="flex">
+                    <div class="flex items-center">
+                      <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                      <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Checked state</label>
+                    </div>
+                </div>
                 <div class="flex justify-end">
                         <button type="submit"
                     class="px-6 py-3.5 w-1/4 text-base font-medium text-white bg-[color:var(--cinza-principal-escuro)] hover:bg-[color:var(--cinza-principal-medio)] rounded-lg text-center"

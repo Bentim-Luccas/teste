@@ -24,27 +24,36 @@ export class ModalFiltroPesquisaComponent implements OnInit {
         ultimaModificacao: ['']  // Inicialmente sem seleção
       });
     }
-    
+
+    status: string[] = [
+
+      'Em Progresso',
+      'Completo',
+      'Liberado para Obra',
+      'Cancelado',
+
+    ]
+
     datas: string[] = [
-  
+
       'Hoje',
-      'Últimos 7 dias',    
+      'Últimos 7 dias',
       'Últimos 30 dias',
       'Este ano',
-  
+
     ]
 
     itensOrdenar: string[] = [
-  
+
       'Última modificação',
-      'Última vez aberto por mim',    
+      'Última vez aberto por mim',
       'A-Z',
       'Número de versões',
-  
+
     ]
 
     ngOnInit(): void {
-      
+
     }
 
     onSubmit(){}

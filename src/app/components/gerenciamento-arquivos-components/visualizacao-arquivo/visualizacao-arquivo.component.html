@@ -2,11 +2,11 @@
 
 
   <div class="flex flex-wrap">
-    @for (arquivoExtensor of arquivosExtensores; track arquivoExtensor) {
+    @if (extensao) {
       <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-2 mb-4">
-        <img class="rounded-t-lg" src="" alt="{{arquivoExtensor.nome}}" />
+        <svg class="h-10 w-10 text-gray-800"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M14 3v4a1 1 0 0 0 1 1h4" />  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />  <line x1="12" y1="11" x2="12" y2="17" />  <polyline points="9 14 12 17 15 14" /></svg>
         <div class="p-5">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{arquivoExtensor.nome}}</h5>
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{extensao}}</h5>
         </div>
       </div>
     }
@@ -15,36 +15,36 @@
 
 
 
-  <app-arquivo-tag></app-arquivo-tag>
+  <!-- <app-arquivo-tag></app-arquivo-tag> -->
 
  <div class="flow-root">
       <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
           <li class="py-3 sm:py-4">
               <div class="flex items-center">
-                @if (arquivoSelecionado) {
+                @if (arquivoSelecionado && arquivoRecente) {
                   <div class="">
                     <div class="flex p-1">
                       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.005 11.19V12l6.998 4.042L19 12v-.81M5 16.15v.81L11.997 21l6.998-4.042v-.81M12.003 3 5.005 7.042l6.998 4.042L19 7.042 12.003 3Z"/>
                       </svg>
-                      <p class="text-base ml-1 font-medium text-gray-900 truncate dark:text-white">
-                          {{arquivoSelecionado.arquivo_descricao}}
+                      <p class="text-base ml-1 font-semibold text-gray-900 truncate dark:text-white">
+                          {{arquivoRecente.arquivo_descricao}}
                       </p>
                     </div>
                     <div class="flex p-1">
                       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/>
                       </svg>
-                      <p class="text-base ml-1 font-medium text-gray-900 truncate dark:text-white">
-                        Criado em: {{stringToDate(arquivoSelecionado.arquivo_data!) | date: 'dd/MM/yyyy hh:mm:ss'}}
+                      <p class="text-base ml-1 font-semibold text-gray-500 truncate dark:text-white">
+                        Criado em: {{arquivoSelecionado.arquivo_data | date: 'dd/MM/yyyy hh:mm:ss'}}
                     </p>
                     </div>
                     <div class="flex p-1">
                       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" clip-rule="evenodd"/>
                       </svg>
-                      <p class="text-base ml-1 font-medium text-gray-900 truncate dark:text-white">
-                        Revisão em: {{stringToDate(arquivoSelecionado.arquivo_data!) | date: 'dd/MM/yyyy hh:mm:ss'}}
+                      <p class="text-base ml-1 font-semibold text-gray-500 truncate dark:text-white">
+                       {{arquivoRecente.arquivo_versao}}ª Revisão: {{arquivoRecente.arquivo_data | date: 'dd/MM/yyyy hh:mm:ss'}}
                       </p>
                     </div>
                   </div>
@@ -63,7 +63,7 @@
                     <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                 </div>
                 <div class="flex-1 min-w-0 ms-4">
-                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    <p class="text-base font-semibold text-gray-900 truncate dark:text-white">
                         {{autor.usuario_nome}}
                     </p>
                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -75,31 +75,30 @@
           </li>
       </ul>
       <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Revisores</h5>
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Revisor</h5>
         <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
           Edit
         </a>
       </div>
+      @if (arquivoRecente) {
       <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
             <li class="py-3 sm:py-4">
                 <div class="flex items-center flex-shrink-0">
-                  @for (revisor of revisores; track revisor) {
                     <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                       <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                   </div>
                   <div class="flex-1 min-w-0 ms-4">
-                      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          {{revisor.nome}}
+                      <p class="text-base font-semibold text-gray-900 truncate dark:text-white">
+                          {{arquivoRecente.autor}}
                       </p>
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                          {{revisor.cargo}}
+                          <!-- {{arquivoRecente.autor}} --> Admin
                       </p>
                   </div>
-                  }
                 </div>
             </li>
         </ul>
-      </div>
+      </div>}
 
  </div>

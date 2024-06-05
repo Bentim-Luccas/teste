@@ -46,6 +46,11 @@ export class TabelaArquivosComponent implements OnInit {
 
   detalharArquivo(arquivo: Arquivo) {
     console.log("setando o arquivo ", arquivo);
+    // this.arquivoService.getVersaoRecente(4, arquivo.arquivo_descricao).subscribe(data => {
+    //  console.log("setando o recente:", data)
+    //  this.arquivoService.setArquivoRecente(data)
+    // })
+
     this.arquivoService.setArquivoSelecionado(arquivo);
 
   }
@@ -56,7 +61,7 @@ export class TabelaArquivosComponent implements OnInit {
 
   atualizarFiltro() {
     if (this.termoPesquisa) {
-      this.listaFiltrada = this.listaArquivos.filter(arquivo => 
+      this.listaFiltrada = this.listaArquivos.filter(arquivo =>
         arquivo.arquivo_descricao?.toLowerCase().includes(this.termoPesquisa.toLowerCase()));
     } else {
       this.listaFiltrada = this.listaArquivos;
