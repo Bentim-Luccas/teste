@@ -14,10 +14,19 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class DisciplinaService {
+    delete(id: number) {
+      throw new Error('Method not implemented.');
+    }
     private readonly baseUrl: string;
 
     constructor(private http: HttpClient) {
         this.baseUrl = environment.apiServer + 'disciplina';
+    }
+
+    getDisciplina(): Observable<any>{
+      return this.http.get<any[]>(this.baseUrl).pipe(
+          catchError(this.handleError) // Handle potential errors
+        );
     }
 
     post(disciplina: Disciplina): Observable<Disciplina> {
@@ -60,6 +69,7 @@ export class DisciplinaService {
         console.error(errorMessage);
         return throwError(errorMessage);
     }
+<<<<<<< HEAD
 
     /* ======================= Services Baseados no Usuário ====================== */
 
@@ -68,4 +78,6 @@ export class DisciplinaService {
           catchError(this.handleError)
       );
     }
+=======
+>>>>>>> f662d8b68eb434afe7719a844191ddb518e68e41
 }
