@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { PermissionamentoUsuarioComponent } from '../../components/permissionamento-usuario/permissionamento-usuario.component';
-import { PerfilUsuarioComponent } from '../../components/perfil-usuario/perfil-usuario.component';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { MenuLateralComponent } from "../../components/menu-lateral/menu-lateral.component";
+import { BreadcrumbComponent } from "../../components/breadcrumb/breadcrumb.component";
+import { TabsUsuarioComponent } from '../../components/gerenciamento-usuarios-components/tabs-usuario/tabs-usuario.component';
 
 @Component({
-  selector: 'app-gerenciamento-usuario',
-  standalone: true,
-  imports: [PerfilUsuarioComponent, PermissionamentoUsuarioComponent],
-  templateUrl: './gerenciamento-usuario.component.html',
-  styleUrl: './gerenciamento-usuario.component.css'
+    selector: 'app-gerenciamento-usuario',
+    standalone: true,
+    templateUrl: './gerenciamento-usuario.component.html',
+    styleUrl: './gerenciamento-usuario.component.css',
+    imports: [NavbarComponent, MenuLateralComponent, BreadcrumbComponent, TabsUsuarioComponent]
 })
 export class GerenciamentoUsuarioComponent {
 
