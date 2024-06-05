@@ -15,19 +15,19 @@ export class ArquivosRecentesComponent {
 
   listaArquivosRecentes: Arquivo[] = []
 
-  constructor(private arquivoService: ArquivoService){}
+  // constructor(private arquivoService: ArquivoService){}
 
-  ngOnInit(): void {
-    this.arquivoService.findAll().pipe(first()).subscribe(data => {
-      this.listaArquivosRecentes = data
-      console.log(data)
-    })
+  // ngOnInit(): void {
+  //   this.arquivoService.findAll().pipe(first()).subscribe(data => {
+  //     this.listaArquivosRecentes = data
+  //     console.log(data)
+  //   })
 
 
-    this.listaArquivosRecentes.reverse()
-    this.listaArquivosRecentes.length = 6
+  //   this.listaArquivosRecentes.reverse()
+  //   this.listaArquivosRecentes.length = 6
 
-    console.log(this.listaArquivosRecentes)
-  }
+  //   console.log(this.listaArquivosRecentes)
+  // }
 
 }

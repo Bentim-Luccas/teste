@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Arquivo } from '../../../interface/arquivo';
 import { ArquivoService } from '../../../service/arquivo.service';
 import { first } from 'rxjs';
@@ -12,16 +12,11 @@ import { first } from 'rxjs';
 })
 export class CardsComponent implements OnInit{
 
-  listaArquivos: Arquivo[] = []
+  @Input() listaArquivos: Arquivo[] = []
 
-  constructor(private arquivoService: ArquivoService){}
+    constructor(private arquivoService: ArquivoService){}
 
   ngOnInit(): void {
-    this.arquivoService.findAll().pipe(first()).subscribe(data => {
-      this.listaArquivos = data
-      console.log(data)
-    })
+
  }
-
-
 }
