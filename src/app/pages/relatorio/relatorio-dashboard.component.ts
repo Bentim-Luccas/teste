@@ -53,7 +53,12 @@ export class RelatorioComponent implements OnInit{
           case 1:
             this.listaArquivosAprovados.push(arquivo)
             break;
-
+          case -1:
+            this.listaArquivosReprovados.push(arquivo)
+            break;
+          case 0:
+            this.listaArquivosPendentes.push(arquivo)
+            break;
         }
      });
     })
