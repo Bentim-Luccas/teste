@@ -1,8 +1,11 @@
 /* Topo */
 
-
-
-
+app-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Certifique-se de que o z-index seja maior do que outros elementos na página */
+}
 
 section{
   padding: 10px;

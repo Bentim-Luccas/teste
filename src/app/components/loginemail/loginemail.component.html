@@ -14,16 +14,17 @@
           <p class="text-center text-xl font-normal text-stone-500">Faça login para acessar a plataforma!</p>
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            [ngClass]="{ 'error-label': (emailFormControl.touched && emailFormControl.invalid) }">Seu e-mail</label>
-          
-            <input type="email" name="email" id="email"
-              class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg
+            [ngClass]="{ 'error-label': emailFormControl.invalid && formEnviado  }">Seu e-mail</label>
+                  
+            <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg
               focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mt-2"
               placeholder="cliente@gmaisp.com.br" [formControl]="emailFormControl" />
-            <div *ngIf="emailFormControl.invalid && emailFormControl.touched" class="text-red-500 text-sm mt-1">
-              <span *ngIf="emailFormControl.hasError('required')">Email é <strong>obrigatório</strong></span>
-              <span *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Por favor, insira um endereço de email válido</span>
-            </div>
+              @if (formEnviado) {
+                <div class="text-red-500 text-sm mt-1">
+                  @if (emailFormControl.hasError('required')) {Email é <strong>obrigatório</strong>}
+                  @if (emailFormControl.hasError('credenciais')) {Por favor, insira um endereço de email válido}
+                </div>
+              }
           </div>
           <button type="submit" class="w-full text-white bg-azulButton hover:bg-hoverAzulButton 
           font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2">
