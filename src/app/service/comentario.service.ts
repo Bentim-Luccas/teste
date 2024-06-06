@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Comentario } from '../interface/comentario/comentario';
+import { Comentario } from '../interface/comentario';
 import { catchError, Observable, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
