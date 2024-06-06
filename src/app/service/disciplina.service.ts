@@ -21,7 +21,7 @@ export class DisciplinaService {
   }
 
   getDisciplina(): Observable<any> {
-    return this.http.get<any[]>(this.baseUrl).pipe(
+    return this.http.get<Disciplina[]>(this.baseUrl).pipe(
       catchError(this.handleError) // Handle potential errors
     );
   }

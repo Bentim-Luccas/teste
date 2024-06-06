@@ -15,7 +15,7 @@ export class TabelaDisciplinaComponent implements OnInit  {
 
   constructor ( private disciplinaservice :DisciplinaService) {}
 
- disciplina! : Disciplina[];
+ disciplinas : Disciplina[] = [];
 
   ngOnInit(): void {
     this.getDisciplina();
@@ -24,7 +24,7 @@ export class TabelaDisciplinaComponent implements OnInit  {
   getDisciplina():void{
     this.disciplinaservice.getDisciplina().subscribe({
       next:(response) =>{
-        response && (this.disciplina = response);
+        response && (this.disciplinas = response);
       },
         error: (error) => console.log(error),
     })
@@ -33,7 +33,7 @@ export class TabelaDisciplinaComponent implements OnInit  {
   removeDisciplina(id: number): void {
     this.disciplinaservice.remove(id).subscribe({
       next: () => {
-        this.disciplina = this.disciplina.filter(disciplina => disciplina.disciplina_id !== id);
+        this.disciplinas = this.disciplinas.filter(disciplina => disciplina.disciplina_id !== id);
       },
       error: (error: any) => console.log(error),
     });

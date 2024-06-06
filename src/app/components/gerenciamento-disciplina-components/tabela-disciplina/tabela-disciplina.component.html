@@ -23,18 +23,19 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let disciplinas of disciplina" class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+        @for(disciplina of disciplinas; track disciplina.disciplina_id) {
+          <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {{disciplinas.disciplina_id}}
+                  {{disciplina.disciplina_id}}
               </th>
               <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {{disciplinas.disciplina_descricao}}
+                  {{disciplina.disciplina_descricao}}
               </td>
               <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {{disciplinas.disciplina_status}}
+                  {{disciplina.disciplina_status}}
               </td>
               <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {{disciplinas.projeto_id}}
+                  {{disciplina.projeto_id}}
               </td>
               <td class="px-6 py-4">
                   <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 40px; cursor: pointer;" data-modal-target="modal-edit" data-modal-toggle="modal-edit">
@@ -42,11 +43,12 @@
                   </a>
               </td>
               <td class="px-6 py-4">
-                  <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 40px; cursor: pointer;" (click)="removeDisciplina(disciplinas.disciplina_id)">
+                  <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 40px; cursor: pointer;" (click)="removeDisciplina(disciplina.disciplina_id)">
                       <i class="fas fa-trash-alt mr-1"></i>
                   </a>
               </td>
           </tr>
+        }
       </tbody>
   </table>
 </div>
