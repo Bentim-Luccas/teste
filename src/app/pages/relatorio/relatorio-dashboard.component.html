@@ -16,7 +16,11 @@
         <app-calendar />
         <app-badge-ativo />
       </div>
-      <app-cards [listaArquivos]="listaArquivos"/>
+      <app-cards [listaArquivos]="listaArquivos"
+        [listaArquivosAprovados]="listaArquivosAprovados"
+        [listaArquivosReprovados]="listaArquivosReprovados"
+        [listaArquivosPendentes]="listaArquivosPendentes"
+        />
       <div class="secao2">
         <div class="bloco-orcamento-user">
           <!-- <app-card-orcamento /> -->

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Arquivo } from '../../../interface/arquivo';
 import { ArquivoService } from '../../../service/arquivo.service';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-cards',
@@ -13,6 +12,9 @@ import { first } from 'rxjs';
 export class CardsComponent implements OnInit{
 
   @Input() listaArquivos: Arquivo[] = []
+  @Input() listaArquivosAprovados: Arquivo[] = []
+  @Input() listaArquivosReprovados: Arquivo[] = []
+  @Input() listaArquivosPendentes: Arquivo[] = []
 
     constructor(private arquivoService: ArquivoService){}
 
