@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { listaCompartilhada } from '../../interface/listaCompartilhada';
 import { ListaCompartilhadaService } from '../../service/listaCompartilhada.service';
 import { CommonModule } from '@angular/common';
+import { listaCompartilhadaArquivo } from '../../interface/listaCompartilhadaArquivo';
 
 @Component({
     selector: 'tabela-app-lista-compartilhada',
@@ -19,7 +20,7 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
     private router: Router
   ){}
 
-  ListaCompartilhada: listaCompartilhada[] = [];
+  listaCompartilhada: listaCompartilhada[] = [];
   ngOnInit(): void {
     this.getListaCompartilhada();
   }
@@ -27,7 +28,7 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
   getListaCompartilhada(): void {
     this.listaCompartilhadaService.getListaCompartilhada().subscribe({
       next: (response) => {
-        response && (this.ListaCompartilhada = response);
+        response && (this.listaCompartilhada = response);
       },
       error: (error) => console.log(error),
     });
@@ -47,8 +48,37 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
     }
   }
 
-
-  listaCompartilhada(): void {
-    this.router.navigate(['/listaCompartilhada']);
+  getUniqueEtapas(lista: listaCompartilhadaArquivo[]): string[] {
+    const etapas = lista
+      .map(arquivo => arquivo.permissionamento.arquivo?.etapa.etapa_descricao)
+      .filter((descricao): descricao is string => descricao !== undefined);
+    return Array.from(new Set(etapas));
   }
+
+  getUniqueDisciplinas(lista: listaCompartilhadaArquivo[]): string[] {
+    const disciplinas = lista
+      .map(arquivo => arquivo.permissionamento.arquivo?.etapa.disciplina.disciplina_descricao)
+      .filter((descricao): descricao is string => descricao !== undefined);
+    return Array.from(new Set(disciplinas));
+  }
+
+  getUniqueProjetos(lista: listaCompartilhadaArquivo[]): string[] {
+    const projetos = lista
+      .map(arquivo => arquivo.permissionamento.arquivo?.projeto.projeto_descricao)
+      .filter((descricao): descricao is string => descricao !== undefined);
+    return Array.from(new Set(projetos));
+  }
+
+  async redirecionarArquivo(dado:any): Promise<void>{
+
+    const idSelecionado = this.listaCompartilhada.find(lista => lista.lista_compartilhada_id === dado.lista_compartilhada_id);
+
+    if (idSelecionado) {
+      await this.router.navigate(['/arquivos'], { queryParams: { id: idSelecionado.lista_compartilhada_id } });
+  } else {
+      console.error('Elemento não encontrado na lista compartilhada.');
+  }
+
+}
+
 }
