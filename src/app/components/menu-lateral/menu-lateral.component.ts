@@ -1,8 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { EmpresaService } from '../../service/empresa.service';
-import { Empresa } from '../../interface/empresa';
 import { Router } from '@angular/router';
+import { ProjetoService } from '../../service/projeto.service';
+import { Projeto } from '../../interface/projeto';
 
 
 @Component({
@@ -16,18 +16,18 @@ import { Router } from '@angular/router';
 export class MenuLateralComponent implements OnInit  {
 
 
-  constructor ( private empresaservice :EmpresaService,
+  constructor ( private projetoService :ProjetoService,
     private router: Router
   ){}
 
- empresa! : Empresa[];
+ projeto! : Projeto[];
   ngOnInit(): void {
-    this.getEmpresa();
+    this.getProjetos();
   }
-  getEmpresa():void{
-    this.empresaservice.getEmpresa().subscribe({
+  getProjetos():void{
+    this.projetoService.findAll().subscribe({
       next:(response) =>{
-        response && (this.empresa = response);
+        response && (this.projeto = response);
       },
         error: (error) => console.log(error),
     })
