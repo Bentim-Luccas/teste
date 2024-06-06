@@ -14,7 +14,6 @@ import { listaCompartilhadaArquivo } from '../../interface/listaCompartilhadaArq
 })
 export class TabelaListaCompartilhadaComponent implements OnInit {
 
-
   constructor(
     private listaCompartilhadaService: ListaCompartilhadaService,
     private router: Router
@@ -23,6 +22,7 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
   listaCompartilhada: listaCompartilhada[] = [];
   ngOnInit(): void {
     this.getListaCompartilhada();
+    console.log(this.listaCompartilhada);
   }
 
   getListaCompartilhada(): void {
@@ -79,6 +79,5 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
       console.error('Elemento não encontrado na lista compartilhada.');
   }
 
-}
-
+  }
 }
