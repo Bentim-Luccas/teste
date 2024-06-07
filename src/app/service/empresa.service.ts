@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from '../../environments/environment.development';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Empresa } from "../interface/empresa";
 
 
 @Injectable({
@@ -15,12 +16,18 @@ export class EmpresaService{
     constructor(private http: HttpClient) {
       this.baseUrl = environment.apiServer + 'Empresa';
     }
+
     getEmpresa(): Observable<any>{
         return this.http.get<any[]>(this.baseUrl).pipe(
             catchError(this.handleError) // Handle potential errors
-          );
-        
+          ); 
     }
+
+    GetEmpresaById(id: number): Observable<Empresa> {
+      return this.http.get<Empresa>(`${this.baseUrl}/${id}`).pipe(
+          catchError(this.handleError) // Handle potential errors
+      );
+  }
 
     private handleError(error: any): Observable<never> {
         // Use 'never' instead of 'void' for error handling
