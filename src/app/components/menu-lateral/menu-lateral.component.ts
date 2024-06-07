@@ -1,14 +1,14 @@
 import { Component,OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { EmpresaService } from '../../service/empresa.service';
-import { Empresa } from '../../interface/empresa';
 import { Router } from '@angular/router';
-
+import { Projeto } from '../../interface/projeto';
+import { ProjetoService } from '../../service/projeto.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, RouterModule],
   template: `<li *ngFor="let usuarios of usuarioresponse"></li>`,
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
@@ -16,18 +16,18 @@ import { Router } from '@angular/router';
 export class MenuLateralComponent implements OnInit  {
 
 
-  constructor ( private empresaservice :EmpresaService,
+  constructor ( private projetoService :ProjetoService,
     private router: Router
   ){}
 
- empresa! : Empresa[];
+ projeto! : Projeto[];
   ngOnInit(): void {
     this.getEmpresa();
   }
   getEmpresa():void{
-    this.empresaservice.getEmpresa().subscribe({
+    this.projetoService.findAll().subscribe({
       next:(response) =>{
-        response && (this.empresa = response);
+        response && (this.projeto = response);
       },
         error: (error) => console.log(error),
     })
