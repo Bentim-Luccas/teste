@@ -16,15 +16,18 @@ import { catchError, throwError } from 'rxjs';
   })
   export class LoginemailComponent {
     emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-    credencias = false;
-    msgErro='ola'
+    credenciais = false;
     formEnviado = false;
+    processado = false;
+    msgErro='ola'
+    
   
     constructor(private router: Router, private authservice: AuthService) { }
   
     submitApp() {
       this.formEnviado = true;
       if (this.emailFormControl.valid) {
+        this.processado = true;
         this.msgErro=''
         this.emailFormControl.setErrors(null)
         const email = new Email(this.emailFormControl.value);
@@ -40,12 +43,12 @@ import { catchError, throwError } from 'rxjs';
               
             }
             
-          },error:(error) => {                              
+          },error:(error) => {     
+            this.processado = false;                         
             this.msgErro = error.error.message
             this.emailFormControl.setErrors({
               credenciais:true
             })
-
           }
       })
       }
