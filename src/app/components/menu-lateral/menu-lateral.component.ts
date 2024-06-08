@@ -22,9 +22,10 @@ export class MenuLateralComponent implements OnInit  {
 
  projeto! : Projeto[];
   ngOnInit(): void {
-    this.getEmpresa();
+    this.getProjetos();
   }
-  getEmpresa():void{
+
+  getProjetos():void{
     this.projetoService.findAll().subscribe({
       next:(response) =>{
         response && (this.projeto = response);
