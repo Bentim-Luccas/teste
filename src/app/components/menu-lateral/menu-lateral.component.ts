@@ -1,14 +1,14 @@
 import { Component,OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProjetoService } from '../../service/projeto.service';
 import { Projeto } from '../../interface/projeto';
-
+import { ProjetoService } from '../../service/projeto.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, RouterModule],
   template: `<li *ngFor="let usuarios of usuarioresponse"></li>`,
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
@@ -24,6 +24,7 @@ export class MenuLateralComponent implements OnInit  {
   ngOnInit(): void {
     this.getProjetos();
   }
+
   getProjetos():void{
     this.projetoService.findAll().subscribe({
       next:(response) =>{

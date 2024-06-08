@@ -3,14 +3,17 @@ import ComentarioComponent from '../../components/comentario/comentario.componen
 import { TabsComponent } from '../../components/tabs/tabs.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
+import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
+import { BarraPesquisaProjetoComponent } from '../../components/home-arquivos-components/barra-pesquisa-projeto/barra-pesquisa-projeto.component';
+import { ModalCriarProjetoComponent } from '../../components/home-arquivos-components/modal-criar-projeto/modal-criar-projeto.component';
+import { HomeArquivosComponentsComponent } from "../../components/home-arquivos-components/home-arquivos-components.component";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [ComentarioComponent,TabsComponent,NavbarComponent,MenuLateralComponent],
-  templateUrl: './homeArquivos.component.html',
-  styleUrl: './homeArquivos.component.css'
-
+    selector: 'app-home',
+    standalone: true,
+    templateUrl: './homeArquivos.component.html',
+    styleUrl: './homeArquivos.component.css',
+    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, ModalCriarProjetoComponent, HomeArquivosComponentsComponent]
 })
 export class HomeComponent {
 
