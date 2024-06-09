@@ -6,7 +6,7 @@
                   Nome da Disciplina
               </th>
               <th scope="col" class="px-6 py-3">
-                  Data do cadastro
+                  Projeto
               </th>
               <th scope="col" class="px-6 py-3">
                   Status
@@ -19,123 +19,31 @@
               </th>
           </tr>
       </thead>
-        <tbody>
+        <tbody *ngFor="let disciplinas of disciplina">
           <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="display: flex; align-items: center;">
-              <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-right: 50px;"/>
-              Arquitetura
+            <th [routerLink]="['/etapas']" scope="row" class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer" style="display: flex; align-items: center;">
+              <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-left: 10px; margin-right: 40px;"/>
+              {{disciplinas.disciplina_descricao}}
             </th>
             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              Apr 23, 2021
+              {{disciplinas.projeto_nome}}
             </td>
             <td class="px-4 py-3">
               <span class="inline-flex items-center bg-red-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                Desativado
+                {{disciplinas.disciplina_status}}
               </span>
             </td>
-            <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-              <a href="#">Editar</a>
-            </td>
-            <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-              <a href="#">Excluir</a>
-            </td>
+            <td class="px-6 py-4">
+              <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 15px; cursor: pointer;" data-modal-target="modal-edit" data-modal-toggle="modal-edit">
+                  <i class="fas fa-edit mr-1"></i>
+              </a>
+          </td>
+          <td class="px-6 py-4">
+              <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 20px; cursor: pointer;" (click)="removeDisciplina(disciplinas.disciplina_id)">
+                  <i class="fas fa-trash-alt mr-1"></i>
+              </a>
+          </td>
           </tr>
-
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="display: flex; align-items: center;">
-                <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-right: 50px;"/>
-                  Elétrica
-              </th>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apr 23, 2021
-                </td>
-                <td class="px-4 py-3"><span
-                  class="inline-flex items-center bg-red-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                  Desativado
-                </span></td>
-                <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                  <a href="#">Editar</a>
-              </td>
-              <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                <a href="#">Excluir</a>
-            </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="display: flex; align-items: center;">
-                <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-right: 50px;"/>
-                  Fundação
-              </th>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  Apr 18, 2021
-                </td>
-                <td class="px-4 py-3"><span
-                  class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                  Ativado
-                </span></td>
-                <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                  <a href="#">Editar</a>
-              </td>
-              <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                <a href="#">Excluir</a>
-            </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="display: flex; align-items: center;">
-                <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-right: 50px;"/>
-                  Piso
-              </th>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  Apr 15, 2021
-                </td>
-                <td class="px-4 py-3"><span
-                  class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                  Ativado
-                </span></td>
-                <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                  <a href="#">Editar</a>
-              </td>
-              <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                <a href="#">Excluir</a>
-            </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="display: flex; align-items: center;">
-                <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-right: 50px;"/>
-                  Hidráulica
-              </th>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  Apr 15, 2021
-                </td>
-                <td class="px-4 py-3"><span
-                  class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                  Ativado
-                </span></td>
-                <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                  <a href="#">Editar</a>
-              </td>
-              <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                <a href="#">Excluir</a>
-            </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" style="display: flex; align-items: center;">
-                <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-right: 50px;"/>
-                  Piscina
-              </th>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  Apr 11, 2021
-                </td>
-                <td class="px-4 py-3"><span
-                  class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-                  Ativado
-                </span></td>
-                <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                  <a href="#">Editar</a>
-              </td>
-              <td class="px-6 py-4 font-medium text-blue-900 whitespace-nowrap dark:text-white">
-                <a href="#">Excluir</a>
-            </td>
-            </tr>
         </tbody>
     </table>
 </div>

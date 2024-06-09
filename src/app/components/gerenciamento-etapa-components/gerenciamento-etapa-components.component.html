@@ -10,80 +10,37 @@
                     Data de Cadastro
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Nome da Disciplina
+                    Status
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Editar Etapa
+                    Editar
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Excluir Etapa
+                    Excluir
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let etapas of etapa">
             <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Estudo de viabilidade
+                <td [routerLink]="['/arquivos']" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
+                    {{etapas.etapa_descricao}}
                 </td>
                 <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    00/00/0000
+                    {{etapas.etapa_data_inicio}}
                 </td>
                 <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Arquitetura
+                  <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                    {{etapas.etapa_status}}
+                  </span>
                 </td>
                 <td class="px-6 py-4">
                     <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-edit"
+                        style="margin-left: 15px; cursor: pointer;" data-modal-target="modal-edit"
                         data-modal-toggle="modal-edit">
                         <i class="fas fa-edit mr-1"></i></a>
                 </td>
                 <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-delete"
-                    data-modal-toggle="modal-delete">
-                        <i class="fas fa-trash-alt mr-1"></i></a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Projeto Arquitetônico
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    00/00/0000
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Arquitetura
-                </td>
-                <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-edit"
-                        data-modal-toggle="modal-edit">
-                        <i class="fas fa-edit mr-1"></i></a>
-                </td>
-                <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-delete"
-                    data-modal-toggle="modal-delete">
-                        <i class="fas fa-trash-alt mr-1"></i></a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Projeto Elétrico
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    00/00/0000
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Arquitetura
-                </td>
-                <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-edit"
-                        data-modal-toggle="modal-edit">
-                        <i class="fas fa-edit mr-1"></i></a>
-                </td>
-                <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-delete"
-                    data-modal-toggle="modal-delete">
+                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 20px; cursor: pointer;">
                         <i class="fas fa-trash-alt mr-1"></i></a>
                 </td>
             </tr>

@@ -3,11 +3,12 @@ import { DisciplinaService } from '../../../service/disciplina.service';
 import { Router } from '@angular/router';
 import { Disciplina } from '../../../interface/disciplina';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral-disciplina',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './menu-lateral-disciplina.component.html',
   styleUrl: './menu-lateral-disciplina.component.css'
 })

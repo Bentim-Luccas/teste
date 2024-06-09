@@ -3,11 +3,12 @@ import { EtapaService } from '../../../service/etapa.service';
 import { Router } from '@angular/router';
 import { Etapa } from '../../../interface/etapa';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral-etapa',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './menu-lateral-etapa.component.html',
   styleUrl: './menu-lateral-etapa.component.css'
 })
