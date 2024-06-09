@@ -1,4 +1,4 @@
-<aside id="default-sidebar" class="fixed left-0 top-[64px] w-[266px] max-h-screen" aria-label="Sidenav">
+<aside id="default-sidebar" class="fixed left-0 top-0 w-[266px] h-full" aria-label="Sidenav">
     <div class=" h-screen bg-[#282626]">
         <ul>
             <li class="w-[266.31px] h-[63.13px] pt-[6.9px] pl-[22.69px] pb-[6.9px] pr-[22.69px]">
@@ -26,12 +26,12 @@
                     <button type="button"
                         class="flex items-center mb-2 mt-1 w-[234.75px] text-white hover:bg-gray-600  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]"
                         (click)="toggleDropdown(disciplina)">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-[22.69px] h-[18.69px]">
-                            <path fill-rule="evenodd"
-                                d="M10.586 4.586a2 2 0 0 1 1.414.586l1.414 1.414h6.586a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-10a2 2 0 0 1 2-2h4.586zM4 8v10h16V8h-6.586l-2-2H4z"
-                                clip-rule="evenodd" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                            <path
+                              d="M120-120q-33 0-56.5-23.5T40-200v-520h80v520h680v80H120Zm160-160q-33 0-56.5-23.5T200-360v-440q0-33 23.5-56.5T280-880h200l80 80h280q33 0 56.5 23.5T920-720v360q0 33-23.5 56.5T840-280H280Zm0-80h560v-360H527l-80-80H280v440Zm0 0v-440 440Z" />
+                          </svg>
                         <span
+                            [routerLink]="['/etapas']"
                             class="flex-1 ml-2 text-left font-['Opens Sans'] text-[15.78px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{disciplina.disciplina_descricao}}</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 10 6">
