@@ -3,7 +3,7 @@
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3" style="padding-left: 90px;">
                     Nome da Etapa
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -22,9 +22,10 @@
         </thead>
         <tbody *ngFor="let etapas of etapa">
             <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td [routerLink]="['/arquivos']" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
+                <th [routerLink]="['/arquivos']" scope="row" class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer" style="display: flex; align-items: center;">
+                    <img src="assets/images/icon etapa.png" style="width: 35px; height: 35px; margin-left: 10px; margin-right: 40px;"/>
                     {{etapas.etapa_descricao}}
-                </td>
+                  </th>
                 <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{etapas.etapa_data_inicio}}
                 </td>
