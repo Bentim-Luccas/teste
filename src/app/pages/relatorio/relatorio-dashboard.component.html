@@ -16,11 +16,15 @@
         <app-calendar />
         <app-badge-ativo />
       </div>
-      <app-cards />
+      <app-cards [listaArquivos]="listaArquivos"
+        [listaArquivosAprovados]="listaArquivosAprovados"
+        [listaArquivosReprovados]="listaArquivosReprovados"
+        [listaArquivosPendentes]="listaArquivosPendentes"
+        />
       <div class="secao2">
         <div class="bloco-orcamento-user">
           <!-- <app-card-orcamento /> -->
-          <app-user-info />
+          <app-user-info [listaArquivos]="listaArquivos"/>
         </div>
         <div class="bloco-grafico">
           <app-grafico />
