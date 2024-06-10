@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, delay } from 'rxjs'
 import { Router } from '@angular/router';
 import { Email } from '../interface/email';
 import { Token } from '../interface/token';
@@ -32,7 +32,9 @@ export class AuthService {
       
     // }
     return obs
+
   }
+
 
   private gerarToken(email:string):Observable<Token>{
     var aleatorio = Math.random().toString(36).substring(2);
