@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../../interface/usuario';
 import { UsuarioService } from '../../../service/usuario.service';
+import { TabsUsuarioComponent } from "../tabs-usuario/tabs-usuario.component";
 
 @Component({
-  selector: 'app-tabela-usuarios',
-  standalone: true,
-  imports: [],
-  templateUrl: './tabela-usuarios.component.html',
-  styleUrl: './tabela-usuarios.component.css'
+    selector: 'app-tabela-usuarios',
+    standalone: true,
+    templateUrl: './tabela-usuarios.component.html',
+    styleUrl: './tabela-usuarios.component.css',
+    imports: [TabsUsuarioComponent]
 })
 export class TabelaUsuariosComponent implements OnInit {
 
