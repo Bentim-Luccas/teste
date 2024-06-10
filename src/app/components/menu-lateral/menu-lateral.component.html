@@ -9,17 +9,9 @@
         </a>
       </li>
       <div class="flex flex-wrap justify-center items-center">
-        <button type="button"
-          class="flex items-center pt-[4.93px] mb-[10px] text-white hover:bg-gray-600 pl-[27.62px] pb-[4.93px] pr-[27.62px] w-[234.75px] h-[45.37px] border-white border-[0.99px] rounded-[7.89px]">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-            class="w-[15.25px] h-[18.15px]">
-            <path fill-rule="evenodd"
-              d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
-              clip-rule="evenodd" />
-          </svg>
-          <span
-            class="flex-1 ml-1 text-left font-['Opens Sans'] text-[19.73px] font-semibold leading-[26.86px] text-white">Novo</span>
-        </button>
+        <div class="flex flex-wrap justify-center items-center">
+          <app-modal-button></app-modal-button>
+        </div>
       </div>
       <div class="overflow-y-auto max-h-[400px] flex flex-wrap justify-center items-center scrollbar-thin">
         <div *ngFor="let projetos of projeto">
