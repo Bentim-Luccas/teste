@@ -8,4 +8,5 @@ export interface Disciplina {
     dropdownOpen: boolean;
     etapas : Etapa[]
     projeto_nome: string;
+    permissionamento_tipo: string;
 }
