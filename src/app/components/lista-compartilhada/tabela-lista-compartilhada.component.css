@@ -1,7 +1,8 @@
 .hover-underline:hover {
     position: relative;
   }
-  .hover-underline:hover::after {
+
+.hover-underline:hover::after {
     content: '';
     position: absolute;
     left: 0;

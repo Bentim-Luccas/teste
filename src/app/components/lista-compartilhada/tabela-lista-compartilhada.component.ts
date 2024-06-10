@@ -1,25 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { listaCompartilhada } from '../../interface/listaCompartilhada';
 import { ListaCompartilhadaService } from '../../service/listaCompartilhada.service';
 import { CommonModule } from '@angular/common';
 import { listaCompartilhadaArquivo } from '../../interface/listaCompartilhadaArquivo';
+
+
 
 @Component({
     selector: 'tabela-app-lista-compartilhada',
     standalone: true,
     templateUrl: './tabela-lista-compartilhada.component.html',
     styleUrls: ['./tabela-lista-compartilhada.component.css'],
-    imports: [CommonModule, RouterLink, RouterOutlet]
+    imports: [CommonModule, RouterLink, RouterOutlet, MatDialogModule]
 })
 export class TabelaListaCompartilhadaComponent implements OnInit {
+  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;
 
   constructor(
     private listaCompartilhadaService: ListaCompartilhadaService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ){}
 
+  openModal(){
+    this.dialog.open(this.modalTemplate);
+  }
+
   listaCompartilhada: listaCompartilhada[] = [];
+
   ngOnInit(): void {
     this.getListaCompartilhada();
     console.log(this.listaCompartilhada);

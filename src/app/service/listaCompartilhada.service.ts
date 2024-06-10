@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 export class ListaCompartilhadaService{
 constructor(private httpCliente:HttpClient){ }
     getListaCompartilhada(): Observable<any>{
-        return this.httpCliente.get("http://localhost:3000/lista-compartilhada",{});
+        return this.httpCliente.get("http://localhost:3000/lista-compartilhada",{}); // mudar o endereço quando tiver o endpoint estiver no Academico3
     }
 
 }
