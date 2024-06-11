@@ -1,7 +1,7 @@
 import { GerenciamentoUsuarioComponent } from './pages/gerenciamento-usuario/gerenciamento-usuario.component';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/homeArquivos/homeArquivos.component';
-
+import { GerenciamentoNotificationComponent } from './pages/gerenciamento-notification/gerenciamento-notification.component';
 import { LoginemailComponent } from './components/loginemail/loginemail.component';
 import { emailGuard } from './guard/email.guard';
 import { LogintokenComponent } from './components/logintoken/logintoken.component';
@@ -46,4 +46,8 @@ export const routes: Routes = [
     component: GerenciamentoArquivosComponent
   }
   , { path: 'relatorio', component: RelatorioComponent },
+
+  {
+    path: 'notificacao', component: GerenciamentoNotificationComponent
+  }
 ];
