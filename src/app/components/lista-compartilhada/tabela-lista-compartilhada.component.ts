@@ -1,33 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { listaCompartilhada } from '../../interface/listaCompartilhada';
 import { ListaCompartilhadaService } from '../../service/listaCompartilhada.service';
 import { CommonModule } from '@angular/common';
+import { listaCompartilhadaArquivo } from '../../interface/listaCompartilhadaArquivo';
+
+
 
 @Component({
     selector: 'tabela-app-lista-compartilhada',
     standalone: true,
     templateUrl: './tabela-lista-compartilhada.component.html',
     styleUrls: ['./tabela-lista-compartilhada.component.css'],
-    imports: [CommonModule, RouterLink, RouterOutlet]
+    imports: [CommonModule, RouterLink, RouterOutlet, MatDialogModule]
 })
 export class TabelaListaCompartilhadaComponent implements OnInit {
-
+  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;
 
   constructor(
     private listaCompartilhadaService: ListaCompartilhadaService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ){}
 
-  ListaCompartilhada: listaCompartilhada[] = [];
+  openModal(){
+    this.dialog.open(this.modalTemplate);
+  }
+
+  listaCompartilhada: listaCompartilhada[] = [];
+
   ngOnInit(): void {
     this.getListaCompartilhada();
+    console.log(this.listaCompartilhada);
   }
 
   getListaCompartilhada(): void {
     this.listaCompartilhadaService.getListaCompartilhada().subscribe({
       next: (response) => {
-        response && (this.ListaCompartilhada = response);
+        response && (this.listaCompartilhada = response);
       },
       error: (error) => console.log(error),
     });
@@ -47,8 +58,36 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
     }
   }
 
+  getUniqueEtapas(lista: listaCompartilhadaArquivo[]): string[] {
+    const etapas = lista
+      .map(arquivo => arquivo.permissionamento.arquivo?.etapa.etapa_descricao)
+      .filter((descricao): descricao is string => descricao !== undefined);
+    return Array.from(new Set(etapas));
+  }
 
-  listaCompartilhada(): void {
-    this.router.navigate(['/listaCompartilhada']);
+  getUniqueDisciplinas(lista: listaCompartilhadaArquivo[]): string[] {
+    const disciplinas = lista
+      .map(arquivo => arquivo.permissionamento.arquivo?.etapa.disciplina.disciplina_descricao)
+      .filter((descricao): descricao is string => descricao !== undefined);
+    return Array.from(new Set(disciplinas));
+  }
+
+  getUniqueProjetos(lista: listaCompartilhadaArquivo[]): string[] {
+    const projetos = lista
+      .map(arquivo => arquivo.permissionamento.arquivo?.projeto.projeto_descricao)
+      .filter((descricao): descricao is string => descricao !== undefined);
+    return Array.from(new Set(projetos));
+  }
+
+  async redirecionarArquivo(dado:any): Promise<void>{
+
+    const idSelecionado = this.listaCompartilhada.find(lista => lista.lista_compartilhada_id === dado.lista_compartilhada_id);
+
+    if (idSelecionado) {
+      await this.router.navigate(['/arquivos'], { queryParams: { id: idSelecionado.lista_compartilhada_id } });
+  } else {
+      console.error('Elemento não encontrado na lista compartilhada.');
+  }
+
   }
 }
