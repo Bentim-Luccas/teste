@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Arquivo } from '../interface/arquivo';
 import { environment } from '../../environments/environment';
+import { ProjetoS3 } from '../interface/projetos3';
+import { ResponsePutArquivoS3 } from '../interface/reponseoutarquivos3';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -52,6 +54,14 @@ export class ArquivoService {
 
   setArquivoRecente(arquivo: Arquivo | null) {
     this.arquivoRecenteSubject.next(arquivo);
+  }
+
+  postPutArquivoS3(projeto:ProjetoS3){
+    return this.http.post<ResponsePutArquivoS3>('http://localhost:3000/arquivo/GetPutPreSignedUrl/',projeto,httpOptions)
+  }
+  
+  putArquivoInS3(file: any,link: string){
+    return this.http.put(link,file,{ observe: 'response' ,responseType:'text'})
   }
 
 }
