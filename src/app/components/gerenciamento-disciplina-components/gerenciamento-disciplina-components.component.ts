@@ -20,43 +20,39 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     constructor(
         private disciplinaService: DisciplinaService,
         private projetoService: ProjetoService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
-        this.carregarDisciplina();
+        this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(4, 4);
     }
 
-    carregarDisciplina(): void {
-        this.disciplinaService.findAll().subscribe(
-            (disciplinas: Disciplina[]) => {
-                this.disciplina = disciplinas;
-                // Carregar nome da empresa para cada projeto
-                this.loadProjetoNome(disciplinas);
+    CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
+        this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto, idUsuario).subscribe({
+            next: (disciplina) => {
+                this.disciplina = disciplina;
+                this.carregarProjetoNome(disciplina);
             },
-            (error: any) => {
-                console.error('Erro ao carregar disciplinas:', error);
-            }
-        );
+            error: (error) => console.log(error)
+        });
     }
 
-    private loadProjetoNome(disciplinas: Disciplina[]): void {
-        disciplinas.forEach((disc: Disciplina) => {
+    private carregarProjetoNome(disciplina: Disciplina[]): void {
+        disciplina.forEach((disc: Disciplina) => {
             this.projetoService.findOne(disc.projeto_id).subscribe(
                 (projeto: Projeto) => {
                     if (projeto) {
-                        disc.projeto_nome = projeto.projeto_descricao || ''; // Handle undefined or null case
+                        disc.projeto_nome = projeto.projeto_descricao || '';
                     } else {
-                        disc.projeto_nome = ''; // Handle case where projeto is undefined
+                        disc.projeto_nome = '';
                     }
                 },
                 (error: any) => {
                     console.error(`Erro ao carregar nome do projeto ${disc.projeto_id}:`, error);
-                    disc.projeto_nome = ''; // Handle error case
+                    disc.projeto_nome = '';
                 }
             );
         });
     }
-    
 
     removeDisciplina(id: number): void {
         this.disciplinaService.remove(id).subscribe({
