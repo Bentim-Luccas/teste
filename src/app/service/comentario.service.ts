@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Comentario } from '../interface/comentario/comentario';
+import { Comentario } from '../interface/comentario';
 import { catchError, Observable, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -17,7 +17,6 @@ const httpOptions = {
 })
 export class ComentarioService {
   private readonly baseUrl: string;
-
 
   constructor(private http: HttpClient) {
     this.baseUrl = environment.apiServer + 'comentario';

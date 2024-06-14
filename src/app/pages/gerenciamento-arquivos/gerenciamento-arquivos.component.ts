@@ -6,11 +6,13 @@ import { ModalButtonComponent, ModalEnviarArquivoComponent } from '../../compone
 import { ModalMudarAcessoComponent } from '../../components/gerenciamento-arquivos-components/modal-mudar-acesso/modal-mudar-acesso.component'
 import { TabelaArquivosComponent } from '../../components/gerenciamento-arquivos-components/tabela-arquivos/tabela-arquivos.component'
 import { NavbarComponent } from '../../components/navbar/navbar.component'
+import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
 
 @Component({
   selector: 'app-gerenciamento-arquivos',
   standalone: true,
-  imports: [ArquivoTagComponent, BarraPesquisaComponent, BreadcrumbComponent, ModalButtonComponent, ModalEnviarArquivoComponent, ModalMudarAcessoComponent, TabelaArquivosComponent, NavbarComponent],
+  imports: [ArquivoTagComponent, BarraPesquisaComponent, BreadcrumbComponent, ModalButtonComponent,
+     ModalEnviarArquivoComponent, ModalMudarAcessoComponent, TabelaArquivosComponent, NavbarComponent, MenuLateralComponent],
   templateUrl: './gerenciamento-arquivos.component.html',
   styleUrl: './gerenciamento-arquivos.component.css'
 })

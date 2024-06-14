@@ -42,4 +42,8 @@ export class UsuarioService {
     this.revisorSelecionadoSubject.next(usuario);
   }
 
+  getUsuariosPorEmpresaId(idEmpresa: number){
+    return this.http.get<Usuario[]>(`${this.baseUrl}/usuarioByEmpresaId/${idEmpresa}`, httpOptions)
+  }
+
 }

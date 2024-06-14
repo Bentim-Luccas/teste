@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body class="relative overflow-hidden p-5 sm:p-0">
+  <div class="flex justify-center items-center h-screen">
+    <div class="flex max-w-md flex-col gap-6 rounded-xl bg-white px-16 py-20 shadow-lg">
+      <form class="space-y-6" (submit)="submitToken()">
+        <div class="flex justify-center mb-4">
+          <img alt="G+P Soluções" loading="lazy" width="80" height="80" decoding="async" class="w-40" src="assets/imagens/logoGmaisP.svg">
+        </div>
+        <p class="text-center text-xl font-normal text-stone-500">Insira o código de autenticação</p>
+        <div>
+          <label for="token" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            [ngClass]="{ 'error-label': tokenFormControl.invalid && formEnviado }">Código de Autenticação</label>
+
+          <input type="text" name="token" id="token"
+            class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg
+            focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mt-2"
+            placeholder="Insira seu código aqui" [formControl]="tokenFormControl" />
+          @if (tokenFormControl.invalid && formEnviado) {
+            <div class="text-red-500 text-sm mt-1">
+              @if (tokenFormControl.hasError('required')) {<span>Código é <strong>obrigatório</strong></span>}
+              @if (tokenFormControl.hasError('tokeninvalido')) {<span>Código inválido. Tente novamente.</span>}
+            </div>
+          }
+        </div>
+        <button type="submit"
+          class="w-full text-white bg-azulButton hover:bg-hoverAzulButton font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2">
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
+  
+
+  <img alt="G+P" loading="lazy" width="285" height="646" decoding="async" data-nimg="1"
+    class="absolute -right-32 bottom-0 top-0 -z-10 w-96 rotate-180 object-cover object-top opacity-50"
+    style="color:transparent" src="assets/imagens/grafismoColorido.svg">
+  <img alt="G+P" loading="lazy" width="285" height="646" decoding="async" data-nimg="1"
+    class="absolute -left-32 bottom-0 top-20 -z-10 w-96 object-cover opacity-50" style="color:transparent"
+    src="assets/imagens/grafismoColorido.svg">
+</body>
+
+</html>
+
