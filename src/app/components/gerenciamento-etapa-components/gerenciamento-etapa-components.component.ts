@@ -18,11 +18,11 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
   constructor(private etapaService: EtapaService) { }
 
   ngOnInit(): void {
-    this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(4, 4);
+    this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(4, 5);
   }
 
-  CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idDisciplina: number, idUsuario: number) {
-    this.etapaService.findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idDisciplina, idUsuario).subscribe({
+  CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario: number, idDisciplina: number) {
+    this.etapaService.findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario, idDisciplina).subscribe({
       next: (etapa) => {
         this.etapa = etapa;
       },

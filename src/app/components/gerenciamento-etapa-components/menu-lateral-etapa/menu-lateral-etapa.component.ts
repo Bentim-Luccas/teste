@@ -15,7 +15,8 @@ import { RouterModule } from '@angular/router';
 export class MenuLateralEtapaComponent implements OnInit {
   constructor(private etapaService: EtapaService, private router: Router) { }
 
-  etapas: Etapa[] = [];
+  etapa: Etapa[] = [];
+  isDropdownOpen: boolean[] = [];
 
   ngOnInit(): void {
     this.getEtapas();
@@ -23,7 +24,7 @@ export class MenuLateralEtapaComponent implements OnInit {
 
   getEtapas(): void {
     this.etapaService.findAll().subscribe(etapas => {
-      this.etapas = etapas;
+      this.etapa = etapas;
     });
   }
 
