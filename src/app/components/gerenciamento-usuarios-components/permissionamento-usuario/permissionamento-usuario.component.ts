@@ -17,6 +17,7 @@ constructor (private projetoService: ProjetoService, private disciplinaService: 
   projetos: Projeto[] = [];
   ngOnInit(): void {
     this.getProjetosDaEmpresaDoUsuarioId(4);
+    this.getCheckedValue("D", "RW");
   }
 
   getProjetosDaEmpresaDoUsuarioId(usuarioId: number) : void{
@@ -45,6 +46,15 @@ constructor (private projetoService: ProjetoService, private disciplinaService: 
       error: (error)=> console.log(error),
     });
 
+  }
+
+  getCheckedValue(inputLetter: string, inputValue: string) : any {
+    let result = inputValue.includes(inputLetter);
+    if(result){
+      return "checked";
+    }else{
+      return "";
+    }
   }
 
 }

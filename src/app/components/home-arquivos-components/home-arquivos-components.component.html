@@ -17,16 +17,25 @@
           <!-- Dropdown menu -->
           <div *ngIf="projetos.dropdownOpen" id="dropdown-{{projetos.projeto_id}}" class="z-10 absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-md w-44 dark:bg-gray-700">
             <ul class="py-2">
+              @if(projetos.permissionamento_tipo!=null){
+                @if(projetos.permissionamento_tipo.includes("W")){
               <li>
+
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Editar</a>
               </li>
-              <li>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Excluir</a>
-              </li>
+               }
+              }
+                @if(projetos.permissionamento_tipo!=null){
+                  @if(projetos.permissionamento_tipo.includes("D")){
+                <li>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Excluir</a>
+                </li>
+                  }
+                }
+
             </ul>
           </div>
         </div>
       </div>
     </a>
   </div>
-  

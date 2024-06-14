@@ -11,4 +11,5 @@ export interface Etapa {
     etapa_id_pai?: number;
     dropdownOpen: boolean;
     arquivos: Arquivo[];
+    permissionamento_tipo: string;
 }

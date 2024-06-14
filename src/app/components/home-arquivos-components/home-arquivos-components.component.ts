@@ -6,6 +6,7 @@ import { Projeto } from '../../interface/projeto';
 import { RouterModule } from '@angular/router';
 import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
+import { Session } from 'node:inspector';
 
 @Component({
   selector: 'app-home-arquivos-components',
@@ -23,20 +24,18 @@ export class HomeArquivosComponentsComponent implements OnInit {
   projeto!: Projeto[];
 
   ngOnInit(): void {
-    this.carregarProjeto();
+    this.carregarProjeto(4);
   }
 
-  carregarProjeto() {
-    this.projetoService.findAll().subscribe(
-      (projeto: any) => {
+  carregarProjeto(usuarioId: number) {
+    this.projetoService.findProjetosDaEmpresaDoUsuarioId(usuarioId).subscribe({
+      next: (projeto)=> {
         this.projeto = projeto;
         // Carregar nome da empresa para cada projeto
         this.loadEmpresaName(projeto);
       },
-      (error: any) => {
-        console.error('Erro ao carregar projeto:', error);
-      }
-    );
+      error: (error)=> console.log(error),
+    });
   }
 
   private loadEmpresaName(projetos: Projeto[]) {
