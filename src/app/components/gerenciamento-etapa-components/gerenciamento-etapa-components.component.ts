@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { Etapa } from '../../interface/etapa';
 import { EtapaService } from '../../service/etapa.service';
 import { NgFor } from '@angular/common';
+import { DisciplinaService } from '../../service/disciplina.service';
 
 @Component({
   selector: 'app-gerenciamento-etapa-components',
@@ -11,23 +12,30 @@ import { NgFor } from '@angular/common';
   templateUrl: './gerenciamento-etapa-components.component.html',
   styleUrl: './gerenciamento-etapa-components.component.css'
 })
-export class GerenciamentoEtapaComponentsComponent implements OnInit{
+export class GerenciamentoEtapaComponentsComponent implements OnInit {
   etapa: Etapa[] = [];
 
-  constructor (private etapaService: EtapaService) {}
+  constructor(private etapaService: EtapaService) { }
 
   ngOnInit(): void {
-    this.carregarEtapa();
-}
+    this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(4, 4);
+  }
 
-carregarEtapa(): void {
-  this.etapaService.findAll().subscribe(
-      (etapas: Etapa[]) => {
-          this.etapa = etapas;
+  CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idDisciplina: number, idUsuario: number) {
+    this.etapaService.findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idDisciplina, idUsuario).subscribe({
+      next: (etapa) => {
+        this.etapa = etapa;
       },
-      (error: any) => {
-          console.error('Erro ao carregar disciplinas:', error);
-      }
-  );
-}
+      error: (error) => console.log(error)
+    });
+  }
+
+  deletarEtapa(idEtapa: number): void {
+    this.etapaService.remove(idEtapa).subscribe(() => {
+      this.etapa = this.etapa.filter(
+        (e) => e.etapa_id !== idEtapa
+      );
+    });
+  }
+
 }

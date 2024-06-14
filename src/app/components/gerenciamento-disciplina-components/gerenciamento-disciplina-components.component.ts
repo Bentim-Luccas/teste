@@ -54,14 +54,11 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
         });
     }
 
-    removeDisciplina(id: number): void {
-        this.disciplinaService.remove(id).subscribe({
-            next: () => {
-                this.disciplina = this.disciplina.filter(disciplina => disciplina.disciplina_id !== id);
-            },
-            error: (error: any) => {
-                console.error('Erro ao remover disciplina:', error);
-            }
+    deletarDisciplina(idDisciplina: number): void {
+        this.disciplinaService.remove(idDisciplina).subscribe(() => {
+            this.disciplina = this.disciplina.filter(
+                (d) => d.disciplina_id !== idDisciplina
+            );
         });
     }
 }
