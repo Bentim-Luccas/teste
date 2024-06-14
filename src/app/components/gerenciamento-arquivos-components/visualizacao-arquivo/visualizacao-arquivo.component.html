@@ -1,22 +1,78 @@
-<div class="w-full max-w p-4 bg-white">
-
-
-  <div class="flex flex-wrap">
-    @if (extensao) {
-      <div class="bg-white border border-gray-200 rounded-lg shadow  mx-2 mb-4">
-        <svg class="h-10 w-10 text-gray-800"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M14 3v4a1 1 0 0 0 1 1h4" />  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />  <line x1="12" y1="11" x2="12" y2="17" />  <polyline points="9 14 12 17 15 14" /></svg>
-        <div class="p-5">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{extensao}}</h5>
+<div class="w-full max-w p-1 bg-white">
+  <div class="flex justify-end">
+    <button id="dropdownDividerButton"
+          data-dropdown-toggle="dropdownDivider"
+          class="text-white font-medium rounded-lg text-sm px-2 py-1 text-center inline-flex items-center"
+          type="button">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M9.586 2.586A2 2 0 0 1 11 2h2a2 2 0 0 1 2 2v.089l.473.196.063-.063a2.002 2.002 0 0 1 2.828 0l1.414 1.414a2 2 0 0 1 0 2.827l-.063.064.196.473H20a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-.089l-.196.473.063.063a2.002 2.002 0 0 1 0 2.828l-1.414 1.414a2 2 0 0 1-2.828 0l-.063-.063-.473.196V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.089l-.473-.196-.063.063a2.002 2.002 0 0 1-2.828 0l-1.414-1.414a2 2 0 0 1 0-2.827l.063-.064L4.089 15H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h.09l.195-.473-.063-.063a2 2 0 0 1 0-2.828l1.414-1.414a2 2 0 0 1 2.827 0l.064.063L9 4.089V4a2 2 0 0 1 .586-1.414ZM8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clip-rule="evenodd"/>
+          </svg>
+    </button>
+  <!-- Dropdown menu -->
+    <div id="dropdownDivider" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+          </li>
+        </ul>
+        <div class="py-2">
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated link</a>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="flex flex-wrap">
+  @if (extensao) {
+    <div class="w-full px-2 flex bg-[color:var(--cinza-secundario)] rounded-lg p-4 items-center justify-between">
+      <div class="flex items-center">
+        @if (extensao === 'DWG') {
+          <img src="../../../../assets/images/DWGimg.png" alt="DWG Icon" class="w-20 h-20 mr-4">
+        } @else if (extensao === 'PDF') {
+          <img src="../../../../assets/images/PDFimg.png" alt="PDF Icon" class="w-20 h-20 mr-4">
+        }
+        <div class="h-full flex flex-col justify-center">
+          <div>
+            <!-- Nome do Arquivo -->
+            Nome
+          </div>
+          <div>
+            <!-- Data da ultima alteração -->
+            29/07/2024
+          </div>
+          <div class="arquivo-dados flex flex-row items-center pt-1">
+            <div class="text-sm text-gray-500 dark:text-gray-400">º REV</div>
+            <div class="separator mx-2"></div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">18 MB</div>
+            <div class="separator mx-2"></div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">{{extensao}}</div>
+          </div>
         </div>
       </div>
-    }
+      <button class="flex items-center justify-center" (click)="downloadFile()">
+        <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+     <div> <!-- Ajustar o Between do Button --> </div>
+    </div>
+  }
+</div>
+
+  <div class="flex content-center justify-between items-center">
+    <app-arquivo-tag></app-arquivo-tag>
+    <button>
+      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd"/>
+      </svg>
+    </button>
   </div>
-
-
-
-
-  <!-- <app-arquivo-tag></app-arquivo-tag> -->
-
  <div class="flow-root">
       <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
           <li class="py-3 sm:py-4">
@@ -76,9 +132,12 @@
       </ul>
       <div class="flex items-center justify-between mb-4">
         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Revisor</h5>
-        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-          Edit
-        </a>
+        <button>
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M17 10v1.126c.367.095.714.24 1.032.428l.796-.797 1.415 1.415-.797.796c.188.318.333.665.428 1.032H21v2h-1.126c-.095.367-.24.714-.428 1.032l.797.796-1.415 1.415-.796-.797a3.979 3.979 0 0 1-1.032.428V20h-2v-1.126a3.977 3.977 0 0 1-1.032-.428l-.796.797-1.415-1.415.797-.796A3.975 3.975 0 0 1 12.126 16H11v-2h1.126c.095-.367.24-.714.428-1.032l-.797-.796 1.415-1.415.796.797A3.977 3.977 0 0 1 15 11.126V10h2Zm.406 3.578.016.016c.354.358.574.85.578 1.392v.028a2 2 0 0 1-3.409 1.406l-.01-.012a2 2 0 0 1 2.826-2.83ZM5 8a4 4 0 1 1 7.938.703 7.029 7.029 0 0 0-3.235 3.235A4 4 0 0 1 5 8Zm4.29 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h6.101A6.979 6.979 0 0 1 9 15c0-.695.101-1.366.29-2Z" clip-rule="evenodd"/>
+          </svg>
+
+        </button>
       </div>
       @if (arquivoRecente) {
       <div class="flow-root">
