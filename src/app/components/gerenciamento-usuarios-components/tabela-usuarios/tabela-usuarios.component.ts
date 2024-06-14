@@ -13,6 +13,7 @@ import { TabsUsuarioComponent } from "../tabs-usuario/tabs-usuario.component";
 export class TabelaUsuariosComponent implements OnInit {
 
   listaUsuarios: Usuario[] = []
+  check = true
 
   constructor (private usuarioService : UsuarioService){}
 

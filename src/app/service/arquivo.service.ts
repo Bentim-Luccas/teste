@@ -1,10 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Arquivo } from '../interface/arquivo';
 import { environment } from '../../environments/environment';
 import { ProjetoS3 } from '../interface/projetos3';
 import { ResponsePutArquivoS3 } from '../interface/reponseoutarquivos3';
+import { RequestGetArquivoS3 } from '../interface/request_get_arquivo_s3';
+import { ResponseGetArquivoS3 } from '../interface/response-get-arquivo-s3';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,7 +28,7 @@ export class ArquivoService {
   private arquivoRecenteSubject = new BehaviorSubject<Arquivo | null>(null);
   arquivoRecente$ = this.arquivoRecenteSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private handler: HttpBackend) { }
 
   findAll() : Observable<Arquivo[]>  {
     return this.http.get<Arquivo[]>(this.baseUrl, httpOptions)
@@ -59,9 +61,22 @@ export class ArquivoService {
   postPutArquivoS3(projeto:ProjetoS3){
     return this.http.post<ResponsePutArquivoS3>('http://localhost:3000/arquivo/GetPutPreSignedUrl/',projeto,httpOptions)
   }
-  
-  putArquivoInS3(file: any,link: string){
-    return this.http.put(link,file,{ observe: 'response' ,responseType:'text'})
+
+  putArquivoInS3(file:any,link:string,file_type:string){
+    return this.http.put(link,file,{  headers: new HttpHeaders({
+      'Content-Type':  file_type,
+      //Authorization: 'my-auth-token'
+    }),observe: 'response' ,responseType:'text'})
   }
 
+  getArquivoS3(request:RequestGetArquivoS3){
+      return this.http.post<ResponseGetArquivoS3>('http://localhost:3000/arquivo/GetGetPreSignedUrl/',request,httpOptions)
+  }
+
+  getArquivoFromS3(link:string){
+    return this.http.get(link,{responseType:'blob',observe:'response'})
+  }
 }
+
+
+
