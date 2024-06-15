@@ -15,6 +15,7 @@ import { Arquivo } from './../../../interface/arquivo';
 import { TagsComponent } from "./tags/tags.component";
 import { ProjetoS3 } from '../../../interface/projetos3';
 import { response } from 'express';
+import { MatDialogRef } from '@angular/material/dialog';
 
 // BOTAO
 @Component({
@@ -48,7 +49,7 @@ export class ModalEnviarArquivoComponent implements OnInit{
   selectedFileType!:string;
   link!:string
 
-  constructor(private arquivoService: ArquivoService, private fb: FormBuilder) {
+  constructor(private arquivoService: ArquivoService, private fb: FormBuilder, private dialogRef: MatDialogRef<ModalEnviarArquivoComponent>) {
     this.formulario = this.fb.group({
       file_name: ['', Validators.required]
   })
@@ -98,6 +99,7 @@ export class ModalEnviarArquivoComponent implements OnInit{
 
           this.arquivoService.postArquivo(this.arquivo).subscribe(response => {
             console.log('Upload successful', response);
+            this.dialogRef.close();
             // Faça o que for necessário com a resposta do servidor
           })
         }
