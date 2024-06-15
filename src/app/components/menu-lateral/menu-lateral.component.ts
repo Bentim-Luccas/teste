@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { Projeto } from '../../interface/projeto';
 import { ProjetoService } from '../../service/projeto.service';
 import { RouterModule } from '@angular/router';
+import { ModalButtonComponent, ModalEnviarArquivoComponent } from '../gerenciamento-arquivos-components/modal-enviar-arquivo/modal-enviar-arquivo.component'
 
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [NgFor, RouterModule],
+  imports: [NgFor, RouterModule, ModalButtonComponent, ModalEnviarArquivoComponent],
   template: `<li *ngFor="let usuarios of usuarioresponse"></li>`,
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
