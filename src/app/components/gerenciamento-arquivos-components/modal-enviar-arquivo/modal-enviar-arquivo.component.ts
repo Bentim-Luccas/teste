@@ -1,4 +1,4 @@
-import { Status } from './../../../../../../arquivosBackendNest/src/enums/usuario_tipo.enum';
+// import { Status } from './../../../../../../arquivosBackendNest/src/enums/usuario_tipo.enum';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -119,4 +119,6 @@ export class ModalEnviarArquivoComponent implements OnInit{
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
+
+
 }
