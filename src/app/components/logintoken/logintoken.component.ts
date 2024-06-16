@@ -16,6 +16,7 @@ import { JWT_Token } from '../../interface/jwt_token';
 export class LogintokenComponent {
   tokenFormControl = new FormControl('', [Validators.required]);
   formEnviado = false;
+  processado = false;
 
 
   constructor(private router:Router, private authservice:AuthService){}
@@ -25,15 +26,16 @@ export class LogintokenComponent {
     this.formEnviado = true;
     if(this.tokenFormControl.value){
       // this.authservice.getTokenByEmail(sessionStorage.getItem("email")).subscribe((token:TokenProjeto)=>{
-      //   if(this.tokenFormControl.value === token[0].token){
-      //     sessionStorage.setItem("logado","true")
-      //     this.router.navigate(['inicial'])
-      //   }
-      // })
-      this.tokenFormControl.setErrors(null)
-      
-      const token = new Token(sessionStorage.getItem('email'),this.tokenFormControl.value)
-      this.authservice.loginToken(token).subscribe({
+        //   if(this.tokenFormControl.value === token[0].token){
+          //     sessionStorage.setItem("logado","true")
+          //     this.router.navigate(['inicial'])
+          //   }
+          // })
+          this.tokenFormControl.setErrors(null)
+          
+          const token = new Token(sessionStorage.getItem('email'),this.tokenFormControl.value)
+          this.processado = true;
+          this.authservice.loginToken(token).subscribe({
         next:(jwt:JWT_Token)=>{
           if(jwt){
             console.log(jwt.accessToken)
@@ -44,6 +46,7 @@ export class LogintokenComponent {
           }
         },
         error:(erro)=>{
+          this.processado = false;
           this.tokenFormControl.setErrors({tokeninvalido:true})
         }
       })
