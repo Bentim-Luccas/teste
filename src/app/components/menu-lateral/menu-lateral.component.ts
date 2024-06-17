@@ -31,8 +31,6 @@ export class MenuLateralComponent implements OnInit  {
   idEmpresaSelecionada! : number;
 
   ngOnInit(): void {
-
-
     let usuarioId = 4; //get usuario de session ID
     this.getEmpresas(usuarioId);
   }
