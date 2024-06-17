@@ -2,19 +2,25 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment.development";
 import { Projeto } from "../interface/projeto";
-import { Observable, catchError, throwError } from "rxjs";
+import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
+import { Empresa } from "../interface/empresa";
 
 const httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'aplication/json'
-    })
+  headers: new HttpHeaders({
+    'Content-Type': 'aplication/json',
+    //'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+  })
 };
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProjetoService {
+
     private readonly baseUrl: string;
+
+    private empresaSelecionadaSubject = new BehaviorSubject<Empresa | null>(null);
+    empresaSelecionada$ = this.empresaSelecionadaSubject.asObservable();
 
     constructor(private http: HttpClient) {
         this.baseUrl = environment.apiServer + 'projeto';
@@ -61,5 +67,30 @@ export class ProjetoService {
         return throwError(errorMessage);
     }
 
+    findProjetosDaEmpresaId(idEmpresa : number): Observable<Projeto[]> {
+      return this.http.get<Projeto[]>(`${this.baseUrl}/empresa/${idEmpresa}`).pipe(
+        catchError(this.handleError)
+      );
+    }
+
+    /* ======================= Services Baseados no Usuário ====================== */
+
+    findProjetosDaEmpresaDoUsuarioId(idUsuario: number): Observable<Projeto[]> {
+      return this.http.get<Projeto[]>(`${this.baseUrl}/projetosDaEmpresaDoUsuarioId/${idUsuario}`).pipe(
+          catchError(this.handleError)
+      );
+    }
+
+    findProjetosDaEmpresaIdDoUsuarioId(idEmpresa: number, idUsuario: number): Observable<Projeto[]> {
+      return this.http.get<Projeto[]>(`${this.baseUrl}/projetosDaEmpresaIdDoUsuarioId/${idEmpresa}/${idUsuario}`).pipe(
+          catchError(this.handleError)
+      );
+    }
+
+    /* ======================== Service para comunicação de componentes=========== */
+
+    setEmpresaSelecionada(empresa: Empresa | null) {
+      this.empresaSelecionadaSubject.next(empresa);
+    }
 
 }

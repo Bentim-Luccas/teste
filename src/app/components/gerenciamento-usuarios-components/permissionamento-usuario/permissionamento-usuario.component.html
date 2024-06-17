@@ -1,0 +1,152 @@
+<div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+  <ul class="space-y-2 font-medium">
+     <li>
+       <div class="grid grid-cols-3 flex items-center text-center">
+         <div>
+           <h1>D</h1>
+         </div>
+         <div>
+           <h1>W</h1>
+          </div>
+         <div>
+           <h1>R</h1>
+         </div>
+       </div>
+     </li>
+
+     @for(projeto of projetos; track projeto.projeto_id){
+     <li>
+       <div class="flex flex-row-reverse items-center">
+         @if(projeto.permissionamento_tipo != null){
+           @if(projeto.permissionamento_tipo.includes("R")){
+             <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+           }@else {
+             <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+           }
+         }@else {
+           <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+         }
+         &nbsp;&nbsp;
+         @if(projeto.permissionamento_tipo != null){
+           @if(projeto.permissionamento_tipo.includes("W")){
+             <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+           }@else {
+             <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+           }
+         }@else {
+           <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+         }
+         &nbsp;&nbsp;
+         @if(projeto.permissionamento_tipo != null){
+           @if(projeto.permissionamento_tipo.includes("D")){
+             <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+           }@else {
+             <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+           }
+         }@else {
+           <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+         }
+         <button type="button" class="flex flex-row-reverse items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" [attr.aria-controls] ="'dropdown-p'+projeto.projeto_id" [attr.data-collapse-toggle]="'dropdown-p'+projeto.projeto_id">
+           <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">{{projeto.projeto_descricao}}</span>
+           @if(projeto.disciplinas){
+           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+           </svg>
+           }
+         </button>
+       </div>
+       @if(projeto.disciplinas){
+         <ul [id]="'dropdown-p'+projeto.projeto_id" class="hidden py-2 space-y-2">
+           @for(disciplina of projeto.disciplinas; track disciplina.disciplina_id){
+           <li>
+             <div class="flex flex-row-reverse items-center">
+               @if(disciplina.permissionamento_tipo != null){
+                 @if(disciplina.permissionamento_tipo.includes("R")){
+                   <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                 }@else {
+                   <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                 }
+               }@else {
+                 <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+               }
+
+               &nbsp;&nbsp;
+               @if(disciplina.permissionamento_tipo != null){
+                 @if(disciplina.permissionamento_tipo.includes("W")){
+                   <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                 }@else {
+                   <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                 }
+               }@else {
+                 <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+               }
+               &nbsp;&nbsp;
+               @if(disciplina.permissionamento_tipo != null){
+                 @if(disciplina.permissionamento_tipo.includes("D")){
+                   <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                 }@else {
+                   <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                 }
+               }@else {
+                 <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+               }
+               <button type="button" class="flex flex-row-reverse items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" [attr.aria-controls]="'dropdown-d'+disciplina.disciplina_id" [attr.data-collapse-toggle]="'dropdown-d'+disciplina.disciplina_id">
+                 <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">{{disciplina.disciplina_descricao}}</span>
+
+                 @if(disciplina.etapas){
+                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                 </svg>
+                 }
+               </button>
+             </div>
+
+             @if(disciplina.etapas){
+             <ul [id]="'dropdown-d'+disciplina.disciplina_id" class="hidden py-2 space-y-2">
+               @for(etapa of disciplina.etapas; track etapa.etapa_id){
+                 <li>
+                   <div class="flex flex-row-reverse items-center">
+                     @if(etapa.permissionamento_tipo != null){
+                       @if(etapa.permissionamento_tipo.includes("R")){
+                         <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       }@else {
+                         <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       }
+                     }@else {
+                       <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     }
+                     &nbsp;&nbsp;
+                     @if(etapa.permissionamento_tipo != null){
+                       @if(etapa.permissionamento_tipo.includes("W")){
+                         <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       }@else {
+                         <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       }
+                     }@else {
+                       <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     }
+                     &nbsp;&nbsp;
+                     @if(etapa.permissionamento_tipo != null){
+                       @if(etapa.permissionamento_tipo.includes("D")){
+                         <input id="checkbox-1" type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       }@else {
+                         <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                       }
+                     }@else {
+                       <input id="checkbox-1" type="checkbox" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     }
+                     <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-20 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{etapa.etapa_descricao}}</a>
+                   </div>
+                 </li>
+               }
+             </ul>
+             }
+           </li>
+           }
+         </ul>
+         }
+
+     </li>
+     }
+  </ul>
+</div>

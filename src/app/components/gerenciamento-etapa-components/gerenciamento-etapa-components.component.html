@@ -1,90 +1,71 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg"
-    style="width: 1500px; margin-left: 60px; margin-top: 40px;">
+    style="width: 1200px; margin-left: 60px; margin-top: 40px;">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-0 py-3" style="padding-left: 90px;">
                     Nome da Etapa
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Data de Cadastro
+                    Data de cadastro
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Nome da Disciplina
+                    Status
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Editar Etapa
+                    Editar
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Excluir Etapa
+                    Excluir
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let etapa of etapa">
             <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Estudo de viabilidade
+                <th [routerLink]="['/arquivos']" scope="row"
+                    class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
+                    style="display: flex; align-items: center;">
+                    <img src="assets/images/icon etapa.png"
+                        style="width: 35px; height: 35px; margin-left: 10px; margin-right: 40px;" />
+                    {{etapa.etapa_descricao}}
+                </th>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{etapa.etapa_data_inicio}}
                 </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    00/00/0000
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Arquitetura
+                <td class="px-4 py-3">
+                    @if(etapa.etapa_status==0){
+                    <span
+                        class="inline-flex items-center bg-red-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                        Inativo
+                    </span>
+                    }
+                    @else if (etapa.etapa_status==1){
+                    <span
+                        class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                        Ativo
+                    </span>
+                    }
                 </td>
                 <td class="px-6 py-4">
+                    @if(etapa.permissionamento_tipo!=null){
+                    @if(etapa.permissionamento_tipo.includes("W")){
                     <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-edit"
+                        style="margin-left: 15px; cursor: pointer;" data-modal-target="modal-edit"
                         data-modal-toggle="modal-edit">
-                        <i class="fas fa-edit mr-1"></i></a>
+                        <i class="fas fa-edit mr-1"></i>
+                    </a>
+                    }
+                    }
                 </td>
                 <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-delete"
-                    data-modal-toggle="modal-delete">
-                        <i class="fas fa-trash-alt mr-1"></i></a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Projeto Arquitetônico
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    00/00/0000
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Arquitetura
-                </td>
-                <td class="px-6 py-4">
+                    @if(etapa.permissionamento_tipo!=null){
+                    @if(etapa.permissionamento_tipo.includes("D")){
                     <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-edit"
-                        data-modal-toggle="modal-edit">
-                        <i class="fas fa-edit mr-1"></i></a>
-                </td>
-                <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-delete"
-                    data-modal-toggle="modal-delete">
-                        <i class="fas fa-trash-alt mr-1"></i></a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Projeto Elétrico
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    00/00/0000
-                </td>
-                <td class="px-6 py-4" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Arquitetura
-                </td>
-                <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-edit"
-                        data-modal-toggle="modal-edit">
-                        <i class="fas fa-edit mr-1"></i></a>
-                </td>
-                <td class="px-6 py-4">
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white" style="margin-left: 30px; cursor: pointer;" data-modal-target="modal-delete"
-                    data-modal-toggle="modal-delete">
-                        <i class="fas fa-trash-alt mr-1"></i></a>
+                        style="margin-left: 20px; cursor: pointer;" (click)="deletarEtapa(etapa.etapa_id)">
+                        <i class="fas fa-trash-alt mr-1"></i>
+                    </a>
+                    }
+                    }
                 </td>
             </tr>
         </tbody>

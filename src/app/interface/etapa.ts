@@ -1,5 +1,7 @@
+import { Arquivo } from "./arquivo";
+
 export interface Etapa {
-    etapa_id: number; 
+    etapa_id: number;
     etapa_descricao?: string;
     etapa_data_inicio?: Date;
     etapa_data_fim?: Date;
@@ -8,4 +10,6 @@ export interface Etapa {
     disciplina_id: number;
     etapa_id_pai?: number;
     dropdownOpen: boolean;
+    arquivos: Arquivo[];
+    permissionamento_tipo: string;
 }
