@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Observable } from "rxjs";
-import { environment } from "../../environments/environment.development";
+import { environment } from "../../environments/environment";
+
 
 @Injectable({
     providedIn: 'root'
@@ -12,11 +12,11 @@ export class ListaCompartilhadaService {
   private readonly baseUrl: string;
 
   constructor(private httpCliente: HttpClient) {
-    this.baseUrl = 'http://academico3.rj.senac.br';
+    this.baseUrl = environment.apiServer+'lista-compartilhada';
   }
 
   getListaCompartilhada(): Observable<any> {
-    return this.httpCliente.get<any>(`${this.baseUrl}/lista-compartilhada`).pipe(
+    return this.httpCliente.get<any>(`${this.baseUrl}`).pipe(
       catchError(this.handleError)
     );
   }
