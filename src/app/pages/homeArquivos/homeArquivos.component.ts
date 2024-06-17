@@ -8,13 +8,14 @@ import { BarraPesquisaProjetoComponent } from '../../components/home-arquivos-co
 import { ModalCriarProjetoComponent } from '../../components/home-arquivos-components/modal-criar-projeto/modal-criar-projeto.component';
 import { HomeArquivosComponentsComponent } from "../../components/home-arquivos-components/home-arquivos-components.component";
 import { ModalEditarProjetoComponent } from "../../components/home-arquivos-components/modal-editar-projeto/modal-editar-projeto.component";
+import { AngularSplitModule } from 'angular-split';
 
 @Component({
     selector: 'app-home',
     standalone: true,
     templateUrl: './homeArquivos.component.html',
     styleUrl: './homeArquivos.component.css',
-    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, ModalCriarProjetoComponent, HomeArquivosComponentsComponent, ModalEditarProjetoComponent]
+    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, ModalCriarProjetoComponent, HomeArquivosComponentsComponent, ModalEditarProjetoComponent, AngularSplitModule]
 })
 export class HomeComponent {
 
