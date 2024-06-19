@@ -1,6 +1,6 @@
 import { Empresa } from './../../interface/empresa';
 import { Component,OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { Projeto } from '../../interface/projeto';
 import { ProjetoService } from '../../service/projeto.service';
@@ -10,11 +10,11 @@ import { EmpresaService } from '../../service/empresa.service';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
 import { Subscription } from 'rxjs';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [NgFor, RouterModule, ModalButtonComponent, ModalEnviarArquivoComponent],
+  imports: [NgFor,NgIf,RouterModule, ModalButtonComponent,FormsModule, ModalEnviarArquivoComponent],
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
 })
@@ -29,18 +29,30 @@ export class MenuLateralComponent implements OnInit  {
   listaEmpresas : Empresa[]=[];
 
   idEmpresaSelecionada! : number;
+  empresaId!: number 
+  isEmpresaSelected: boolean = false;
 
   ngOnInit(): void {
     let usuarioId = 4; //get usuario de session ID
     this.getEmpresas(usuarioId);
   }
 
-  selecionarEmpresa(idEmpresa: any){
+
+ 
+
+  selecionarEmpresa(idEmpresa: number){
     this.listaProjetos = [];
-    this.idEmpresaSelecionada = idEmpresa.target.value;
-    this.getProjetosDeEmpresaId(idEmpresa.target.value);
-    this.getOneEmpresa(idEmpresa.target.value);
+    this.idEmpresaSelecionada = idEmpresa;
+    this.getProjetosDeEmpresaId(idEmpresa);
+    this.getOneEmpresa(idEmpresa);
+    this.isEmpresaSelected = true;
   }
+
+
+
+
+
+
 
   getEmpresas(idUsuario: number):void{
     this.listaEmpresas =[];
@@ -88,12 +100,17 @@ export class MenuLateralComponent implements OnInit  {
       })
     }
   }
+  
+  
 
 
   listaCompartilhada(){
     this.router.navigate(['/listaCompartilhada'])
   }
-
+  usuarios() {
+    this.router.navigate(['/usuarios'])
+  }
+  empresas() {
+    this.router.navigate(['/'])
+  }
 }
-
-
