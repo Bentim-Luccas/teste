@@ -7,6 +7,7 @@ import { CommonModule} from '@angular/common';
 import { JWT_Token } from '../../interface/jwt_token';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-logintoken',
@@ -21,7 +22,7 @@ export class LogintokenComponent {
   processado = false;
 
 
-  constructor(private router:Router, private authservice:AuthService, private usuarioService:UsuarioService){}
+  constructor(private jwtHelper: JwtHelperService, private router:Router, private authservice:AuthService, private usuarioService:UsuarioService){}
 
 
   submitToken(){
@@ -43,6 +44,7 @@ export class LogintokenComponent {
                 console.log(jwt.accessToken)
                 sessionStorage.setItem("logado","true");
                 sessionStorage.setItem('jwt',jwt.accessToken);
+                console.log(this.jwtHelper.decodeToken(jwt.accessToken))
                 sessionStorage.removeItem('token');
                 let email = sessionStorage.getItem('email');
                 this.usuarioService.getUsuarioPorEmail(email).subscribe({

@@ -10,11 +10,11 @@ import { EmpresaService } from '../../service/empresa.service';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [NgFor,NgIf,RouterModule, ModalButtonComponent,FormsModule, ModalEnviarArquivoComponent],
+  imports: [NgFor,NgIf,RouterModule, ModalButtonComponent, ReactiveFormsModule, ModalEnviarArquivoComponent],
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
 })
@@ -28,8 +28,12 @@ export class MenuLateralComponent implements OnInit  {
   listaProjetos : Projeto[]=[];
   listaEmpresas : Empresa[]=[];
 
+  formBusca = new FormGroup({
+    empresa_nome : new FormControl('')
+  });
+
   idEmpresaSelecionada! : number;
-  empresaId!: number 
+  empresaId!: number
   isEmpresaSelected: boolean = false;
 
   ngOnInit(): void {
@@ -38,19 +42,19 @@ export class MenuLateralComponent implements OnInit  {
   }
 
 
- 
-
-  selecionarEmpresa(idEmpresa: number){
-    this.listaProjetos = [];
-    this.idEmpresaSelecionada = idEmpresa;
-    this.getProjetosDeEmpresaId(idEmpresa);
-    this.getOneEmpresa(idEmpresa);
-    this.isEmpresaSelected = true;
+  buscaEmpresaPorNome(){
+    console.log(this.formBusca.value.empresa_nome);
+    this.getEmpresaPorNome(<string>this.formBusca.value.empresa_nome);
   }
 
 
-
-
+  // selecionarEmpresa(idEmpresa: number){
+  //   this.listaProjetos = [];
+  //   this.idEmpresaSelecionada = idEmpresa;
+  //   this.getProjetosDeEmpresaId(idEmpresa);
+  //   this.getOneEmpresa(idEmpresa);
+  //   this.isEmpresaSelected = true;
+  // }
 
 
 
@@ -100,8 +104,19 @@ export class MenuLateralComponent implements OnInit  {
       })
     }
   }
-  
-  
+
+  getEmpresaPorNome(nomeEmpresa: string): void {
+    if(nomeEmpresa.length!=0){
+      this.empresaService.getEmpresaByNome(nomeEmpresa).subscribe({
+        next:(response) =>{
+          console.log(response);
+          this.listaEmpresas = response;
+        },
+        error: (error) => console.log(error),
+      })
+    }
+  }
+
 
 
   listaCompartilhada(){
