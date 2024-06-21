@@ -29,7 +29,7 @@
                         placeholder="Informe o valor do orçamento" required="">
                 </div>
             </div>
-            <button type="submit" [disabled]="!projetoForm.valid"
+            <button type="submit" [disabled]="!projetoForm.valid" (click)="fecharModal()"
             class="text-white inline-flex justify-center items-center bg-[#4381A7] hover:bg-[color:var(--cinza-principal-medio)] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mt-5 cursor-pointer"
             style="width: 376px;">
             Criar
