@@ -21,7 +21,7 @@
             @if(projetos.permissionamento_tipo!=null){
               @if(projetos.permissionamento_tipo.includes("W")){
               <li>
-                <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer">Editar</a>
+                <app-button-modal-editar-projeto (click)="toggleDropdown(projetos)"></app-button-modal-editar-projeto>
               </li>
               }
             }

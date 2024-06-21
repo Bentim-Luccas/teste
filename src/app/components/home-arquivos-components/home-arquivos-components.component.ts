@@ -10,13 +10,14 @@ import { Session } from 'node:inspector';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
+import { ButtonModalEditarProjeto } from "./modal-editar-projeto/button/button-modal-editar-projeto.component";
 
 @Component({
-  selector: 'app-home-arquivos-components',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './home-arquivos-components.component.html',
-  styleUrl: './home-arquivos-components.component.css'
+    selector: 'app-home-arquivos-components',
+    standalone: true,
+    templateUrl: './home-arquivos-components.component.html',
+    styleUrl: './home-arquivos-components.component.css',
+    imports: [CommonModule, RouterModule, ButtonModalEditarProjeto]
 })
 export class HomeArquivosComponentsComponent implements OnInit {
 
@@ -38,9 +39,11 @@ export class HomeArquivosComponentsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    /**
     let usuarioId = 4;
     let usuarioTipo = 2;   //1=comun e admin | 2=superadmin
-    this.getEmpresa(usuarioId, usuarioTipo);
+    this.getEmpresa(usuarioId, usuarioTipo); */
+    this.carregarProjeto(4, 4);
   }
 
   getEmpresa(usuarioId: number, usuarioTipo: number): void {

@@ -27,7 +27,7 @@ export class DisciplinaService {
   }
 
   post(disciplina: Disciplina): Observable<Disciplina> {
-    return this.http.post<Disciplina>(this.baseUrl, disciplina, httpOptions).pipe(
+    return this.http.post<Disciplina>(this.baseUrl, disciplina).pipe(
       catchError(this.handleError)
     );
   }
