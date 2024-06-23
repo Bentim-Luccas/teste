@@ -15,7 +15,7 @@ import { AngularSplitModule } from 'angular-split';
     standalone: true,
     templateUrl: './homeArquivos.component.html',
     styleUrl: './homeArquivos.component.css',
-    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, ModalCriarProjetoComponent, HomeArquivosComponentsComponent, ModalEditarProjetoComponent, AngularSplitModule]
+    imports: [AngularSplitModule,ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, ModalCriarProjetoComponent, HomeArquivosComponentsComponent, ModalEditarProjetoComponent, AngularSplitModule]
 })
 export class HomeComponent {
 
