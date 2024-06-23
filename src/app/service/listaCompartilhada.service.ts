@@ -1,13 +1,20 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
+import { listaCompartilhada } from "../interface/listaCompartilhada";
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'aplication/json',
+  })
+};
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class ListaCompartilhadaService {
   private readonly baseUrl: string;
 
@@ -17,6 +24,13 @@ export class ListaCompartilhadaService {
 
   getListaCompartilhada(): Observable<any> {
     return this.httpCliente.get<any>(`${this.baseUrl}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  postListaCompartilhada(listacompartilhada: listaCompartilhada): Observable<listaCompartilhada> {
+    console.log('Dados a serem enviados para o backend:', listacompartilhada);
+    return this.httpCliente.post<listaCompartilhada>(this.baseUrl, listacompartilhada, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
