@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialog,
@@ -7,6 +7,7 @@ import {
   MatDialogClose,
   MatDialogContent,
   MatDialogTitle,
+  MatDialogRef
 } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 
@@ -33,5 +34,11 @@ export class ListaCompartilhadaModalButtonComponent {
   templateUrl: './lista-compartilhada-modal.component.html'
 })
 export class ListaCompartilhadaModalComponent implements OnInit{
+  constructor(public dialogRef: MatDialogRef<ListaCompartilhadaModalComponent>) {}
+
   ngOnInit(): void {}
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }
