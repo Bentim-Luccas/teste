@@ -20,7 +20,7 @@ import { Usuario } from '../../interface/usuario';
 })
 export class HomeArquivosComponentsComponent implements OnInit {
 
-  projeto!: Projeto[];
+  projetos: Projeto[]=[];
   empresaSelecionada : Empresa| null = null;
   private empresaSubscription!: Subscription;
 
@@ -61,8 +61,8 @@ export class HomeArquivosComponentsComponent implements OnInit {
 
   carregarProjeto(empresaId: number, usuarioId: number) {
     this.projetoService.findProjetosDaEmpresaIdDoUsuarioId(empresaId ,usuarioId).subscribe({
-      next: (projeto)=> {
-        this.projeto = projeto;
+      next: (projetos)=> {
+        this.projetos = projetos;
       },
       error: (error)=> console.log(error),
     });
@@ -70,8 +70,8 @@ export class HomeArquivosComponentsComponent implements OnInit {
 
   carregarProjetoSuperAdmin(empresaId: number) {
     this.projetoService.findProjetosDaEmpresaId(empresaId).subscribe({
-      next: (projeto)=> {
-        this.projeto = projeto;
+      next: (projetos)=> {
+        this.projetos = projetos;
       },
       error: (error)=> console.log(error),
     });

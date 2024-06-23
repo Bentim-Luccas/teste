@@ -10,11 +10,12 @@ import { EmpresaService } from '../../service/empresa.service';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DisciplinaService } from '../../service/disciplina.service';
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [NgFor,NgIf,RouterModule, ModalButtonComponent,FormsModule, ModalEnviarArquivoComponent],
+  imports: [NgFor,NgIf,RouterModule, ModalButtonComponent, ReactiveFormsModule, ModalEnviarArquivoComponent],
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
 })
@@ -23,34 +24,67 @@ export class MenuLateralComponent implements OnInit  {
   usuarioAutenticado : Usuario | null = null;
   private usuarioAutenticadoSubscription!: Subscription;
 
-  constructor(private projetoService :ProjetoService, private empresaService : EmpresaService, private usuarioService: UsuarioService, private router: Router){ }
+  constructor(private projetoService :ProjetoService, private disciplinaService: DisciplinaService,private empresaService : EmpresaService, private usuarioService: UsuarioService, private router: Router){ }
 
   listaProjetos : Projeto[]=[];
   listaEmpresas : Empresa[]=[];
 
+  formBusca = new FormGroup({
+    empresa_nome : new FormControl('')
+  });
+
   idEmpresaSelecionada! : number;
-  empresaId!: number 
+  empresaId!: number
   isEmpresaSelected: boolean = false;
 
   ngOnInit(): void {
-    let usuarioId = 4; //get usuario de session ID
-    this.getEmpresas(usuarioId);
+    // let usuarioId = 4; //get usuario de session ID
+    // this.getEmpresas(usuarioId);
   }
 
 
- 
-
-  selecionarEmpresa(idEmpresa: number){
-    this.listaProjetos = [];
-    this.idEmpresaSelecionada = idEmpresa;
-    this.getProjetosDeEmpresaId(idEmpresa);
-    this.getOneEmpresa(idEmpresa);
-    this.isEmpresaSelected = true;
+  buscaEmpresaPorNome(){
+    console.log(this.formBusca.value.empresa_nome);
+    this.getEmpresaPorNome(<string>this.formBusca.value.empresa_nome);
   }
 
 
 
+  //--------------------------------------------
+  //----Buscando Empresa por nome no endpoint---
+  //--------------------------------------------
+   getEmpresaPorNome(nomeEmpresa: string): void {
+     if(nomeEmpresa.length!=0){
+       this.empresaService.getEmpresaByNome(nomeEmpresa).subscribe({
+         next:(response) =>{
+         console.log(response);
+         this.listaEmpresas = response;
+       },
+       error: (error) => console.log(error),
+      })
+     }
+   }
+   
+  //  getProjetosdaEmpresa(empresaid: number) :void{
+  //   this.projetoService.findProjetosDaEmpresaId(empresaid).subscribe({
+  //     next:(response)=>{
+  //       response && (this.listaProjetos=response);
+  //       this.listaProjetos.forEach(listaProjetos=>{
+  //         this.disciplinaService.
+  //       })
+  //     }
+  //   })
+  //  }
 
+
+
+  // selecionarEmpresa(idEmpresa: number){
+  //   this.listaProjetos = [];
+  //   this.idEmpresaSelecionada = idEmpresa;
+  //   this.getProjetosDeEmpresaId(idEmpresa);
+  //   this.getOneEmpresa(idEmpresa);
+  //   this.isEmpresaSelected = true;
+  // }
 
 
 
@@ -100,9 +134,6 @@ export class MenuLateralComponent implements OnInit  {
       })
     }
   }
-  
-  
-
 
   listaCompartilhada(){
     this.router.navigate(['/listaCompartilhada'])
