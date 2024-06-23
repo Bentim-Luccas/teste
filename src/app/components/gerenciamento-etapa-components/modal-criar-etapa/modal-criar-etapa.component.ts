@@ -17,8 +17,10 @@ export class ModalCriarEtapaComponent {
 
   etapaForm = new FormGroup({
     etapa_descricao: new FormControl('', Validators.required),
+    /**etapa_data_inicio: new FormControl('', Validators.required), */
     etapa_status: new FormControl(1, Validators.required),
     disciplina_id: new FormControl(4, Validators.required),
+    /**etapa_id_pai: new FormControl(4, Validators.required), */
   });
 
   constructor(private etapaService: EtapaService,

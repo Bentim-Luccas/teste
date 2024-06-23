@@ -80,6 +80,18 @@ export class HomeArquivosComponentsComponent implements OnInit {
     });
   }
 
+  deletarProjeto(idProjeto: number | undefined): void {
+    if (idProjeto === undefined) {
+        console.error("Não é possível excluir o projeto: idProjeto está indefinido");
+        return;
+    }
+    this.projetoService.remove(idProjeto).subscribe(() => {
+        this.projetos = this.projetos.filter(
+            (p) => p.projeto_id !== idProjeto
+        );
+    });
+}
+
   toggleDropdown(projeto: any): void {
     projeto.dropdownOpen = !projeto.dropdownOpen;
   }
