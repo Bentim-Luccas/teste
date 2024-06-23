@@ -6,9 +6,12 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
+  MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { Usuario } from '../../../interface/usuario';
+import { UsuarioService } from '../../../service/usuario.service';
 
 //BOTAO
 @Component({
@@ -33,6 +36,46 @@ export class CriacaoUsuarioModalButtonComponent {
   templateUrl: './criacao-usuario-modal.component.html',
 })
 export class CriacaoUsuarioModalComponent implements OnInit {
+  usuarioForm!: FormGroup;
 
-  ngOnInit():void{}
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private dialogRef: MatDialogRef<CriacaoUsuarioModalComponent>
+  ) {}
+
+  ngOnInit(): void {
+    this.usuarioForm = this.fb.group({
+      usuario_nome: ['', Validators.required],
+      usuario_email: ['', [Validators.required, Validators.email]],
+      usuario_cpf: ['', Validators.required],
+      usuario_cnpj: [''],
+      usuario_endereco: ['', Validators.required],
+      usuario_status: [0, Validators.required],
+      usuario_cargo: ['', Validators.required],
+      empresa_id: [0, Validators.required],
+      usuario_tipo: [0, Validators.required],
+    });
+  }
+
+  onSubmit(): void {
+    if (this.usuarioForm.valid) {
+      const usuario: Usuario = this.usuarioForm.value;
+      this.usuarioService.post(usuario).subscribe({
+        next: (response) => {
+          console.log('Usuário criado com sucesso', response);
+          this.dialogRef.close(true);
+        },
+        error: (error) => {
+          console.error('Erro ao criar usuário', error);
+        },
+        complete: () => {
+          console.log('Requisição de criação de usuário completa');
+        }
+      });
+    } else {
+      console.error('Formulário inválido');
+    }
+  
+  }
 }

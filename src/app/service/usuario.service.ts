@@ -1,7 +1,7 @@
 import { Usuario } from './../interface/usuario';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
 import { environment } from '../../environments/environment.development';
 
 const httpOptions = {
@@ -59,5 +59,20 @@ export class UsuarioService {
   setUsuarioAutenticado(usuario: Usuario | null) {
     this.usuarioAutenticadoSubject.next(usuario);
   }
+  post(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.baseUrl, usuario,httpOptions).pipe(
+      catchError(this.handleError) // Handle potential errors
+    );
+  }
 
+  private handleError(error: any): Observable<never> {
+    let errorMessage: string;
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = 'Ocorreu um erro: ' + error.error.message;
+    } else {
+      errorMessage = `O backend retornou o código ${error.status}: ${error.message}`
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
+  }
 }
