@@ -1,39 +1,29 @@
-
-<app-navbar></app-navbar>
+  <app-navbar></app-navbar>
 
 <div id="SidBar" class="col-span-2">
   <app-menu-lateral></app-menu-lateral>
 </div>
 
-<div class="p-4 sm:ml-64 bg-gray-100">
-  <div class="meio">
+<div class="p-4 sm:ml-64 bg-gray-100" style="max-height: 200vh; overflow-y: auto; margin-top: 20px;">
+  <div class="meio space-y-8 " >
     <div class="barra-esquerda"></div>
-    <section>
-      <app-breadcrumb />
-      <div class="secao1">
-        <app-indicador />
-        <app-dropdown />
-        <app-calendar />
-        <app-badge-ativo />
-      </div>
-      <app-cards [listaArquivos]="listaArquivos"
-        [listaArquivosAprovados]="listaArquivosAprovados"
-        [listaArquivosReprovados]="listaArquivosReprovados"
-        [listaArquivosPendentes]="listaArquivosPendentes"
+
+    <div class="secao1 mb-8">
+      <app-calendar />
+    </div>
+    <div class="secao2 mb-8 ">
+      <div class="secao-cards mb-8" style="width: 75%;">
+        <app-cards [listaArquivos]="listaArquivos"
+          [listaArquivosAprovados]="listaArquivosAprovados"
+          [listaArquivosReprovados]="listaArquivosReprovados"
+          [listaArquivosPendentes]="listaArquivosPendentes"
         />
-      <div class="secao2">
-        <div class="bloco-orcamento-user">
-          <!-- <app-card-orcamento /> -->
-          <app-user-info [listaArquivos]="listaArquivos"/>
-        </div>
-        <div class="bloco-grafico">
-          <app-grafico />
-        </div>
       </div>
-    </section>
-    <aside>
-      <app-arquivos-recentes />
-    </aside>
+      <div class="arquivos" style="width: 35%; ">
+        <app-arquivos-recentes />
+      </div>
+    </div>
+
+
   </div>
 </div>
-

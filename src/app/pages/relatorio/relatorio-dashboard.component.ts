@@ -5,7 +5,6 @@ import { BreadcrumbComponent } from '../../components/relatorio/breadcrumb/bread
 import { IndicadorComponent } from '../../components/relatorio/indicador/indicador.component';
 import { BadgeAtivoComponent } from '../../components/relatorio/badge-ativo/badge-ativo.component';
 import { CalendarComponent } from '../../components/relatorio/calendar/calendar.component';
-import { GraficoComponent } from '../../components/relatorio/grafico/grafico.component';
 import { UserInfoComponent } from '../../components/relatorio/user-info/user-info.component';
 import { ArquivosRecentesComponent } from '../../components/relatorio/arquivos-recentes/arquivos-recentes.component';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
@@ -26,11 +25,10 @@ import { ArquivoService } from '../../service/arquivo.service';
         DropdownComponent,
         BadgeAtivoComponent,
         CalendarComponent,
-        GraficoComponent,
         UserInfoComponent,
         ArquivosRecentesComponent,
         NavbarComponent,
-        MenuLateralComponent
+        MenuLateralComponent,
     ]
 })
 export class RelatorioComponent implements OnInit{
