@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
 import { environment } from '../../environments/environment.development';
+import { CreateUsuarioDTO } from '../interface/create-usuario-dto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -59,20 +60,18 @@ export class UsuarioService {
   setUsuarioAutenticado(usuario: Usuario | null) {
     this.usuarioAutenticadoSubject.next(usuario);
   }
-  post(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.baseUrl, usuario,httpOptions).pipe(
-      catchError(this.handleError) // Handle potential errors
-    );
+  criarUsuario(usuario: CreateUsuarioDTO): Observable<Usuario> {
+    return this.http.post<Usuario>(this.baseUrl, usuario,httpOptions)
   }
 
-  private handleError(error: any): Observable<never> {
-    let errorMessage: string;
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = 'Ocorreu um erro: ' + error.error.message;
-    } else {
-      errorMessage = `O backend retornou o código ${error.status}: ${error.message}`
-    }
-    console.error(errorMessage);
-    return throwError(errorMessage);
-  }
+  // private handleError(error: any): Observable<never> {
+  //   let errorMessage: string;
+  //   if (error.error instanceof ErrorEvent) {
+  //     errorMessage = 'Ocorreu um erro: ' + error.error.message;
+  //   } else {
+  //     errorMessage = `O backend retornou o código ${error.status}: ${error.message}`
+  //   }
+  //   console.error(errorMessage);
+  //   return throwError(errorMessage);
+  // }
 }
