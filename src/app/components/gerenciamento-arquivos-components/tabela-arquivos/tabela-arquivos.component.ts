@@ -22,6 +22,7 @@ export class TabelaArquivosComponent implements OnInit {
   criterioOrdenacao: string = '';
   usuarioId!: number;
   statusSelecionado: string[] = [];
+  ultimaModificacao: string = '';
 
 
   constructor(private arquivoService: ArquivoService, private filtroService: FiltroService) {
@@ -34,6 +35,10 @@ export class TabelaArquivosComponent implements OnInit {
     });
 
     this.filtroService.atualizarStatusSelecionado(this.statusSelecionado);
+
+    this.filtroService.obterUltimaModificacao().subscribe(ultimaModificacao => {
+      this.onUltimaModificacaoChange(ultimaModificacao);
+    });
   }
 
 
@@ -66,6 +71,8 @@ export class TabelaArquivosComponent implements OnInit {
     return new Date(stringDate);
   }
 
+
+
   atualizarFiltro() {
     let arquivosFiltrados = this.listaArquivos;
     if (this.termoPesquisa) {
@@ -76,6 +83,11 @@ export class TabelaArquivosComponent implements OnInit {
       //arquivosFiltrados = arquivosFiltrados.filter(arquivo =>
         //this.statusSelecionado.includes(arquivo.arquivo_status!));
     //}
+
+    if (this.ultimaModificacao) {
+      arquivosFiltrados = this.filtrarPorUltimaModificacao(arquivosFiltrados, this.ultimaModificacao);
+    }
+
     this.listaFiltrada = this.ordenarArquivos(arquivosFiltrados, this.criterioOrdenacao);
   }
 
@@ -91,6 +103,30 @@ export class TabelaArquivosComponent implements OnInit {
   onStatusChange(status: string[]) {
     this.statusSelecionado = status;
     this.atualizarFiltro();
+  }
+
+  onUltimaModificacaoChange(ultimaModificacao: string) {
+    this.ultimaModificacao = ultimaModificacao;
+    this.atualizarFiltro();
+  }
+
+  filtrarPorUltimaModificacao(lista: Arquivo[], criterio: string): Arquivo[] {
+    const agora = new Date();
+    return lista.filter(arquivo => {
+      const dataArquivo = new Date(arquivo.arquivo_data!);
+      switch (criterio) {
+        case 'Hoje':
+          return dataArquivo.toDateString() === agora.toDateString();
+        case 'Últimos 7 dias':
+          return (agora.getTime() - dataArquivo.getTime()) / (1000 * 3600 * 24) <= 7;
+        case 'Últimos 30 dias':
+          return (agora.getTime() - dataArquivo.getTime()) / (1000 * 3600 * 24) <= 30;
+        case 'Este ano':
+          return dataArquivo.getFullYear() === agora.getFullYear();
+        default:
+          return true;
+      }
+    });
   }
 
   ordenarArquivos(lista: Arquivo[], criterio?: string): Arquivo[] {

@@ -33,8 +33,8 @@
                         <div class="pt-4 flex gap-6">
                         @for (st of status; track st) {
                                 <div class="flex items-center">
-                                    <input id="default-checkbox" type="checkbox" value="" (change)="onStatusChange($event)" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{st}}</label>
+                                  <input id="default-checkbox-{{st}}" type="checkbox" [value]="st" (change)="onStatusChange($event)" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                  <label for="default-checkbox-{{st}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{st}}</label>
                                 </div>
                             }
                         </div>
@@ -45,9 +45,9 @@
                         <h6 class="mb-1 text-sm font-medium text-gray-900 dark:text-white">
                             Última modificação
                         </h6>
-                        <div class="relative inline-block">
-                            <button (click)="toggleDropdown('dropdownData')" id="dropdownDataButton" data-dropdown-toggle="dropdownData" class="w-48 text-gray-900 border border-[color:var(--cinza-border)] bg-white hover:bg-gray-200 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center truncate" type="button">
-                                Selecionar opção
+                        <div class="pt-4 relative inline-block">
+                            <button (click)="toggleDropdown('dropdownData')" id="dropdownDataButton" data-dropdown-toggle="dropdownData" class="w-48 text-gray-900 border border-gray-400 bg-white hover:bg-gray-200 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center truncate" type="button">
+                                <span class="truncate">{{selectedUltimaModificacao}}</span>
                                 <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                 </svg>
@@ -57,7 +57,7 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDataButton">
                                 @for (data of ultimaModificacao; track data) {
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{data}}</a>
+                                      <a href="#" (click)="setUltimaModificacao($event, data)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{data}}</a>
                                     </li>
                                 }
                                 </ul>

@@ -23,6 +23,7 @@ export class ModalFiltroPesquisaComponent implements OnInit {
   currentDropdown: string | null = null;
   selectedOrdenacao: string = 'Última modificação';
   statusSelecionado: string[] = [];
+  selectedUltimaModificacao: string = 'Selecione a opção';
 
   constructor(private fb: FormBuilder, private filtroService: FiltroService, public dialogRef: MatDialogRef<ModalFiltroPesquisaComponent>) {
     this.formulario = this.fb.group({
@@ -67,6 +68,13 @@ export class ModalFiltroPesquisaComponent implements OnInit {
     this.currentDropdown = null;
   }
 
+  setUltimaModificacao(event: Event, data: string) {
+    event.preventDefault();
+    this.formulario.get('ultimaModificacao')?.setValue(data);
+    this.selectedUltimaModificacao = data;  // Atualiza o texto do botão
+    this.currentDropdown = null;  // Fecha o dropdown
+  }
+
   onStatusChange(event: any) {
     const checkbox = event.target;
     if (checkbox.checked) {
@@ -96,9 +104,10 @@ export class ModalFiltroPesquisaComponent implements OnInit {
     const criterioOrdenacao = this.formulario.get('ordenacao')?.value;
     this.filtroService.atualizarCriterioOrdenacao(criterioOrdenacao);
 
-    const status = this.formulario.get('status')?.value;
+    this.filtroService.atualizarStatusSelecionado(this.statusSelecionado);
 
     const ultimaModificacao = this.formulario.get('ultimaModificacao')?.value;
+    this.filtroService.atualizarUltimaModificacao(ultimaModificacao);
 
     this.dialogRef.close();
   }
