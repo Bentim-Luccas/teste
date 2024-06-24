@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DisciplinaService } from '../../service/disciplina.service';
 import { EtapaService } from '../../service/etapa.service';
-import { discardPeriodicTasks } from '@angular/core/testing';
 import { Projeto } from '../../interface/projeto';
 @Component({
   selector: 'app-menu-lateral',
@@ -48,6 +47,7 @@ export class MenuLateralComponent implements OnInit {
     console.log(this.formBusca.value.empresa_nome);
     this.getEmpresaPorNome(<string>this.formBusca.value.empresa_nome);
   }
+
   //--------------------------------------------
   //----Buscando Empresa por nome no endpoint---
   //--------------------------------------------
@@ -88,6 +88,9 @@ export class MenuLateralComponent implements OnInit {
 
 
 
+
+
+
   // selecionarEmpresa(idEmpresa: number){
   //   this.listaProjetos = [];
   //   this.idEmpresaSelecionada = idEmpresa;
@@ -95,9 +98,6 @@ export class MenuLateralComponent implements OnInit {
   //   this.getOneEmpresa(idEmpresa);
   //   this.isEmpresaSelected = true;
   // }
-
-
-
   // getEmpresas(idUsuario: number):void{
   //   this.listaEmpresas =[];
   //   this.empresaService.getEmpresaByUsuarioId(idUsuario).subscribe({
@@ -112,7 +112,6 @@ export class MenuLateralComponent implements OnInit {
   //     this.projetoService.setEmpresaSelecionada(this.listaEmpresas[0]);
   //   }
   // }
-
   // getProjetosUsuarioId(idUsuario: number) : void {
   //   this.listaProjetos = [];
   //   this.projetoService.findProjetosDaEmpresaDoUsuarioId(idUsuario).subscribe({
