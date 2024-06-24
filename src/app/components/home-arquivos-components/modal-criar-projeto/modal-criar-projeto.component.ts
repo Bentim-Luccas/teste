@@ -2,18 +2,15 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjetoService } from '../../../service/projeto.service';
 import { Projeto } from '../../../interface/projeto';
-import { MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-criar-projeto',
   standalone: true,
-  imports: [ReactiveFormsModule, MatDialogContent],
+  imports: [ReactiveFormsModule],
   templateUrl: './modal-criar-projeto.component.html',
   styleUrl: './modal-criar-projeto.component.css'
 })
 export class ModalCriarProjetoComponent {
-
-  exibirModal: boolean = false;
   
   projetoForm = new FormGroup({
     projeto_descricao: new FormControl('', Validators.required),
@@ -27,9 +24,7 @@ export class ModalCriarProjetoComponent {
 
   });
 
-  constructor(private projetoService: ProjetoService,
-    private dialogRef: MatDialogRef<ModalCriarProjetoComponent>
-  ) {}
+  constructor(private projetoService: ProjetoService) {}
 
   onSubmit() {
     console.log(this.projetoForm.value);
@@ -40,9 +35,5 @@ export class ModalCriarProjetoComponent {
       error: (error) => console.log(error),
     })
   }
-
-  fecharModal(): void {
-    this.dialogRef.close();
-}
 
 }

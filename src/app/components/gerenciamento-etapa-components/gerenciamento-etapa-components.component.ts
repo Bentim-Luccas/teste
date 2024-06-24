@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { Etapa } from '../../interface/etapa';
 import { EtapaService } from '../../service/etapa.service';
 import { NgFor } from '@angular/common';
-import { DisciplinaService } from '../../service/disciplina.service';
 import { ButtonModalEditarEtapa } from "./modal-editar-etapa/button/button-modal-editar-etapa.component";
 
 @Component({

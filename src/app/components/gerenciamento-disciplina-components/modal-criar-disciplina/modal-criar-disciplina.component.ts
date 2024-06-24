@@ -2,18 +2,15 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DisciplinaService } from '../../../service/disciplina.service';
 import { Disciplina } from '../../../interface/disciplina';
-import { MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-criar-disciplina',
   standalone: true,
-  imports: [ReactiveFormsModule, MatDialogContent],
+  imports: [ReactiveFormsModule],
   templateUrl: './modal-criar-disciplina.component.html',
   styleUrl: './modal-criar-disciplina.component.css'
 })
 export class ModalCriarDisciplinaComponent {
-
-  exibirModal: boolean = false;
 
   disciplinaForm = new FormGroup({
     disciplina_descricao: new FormControl('', Validators.required),
@@ -22,7 +19,6 @@ export class ModalCriarDisciplinaComponent {
   });
 
   constructor(private disciplinaService: DisciplinaService,
-    private dialogRef: MatDialogRef<ModalCriarDisciplinaComponent>
   ) { }
 
   onSubmit() {
@@ -34,10 +30,5 @@ export class ModalCriarDisciplinaComponent {
       error: (error) => console.log(error),
     })
   }
-
-  fecharModal(): void {
-    this.dialogRef.close();
-}
-
 
 }
