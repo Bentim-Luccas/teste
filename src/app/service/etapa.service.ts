@@ -68,6 +68,12 @@ export class EtapaService {
           catchError(this.handleError)
       );
     }
+    
+    findEtapasDaDisciplinaId(idDisciplina: number): Observable<Etapa[]> {
+        return this.http.get<Etapa[]>(`${this.baseUrl}/disciplina/${idDisciplina}`).pipe(
+            catchError(this.handleError)
+        );
+      }
 
 
 }
