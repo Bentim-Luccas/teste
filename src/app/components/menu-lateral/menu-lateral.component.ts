@@ -13,6 +13,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { DisciplinaService } from '../../service/disciplina.service';
 import { EtapaService } from '../../service/etapa.service';
 import { discardPeriodicTasks } from '@angular/core/testing';
+import { Projeto } from '../../interface/projeto';
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
@@ -27,7 +28,7 @@ export class MenuLateralComponent implements OnInit {
 
   constructor(private projetoService: ProjetoService, private disciplinaService: DisciplinaService, private empresaService: EmpresaService, private etapaService: EtapaService, private usuarioService: UsuarioService, private router: Router) { }
 
-
+  projetos: Projeto[] = []
   empresas: Empresa[] = [];
   formBusca = new FormGroup({
     empresa_nome: new FormControl('')
@@ -58,6 +59,7 @@ export class MenuLateralComponent implements OnInit {
         this.empresas.forEach(empresa => {
           this.projetoService.findProjetosDaEmpresaId(<number>empresa.empresa_id).subscribe({
             next: (response1) => {
+              this.projetos = response1;
               empresa.projetos = response1;
               empresa.projetos.forEach(projeto => {
                 this.disciplinaService.findDisciplinasDeProjetoId(<number>projeto.projeto_id).subscribe({
