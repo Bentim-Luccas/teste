@@ -27,7 +27,7 @@ export class ProjetoService {
     }
 
     post(projeto: Projeto): Observable<Projeto> {
-        return this.http.post<Projeto>(this.baseUrl, projeto, httpOptions).pipe(
+        return this.http.post<Projeto>(this.baseUrl, projeto).pipe(
             catchError(this.handleError)
         );
     }
