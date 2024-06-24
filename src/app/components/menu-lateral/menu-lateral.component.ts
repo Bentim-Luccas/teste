@@ -1,9 +1,7 @@
-import { ProjetoS3 } from './../../interface/projetos3';
 import { Empresa } from './../../interface/empresa';
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import { Projeto } from '../../interface/projeto';
 import { ProjetoService } from '../../service/projeto.service';
 import { RouterModule } from '@angular/router';
 import { ModalButtonComponent, ModalEnviarArquivoComponent } from '../gerenciamento-arquivos-components/modal-enviar-arquivo/modal-enviar-arquivo.component'
@@ -13,28 +11,30 @@ import { Usuario } from '../../interface/usuario';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DisciplinaService } from '../../service/disciplina.service';
+import { EtapaService } from '../../service/etapa.service';
+import { discardPeriodicTasks } from '@angular/core/testing';
+import { Projeto } from '../../interface/projeto';
 @Component({
   selector: 'app-menu-lateral',
   standalone: true,
-  imports: [NgFor,NgIf,RouterModule, ModalButtonComponent, ReactiveFormsModule, ModalEnviarArquivoComponent],
+  imports: [NgFor, NgIf, RouterModule, ModalButtonComponent, ReactiveFormsModule, ModalEnviarArquivoComponent],
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
 })
-export class MenuLateralComponent implements OnInit  {
+export class MenuLateralComponent implements OnInit {
 
-  usuarioAutenticado : Usuario | null = null;
+  usuarioAutenticado: Usuario | null = null;
   private usuarioAutenticadoSubscription!: Subscription;
 
-  constructor(private projetoService :ProjetoService, private disciplinaService: DisciplinaService,private empresaService : EmpresaService, private usuarioService: UsuarioService, private router: Router){ }
+  constructor(private projetoService: ProjetoService, private disciplinaService: DisciplinaService, private empresaService: EmpresaService, private etapaService: EtapaService, private usuarioService: UsuarioService, private router: Router) { }
 
-
-  empresas : Empresa[]=[];
-
+  projetos: Projeto[] = []
+  empresas: Empresa[] = [];
   formBusca = new FormGroup({
-    empresa_nome : new FormControl('')
+    empresa_nome: new FormControl('')
   });
 
-  idEmpresaSelecionada! : number;
+  idEmpresaSelecionada!: number;
   empresaId!: number
   isEmpresaSelected: boolean = false;
 
@@ -44,52 +44,46 @@ export class MenuLateralComponent implements OnInit  {
   }
 
 
-  buscaEmpresaPorNome(){
+  buscaEmpresaPorNome() {
     console.log(this.formBusca.value.empresa_nome);
     this.getEmpresaPorNome(<string>this.formBusca.value.empresa_nome);
   }
-
-
-
   //--------------------------------------------
   //----Buscando Empresa por nome no endpoint---
   //--------------------------------------------
-   getEmpresaPorNome(nomeEmpresa: string): void {
-
-
-       this.empresaService.getEmpresaByNome(nomeEmpresa).subscribe({
-
-         next: (response)=> {
-         response && (this.empresas = response);
-         console.log(this.empresas)
-         this.empresas.forEach(empresa =>{
-        //Obter cada projeto da empresa
+  getEmpresaPorNome(nomeEmpresa: string): void {
+    this.empresaService.getEmpresaByNome(nomeEmpresa).subscribe({
+      next: (response) => {
+        this.empresas = response;
+        this.empresas = Array.isArray(response) ? response : [response];
+        this.empresas.forEach(empresa => {
           this.projetoService.findProjetosDaEmpresaId(<number>empresa.empresa_id).subscribe({
-            next:(response1)=>{
+            next: (response1) => {
+              this.projetos = response1;
               empresa.projetos = response1;
-              console.log(response1)
               empresa.projetos.forEach(projeto => {
-                //Obter as disciplanas de cada projeto
                 this.disciplinaService.findDisciplinasDeProjetoId(<number>projeto.projeto_id).subscribe({
-                  next: (response2)=> {
+                  next: (response2) => {
                     projeto.disciplinas = response2
+                    projeto.disciplinas.forEach(disciplina => {
+                      this.etapaService.findEtapasDaDisciplinaId(<number>disciplina.disciplina_id).subscribe({
+                        next: (response3) => {
+                          disciplina.etapas = response3;
+                        }
+                      })
+                    })
                   }
                 })
               });
-
             }
           }
-
-          )
-
-         })
-         console.log(this.empresas)
-       },
-       error: (error) => console.log(error),
-      })
-
-   }
-
+        )
+       })
+        console.log(this.empresas)
+      },
+      error: (error) => console.log(error),
+    })
+  }
 
 
 
@@ -151,7 +145,7 @@ export class MenuLateralComponent implements OnInit  {
   //   }
   // }
 
-  listaCompartilhada(){
+  listaCompartilhada() {
     this.router.navigate(['/listaCompartilhada'])
   }
   usuarios() {
