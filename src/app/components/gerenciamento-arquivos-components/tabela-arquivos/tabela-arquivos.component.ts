@@ -16,17 +16,24 @@ import { FiltroService } from '../../../service/filtro.service';
   styleUrl: './tabela-arquivos.component.css'
 })
 export class TabelaArquivosComponent implements OnInit {
-
-  listaArquivos: Arquivo[] = []
-  listaFiltrada: Arquivo[] = []
-  termoPesquisa: string = ''
-  usuarioId!: number
+  listaArquivos: Arquivo[] = [];
+  listaFiltrada: Arquivo[] = [];
+  termoPesquisa: string = '';
+  criterioOrdenacao: string = '';
+  usuarioId!: number;
+  statusSelecionado: string[] = [];
 
 
   constructor(private arquivoService: ArquivoService, private filtroService: FiltroService) {
     this.filtroService.obterTermoPesquisa().subscribe(termo => {
       this.onPesquisaChange(termo);
     });
+
+    this.filtroService.obterCriterioOrdenacao().subscribe(criterio => {
+      this.onOrdenacaoChange(criterio);
+    });
+
+    this.filtroService.atualizarStatusSelecionado(this.statusSelecionado);
   }
 
 
@@ -60,12 +67,16 @@ export class TabelaArquivosComponent implements OnInit {
   }
 
   atualizarFiltro() {
+    let arquivosFiltrados = this.listaArquivos;
     if (this.termoPesquisa) {
-      this.listaFiltrada = this.listaArquivos.filter(arquivo =>
+      arquivosFiltrados = arquivosFiltrados.filter(arquivo =>
         arquivo.arquivo_descricao?.toLowerCase().includes(this.termoPesquisa.toLowerCase()));
-    } else {
-      this.listaFiltrada = this.listaArquivos;
     }
+    //if (this.statusSelecionado.length > 0) {
+      //arquivosFiltrados = arquivosFiltrados.filter(arquivo =>
+        //this.statusSelecionado.includes(arquivo.arquivo_status!));
+    //}
+    this.listaFiltrada = this.ordenarArquivos(arquivosFiltrados, this.criterioOrdenacao);
   }
 
   onPesquisaChange(novoValor: string) {
@@ -73,7 +84,33 @@ export class TabelaArquivosComponent implements OnInit {
     this.atualizarFiltro();
   }
 
+  onOrdenacaoChange(criterio: string) {
+    this.listaFiltrada = this.ordenarArquivos(this.listaFiltrada, criterio);
+  }
 
+  onStatusChange(status: string[]) {
+    this.statusSelecionado = status;
+    this.atualizarFiltro();
+  }
+
+  ordenarArquivos(lista: Arquivo[], criterio?: string): Arquivo[] {
+    if (!criterio) return lista;
+
+    switch (criterio) {
+      case 'Última modificação':
+        return lista.sort((a, b) => new Date(b.arquivo_data!).getTime() - new Date(a.arquivo_data!).getTime());
+      case 'Maior tamanho':
+        //return lista.sort((a, b) => b.arquivo_tamanho! - a.arquivo_tamanho!);
+      case 'Menor tamanho':
+        //return lista.sort((a, b) => a.arquivo_tamanho! - b.arquivo_tamanho!);
+      case 'A-Z':
+        return lista.sort((a, b) => a.arquivo_descricao!.localeCompare(b.arquivo_descricao!));
+      case 'Z-A':
+        return lista.sort((a, b) => b.arquivo_descricao!.localeCompare(a.arquivo_descricao!));
+      default:
+        return lista;
+    }
+  }
 
 
   pastas: Pasta[] = [

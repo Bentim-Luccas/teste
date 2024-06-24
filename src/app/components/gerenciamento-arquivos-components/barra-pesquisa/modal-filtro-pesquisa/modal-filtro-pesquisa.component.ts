@@ -1,62 +1,106 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { TagsComponent } from '../../modal-enviar-arquivo/tags/tags.component';
 import { ArquivoTagComponent } from '../../arquivo-tag/arquivo-tag.component';
 import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import Dropdown from 'flowbite/lib/esm/components/dropdown';
+import { FiltroService } from '../../../../service/filtro.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-filtro-pesquisa',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, TagsComponent, MatIcon, FormsModule, ArquivoTagComponent],
+  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, TagsComponent, MatIcon, FormsModule, ArquivoTagComponent, MatMenuModule, ReactiveFormsModule],
   templateUrl: './modal-filtro-pesquisa.component.html',
   styleUrl: './modal-filtro-pesquisa.component.css'
 })
 
 export class ModalFiltroPesquisaComponent implements OnInit {
-    formulario: FormGroup;
+  formulario: FormGroup;
+  currentDropdown: string | null = null;
+  selectedOrdenacao: string = 'Última modificação';
+  statusSelecionado: string[] = [];
 
-    constructor(private fb: FormBuilder) {
-      this.formulario = this.fb.group({
-        ordenacao: [''],  // Inicialmente sem seleção
-        status: [''],     // Depende de como você está gerenciando status, pode ser um array se múltiplos
-        ultimaModificacao: ['']  // Inicialmente sem seleção
-      });
+  constructor(private fb: FormBuilder, private filtroService: FiltroService, public dialogRef: MatDialogRef<ModalFiltroPesquisaComponent>) {
+    this.formulario = this.fb.group({
+      ordenacao: ['Última modificação'],
+      status: [''],
+      ultimaModificacao: ['']
+    });
+  }
+
+  status: string[] = [
+
+    'Em Progresso',
+    'Completo',
+    'Liberado para Obra',
+    'Cancelado',
+
+  ]
+
+  ultimaModificacao: string[] = [
+
+    'Hoje',
+    'Últimos 7 dias',
+    'Últimos 30 dias',
+    'Este ano',
+
+  ]
+
+  itensOrdenar: string[] = [
+
+    'Última modificação',
+    'Maior tamanho',
+    'Menor tamanho',
+    'A-Z',
+    'Z-A',
+
+  ]
+
+  setOrdenacao(event: Event, item: string) {
+    event.preventDefault();
+    this.formulario.get('ordenacao')?.setValue(item);
+    this.selectedOrdenacao = item;
+    this.currentDropdown = null;
+  }
+
+  onStatusChange(event: any) {
+    const checkbox = event.target;
+    if (checkbox.checked) {
+      this.statusSelecionado.push(checkbox.value);
+    } else {
+      const index = this.statusSelecionado.indexOf(checkbox.value);
+      if (index > -1) {
+        this.statusSelecionado.splice(index, 1);
+      }
     }
+  }
 
-    status: string[] = [
+  toggleDropdown(dropdownId: string) {
+      if (this.currentDropdown === dropdownId) {
+          this.currentDropdown = null;
+      } else {
+          this.currentDropdown = dropdownId;
+      }
+  }
 
-      'Em Progresso',
-      'Completo',
-      'Liberado para Obra',
-      'Cancelado',
+  ngOnInit(): void {
+    new Dropdown(document.getElementById('dropdownDefaultButton'));
+    new Dropdown(document.getElementById('dropdownDataButton'));
+  }
 
-    ]
+  onSubmit() {
+    const criterioOrdenacao = this.formulario.get('ordenacao')?.value;
+    this.filtroService.atualizarCriterioOrdenacao(criterioOrdenacao);
 
-    datas: string[] = [
+    const status = this.formulario.get('status')?.value;
 
-      'Hoje',
-      'Últimos 7 dias',
-      'Últimos 30 dias',
-      'Este ano',
+    const ultimaModificacao = this.formulario.get('ultimaModificacao')?.value;
 
-    ]
-
-    itensOrdenar: string[] = [
-
-      'Última modificação',
-      'Última vez aberto por mim',
-      'A-Z',
-      'Número de versões',
-
-    ]
-
-    ngOnInit(): void {
-
-    }
-
-    onSubmit(){}
-
+    this.dialogRef.close();
+  }
 }
 

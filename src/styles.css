@@ -55,3 +55,6 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--cinza-principal-claro);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
