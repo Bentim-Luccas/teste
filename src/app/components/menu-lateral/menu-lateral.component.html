@@ -1,8 +1,8 @@
-<aside id="default-sidebar" class="fixed left-0 top-[64px] w-[266px] h-full" aria-label="Sidenav">
-  <div class=" h-screen bg-[#ffffff]">
-    <div  class="flex flex-wrap justify-center items-center mt-1  pt-[10px] " >
+<aside id="default-sidebar" class="left-0 w-[100%] h-[100%]" aria-label="Sidenav">
+  <div class="h-full bg-[#ffffff]">
+    <div  class="flex-wrap justify-center items-center pr-[3%] pl-[3%]  pt-[10px] " >
       <form [formGroup]="formBusca" >
-      <button type="button" class="flex items-center justify-between pt-[3%] mb-[5%] text-black bg-gray-50 pl-[10%] pb-[3%] pr-[10%] w-[85%] h-[45.37px] border-gray-200 border-[0.99px] rounded-[7.89px]">
+      <button type="button" class="flex items-center justify-between pt-[3%] mb-[5%] text-black bg-gray-50 pl-[10%] pb-[3%] pr-[10%] w-[100%] h-[45.37px] border-gray-200 border-[0.99px] rounded-[7.89px]">
         <svg (click)="buscaEmpresaPorNome()"  class="w-[12px] h-[12px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
@@ -15,49 +15,46 @@
       </button>
       </form>
     </div>
-    <!-- <div *ngIf="errorMessage" class="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
-      <div class="relative text-red-500 text-center bg-white p-4 rounded shadow-lg">
-        <button class="absolute top-0 right-0 mt-2 mr-2 text-gray-400 hover:text-gray-600"> (click)="clearErrorMessage()"   {{ errorMessage }} -->
-          <!-- &times;
-        </button>
-      </div>
-    </div> *ngIf="empresaSelecionada" -->
-
-    <!-- <div  class="flex flex-wrap justify-center items-center">
-          <app-modal-button></app-modal-button>
-    </div> -->
-      <!-- Selected Empresa Menu -->
-      <!-- <li  class="w-[266.31px] h-[43.13px] pt-[6.9px] pl-[22.69px] pb-[6.9px] pr-[22.69px]">
-        <span class="font-['Opens Sans'] font-semibold text-[19.73px] leading-[26.86px] text-black w-[58px] h-[27px]">Empresa</span>
-      </li>
-      <div  class="overflow-y-auto max-h-[400px] flex flex-wrap justify-center items-center">
-
-        <select id="empresas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option value=-999 selected>Selecione uma empresa</option>
-          @if(listaEmpresas.length == 1){
-            <option selected value={{listaEmpresas[0].empresa_id}}>{{listaEmpresas[0].empresa_nome}}</option>
-          }@else{
-            @for(empresa of listaEmpresas; track empresa.empresa_id){
-              <option value={{empresa.empresa_id}}>{{empresa.empresa_nome}}</option>
-            }
-          }
-        </select>
-      </div> -->
-
-      <div  class="overflow-y-auto max-h-[400px] flex flex-wrap justify-center items-center scrollbar-thin">
-        @for(projeto of listaProjetos; track projeto){
-          <button type="button" class="flex items-center mb-2 mt-1 w-[234.75px]  text-black hover:bg-gray-200 font-[150] border-[0.99px]  border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+      <div  class="overflow-y-auto max-h-[250px] flex flex-wrap justify-center items-center scrollbar-thin">
+        @for(projeto of projetos; track projeto.empresa_id){
+          <!----------------------------------------------------->
+          <!----------------BOTAO DE PROJETOS-------------------->
+          <!----------------------------------------------------->
+          <button type="button" class="flex items-center mb-2 mt-1 w-[234.75px] text-black hover:bg-gray-200 font-[150] border-[0.99px]  border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]" aria-hidden="true" [attr.aria-controls] ="'dropdown-p'+projeto.projeto_id" [attr.data-collapse-toggle]="'dropdown-p'+projeto.projeto_id">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.111 20A3.111 3.111 0 0 1 4 16.889v-12C4 4.398 4.398 4 4.889 4h4.444a.89.89 0 0 1 .89.889v12A3.111 3.111 0 0 1 7.11 20Zm0 0h12a.889.889 0 0 0 .889-.889v-4.444a.889.889 0 0 0-.889-.89h-4.389a.889.889 0 0 0-.62.253l-3.767 3.665a.933.933 0 0 0-.146.185c-.868 1.433-1.581 1.858-3.078 2.12Zm0-3.556h.009m7.933-10.927 3.143 3.143a.889.889 0 0 1 0 1.257l-7.974 7.974v-8.8l3.574-3.574a.889.889 0 0 1 1.257 0Z"/>
             </svg>
-            <span [routerLink]="['/disciplinas']"  class="flex-1 ml-2 text-left font-['Opens Sans'] text-[15.78px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">
-              {{projeto.projeto_descricao}}
-            </span>
+            <span class="flex-1 ml-2 text-left font-['Opens Sans'] text-[15.78px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{projeto.projeto_descricao}}</span>
+            @if(projeto.disciplinas){
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+          }
           </button>
-                      }
+          @if(projeto.disciplinas){
+            <ul [id]="'dropdown-p'+projeto.projeto_id" class="hidden py-2 space-y-2">
+            @for(disciplina of projeto.disciplinas; track disciplina.disciplina_id){
+              <li>
+                <div class="flex flex-row-reverse items-center">
+                  <button type="button" class="flex flex-row-reverse items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" [attr.aria-controls]="'dropdown-d'+disciplina.disciplina_id" [attr.data-collapse-toggle]="'dropdown-d'+disciplina.disciplina_id">
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">{{disciplina.disciplina_descricao}}</span>
+                    @if(disciplina.etapas){
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                    }
+                  </button>
+                </div>
+              </li>
+            }
+              
+            </ul>
+
+          }
+        }
       </div>
-
-
+      
+      
 
 
 
@@ -84,6 +81,7 @@
       </button>
 
     </div>
+
     <!--SuperAdmin Menu -->
     <div   class="flex flex-wrap justify-center items-center" >
       <button type="button" class="flex items-center  text-black hover:bg-gray-100 mb-[2%] w-[85%] pt-[2%] pb-[2%] pl-2 border-gray-200 font-[150] border-[0.99px] rounded-[7.89px]">
@@ -93,7 +91,7 @@
 
           <span class="font-['Inter'] text-[16px] font-semibold  text-black">Dashboard</span>
       </button>
-      <button type="button" class="flex items-center   hover:bg-gray-100 mb-[2%] w-[85%] pt-[2%] pb-[2%] pl-2 border-gray-200 font-[150] border-[0.99px] rounded-[7.89px]" (click)=empresas()>
+      <button type="button" class="flex items-center   hover:bg-gray-100 mb-[2%] w-[85%] pt-[2%] pb-[2%] pl-2 border-gray-200 font-[150] border-[0.99px] rounded-[7.89px]" (click)=empresasrota()>
         <svg class="w-[22.69px] h-[18.69px] text-gray-800 mr-[3%] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"/>
         </svg>

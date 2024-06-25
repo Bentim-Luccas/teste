@@ -3,14 +3,14 @@ import { RouterModule } from '@angular/router';
 import { Etapa } from '../../interface/etapa';
 import { EtapaService } from '../../service/etapa.service';
 import { NgFor } from '@angular/common';
-import { DisciplinaService } from '../../service/disciplina.service';
+import { ButtonModalEditarEtapa } from "./modal-editar-etapa/button/button-modal-editar-etapa.component";
 
 @Component({
-  selector: 'app-gerenciamento-etapa-components',
-  standalone: true,
-  imports: [NgFor, RouterModule],
-  templateUrl: './gerenciamento-etapa-components.component.html',
-  styleUrl: './gerenciamento-etapa-components.component.css'
+    selector: 'app-gerenciamento-etapa-components',
+    standalone: true,
+    templateUrl: './gerenciamento-etapa-components.component.html',
+    styleUrl: './gerenciamento-etapa-components.component.css',
+    imports: [NgFor, RouterModule, ButtonModalEditarEtapa]
 })
 export class GerenciamentoEtapaComponentsComponent implements OnInit {
   etapa: Etapa[] = [];
