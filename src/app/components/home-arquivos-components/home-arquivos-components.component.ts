@@ -4,91 +4,52 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Projeto } from '../../interface/projeto';
 import { RouterModule } from '@angular/router';
+import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
-import { Subscription } from 'rxjs';
-import { UsuarioService } from '../../service/usuario.service';
-import { Usuario } from '../../interface/usuario';
-import { ButtonModalEditarProjeto } from "./modal-editar-projeto/button/button-modal-editar-projeto.component";
+import { Session } from 'node:inspector';
 
 @Component({
-    selector: 'app-home-arquivos-components',
-    standalone: true,
-    templateUrl: './home-arquivos-components.component.html',
-    styleUrl: './home-arquivos-components.component.css',
-    imports: [CommonModule, RouterModule, ButtonModalEditarProjeto]
+  selector: 'app-home-arquivos-components',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './home-arquivos-components.component.html',
+  styleUrl: './home-arquivos-components.component.css'
 })
 export class HomeArquivosComponentsComponent implements OnInit {
+  constructor(private projetoService: ProjetoService,
+    private empresaService: EmpresaService,
+    private router: Router
+  ) { }
 
-  projetos: Projeto[]=[];
-  empresaSelecionada : Empresa| null = null;
-  private empresaSubscription!: Subscription;
-
-  usuarioAutenticado : Usuario | null = null;
-  private usuarioAutenticadoSubscription!: Subscription;
-
-  constructor(private projetoService: ProjetoService, usuarioService: UsuarioService, private router: Router) {
-    this.usuarioAutenticadoSubscription = usuarioService.usuarioAutenticado$.subscribe(
-      usuario => {
-        this.usuarioAutenticado = usuario;
-      }
-    )
-
-  }
+  projeto!: Projeto[];
 
   ngOnInit(): void {
-
-    /**
-    let usuarioId = 4;
-    let usuarioTipo = 2;   //1=comun e admin | 2=superadmin
-    this.getEmpresa(usuarioId, usuarioTipo); */
-    this.carregarProjeto(4, 4);
+    this.carregarProjeto(4);
   }
 
-  getEmpresa(usuarioId: number, usuarioTipo: number): void {
-    this.empresaSubscription = this.projetoService.empresaSelecionada$.subscribe(
-      empresa => {
-        this.empresaSelecionada = empresa;
-        if (empresa) {
-          if(usuarioTipo==1 || usuarioTipo==2){
-            this.carregarProjeto(empresa.empresa_id, usuarioId);
-          }
-          else if(usuarioTipo==3){
-            this.carregarProjetoSuperAdmin(empresa.empresa_id);
-          }
+  carregarProjeto(usuarioId: number) {
+    this.projetoService.findProjetosDaEmpresaDoUsuarioId(usuarioId).subscribe({
+      next: (projeto)=> {
+        this.projeto = projeto;
+        // Carregar nome da empresa para cada projeto
+        this.loadEmpresaName(projeto);
+      },
+      error: (error)=> console.log(error),
+    });
+  }
+
+  private loadEmpresaName(projetos: Projeto[]) {
+    projetos.forEach((proj: Projeto) => {
+      this.empresaService.GetEmpresaById(proj.empresa_id).subscribe(
+        (empresa: Empresa) => {
+          proj.empresa_nome = empresa.empresa_nome;
+        },
+        (error: any) => {
+          console.error('Erro ao carregar nome da empresa:', error);
         }
-      }
-    );
-  }
-
-  carregarProjeto(empresaId: number, usuarioId: number) {
-    this.projetoService.findProjetosDaEmpresaIdDoUsuarioId(empresaId ,usuarioId).subscribe({
-      next: (projetos)=> {
-        this.projetos = projetos;
-      },
-      error: (error)=> console.log(error),
+      );
     });
   }
-
-  carregarProjetoSuperAdmin(empresaId: number) {
-    this.projetoService.findProjetosDaEmpresaId(empresaId).subscribe({
-      next: (projetos)=> {
-        this.projetos = projetos;
-      },
-      error: (error)=> console.log(error),
-    });
-  }
-
-  deletarProjeto(idProjeto: number | undefined): void {
-    if (idProjeto === undefined) {
-        console.error("Não é possível excluir o projeto: idProjeto está indefinido");
-        return;
-    }
-    this.projetoService.remove(idProjeto).subscribe(() => {
-        this.projetos = this.projetos.filter(
-            (p) => p.projeto_id !== idProjeto
-        );
-    });
-}
 
   toggleDropdown(projeto: any): void {
     projeto.dropdownOpen = !projeto.dropdownOpen;

@@ -4,19 +4,18 @@ import { Router } from '@angular/router';
 import { Disciplina } from '../../../interface/disciplina';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ModalButtonComponent } from "../../gerenciamento-arquivos-components/modal-enviar-arquivo/modal-enviar-arquivo.component";
 
 @Component({
-    selector: 'app-menu-lateral-disciplina',
-    standalone: true,
-    templateUrl: './menu-lateral-disciplina.component.html',
-    styleUrl: './menu-lateral-disciplina.component.css',
-    imports: [CommonModule, RouterModule, ModalButtonComponent]
+  selector: 'app-menu-lateral-disciplina',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './menu-lateral-disciplina.component.html',
+  styleUrl: './menu-lateral-disciplina.component.css'
 })
 export class MenuLateralDisciplinaComponent implements OnInit{
   constructor(private disciplinaService: DisciplinaService, private router: Router) { }
 
-  disciplina: Disciplina[] = [];
+  disciplinas: Disciplina[] = [];
   isDropdownOpen: boolean[] = [];
 
   ngOnInit(): void {
@@ -25,7 +24,7 @@ export class MenuLateralDisciplinaComponent implements OnInit{
 
   getDisciplinas(): void {
     this.disciplinaService.findAll().subscribe(disciplinas => {
-      this.disciplina = disciplinas;
+      this.disciplinas = disciplinas;
     });
   }
 

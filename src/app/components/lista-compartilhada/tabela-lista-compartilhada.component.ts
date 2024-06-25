@@ -21,8 +21,12 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
   constructor(
     private listaCompartilhadaService: ListaCompartilhadaService,
     private router: Router,
+    private dialog: MatDialog,
   ){}
 
+  openModal(){
+    this.dialog.open(this.modalTemplate);
+  }
 
   listaCompartilhada: listaCompartilhada[] = [];
 

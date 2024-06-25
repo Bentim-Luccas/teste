@@ -5,16 +5,16 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { BarraPesquisaProjetoComponent } from '../../components/home-arquivos-components/barra-pesquisa-projeto/barra-pesquisa-projeto.component';
+import { ModalCriarProjetoComponent } from '../../components/home-arquivos-components/modal-criar-projeto/modal-criar-projeto.component';
 import { HomeArquivosComponentsComponent } from "../../components/home-arquivos-components/home-arquivos-components.component";
-import { AngularSplitModule } from 'angular-split';
-import { ButtonModalCriarProjeto } from "../../components/home-arquivos-components/modal-criar-projeto/button/button-modal-criar-projeto.component";
+import { BreadcrumbHomeComponent } from '../../components/home-arquivos-components/breadcrumb-home/breadcrumb-home.component'
 
 @Component({
     selector: 'app-home',
     standalone: true,
     templateUrl: './homeArquivos.component.html',
     styleUrl: './homeArquivos.component.css',
-    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, HomeArquivosComponentsComponent, AngularSplitModule, ButtonModalCriarProjeto]
+    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, ModalCriarProjetoComponent, HomeArquivosComponentsComponent, BreadcrumbHomeComponent]
 })
 export class HomeComponent {
 
