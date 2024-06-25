@@ -21,10 +21,10 @@ export class EtapaService {
     }
 
     post(etapa: Etapa): Observable<Etapa> {
-        return this.http.post<Etapa>(this.baseUrl, etapa).pipe(
-          catchError(this.handleError)
+        return this.http.post<Etapa>(this.baseUrl, etapa, httpOptions).pipe(
+            catchError(this.handleError)
         );
-      }
+    }
 
     findAll(): Observable<Etapa[]> {
         return this.http.get<Etapa[]>(this.baseUrl).pipe(
@@ -68,12 +68,6 @@ export class EtapaService {
           catchError(this.handleError)
       );
     }
-    
-    findEtapasDaDisciplinaId(idDisciplina: number): Observable<Etapa[]> {
-        return this.http.get<Etapa[]>(`${this.baseUrl}/disciplina/${idDisciplina}`).pipe(
-            catchError(this.handleError)
-        );
-      }
 
 
 }

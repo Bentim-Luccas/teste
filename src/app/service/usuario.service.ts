@@ -7,28 +7,24 @@ import { environment } from '../../environments/environment.development';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    //'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    //Authorization: 'my-auth-token'
   })
 };
+
+const API = environment.apiServer
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  private readonly baseUrl: string;
-
-  private usuarioAutenticadoSubject = new BehaviorSubject<Usuario | null>(null);
-  usuarioAutenticado$ = this.usuarioAutenticadoSubject.asObservable();
-
+  private readonly baseUrl = `${API}usuario`
   private autorSelecionadoSubject = new BehaviorSubject<Usuario | null>(null);
   autor$ = this.autorSelecionadoSubject.asObservable();
   private revisorSelecionadoSubject = new BehaviorSubject<Usuario | null>(null);
   revisor$ = this.revisorSelecionadoSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.baseUrl = environment.apiServer + 'usuario';
-  }
+  constructor(private http: HttpClient) { }
 
   findAll() : Observable<Usuario[]>  {
     return this.http.get<Usuario[]>(this.baseUrl, httpOptions)
@@ -48,16 +44,6 @@ export class UsuarioService {
 
   getUsuariosPorEmpresaId(idEmpresa: number){
     return this.http.get<Usuario[]>(`${this.baseUrl}/usuarioByEmpresaId/${idEmpresa}`, httpOptions)
-  }
-
-  getUsuarioPorEmail(email: string | null){
-    return this.http.get<Usuario>(`${this.baseUrl}/usuarioByEmail/${email}`, httpOptions)
-  }
-
-  /* ======================== Service para comunicação de componentes=========== */
-
-  setUsuarioAutenticado(usuario: Usuario | null) {
-    this.usuarioAutenticadoSubject.next(usuario);
   }
 
 }

@@ -1,4 +1,5 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
+
 @Component({
   selector: 'app-calendar',
   standalone: true,
@@ -7,6 +8,5 @@ import { AfterViewInit, Component } from '@angular/core';
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent {
-
 
 }
