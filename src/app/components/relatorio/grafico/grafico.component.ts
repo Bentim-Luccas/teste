@@ -5,8 +5,9 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './grafico.component.html',
-  styleUrls: ['./grafico.component.css']
+  styleUrl: './grafico.component.css'
 })
 export class GraficoComponent {
+  
 
 }

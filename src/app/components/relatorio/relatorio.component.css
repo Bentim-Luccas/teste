@@ -1,0 +1,68 @@
+/* Topo */
+header{
+  height: 50px;
+  width: 100%;
+  background-color: black;
+}
+
+
+/* Meio */
+.meio{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+section{
+  padding: 10px;
+}
+
+.secao1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  /* background-color: yellow; */
+}
+
+.secao2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+  /* background-color: green; */
+
+  .bloco-orcamento-user{
+    width: 450px;
+    /* background-color: grey; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .bloco-grafico{
+    width: 450px;
+    /* background-color: black; */
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.barra-esquerda{
+  height: 678.21;
+  width: 100px;
+  background-color: black;
+}
+
+aside{
+  height: 678.21;
+  width: 300px;
+  /* background-color: grey; */
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+}
+
+

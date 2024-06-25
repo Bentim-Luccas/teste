@@ -5,16 +5,14 @@ import { ProjetoService } from '../../service/projeto.service';
 import { Projeto } from '../../interface/projeto';
 import { NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ModalCriarDisciplinaComponent } from "./modal-criar-disciplina/modal-criar-disciplina.component";
-import { ButtonModalEditarDisciplina } from "./modal-editar-disciplina/button/button-modal-editar-disciplina.component";
 
 
 @Component({
     selector: 'app-gerenciamento-disciplina-components',
     standalone: true,
+    imports: [NgFor, RouterModule],
     templateUrl: './gerenciamento-disciplina-components.component.html',
-    styleUrls: ['./gerenciamento-disciplina-components.component.css'],
-    imports: [NgFor, RouterModule, ModalCriarDisciplinaComponent, ButtonModalEditarDisciplina]
+    styleUrls: ['./gerenciamento-disciplina-components.component.css']
 })
 export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     disciplina: Disciplina[] = [];
@@ -22,45 +20,52 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     constructor(
         private disciplinaService: DisciplinaService,
         private projetoService: ProjetoService
-    ) { }
+    ) {}
 
     ngOnInit(): void {
-        this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(4, 4);
+        this.carregarDisciplina();
     }
 
-    CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
-        this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto, idUsuario).subscribe({
-            next: (disciplina) => {
-                this.disciplina = disciplina;
-                this.carregarProjetoNome(disciplina);
+    carregarDisciplina(): void {
+        this.disciplinaService.findAll().subscribe(
+            (disciplinas: Disciplina[]) => {
+                this.disciplina = disciplinas;
+                // Carregar nome da empresa para cada projeto
+                this.loadProjetoNome(disciplinas);
             },
-            error: (error) => console.log(error)
-        });
+            (error: any) => {
+                console.error('Erro ao carregar disciplinas:', error);
+            }
+        );
     }
 
-    private carregarProjetoNome(disciplina: Disciplina[]): void {
-        disciplina.forEach((disc: Disciplina) => {
+    private loadProjetoNome(disciplinas: Disciplina[]): void {
+        disciplinas.forEach((disc: Disciplina) => {
             this.projetoService.findOne(disc.projeto_id).subscribe(
                 (projeto: Projeto) => {
                     if (projeto) {
-                        disc.projeto_nome = projeto.projeto_descricao || '';
+                        disc.projeto_nome = projeto.projeto_descricao || ''; // Handle undefined or null case
                     } else {
-                        disc.projeto_nome = '';
+                        disc.projeto_nome = ''; // Handle case where projeto is undefined
                     }
                 },
                 (error: any) => {
                     console.error(`Erro ao carregar nome do projeto ${disc.projeto_id}:`, error);
-                    disc.projeto_nome = '';
+                    disc.projeto_nome = ''; // Handle error case
                 }
             );
         });
     }
+    
 
-    deletarDisciplina(idDisciplina: number): void {
-        this.disciplinaService.remove(idDisciplina).subscribe(() => {
-            this.disciplina = this.disciplina.filter(
-                (d) => d.disciplina_id !== idDisciplina
-            );
+    removeDisciplina(id: number): void {
+        this.disciplinaService.remove(id).subscribe({
+            next: () => {
+                this.disciplina = this.disciplina.filter(disciplina => disciplina.disciplina_id !== id);
+            },
+            error: (error: any) => {
+                console.error('Erro ao remover disciplina:', error);
+            }
         });
     }
 }
