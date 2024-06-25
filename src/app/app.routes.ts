@@ -15,6 +15,7 @@ import { ListaCompartilhadaComponent } from './pages/lista-compartilhada/lista-c
 import { GerenciamentoDisciplinasComponent } from './pages/gerenciamento-disciplinas/gerenciamento-disciplinas.component';
 import { GerenciamentoEtapasComponent } from './pages/gerenciamento-etapas/gerenciamento-etapas.component';
 import { GerenciamentoNotificationComponent } from './pages/gerenciamento-notification/gerenciamento-notification.component';
+import { RelatorioArquivoComponent } from './pages/relatorio-arquivo/relatorio-arquivo.component';
 
 export const routes: Routes = [
   {
@@ -47,8 +48,14 @@ export const routes: Routes = [
     path: 'arquivos',
     component: GerenciamentoArquivosComponent
   }
-  , { path: 'relatorio', component: RelatorioComponent },
+, { path: 'relatorio',
+    component: RelatorioComponent
 
+    },
+    {
+      path: 'relatorio-arquivo',
+      component: RelatorioArquivoComponent,
+    },
   {
     path: 'notificacao', component: GerenciamentoNotificationComponent
 

@@ -12,11 +12,7 @@
                   <p class="text-sm font-normal text-gray-900 dark:text-white">{{comments.arquivo_comentario_descricao}}</p>
               </div>
           </div>
-          <button class="flex items-center bg-vermelho-deletar text-branco-principal mt-4 p-4 rounded-xl" (click)="deletarComentario(comments.arquivo_comentario_id!)">
-            <svg class="w-6 h-6 text-branco-principal" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
-              </svg>
-            Deletar</button>
+          <button (click)="deletarComentario(comments.arquivo_comentario_id!)">Deletar</button>
       </div>
   </div>
   }

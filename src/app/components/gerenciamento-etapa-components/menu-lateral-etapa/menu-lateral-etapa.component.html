@@ -1,64 +1,34 @@
-<aside id="default-sidebar" class="fixed left-0 top-[64px] w-[266px] max-h-screen" aria-label="Sidenav">
+<aside id="default-sidebar" class="fixed left-0 top-[64px] w-[266px] h-full" aria-label="Sidenav">
     <div class=" h-screen bg-[#ffffff]">
         <ul>
-            <li class="mb-1 w-[266.31px] h-[63.13px] pt-[6.9px] pl-[22.69px] pb-[6.9px] pr-[22.69px]">
-              <form class="max-w-md mx-auto">   
-                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                    </div>
-                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pesquisar" required />
-                </div>
-              </form>
+            <li class="w-[266.31px] h-[63.13px] pt-[6.9px] pl-[22.69px] pb-[6.9px] pr-[22.69px]">
+                <a href="#" class="flex items-center p-2 text-white ">
+                    <span
+                        class="font-['Opens Sans'] font-semibold text-[19.73px] leading-[26.86px] text-black w-[58px] h-[27px]">Etapas</span>
+                </a>
             </li>
             <div class="flex flex-wrap justify-center items-center">
-                <button type="button"
-                    class="flex justify-center items-center p-6 mb-[10px] text-black hover:bg-gray-200  w-[199px] h-[45.37px] border-black border-[0.99px] rounded-[7.89px]">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                        class="w-[15.25px] h-[18.15px]">
-                        <path fill-rule="evenodd"
-                            d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span
-                        class="flex ml-1  font-['Opens Sans'] text-[16px] leading-[26.86px] text-black"
-                        data-modal-target="modal-create" data-modal-toggle="modal-create">Novo</span>
-                </button>
+                <app-modal-button></app-modal-button>
             </div>
             <div class="overflow-y-auto max-h-[400px] flex flex-wrap justify-center items-center scrollbar-thin">
-                <div *ngFor="let etapa of etapas" class="dropdown-container">
+                <div *ngFor="let etapa of etapa">
                     <button type="button"
-                        class="flex items-center mb-2 mt-1 w-[234.75px] text-black hover:bg-gray-600  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]"
-                        (click)="toggleDropdown(etapa)">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                            fill="#e8eaed">
-                            <path
-                                d="M120-120q-33 0-56.5-23.5T40-200v-520h80v520h680v80H120Zm160-160q-33 0-56.5-23.5T200-360v-440q0-33 23.5-56.5T280-880h200l80 80h280q33 0 56.5 23.5T920-720v360q0 33-23.5 56.5T840-280H280Zm0-80h560v-360H527l-80-80H280v440Zm0 0v-440 440Z" />
+                        class="flex items-center mb-2 mt-1 w-[234.75px]  text-black hover:bg-gray-200 font-[150] border-[0.99px]  border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                d="M7.111 20A3.111 3.111 0 0 1 4 16.889v-12C4 4.398 4.398 4 4.889 4h4.444a.89.89 0 0 1 .89.889v12A3.111 3.111 0 0 1 7.11 20Zm0 0h12a.889.889 0 0 0 .889-.889v-4.444a.889.889 0 0 0-.889-.89h-4.389a.889.889 0 0 0-.62.253l-3.767 3.665a.933.933 0 0 0-.146.185c-.868 1.433-1.581 1.858-3.078 2.12Zm0-3.556h.009m7.933-10.927 3.143 3.143a.889.889 0 0 1 0 1.257l-7.974 7.974v-8.8l3.574-3.574a.889.889 0 0 1 1.257 0Z" />
                         </svg>
                         <span [routerLink]="['/arquivos']"
                             class="flex-1 ml-2 text-left font-['Opens Sans'] text-[15.78px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{etapa.etapa_descricao}}</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
                     </button>
-                    <ul class="dropdown-menu" *ngIf="etapa.dropdownOpen">
-                        <li>
-                            <a href="#"
-                                class="flex items-center w-full p-2 text-black hover:bg-gray-600 transition duration-75 rounded-lg pl-11 group dark:text-white dark:hover:bg-gray-700">Arquivo.PDF</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </ul>
         <ul class="pt-5 mt-5 space-y-2 border-t border-gray-700"> </ul>
         <div class=" flex flex-wrap justify-center items-center">
             <button type="button"
-                class="flex items-center w-[234.75px] mb-1 mt-1 text-black hover:bg-gray-600  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[30px] pb-[4.93px] pr-[14.8px]"
+                class="flex items-center w-[234.75px] mb-1 mt-1 text-black hover:bg-gray-200  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[30px] pb-[4.93px] pr-[14.8px]"
                 a>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-[17.6px] h-[16.86px]">
@@ -69,7 +39,7 @@
                 <span class="flex-1 ml-2 text-left font-['Opens Sans'] text-[15.78px] font-normal">Favoritos </span>
             </button>
             <button type="button"
-                class="flex items-center w-[234.75px] mb-1 mt-4 text-black hover:bg-gray-600  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[30px] pb-[4.93px] pr-[14.8px]"
+                class="flex items-center w-[234.75px] mb-1 mt-4 text-black hover:bg-gray-200  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[30px] pb-[4.93px] pr-[14.8px]"
                 a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-[17.6px] h-[16.86px]">
@@ -79,7 +49,7 @@
                 <span class="flex-1 ml-2 text-left font-['Opens Sans'] text-[15.78px] font-normal">Recentes</span>
             </button>
             <button type="button"
-                class="flex items-center w-[234.75px] mb-1 mt-4 text-black hover:bg-gray-600  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[30px] pb-[4.93px] pr-[14.8px]"
+                class="flex items-center w-[234.75px] mb-1 mt-4 text-black hover:bg-gray-200  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[30px] pb-[4.93px] pr-[14.8px]"
                 (click)=listaCompartilhada() a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-[17.6px] h-[16.86px]">
@@ -93,7 +63,7 @@
         <div class="absolute bottom-0 w-[266.31px] h-[120px] justify-center">
             <div class="justify-center items-center flex-wrap flex">
                 <button type="button"
-                    class="flex items-center w-[234.75px] mb-1 mt-1 text-black hover:bg-gray-600  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[15.93px] pb-[4.93px]"
+                    class="flex items-center w-[234.75px] mb-1 mt-1 text-black hover:bg-gray-200  rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[15.93px] pb-[4.93px]"
                     a>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                         class="w-[17.6px] h-[16.86px]">
@@ -101,8 +71,7 @@
                             d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z"
                             clip-rule="evenodd" />
                     </svg>
-                    <span
-                        class="flex-1 ml-2 text-left font-['Opens Sans'] text-[15.78px] font-normal">Configurações</span>
+                    <span class="flex-1 ml-2 text-left font-['Opens Sans'] text-[16px] font-normal">Configurações</span>
                 </button>
             </div>
         </div>
