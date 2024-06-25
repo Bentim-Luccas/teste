@@ -1,3 +1,4 @@
+import { listaCompartilhadaDto } from './../../../interface/listaCompartilhadaDto';
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,8 +46,6 @@ export class ListaCompartilhadaModalComponent implements OnInit {
   ) {
     this.listaForm = this.formBuilder.group({
       lista_compartilhada_descricao: ['', Validators.required],
-      lista_compartilhada_data: ['', Validators.required],
-      lista_compartilhada_status: ['', Validators.required]
     });
   }
 
@@ -54,8 +53,11 @@ export class ListaCompartilhadaModalComponent implements OnInit {
 
   submitForm(): void {
     if (this.listaForm.valid) {
-      const listaCompartilhadaData = this.listaForm.value;
-      console.log('Dados do formulário:', listaCompartilhadaData); // Verificar dados do formulário
+      const listaCompartilhadaData = new listaCompartilhadaDto()
+      listaCompartilhadaData.lista_compartilhada_status = 1
+      listaCompartilhadaData.lista_compartilhada_data = new Date(Date.now())
+      listaCompartilhadaData.lista_compartilhada_descricao = this.listaForm.get("lista_compartilhada_descricao")?.value
+      console.log('Dados do formulário:', listaCompartilhadaData);
       this.listaCompartilhadaService.postListaCompartilhada(listaCompartilhadaData).subscribe(
         (response) => {
           console.log('Dados enviados com sucesso:', response);

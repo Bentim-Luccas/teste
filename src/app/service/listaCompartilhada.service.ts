@@ -4,15 +4,16 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 import { listaCompartilhada } from "../interface/listaCompartilhada";
+import { listaCompartilhadaDto } from "../interface/listaCompartilhadaDto";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'aplication/json',
+    'Content-Type':  'application/json',
   })
 };
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class ListaCompartilhadaService {
@@ -28,7 +29,7 @@ export class ListaCompartilhadaService {
     );
   }
 
-  postListaCompartilhada(listacompartilhada: listaCompartilhada): Observable<listaCompartilhada> {
+  postListaCompartilhada(listacompartilhada: listaCompartilhadaDto): Observable<listaCompartilhada> {
     console.log('Dados a serem enviados para o backend:', listacompartilhada);
     return this.httpCliente.post<listaCompartilhada>(this.baseUrl, listacompartilhada, httpOptions).pipe(
       catchError(this.handleError)
