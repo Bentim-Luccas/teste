@@ -6,6 +6,8 @@ import { AuthService } from '../../service/auth.service';
 import { Email } from '../../interface/email';
 import { EmailTokenRecebido } from '../../interface/emailtoken_recebido';
 import { catchError, throwError } from 'rxjs';
+import { OnInit } from '@angular/core';
+import { CreateListaCompartilhada } from '../../interface/create-lista-compartilhada.dto';
 
   @Component({
     selector: 'app-loginemail',
@@ -14,16 +16,26 @@ import { catchError, throwError } from 'rxjs';
     templateUrl: './loginemail.component.html',
     styleUrls: ['./loginemail.component.css']
   })
-  export class LoginemailComponent {
+  export class LoginemailComponent implements OnInit {
     emailFormControl = new FormControl('', [Validators.required, Validators.email]);
     credenciais = false;
     formEnviado = false;
     processado = false;
     msgErro='ola'
-    
-  
+
+
     constructor(private router: Router, private authservice: AuthService) { }
-  
+
+    ngOnInit(){
+      let lista = new CreateListaCompartilhada()
+      lista.lista_compartilhada_descricao ="Teste Armando"
+      lista.lista_compartilhada_status = 1
+      lista.lista_compartilhada_data = new Date(Date.now())
+      this.authservice.testeListaCompartilhada(lista).subscribe((res)=>{
+        console.log(res)
+      })
+    }
+
     submitApp() {
       this.formEnviado = true;
       if (this.emailFormControl.valid) {
@@ -40,11 +52,11 @@ import { catchError, throwError } from 'rxjs';
                 sessionStorage.setItem('token', email.usuario_token);
                 this.router.navigate(['logintoken']);
               }
-              
+
             }
-            
-          },error:(error) => {     
-            this.processado = false;                         
+
+          },error:(error) => {
+            this.processado = false;
             this.msgErro = error.error.message
             this.emailFormControl.setErrors({
               credenciais:true
@@ -59,6 +71,6 @@ import { catchError, throwError } from 'rxjs';
 
 
 
-  
-  
+
+
 
