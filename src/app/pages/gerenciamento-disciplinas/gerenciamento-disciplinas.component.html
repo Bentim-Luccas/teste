@@ -3,12 +3,19 @@
   <div id="SidBar" class="col-span-2">
     <app-menu-lateral-disciplina></app-menu-lateral-disciplina>
   </div>
-  <div class="z-0 mt-[64px]">
+
+  <div class="flex content-center justify-between items-center bg-gray-100 mt-[80px]">
     <app-breadcrumb-disciplina></app-breadcrumb-disciplina>
-    <div class="flex content-center justify-between items-center bg-gray-100">
-      <app-barra-pesquisa-disciplina></app-barra-pesquisa-disciplina>
-      <app-button-modal-criar-disciplina></app-button-modal-criar-disciplina>
-    </div>
+    <app-barra-pesquisa-disciplina></app-barra-pesquisa-disciplina>
+  </div>
+  <div class="ml-8 mt-4 mb-8">
+    <app-track-page-disciplina></app-track-page-disciplina>
+  </div>
+  <div class="flex content-center justify-between items-center bg-gray-100 ml-8">
+    <app-buscar-disciplina></app-buscar-disciplina>
+    <app-modal-criar-disciplina></app-modal-criar-disciplina>
+  </div>
+  <div>
     <app-gerenciamento-disciplina-components></app-gerenciamento-disciplina-components>
   </div>
 </div>

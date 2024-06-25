@@ -6,14 +6,16 @@ import { ModalCriarDisciplinaComponent } from "../../components/gerenciamento-di
 import { GerenciamentoDisciplinaComponentsComponent } from "../../components/gerenciamento-disciplina-components/gerenciamento-disciplina-components.component";
 import { ModalEditarDisciplinaComponent } from "../../components/gerenciamento-disciplina-components/modal-editar-disciplina/modal-editar-disciplina.component";
 import { BarraPesquisaDisciplinaComponent } from "../../components/gerenciamento-disciplina-components/barra-pesquisa-disciplina/barra-pesquisa-disciplina.component";
-import { ButtonModalCriarDisciplina } from "../../components/gerenciamento-disciplina-components/modal-criar-disciplina/button/button-modal-criar-disciplina.component";
+import { BuscarDisciplinaComponent } from '../../components/gerenciamento-disciplina-components/buscar-disciplina/buscar-disciplina.component'
+import { TrackPageDisciplinaComponent } from '../../components/gerenciamento-disciplina-components/track-page-disciplina/track-page-disciplina.component'
+
 
 @Component({
     selector: 'app-gerenciamento-disciplina',
     standalone: true,
     templateUrl: './gerenciamento-disciplinas.component.html',
     styleUrl: './gerenciamento-disciplinas.component.css',
-    imports: [NavbarComponent, MenuLateralDisciplinaComponent, BreadcrumbDisciplinaComponent, ModalCriarDisciplinaComponent, GerenciamentoDisciplinaComponentsComponent, ModalEditarDisciplinaComponent, BarraPesquisaDisciplinaComponent, ButtonModalCriarDisciplina]
+    imports: [NavbarComponent, MenuLateralDisciplinaComponent, BreadcrumbDisciplinaComponent, ModalCriarDisciplinaComponent, GerenciamentoDisciplinaComponentsComponent, ModalEditarDisciplinaComponent, BarraPesquisaDisciplinaComponent, BuscarDisciplinaComponent, TrackPageDisciplinaComponent]
 })
 export class GerenciamentoDisciplinasComponent {
 
