@@ -7,6 +7,7 @@ import { Token } from '../interface/token';
 import { JWT_Token } from '../interface/jwt_token';
 import { EmailTokenRecebido } from '../interface/emailtoken_recebido';
 import { environment } from '../../environments/environment.development';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 const httpOptions = {
@@ -19,13 +20,14 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService  {
 
   private readonly baseUrl: string;
 
-  constructor(private http:HttpClient, private router: Router) {
+  constructor(private jwtHelper: JwtHelperService, private http:HttpClient, private router: Router) {
     this.baseUrl = environment.apiServer;
   }
+
 
   loginEmail(email:Email):Observable<EmailTokenRecebido>{
     const obs = this.http.post<EmailTokenRecebido>(this.baseUrl+'auth/login_email',email)
