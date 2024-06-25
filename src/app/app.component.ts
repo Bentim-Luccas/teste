@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 
@@ -7,11 +7,12 @@ import {  PLATFORM_ID, Inject } from '@angular/core';
 
 import { isPlatformBrowser } from "@angular/common";
 import { BuscaComponent } from './components/busca/busca.component';
+import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, BuscaComponent],
+  imports: [RouterOutlet, BuscaComponent, RouterModule, BreadcrumbComponent, BreadcrumbItemDirective],
   template: `<div></div>`,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

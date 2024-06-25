@@ -1,14 +1,14 @@
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
 export const inicialGuard: CanActivateFn = (route, state) => {
-  const check = sessionStorage.getItem("logado")
-  const router = new Router();
+  const router = inject(Router);
+  const check = sessionStorage.getItem("logado");
 
-  
-
-  if(check === "true"){
-    return true
+  if (check === "true") {
+    return true;
   }
-  router.navigate(['loginemail'])
-  return false
+
+  router.navigate(['loginemail']);
+  return false;
 };
