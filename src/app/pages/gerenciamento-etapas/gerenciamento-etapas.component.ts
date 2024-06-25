@@ -1,3 +1,4 @@
+import { ModalCriarEtapaComponent } from './../../components/gerenciamento-etapa-components/modal-criar-etapa/modal-criar-etapa.component';
 import { Component } from '@angular/core';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { MenuLateralEtapaComponent } from "../../components/gerenciamento-etapa-components/menu-lateral-etapa/menu-lateral-etapa.component";
