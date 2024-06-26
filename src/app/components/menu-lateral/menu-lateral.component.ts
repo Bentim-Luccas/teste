@@ -26,7 +26,8 @@ export class MenuLateralComponent implements OnInit {
   private usuarioAutenticadoSubscription!: Subscription;
 
   constructor(private projetoService: ProjetoService, private disciplinaService: DisciplinaService, private empresaService: EmpresaService, private etapaService: EtapaService, private usuarioService: UsuarioService, private router: Router) { }
-
+  initialCityName = 'G+P';
+  valorPlaceHolder ='Buscar empresa'
   projetos: Projeto[] = []
   empresas: Empresa[] = [];
   formBusca = new FormGroup({
@@ -55,6 +56,7 @@ export class MenuLateralComponent implements OnInit {
     this.empresaService.getEmpresaByNome(nomeEmpresa).subscribe({
       next: (response) => {
         this.empresas = response;
+
         this.empresas = Array.isArray(response) ? response : [response];
         this.empresas.forEach(empresa => {
           this.projetoService.findProjetosDaEmpresaId(<number>empresa.empresa_id).subscribe({
@@ -85,7 +87,11 @@ export class MenuLateralComponent implements OnInit {
     })
   }
 
+  OnSubmit(): void{
+    this.getEmpresaPorNome(this.initialCityName);
+    this.initialCityName = 'Empresa';
 
+  }
 
 
 
