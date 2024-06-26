@@ -5,14 +5,16 @@ import { ProjetoService } from '../../service/projeto.service';
 import { Projeto } from '../../interface/projeto';
 import { NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ModalCriarDisciplinaComponent } from "./modal-criar-disciplina/modal-criar-disciplina.component";
+import { ButtonModalEditarDisciplina } from "./modal-editar-disciplina/button/button-modal-editar-disciplina.component";
 
 
 @Component({
     selector: 'app-gerenciamento-disciplina-components',
     standalone: true,
-    imports: [NgFor, RouterModule],
     templateUrl: './gerenciamento-disciplina-components.component.html',
-    styleUrls: ['./gerenciamento-disciplina-components.component.css']
+    styleUrls: ['./gerenciamento-disciplina-components.component.css'],
+    imports: [NgFor, RouterModule, ModalCriarDisciplinaComponent, ButtonModalEditarDisciplina]
 })
 export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     disciplina: Disciplina[] = [];

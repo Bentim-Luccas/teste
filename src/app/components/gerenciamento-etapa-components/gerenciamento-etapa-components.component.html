@@ -47,25 +47,29 @@
                     }
                 </td>
                 <td class="px-6 py-4">
+                    <!--
                     @if(etapa.permissionamento_tipo!=null){
                     @if(etapa.permissionamento_tipo.includes("W")){
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 15px; cursor: pointer;" data-modal-target="modal-edit"
-                        data-modal-toggle="modal-edit">
-                        <i class="fas fa-edit mr-1"></i>
-                    </a>
+                    -->
+                    <app-button-modal-editar-etapa></app-button-modal-editar-etapa>
+                    <!--
                     }
                     }
+                    -->
                 </td>
                 <td class="px-6 py-4">
+                    <!--
                     @if(etapa.permissionamento_tipo!=null){
                     @if(etapa.permissionamento_tipo.includes("D")){
+                    -->
                     <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
                         style="margin-left: 20px; cursor: pointer;" (click)="deletarEtapa(etapa.etapa_id)">
                         <i class="fas fa-trash-alt mr-1"></i>
                     </a>
+                    <!--
                     }
                     }
+                    -->
                 </td>
             </tr>
         </tbody>

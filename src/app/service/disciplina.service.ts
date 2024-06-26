@@ -27,7 +27,7 @@ export class DisciplinaService {
   }
 
   post(disciplina: Disciplina): Observable<Disciplina> {
-    return this.http.post<Disciplina>(this.baseUrl, disciplina, httpOptions).pipe(
+    return this.http.post<Disciplina>(this.baseUrl, disciplina).pipe(
       catchError(this.handleError)
     );
   }
@@ -74,6 +74,11 @@ export class DisciplinaService {
       catchError(this.handleError)
     );
   }
+  findDisciplinasDeProjetoId(idProjeto: number): Observable<Disciplina[]> {
+    return this.http.get<Disciplina[]>(`${this.baseUrl}/projeto/${idProjeto}`).pipe(
+      catchError(this.handleError)
+    );
+  }
   // findDisciplinasDeProjetoIdDaEmpresa(idUsuario: number, idProjeto: number): Observable<Disciplina[]> {
   //   return this.http.get<Disciplina[]>(`${this.baseUrl}/disciplinasDeProjetoIdDaEmpresaDoUsuarioId/${idUsuario}/${idProjeto}`).pipe(
   //     catchError(this.handleError)
@@ -81,3 +86,4 @@ export class DisciplinaService {
   // }
 
 }
+

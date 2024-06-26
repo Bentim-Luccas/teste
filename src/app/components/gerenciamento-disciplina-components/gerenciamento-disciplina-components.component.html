@@ -47,24 +47,29 @@
           }
         </td>
         <td class="px-6 py-4">
+          <!--
           @if(disciplina.permissionamento_tipo!=null){
           @if(disciplina.permissionamento_tipo.includes("W")){
-          <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            style="margin-left: 15px; cursor: pointer;" data-modal-target="modal-edit" data-modal-toggle="modal-edit">
-            <i class="fas fa-edit mr-1"></i>
-          </a>
+          -->
+          <app-button-modal-editar-disciplina></app-button-modal-editar-disciplina>
+          <!--
           }
           }
+          -->
         </td>
         <td class="px-6 py-4">
+          <!--
           @if(disciplina.permissionamento_tipo!=null){
           @if(disciplina.permissionamento_tipo.includes("D")){
+          -->
           <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
             style="margin-left: 20px; cursor: pointer;" (click)="deletarDisciplina(disciplina.disciplina_id)">
             <i class="fas fa-trash-alt mr-1"></i>
           </a>
+          <!--
           }
           }
+          -->
         </td>
       </tr>
     </tbody>

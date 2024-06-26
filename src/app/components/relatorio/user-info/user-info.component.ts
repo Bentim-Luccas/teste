@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Arquivo } from '../../../interface/arquivo';
+import { ArquivoService } from '../../../service/arquivo.service';
 
 @Component({
   selector: 'app-user-info',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css'
 })
-export class UserInfoComponent {
+export class UserInfoComponent implements OnInit{
 
+  @Input() listaArquivos: Arquivo[] = []
+
+  constructor(private arquivoService: ArquivoService){}
+
+  ngOnInit(): void {
+
+
+  }
 }
