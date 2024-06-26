@@ -16,7 +16,6 @@ import { GerenciamentoDisciplinasComponent } from './pages/gerenciamento-discipl
 import { GerenciamentoEtapasComponent } from './pages/gerenciamento-etapas/gerenciamento-etapas.component';
 import { GerenciamentoNotificationComponent } from './pages/gerenciamento-notification/gerenciamento-notification.component';
 import { RelatorioArquivoComponent } from './pages/relatorio-arquivo/relatorio-arquivo.component';
-import { authGuard } from './guard/authGuard';
 
 export const routes: Routes = [
   {
