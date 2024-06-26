@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
 
@@ -19,11 +19,15 @@ import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 })
 export class AppComponent implements OnInit {
   title = 'GDA';
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {}
 
    ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       initFlowbite();
+    }
+    const email = sessionStorage.getItem("email");
+    if (email) {
+      this.router.navigate(['dashboard']); // Redireciona para o dashboard se o usuário estiver logado
     }
   }
 }
