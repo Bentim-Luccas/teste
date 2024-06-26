@@ -10,6 +10,6 @@ export const emailGuard: CanActivateFn = (route, state) => {
     }
     return true;
   } else {
-    return false; // Ou alguma outra lógica para ambientes que não sejam navegadores
+    return false;
   }
 };

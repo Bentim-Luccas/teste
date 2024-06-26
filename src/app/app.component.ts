@@ -25,9 +25,5 @@ export class AppComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       initFlowbite();
     }
-    const email = sessionStorage.getItem("email");
-    if (email) {
-      this.router.navigate(['dashboard']); // Redireciona para o dashboard se o usuário estiver logado
-    }
   }
 }

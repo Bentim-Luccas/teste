@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
@@ -16,14 +16,21 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
   templateUrl: './logintoken.component.html',
   styleUrl: './logintoken.component.css'
 })
-export class LogintokenComponent {
+export class LogintokenComponent implements OnInit{
   tokenFormControl = new FormControl('', [Validators.required]);
   formEnviado = false;
   processado = false;
 
-
   constructor(private jwtHelper: JwtHelperService, private router:Router, private authservice:AuthService, private usuarioService:UsuarioService){}
-
+  
+  ngOnInit(): void {
+    if (typeof sessionStorage !== 'undefined') {
+      const jwt = sessionStorage.getItem("jwt");
+      if (jwt) {
+        this.router.navigate(['dashboard']);
+      }
+    }
+  }
 
   submitToken(){
     this.formEnviado = true;

@@ -3,9 +3,9 @@ import { CanActivateFn, Router } from '@angular/router';
 
 export const inicialGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const check = sessionStorage.getItem("logado");
+  const check = typeof window !== 'undefined' && window.sessionStorage.getItem("logado") === "true";
 
-  if (check === "true") {
+  if (check) {
     return true;
   }
 

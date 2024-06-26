@@ -16,6 +16,7 @@ import { GerenciamentoDisciplinasComponent } from './pages/gerenciamento-discipl
 import { GerenciamentoEtapasComponent } from './pages/gerenciamento-etapas/gerenciamento-etapas.component';
 import { GerenciamentoNotificationComponent } from './pages/gerenciamento-notification/gerenciamento-notification.component';
 import { RelatorioArquivoComponent } from './pages/relatorio-arquivo/relatorio-arquivo.component';
+import { authGuard } from './guard/authGuard';
 
 export const routes: Routes = [
   {
@@ -46,7 +47,7 @@ export const routes: Routes = [
   },
   {
     path: 'arquivos',
-    component: GerenciamentoArquivosComponent,canActivate: [inicialGuard], data: { breadcrumb: 'Arquivos' }
+    component: GerenciamentoArquivosComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Arquivos' }
   }
 , { path: 'relatorio',
     component: RelatorioComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Relatorio' }
