@@ -58,4 +58,5 @@ export class AuthService  {
   verificarJWTToken(jwt:JWT_Token):Observable<Boolean>{
     return this.http.post<Boolean>(this.baseUrl+'auth/check_jwt',jwt)
   }
+  
 }

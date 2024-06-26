@@ -6,7 +6,7 @@
         <svg (click)="buscaEmpresaPorNome()"  class="w-[12px] h-[12px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
-        <input formControlName="empresa_nome" type="text" class="ml-2 flex-1 p-0 bg-gray-50 border-none outline-none text-gray-500 w-[19%] text-[14px] font-['Open Sans'] placeholder-gray-500" placeholder="Buscar Empresas"
+        <input formControlName="empresa_nome" [placeholder]="placeholderText" type="text" class="ml-2 flex-1 p-0 bg-gray-50 border-none outline-none text-gray-500 w-[19%] text-[14px] font-['Open Sans'] placeholder-gray-500"
         />
          <!--(keypress)="onKeyPress($event)"-->
         <svg class="w-[10px] h-[10px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
