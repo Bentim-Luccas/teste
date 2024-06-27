@@ -29,7 +29,6 @@ import { ArquivoService } from '../../service/arquivo.service';
         ArquivosRecentesComponent,
         NavbarComponent,
         MenuLateralComponent,
-        GraficoComponent
     ]
 })
 export class RelatorioComponent implements OnInit{
