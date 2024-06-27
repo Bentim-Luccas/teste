@@ -12,7 +12,6 @@ import { MenuLateralComponent } from "../../components/menu-lateral/menu-lateral
 import { first } from 'rxjs';
 import { Arquivo } from '../../interface/arquivo';
 import { ArquivoService } from '../../service/arquivo.service';
-import { GraficoComponent } from "../../components/relatorio/grafico/grafico.component";
 
 @Component({
     selector: 'app-relatorio',
