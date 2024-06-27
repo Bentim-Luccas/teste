@@ -1,24 +1,28 @@
-<app-navbar></app-navbar>
-<div class="flex h-screen">
-  <div id="SidBar" class="col-span-2 bg-gray-500 w-[13.50%]">
-    <app-menu-lateral></app-menu-lateral>
-  </div>
-  
-    <!-- breadcrumb -->
-  <!-- DOCUMENTAÇÂO: https://udayvunnam.github.io/xng-breadcrumb/#/ -->
-  <xng-breadcrumb>
-    <ng-container *xngBreadcrumbItem="let breadcrumb">
-      <ng-container>{{ breadcrumb }}</ng-container>
-    </ng-container>
-  </xng-breadcrumb>
+<div>
+  <app-navbar></app-navbar>
 
-  <div class="z-0">
-    <div class="flex content-center justify-between items-center bg-gray-100">
-      <app-barra-pesquisa-projeto></app-barra-pesquisa-projeto>
-      <div class="mr-10">
-        <app-button-modal-criar-projeto></app-button-modal-criar-projeto>
-      </div>
+  <div class="flex h-screen">
+    <div id="SidBar" class="col-span-2 bg-gray-500 w-[13.50%]">
+      <app-menu-lateral></app-menu-lateral>
     </div>
-    <app-home-arquivos-components></app-home-arquivos-components>
+
+    <div class="z-0">
+      <div class="flex content-center justify-between items-center bg-gray-100">
+        <app-barra-pesquisa-projeto></app-barra-pesquisa-projeto>
+        <div class="mr-10">
+          <app-button-modal-criar-projeto></app-button-modal-criar-projeto>
+        </div>
+      </div>
+      
+      <!-- breadcrumb -->
+      <!-- DOCUMENTAÇÂO: https://udayvunnam.github.io/xng-breadcrumb/#/ -->
+      <xng-breadcrumb>
+        <ng-container *xngBreadcrumbItem="let breadcrumb">
+          <ng-container>{{ breadcrumb }}</ng-container>
+        </ng-container>
+      </xng-breadcrumb>
+
+      <app-home-arquivos-components></app-home-arquivos-components>
+    </div>
   </div>
 </div>
