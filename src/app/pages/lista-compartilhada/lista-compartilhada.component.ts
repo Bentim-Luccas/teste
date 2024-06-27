@@ -1,5 +1,4 @@
 import { Component} from '@angular/core';
-import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { BarraPesquisaComponent } from '../../components/gerenciamento-arquivos-components/barra-pesquisa/barra-pesquisa.component';
 import { ModalButtonComponent } from '../../components/gerenciamento-arquivos-components/modal-enviar-arquivo/modal-enviar-arquivo.component';
@@ -16,7 +15,7 @@ import { ListaCompartilhadaModalButtonComponent } from "../../components/lista-c
 @Component({
   selector: 'app-lista-compartilhada',
   standalone: true,
-  imports: [BreadcrumbComponent, NavbarComponent, BarraPesquisaComponent, ModalButtonComponent, MenuLateralComponent, TabelaListaCompartilhadaComponent, BtnListaCompartilhadaComponent, BtnGrupoListaCompartilhadaComponent, SearchListaCompartilhadaComponent, TrackPageListaCompartilhadaComponent, BreadcrumbListaCompartilhadaComponent, ListaCompartilhadaModalButtonComponent],
+  imports: [NavbarComponent, BarraPesquisaComponent, ModalButtonComponent, MenuLateralComponent, TabelaListaCompartilhadaComponent, BtnListaCompartilhadaComponent, BtnGrupoListaCompartilhadaComponent, SearchListaCompartilhadaComponent, TrackPageListaCompartilhadaComponent, BreadcrumbListaCompartilhadaComponent, ListaCompartilhadaModalButtonComponent],
   templateUrl: './lista-compartilhada.component.html',
   styleUrl: './lista-compartilhada.component.css'
 })

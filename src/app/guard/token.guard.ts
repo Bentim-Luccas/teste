@@ -1,13 +1,14 @@
-import {  CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 
 export const tokenGuard: CanActivateFn = (route, state) => {
-  const check = sessionStorage.getItem("email")
-  const router = new Router();
-  if(check){
-    return true
-  }
-  else {
-    router.navigate(['loginemail'])
-    return false
+  const router = inject(Router);
+  const check = sessionStorage.getItem("email");
+  
+  if (check) {
+    return true;
+  } else {
+    router.navigate(['loginemail']);
+    return false;
   }
 };

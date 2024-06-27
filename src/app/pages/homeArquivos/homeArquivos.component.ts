@@ -3,11 +3,11 @@ import ComentarioComponent from '../../components/comentario/comentario.componen
 import { TabsComponent } from '../../components/tabs/tabs.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
-import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { BarraPesquisaProjetoComponent } from '../../components/home-arquivos-components/barra-pesquisa-projeto/barra-pesquisa-projeto.component';
 import { HomeArquivosComponentsComponent } from "../../components/home-arquivos-components/home-arquivos-components.component";
 import { BreadcrumbHomeComponent } from '../../components/home-arquivos-components/breadcrumb-home/breadcrumb-home.component'
 import { ButtonModalCriarProjeto } from "../../components/home-arquivos-components/modal-criar-projeto/button/button-modal-criar-projeto.component";
+import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 import { ModalCriarProjetoComponent } from '../../components/home-arquivos-components/modal-criar-projeto/modal-criar-projeto.component';
 
 @Component({
@@ -15,7 +15,7 @@ import { ModalCriarProjetoComponent } from '../../components/home-arquivos-compo
     standalone: true,
     templateUrl: './homeArquivos.component.html',
     styleUrl: './homeArquivos.component.css',
-    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BreadcrumbComponent, BarraPesquisaProjetoComponent, HomeArquivosComponentsComponent, BreadcrumbHomeComponent, ButtonModalCriarProjeto, ModalCriarProjetoComponent]
+    imports: [ComentarioComponent, TabsComponent, NavbarComponent, MenuLateralComponent, BarraPesquisaProjetoComponent, HomeArquivosComponentsComponent, BreadcrumbHomeComponent, ButtonModalCriarProjeto, ModalCriarProjetoComponent, BreadcrumbItemDirective, BreadcrumbComponent]
 })
 export class HomeComponent {
 

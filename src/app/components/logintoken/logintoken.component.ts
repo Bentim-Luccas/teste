@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
@@ -16,53 +16,56 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
   templateUrl: './logintoken.component.html',
   styleUrl: './logintoken.component.css'
 })
-export class LogintokenComponent {
+export class LogintokenComponent implements OnInit{
   tokenFormControl = new FormControl('', [Validators.required]);
   formEnviado = false;
   processado = false;
 
-
   constructor(private jwtHelper: JwtHelperService, private router:Router, private authservice:AuthService, private usuarioService:UsuarioService){}
-
+  
+  ngOnInit(): void {
+    if (typeof sessionStorage !== 'undefined') {
+      const jwt = sessionStorage.getItem("jwt");
+      if (jwt) {
+        this.router.navigate(['dashboard']);
+      }
+    }
+  }
 
   submitToken(){
     this.formEnviado = true;
     if(this.tokenFormControl.value){
-      // this.authservice.getTokenByEmail(sessionStorage.getItem("email")).subscribe((token:TokenProjeto)=>{
-        //   if(this.tokenFormControl.value === token[0].token){
-          //     sessionStorage.setItem("logado","true")
-          //     this.router.navigate(['inicial'])
-          //   }
-          // })
-          this.tokenFormControl.setErrors(null)
+      if (typeof sessionStorage !== 'undefined') {
+        this.tokenFormControl.setErrors(null);
 
-          const token = new Token(sessionStorage.getItem('email'),this.tokenFormControl.value)
-          this.processado = true;
-          this.authservice.loginToken(token).subscribe({
-            next:(jwt:JWT_Token)=>{
-              if(jwt){
-                console.log(jwt.accessToken)
-                sessionStorage.setItem("logado","true");
-                sessionStorage.setItem('jwt',jwt.accessToken);
-                console.log(this.jwtHelper.decodeToken(jwt.accessToken))
-                sessionStorage.removeItem('token');
-                let email = sessionStorage.getItem('email');
-                this.usuarioService.getUsuarioPorEmail(email).subscribe({
-                  next: (response)=>{
-                    this.usuarioService.setUsuarioAutenticado(response);
-                  }
-                })
-                this.router.navigate(['']);
-              }
-            },
-            error:(erro)=>{
-              this.processado = false;
-              this.tokenFormControl.setErrors({tokeninvalido:true})
+        const token = new Token(sessionStorage.getItem('email'), this.tokenFormControl.value);
+        this.processado = true;
+        this.authservice.loginToken(token).subscribe({
+          next: (jwt: JWT_Token) => {
+            if (jwt) {
+              console.log(jwt.accessToken);
+              sessionStorage.setItem("logado", "true");
+              sessionStorage.setItem('jwt', jwt.accessToken);
+              console.log(this.jwtHelper.decodeToken(jwt.accessToken));
+              sessionStorage.removeItem('token');
+              let email = sessionStorage.getItem('email');
+              this.usuarioService.getUsuarioPorEmail(email).subscribe({
+                next: (response) => {
+                  this.usuarioService.setUsuarioAutenticado(response);
+                }
+              });
+              this.router.navigate(['dashboard']);
             }
-          })
-
-   }
+          },
+          error: (erro) => {
+            this.processado = false;
+            this.tokenFormControl.setErrors({ tokeninvalido: true });
+          }
+        });
+      } else {
+        console.error("sessionStorage não está definido. Certifique-se de que está executando este código em um navegador.");
+      }
+    }
   }
 }
-
 
