@@ -1,16 +1,16 @@
 <app-navbar></app-navbar>
-<div class="flex h-screen">
-  <div id="SidBar" class="col-span-2 bg-gray-500 w-[13.50%]">
+<div class="p-4 sm:ml-64 bg-gray-100">
+  <div id="SidBar" class="col-span-2">
     <app-menu-lateral></app-menu-lateral>
   </div>
-  <div class="flex flex-col w-full">
-    <app-breadcrumb></app-breadcrumb>
-    <div class="flex items-center justify-between bg-gray-100 py-2">
-      <app-barra-pesquisa-projeto></app-barra-pesquisa-projeto>
-      <div class="mr-10">
-        <app-button-modal-criar-projeto></app-button-modal-criar-projeto>
-      </div>
-    </div>
+  <div class="flex content-center justify-between items-center bg-gray-100 mt-[80px] mb-8">
+    <app-breadcrumb-home></app-breadcrumb-home>
+    <app-barra-pesquisa-projeto></app-barra-pesquisa-projeto>
+  </div>
+  <div class="flex justify-end content-center items-center bg-gray-100">
+    <app-modal-criar-projeto></app-modal-criar-projeto>
+  </div>
+  <div>
     <app-home-arquivos-components></app-home-arquivos-components>
   </div>
 </div>

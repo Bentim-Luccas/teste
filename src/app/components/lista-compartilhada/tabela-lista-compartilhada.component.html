@@ -9,11 +9,8 @@
             <th scope="col" class="p-4 text-white">Etapas</th>
             <th scope="col" class="p-4 text-white">Disciplinas</th>
             <th scope="col" class="p-4 text-white">Projetos</th>
-            <th scope="col" class="p-4 text-white">Arquivos</th>
-            <th scope="col" class="p-4 text-white">Status</th>
-          </tr>
-          <tr>
-            <td colspan="7" class="bg-white px-4 py-2 text-black border border-gray-300 text-sm font-bold">Listas compartilhadas</td>
+            <th scope="col" class="p-4 text-white text-center">Arquivos</th>
+            <th scope="col" class="p-4 text-white text-center">Status</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -46,10 +43,10 @@
                 </li>
               </ul>
             </td>
-            <td class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <td class="p-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
               {{ item.lista_compartilhada_arquivo.length }}
             </td>
-            <td class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <td class="p-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
               {{ getStatusDescription(item.lista_compartilhada_status) }}
             </td>
           </tr>
