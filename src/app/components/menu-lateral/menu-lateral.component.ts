@@ -74,7 +74,7 @@ export class MenuLateralComponent implements OnInit {
 
   buscaEmpresaPorNome() {
     console.log(this.formBusca.value.empresa_nome);
-    this.isEmpresaSelected = true;
+
     this.getEmpresaPorNome(<string>this.formBusca.value.empresa_nome);
 
   }
@@ -87,6 +87,7 @@ export class MenuLateralComponent implements OnInit {
     this.empresaService.getEmpresaByNome(nomeEmpresa).subscribe({
       next: (response) => {
         this.empresas = response;
+        this.isEmpresaSelected = true;
         this.empresas = Array.isArray(response) ? response : [response];
         this.empresas.forEach((empresa) => {
           this.projetoService
