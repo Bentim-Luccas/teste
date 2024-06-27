@@ -1,6 +1,10 @@
 <div class="navbar">
 <app-navbar></app-navbar>
 </div>
+<div class="flex content-center justify-between items-center bg-gray-100 mt-[95px] ml-[270px]">
+  <app-breadcrumb></app-breadcrumb>
+  <app-busca></app-busca>
+</div>
 <div class="flex h-[100%]">
   <div id="SidBar" class="col-span-2 bg-gray-500 w-[13.50%]" style="margin-top: 65px;">
     <app-menu-lateral></app-menu-lateral>
@@ -9,7 +13,7 @@
     <div class="meio space-y-8">
       <div class="barra-esquerda"></div>
 
-      <div class="secao1 mb-8">
+      <div class="secao1 mb-8 ml-8">
         <app-calendar></app-calendar>
       </div>
       <div class="secao2 mb-8">
@@ -20,7 +24,7 @@
             [listaArquivosReprovados]="listaArquivosReprovados"
             [listaArquivosPendentes]="listaArquivosPendentes"
           ></app-cards>
-           <div class="info-grafico" style="display: flex; flex-direction: row; gap: 1rem; width: 100%;">
+           <div class="info-grafico ml-8" style="display: flex; flex-direction: row; gap: 1rem; width: 100%;">
             <app-user-info style="flex: 1;"></app-user-info>
             <app-grafico style="flex: 1;margin-top: 1vw;"></app-grafico>
           </div>
