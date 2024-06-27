@@ -1,3 +1,4 @@
+import { BuscaComponent } from './../../components/busca/busca.component';
 import { Component, OnInit } from '@angular/core';
 import { DropdownComponent } from './../../components/relatorio/dropdown/dropdown.component';
 import { CardsComponent } from '../../components/relatorio/cards/cards.component';
@@ -29,6 +30,8 @@ import { ArquivoService } from '../../service/arquivo.service';
         ArquivosRecentesComponent,
         NavbarComponent,
         MenuLateralComponent,
+        GraficoComponent,
+        BuscaComponent
     ]
 })
 export class RelatorioComponent implements OnInit{
