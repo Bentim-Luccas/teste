@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../service/notification.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
 import { BarraPesquisaComponent } from '../../components/gerenciamento-arquivos-components/barra-pesquisa/barra-pesquisa.component';
 
@@ -11,7 +10,7 @@ import { BarraPesquisaComponent } from '../../components/gerenciamento-arquivos-
 @Component({
   selector: 'app-gerenciamento-notification',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, BreadcrumbComponent, MenuLateralComponent, BarraPesquisaComponent],
+  imports: [CommonModule, NavbarComponent, MenuLateralComponent, BarraPesquisaComponent],
   templateUrl: './gerenciamento-notification.component.html',
   styleUrl: './gerenciamento-notification.component.css'
 })
