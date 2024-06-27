@@ -8,14 +8,13 @@ import { BtnListaCompartilhadaComponent } from '../../components/btn-lista-compa
 import { BtnGrupoListaCompartilhadaComponent } from '../../components/btn-grupo-lista-compartilhada/btn-grupo-lista-compartilhada.component'
 import { SearchListaCompartilhadaComponent } from '../../components/search-lista-compartilhada/search-lista-compartilhada.component'
 import { TrackPageListaCompartilhadaComponent } from '../../components/track-page-lista-compartilhada/track-page-lista-compartilhada.component'
-import { BreadcrumbListaCompartilhadaComponent } from '../../components/breadcrumb-lista-compartilhada/breadcrumb-lista-compartilhada.component'
 import { ListaCompartilhadaModalButtonComponent } from "../../components/lista-compartilhada/lista-compartilhada-modal/lista-compartilhada-modal.component";
 
 
 @Component({
   selector: 'app-lista-compartilhada',
   standalone: true,
-  imports: [NavbarComponent, BarraPesquisaComponent, ModalButtonComponent, MenuLateralComponent, TabelaListaCompartilhadaComponent, BtnListaCompartilhadaComponent, BtnGrupoListaCompartilhadaComponent, SearchListaCompartilhadaComponent, TrackPageListaCompartilhadaComponent, BreadcrumbListaCompartilhadaComponent, ListaCompartilhadaModalButtonComponent],
+  imports: [NavbarComponent, BarraPesquisaComponent, ModalButtonComponent, MenuLateralComponent, TabelaListaCompartilhadaComponent, BtnListaCompartilhadaComponent, BtnGrupoListaCompartilhadaComponent, SearchListaCompartilhadaComponent, TrackPageListaCompartilhadaComponent, ListaCompartilhadaModalButtonComponent],
   templateUrl: './lista-compartilhada.component.html',
   styleUrl: './lista-compartilhada.component.css'
 })
