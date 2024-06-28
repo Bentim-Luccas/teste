@@ -4,6 +4,9 @@ import { environment } from "../../environments/environment";
 import { Observable } from "rxjs";
 // import { Markup } from '../interface/markup';
 import { ComentarioMarkup } from "../interface/comentario_markup";
+import { RequestPutMarkupS3 } from "../interface/request-put-s3-markup.dto";
+import { ResponsePutMarkupS3 } from "../interface/response-put-s3-markup.dto";
+import { CreateMarkUpDto } from "../interface/create-mark-up.dto";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -36,4 +39,16 @@ export class MarkupService {
   // remove(id: number): Observable<void> {
   //   return this.http.delete<void>(`${this.baseUrl}/${id}`);
   // }
+
+  getPutS3Link(request:RequestPutMarkupS3):Observable<ResponsePutMarkupS3>{
+    return this.http.post<ResponsePutMarkupS3>(this.baseUrl+'/GetPutPreSignedUrl',request,httpOptions)
+  }
+
+  putImg(file:File, marklink:string){
+    return this.http.put(marklink,file,{observe: 'response'})
+  }
+
+  salvaNoBanco(markup:CreateMarkUpDto){
+   return this.http.post(this.baseUrl,markup)
+  }
 }
