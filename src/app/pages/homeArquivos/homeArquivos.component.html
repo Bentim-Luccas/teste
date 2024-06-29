@@ -52,8 +52,16 @@
           <app-home-arquivos-components></app-home-arquivos-components>
         </div>
       </div>
-      
-      
+
+      <!-- breadcrumb -->
+      <!-- DOCUMENTAÇÂO: https://udayvunnam.github.io/xng-breadcrumb/#/ -->
+      <xng-breadcrumb>
+        <ng-container *xngBreadcrumbItem="let breadcrumb">
+          <ng-container>{{ breadcrumb }}</ng-container>
+        </ng-container>
+      </xng-breadcrumb>
+
+      <app-home-arquivos-components></app-home-arquivos-components>
     </div>
   </div>
 </div> -->
