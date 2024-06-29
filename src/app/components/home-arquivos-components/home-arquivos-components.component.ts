@@ -8,7 +8,7 @@ import { Empresa } from '../../interface/empresa';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
-import { ButtonModalEditarProjeto } from "./modal-editar-projeto/button/button-modal-editar-projeto.component";
+import { ButtonModalEditarProjeto } from "./modal-editar-projeto/button/btn-modal-editar-projeto.component";
 
 @Component({
     selector: 'app-home-arquivos-components',

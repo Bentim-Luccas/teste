@@ -3,12 +3,12 @@ import { Component } from "@angular/core";
 import { ModalCriarDisciplinaComponent } from "../modal-criar-disciplina.component";
 
 @Component({
-    selector: 'app-button-modal-criar-disciplina',
-    templateUrl: 'button-modal-criar-disciplina.component.html',
+    selector: 'app-btn-modal-criar-disciplina',
+    templateUrl: 'btn-modal-criar-disciplina.component.html',
     standalone: true,
     imports: [],
   })
-  export class ButtonModalCriarDisciplina {
+  export class BtnModalCriarDisciplina {
     constructor(public dialog: MatDialog) {}
   
     openDialog() {

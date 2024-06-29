@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DisciplinaService } from '../../../service/disciplina.service';
 import { Disciplina } from '../../../interface/disciplina';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-criar-disciplina',
@@ -19,6 +20,8 @@ export class ModalCriarDisciplinaComponent {
   });
 
   constructor(private disciplinaService: DisciplinaService,
+    public dialogRef: MatDialogRef<ModalCriarDisciplinaComponent>
+
   ) { }
 
   onSubmit() {
@@ -29,6 +32,10 @@ export class ModalCriarDisciplinaComponent {
       },
       error: (error) => console.log(error),
     })
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
 }
