@@ -52,8 +52,8 @@ export class PermissionamentoService {
       );
   }
 
-  getProjectById(id: number): Observable<PermissionamentoUsuario> {
-    return this.http.get<PermissionamentoUsuario>(`${environment.apiServer}/projeto/projetosDaEmpresaDoUsuarioId/${id}`);
+  getProjectById(id: number): Observable<PermissionamentoUsuario[]> {
+    return this.http.get<PermissionamentoUsuario[]>(`${environment.apiServer}projeto/projetosDaEmpresaDoUsuarioId/${id}`);
   }
 
   private handleError(error: any): Observable<never> {
