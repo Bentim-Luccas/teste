@@ -15,6 +15,7 @@ import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
 import { PermissionamentoService } from '../../service/permissionamento.service';
 import { PermissionamentoUsuario } from '../../interface/permissionamento-usuario';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,7 @@ import { PermissionamentoUsuario } from '../../interface/permissionamento-usuari
     RouterModule,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
+    CommonModule
   ],
 })
 export class HomeComponent implements OnInit {
@@ -40,7 +42,7 @@ export class HomeComponent implements OnInit {
   email: string | null = null;
   idUsuario!: number;
   empresa!: Empresa;
-  permissionamento: PermissionamentoUsuario | undefined;
+  permissionamento: PermissionamentoUsuario[] = [];
 
   constructor(
     private empresaService: EmpresaService,
@@ -67,7 +69,7 @@ export class HomeComponent implements OnInit {
   }
 
   fetchProject(id: number): void {
-    this.permissionamentoService.getProjectById(id).subscribe(data => {
+    this.permissionamentoService.getProjectById(id).subscribe((data: PermissionamentoUsuario[]) => {
       this.permissionamento = data;
     });
   }
