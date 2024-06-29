@@ -13,6 +13,8 @@ import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
+import { PermissionamentoService } from '../../service/permissionamento.service';
+import { PermissionamentoUsuario } from '../../interface/permissionamento-usuario';
 
 @Component({
   selector: 'app-home',
@@ -38,11 +40,13 @@ export class HomeComponent implements OnInit {
   email: string | null = null;
   idUsuario!: number;
   empresa!: Empresa;
+  permissionamento: PermissionamentoUsuario | undefined;
 
   constructor(
     private empresaService: EmpresaService,
     private usuarioService: UsuarioService,
-    private router: RouterModule
+    private router: RouterModule,
+    private permissionamentoService: PermissionamentoService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +57,7 @@ export class HomeComponent implements OnInit {
         (usuario) => {
           this.idUsuario = usuario?.usuario_id;
           sessionStorage.setItem("id", this.idUsuario.toString());
-          this.fetchEmpresa();
+          this.fetchProject(this.idUsuario);
         },
         (error) => {
           console.error('Erro ao buscar usuário pelo email', error);
@@ -62,16 +66,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  fetchEmpresa(): void {
-    if (this.idUsuario) {
-      this.empresaService.getEmpresaByUsuarioId(this.idUsuario).subscribe(
-        (data: Empresa[]) => {
-          this.empresa = data[0];
-        },
-        (error) => {
-          console.error('Error fetching empresa data', error);
-        }
-      );
-    }
+  fetchProject(id: number): void {
+    this.permissionamentoService.getProjectById(id).subscribe(data => {
+      this.permissionamento = data;
+    });
   }
 }
