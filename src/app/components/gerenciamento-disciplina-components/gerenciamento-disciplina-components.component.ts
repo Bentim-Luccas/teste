@@ -31,9 +31,7 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     ngOnInit() {
         const idStorage = Number(sessionStorage.getItem('id'));
         
-        this.empresaService.getProjetoByUsuarioId(idStorage).subscribe(data => {
-          this.listaDisciplinas = data;
-        });
+        
       }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
