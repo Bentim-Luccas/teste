@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Empresa } from "../interface/empresa";
+import { ArquivoUsuario } from "../interface/arquivo-usuario";
 
 
 @Injectable({
@@ -30,8 +31,13 @@ export class EmpresaService{
     }
 
     getEmpresaByUsuarioId(id: number): Observable<Empresa[]> {
-      return this.http.get<Empresa[]>(`${this.baseUrl}/empresaByUsuarioId/${id}/2`).pipe(
+      return this.http.get<Empresa[]>(`${this.baseUrl}/empresaByUsuarioId/${id}/1`).pipe(
         catchError(this.handleError) // Handle potential errors
+      );
+    }
+    getProjetoByUsuarioId(id: number): Observable<ArquivoUsuario[]> {
+      return this.http.get<ArquivoUsuario[]>(`${this.baseUrl}/projeto/disciplinas/usuario/${id}`).pipe(
+        catchError(this.handleError)
       );
     }
 
@@ -55,6 +61,5 @@ export class EmpresaService{
       console.error(errorMessage); // Registra o erro no console
       return throwError(errorMessage); // Dispara um novo erro como um observável
     }
-
 
 }

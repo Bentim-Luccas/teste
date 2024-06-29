@@ -20,7 +20,7 @@ export class MenuLateralDisciplinaComponent implements OnInit{
   isDropdownOpen: boolean[] = [];
 
   ngOnInit(): void {
-    this.getDisciplinas();
+    const id = sessionStorage.getItem('id')
   }
 
   getDisciplinas(): void {

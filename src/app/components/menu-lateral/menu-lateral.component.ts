@@ -157,6 +157,9 @@ export class MenuLateralComponent implements OnInit {
   usuarios() {
     this.router.navigate(['/usuarios'])
   }
+  dashboard() {
+    this.router.navigate(['/dashboard'])
+  }
   empresasrota() {
     this.router.navigate(['/'])
   }

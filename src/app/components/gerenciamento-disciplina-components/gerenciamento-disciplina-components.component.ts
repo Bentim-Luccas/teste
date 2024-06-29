@@ -7,6 +7,8 @@ import { NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ModalCriarDisciplinaComponent } from "./modal-criar-disciplina/modal-criar-disciplina.component";
 import { ButtonModalEditarDisciplina } from "./modal-editar-disciplina/button/button-modal-editar-disciplina.component";
+import { EmpresaService } from '../../service/empresa.service';
+import { ArquivoUsuario } from '../../interface/arquivo-usuario';
 
 
 @Component({
@@ -18,15 +20,21 @@ import { ButtonModalEditarDisciplina } from "./modal-editar-disciplina/button/bu
 })
 export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     disciplina: Disciplina[] = [];
-
+    listaDisciplinas: ArquivoUsuario[] = [];
+    
     constructor(
         private disciplinaService: DisciplinaService,
-        private projetoService: ProjetoService
+        private projetoService: ProjetoService,
+        private empresaService: EmpresaService
     ) { }
 
-    ngOnInit(): void {
-        this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(4, 4);
-    }
+    ngOnInit() {
+        const idStorage = Number(sessionStorage.getItem('id'));
+        
+        this.empresaService.getProjetoByUsuarioId(idStorage).subscribe(data => {
+          this.listaDisciplinas = data;
+        });
+      }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
         this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto, idUsuario).subscribe({
@@ -64,3 +72,6 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
         });
     }
 }
+
+
+
