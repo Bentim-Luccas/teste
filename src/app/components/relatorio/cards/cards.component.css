@@ -2,7 +2,6 @@
 .principal {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  justify-content: center;
   gap: 20px;
   margin: 0 auto;  /* Centraliza o contêiner na página */
   max-width: 1000px;  /* Define um limite máximo para a largura do contêiner */
