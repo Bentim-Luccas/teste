@@ -32,12 +32,12 @@ export const routes: Routes = [
   { path: 'logintoken', component: LogintokenComponent, canActivate: [tokenGuard] },
   { path: 'inicial', component: InicialComponent, canActivate: [inicialGuard] },
   {
-    path: 'etapas',
+    path: 'etapas/:id',
     component: GerenciamentoEtapasComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Etapas' }
   },
   { path: 'loginjwt/:jwt', component: LoginjwtComponent},
   {
-    path: 'disciplinas',
+    path: 'disciplinas/:id',
     component: GerenciamentoDisciplinasComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Disciplinas' }
   },
   {

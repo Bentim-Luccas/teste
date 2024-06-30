@@ -6,7 +6,7 @@ import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral
 import { BarraPesquisaProjetoComponent } from '../../components/home-arquivos-components/barra-pesquisa-projeto/barra-pesquisa-projeto.component';
 import { HomeArquivosComponentsComponent } from '../../components/home-arquivos-components/home-arquivos-components.component';
 import { ModalCriarProjetoComponent } from '../../components/home-arquivos-components/modal-criar-projeto/modal-criar-projeto.component';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
@@ -59,7 +59,8 @@ export class HomeComponent implements OnInit {
     private projetoService: ProjetoService,
     private usuarioService: UsuarioService,
     private permissionamentoService: PermissionamentoService,
-    private route: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -85,9 +86,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onSelect(project: any): void {
-    this.permissionamentoService.setSelectedObject(project);
-    this.route.navigate(['/disciplinas']);
+  onSelect(project: PermissionamentoUsuario): void {
+    const id = project.projeto_id
+    this.router.navigate(['/disciplinas', id]);
   }
 
   deletarProjeto(idProjeto: number | undefined): void {

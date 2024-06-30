@@ -21,7 +21,7 @@
     </thead>
     <tbody *ngFor="let disciplina of disciplina">
       <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <th [routerLink]="['/etapas']" scope="row"
+        <th (click)="onSelect(disciplina)" scope="row"
           class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
           style="display: flex; align-items: center;">
           <img src="assets/images/icon etapa.png"
