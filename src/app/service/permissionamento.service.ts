@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Permissionamento } from '../interface/permissionamento';
+import { PermissionamentoUsuario } from '../interface/permissionamento-usuario';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,6 +20,16 @@ export class PermissionamentoService {
 
   constructor(private http: HttpClient) {
       this.baseUrl = environment.apiServer + 'permissionamento';
+  }
+
+    private selectedObject: any;
+
+  setSelectedObject(obj: any): void {
+    this.selectedObject = obj;
+  }
+
+  getSelectedObject(): any {
+    return this.selectedObject;
   }
 
   post(permissionamento: Permissionamento): Observable<Permissionamento> {
@@ -49,6 +60,10 @@ export class PermissionamentoService {
       return this.http.delete<void>(`${this.baseUrl}/${id}`).pipe(
           catchError(this.handleError)
       );
+  }
+
+  getProjectById(id: number): Observable<PermissionamentoUsuario[]> {
+    return this.http.get<PermissionamentoUsuario[]>(`${environment.apiServer}projeto/projetosDaEmpresaDoUsuarioId/${id}`);
   }
 
   private handleError(error: any): Observable<never> {

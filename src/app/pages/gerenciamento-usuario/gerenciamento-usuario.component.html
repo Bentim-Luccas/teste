@@ -1,7 +1,9 @@
 <app-navbar></app-navbar>
+<app-menu-lateral></app-menu-lateral>
+
 <div class="p-4 sm:ml-64 bg-gray-100">
   <div id="SidBar" class="col-span-2">
-    <!-- <app-menu-lateral></app-menu-lateral> -->
+    <app-menu-lateral></app-menu-lateral>
   </div>
 
   <div class="mt-[80px]">
@@ -9,14 +11,6 @@
     <app-barra-pesquisa></app-barra-pesquisa>
     <app-criacao-usuario-modal-button></app-criacao-usuario-modal-button>
   </div>
-
-          <!-- breadcrumb -->
-  <!-- DOCUMENTAÇÂO: https://udayvunnam.github.io/xng-breadcrumb/#/ -->
-  <xng-breadcrumb>
-    <ng-container *xngBreadcrumbItem="let breadcrumb">
-      <ng-container>{{ breadcrumb }}</ng-container>
-    </ng-container>
-  </xng-breadcrumb>
 
   <app-tabela-usuarios/>
 </div>
