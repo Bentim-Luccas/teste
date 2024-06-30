@@ -7,7 +7,7 @@ import { BarraPesquisaProjetoComponent } from '../../components/home-arquivos-co
 import { HomeArquivosComponentsComponent } from '../../components/home-arquivos-components/home-arquivos-components.component';
 import { ButtonModalCriarProjeto } from '../../components/home-arquivos-components/modal-criar-projeto/button/button-modal-criar-projeto.component';
 import { ModalCriarProjetoComponent } from '../../components/home-arquivos-components/modal-criar-projeto/modal-criar-projeto.component';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
@@ -16,6 +16,7 @@ import { Usuario } from '../../interface/usuario';
 import { PermissionamentoService } from '../../service/permissionamento.service';
 import { PermissionamentoUsuario } from '../../interface/permissionamento-usuario';
 import { CommonModule } from '@angular/common';
+import { log } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -31,10 +32,10 @@ import { CommonModule } from '@angular/common';
     HomeArquivosComponentsComponent,
     ButtonModalCriarProjeto,
     ModalCriarProjetoComponent,
-    RouterModule,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
 })
 export class HomeComponent implements OnInit {
@@ -43,12 +44,13 @@ export class HomeComponent implements OnInit {
   idUsuario!: number;
   empresa!: Empresa;
   permissionamento: PermissionamentoUsuario[] = [];
+  lista = [];
 
   constructor(
     private empresaService: EmpresaService,
     private usuarioService: UsuarioService,
-    private router: RouterModule,
-    private permissionamentoService: PermissionamentoService
+    private permissionamentoService: PermissionamentoService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -72,5 +74,10 @@ export class HomeComponent implements OnInit {
     this.permissionamentoService.getProjectById(id).subscribe((data: PermissionamentoUsuario[]) => {
       this.permissionamento = data;
     });
+  }
+
+  onSelect(project: any): void {
+    this.permissionamentoService.setSelectedObject(project);
+    this.route.navigate(['/disciplinas']);
   }
 }

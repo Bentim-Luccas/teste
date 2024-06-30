@@ -9,6 +9,8 @@ import { ModalCriarDisciplinaComponent } from "./modal-criar-disciplina/modal-cr
 import { ButtonModalEditarDisciplina } from "./modal-editar-disciplina/button/button-modal-editar-disciplina.component";
 import { EmpresaService } from '../../service/empresa.service';
 import { ArquivoUsuario } from '../../interface/arquivo-usuario';
+import { PermissionamentoService } from '../../service/permissionamento.service';
+import { PermissionamentoUsuario } from '../../interface/permissionamento-usuario';
 
 
 @Component({
@@ -21,18 +23,21 @@ import { ArquivoUsuario } from '../../interface/arquivo-usuario';
 export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     disciplina: Disciplina[] = [];
     listaDisciplinas: ArquivoUsuario[] = [];
+    permissionamento: PermissionamentoUsuario[] = [];
+    selectedObject: any;
     
     constructor(
         private disciplinaService: DisciplinaService,
         private projetoService: ProjetoService,
-        private empresaService: EmpresaService
+        private permissionamentoService: PermissionamentoService
     ) { }
 
-    ngOnInit() {
-        const idStorage = Number(sessionStorage.getItem('id'));
-        
-        
-      }
+    ngOnInit(): void {
+    const id = Number(sessionStorage.getItem('id'))
+    this.selectedObject = this.permissionamentoService.getSelectedObject();
+    this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(this.selectedObject.projeto_id, id)
+    this.permissionamentoService.setSelectedObject(this.selectedObject.projeto_id)
+    }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
         this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto, idUsuario).subscribe({
@@ -70,6 +75,3 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
         });
     }
 }
-
-
-
