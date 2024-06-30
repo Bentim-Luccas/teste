@@ -42,6 +42,12 @@ export class ListaCompartilhadaService {
     );
   }
 
+  getArquivosListaCompartilhada(lista_compartilhada_id: string | null): Observable<any>{
+    return this.httpCliente.get<any>(`${this.baseUrl}/arquivosListaCompartilhada3/${lista_compartilhada_id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any): Observable<never> {
     console.error('An error occurred', error);
     return throwError('Something bad happened; please try again later.');

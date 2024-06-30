@@ -88,7 +88,7 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
     const idSelecionado = this.listaCompartilhada.find(lista => lista.lista_compartilhada_id === dado.lista_compartilhada_id);
 
     if (idSelecionado) {
-      await this.router.navigate(['/arquivos'], { queryParams: { id: idSelecionado.lista_compartilhada_id } });
+      await this.router.navigate(['/arquivos'], { queryParams: { listaId: idSelecionado.lista_compartilhada_id } });
   } else {
       console.error('Elemento não encontrado na lista compartilhada.');
   }

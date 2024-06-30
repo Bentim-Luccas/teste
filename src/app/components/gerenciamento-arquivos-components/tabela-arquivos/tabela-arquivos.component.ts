@@ -6,6 +6,8 @@ import { Arquivo } from '../../../interface/arquivo';
 import { log } from 'console';
 import { CommonModule } from '@angular/common';
 import { VersoesArquivoComponent } from './versoes-arquivo/versoes-arquivo.component';
+import { ListaCompartilhadaService } from '../../../service/listaCompartilhada.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabela-arquivos',
@@ -24,13 +26,34 @@ export class TabelaArquivosComponent implements OnInit {
   listaArquivosMarcados :  Arquivo[] = [];
 
 
-  constructor(private arquivoService: ArquivoService) { }
+  constructor(private arquivoService: ArquivoService, private listaCompartilhadaService: ListaCompartilhadaService, private router: ActivatedRoute) { }
 
 
   ngOnInit() {
-    this.arquivoService.getArquivosPais().subscribe((data) => {
-      this.listaArquivos = data
-    })
+    this.router.queryParamMap.subscribe((params: ParamMap) => {
+      if (params.has('listaId')) {
+        const id = params.get('listaId');
+        this.listaCompartilhadaService.getArquivosListaCompartilhada(id).subscribe((data) => {
+          const seenIds = new Set();
+          const uniqueItems = data.filter((item: any) => {
+            if (seenIds.has(item.arquivo_id)) {
+              return false;
+            } else {
+              seenIds.add(item.arquivo_id);
+              return true;
+            }
+          });
+          this.listaArquivos = uniqueItems;
+        })
+      } else {
+        this.arquivoService.getArquivosPais().subscribe((data) => {
+          this.listaArquivos = data
+        })
+      }
+    });
+
+
+
   }
 
   // ngOnInit() {
