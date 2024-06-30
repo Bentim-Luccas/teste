@@ -5,12 +5,12 @@ import { ModalEditarDisciplinaComponent } from "../modal-editar-disciplina.compo
 
 
 @Component({
-    selector: 'app-btn-modal-editar-disciplina',
-    templateUrl: 'btn-modal-editar-disciplina.component.html',
+    selector: 'app-button-modal-editar-disciplina',
+    templateUrl: 'button-modal-editar-disciplina.component.html',
     standalone: true,
     imports: [MatDialogContent],
   })
-  export class BtnModalEditarDisciplina {
+  export class ButtonModalEditarDisciplina {
     constructor(public dialog: MatDialog) {}
 
     openDialog() {

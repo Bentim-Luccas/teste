@@ -3,12 +3,12 @@ import { Component } from "@angular/core";
 import { ModalEditarEtapaComponent } from "../modal-editar-etapa.component";
 
 @Component({
-    selector: 'app-btn-modal-editar-etapa',
-    templateUrl: 'btn-modal-editar-etapa.component.html',
+    selector: 'app-button-modal-editar-etapa',
+    templateUrl: 'button-modal-editar-etapa.component.html',
     standalone: true,
     imports: [],
   })
-  export class BtnModalEditarEtapa {
+  export class ButtonModalEditarEtapa {
     constructor(public dialog: MatDialog) {}
   
     openDialog() {
