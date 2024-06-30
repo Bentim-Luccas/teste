@@ -1,5 +1,6 @@
 // src/app/interfaces/projeto.interface.ts
 export interface PermissionamentoUsuario {
+    dropdownOpen: boolean;
     projeto_id: number;
     projeto_descricao: string;
     projeto_data_inicio: Date;
