@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 import { MenuLateralComponent } from "../../components/menu-lateral/menu-lateral.component";
 import { BtnModalCriarDisciplina } from "../../components/gerenciamento-disciplina-components/modal-criar-disciplina/button/btn-modal-criar-disciplina.component";
+import { MenuLateralDisciplinaComponent } from "../../components/gerenciamento-disciplina-components/menu-lateral-disciplina/menu-lateral-disciplina.component";
 
 @Component({
     selector: 'app-gerenciamento-disciplina',
@@ -26,7 +27,8 @@ import { BtnModalCriarDisciplina } from "../../components/gerenciamento-discipli
         BreadcrumbComponent,
         BreadcrumbItemDirective,
         MenuLateralComponent,
-        BtnModalCriarDisciplina
+        BtnModalCriarDisciplina,
+        MenuLateralDisciplinaComponent
     ]
 })
 export class GerenciamentoDisciplinasComponent {}
