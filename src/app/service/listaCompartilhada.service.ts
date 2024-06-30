@@ -36,6 +36,12 @@ export class ListaCompartilhadaService {
     );
   }
 
+  addArquivoToListaCompartilhada(usuario_id: number, lista_compartilhada_id: number, arquivos: string[]): Observable<void>{
+    return this.httpCliente.post<any>(`${this.baseUrl}/addArquivoToListaCompartilhada/${usuario_id}/${lista_compartilhada_id}`, arquivos,httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any): Observable<never> {
     console.error('An error occurred', error);
     return throwError('Something bad happened; please try again later.');

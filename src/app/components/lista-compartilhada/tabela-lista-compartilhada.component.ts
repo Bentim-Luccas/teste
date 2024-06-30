@@ -34,7 +34,7 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
   getListaCompartilhada(): void {
     this.listaCompartilhadaService.getListaCompartilhada().subscribe({
       next: (response) => {
-        response && (this.listaCompartilhada = response);
+        response && (this.listaCompartilhada = response)
       },
       error: (error) => console.log(error),
     });
@@ -73,6 +73,14 @@ export class TabelaListaCompartilhadaComponent implements OnInit {
       .map(arquivo => arquivo.permissionamento.arquivo?.projeto.projeto_descricao)
       .filter((descricao): descricao is string => descricao !== undefined);
     return Array.from(new Set(projetos));
+  }
+
+  getQuantidadeArquivos(lista: listaCompartilhadaArquivo[]): number{
+    let arquivos = lista
+      .map(arquivo => arquivo.permissionamento.arquivo_id)
+      .filter((descricao): descricao is string => descricao !== undefined);
+    arquivos = Array.from(new Set(arquivos));
+    return arquivos.length;
   }
 
   async redirecionarArquivo(dado:any): Promise<void>{
