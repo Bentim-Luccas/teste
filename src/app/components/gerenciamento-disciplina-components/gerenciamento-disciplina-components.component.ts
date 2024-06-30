@@ -40,7 +40,7 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
-        this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto, idUsuario).subscribe({
+        this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario, idProjeto).subscribe({
             next: (disciplina) => {
                 this.disciplina = disciplina;
                 this.carregarProjetoNome(disciplina);
