@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EtapaService } from '../../../service/etapa.service';
 import { Etapa } from '../../../interface/etapa';
-import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-criar-etapa',
@@ -15,14 +14,13 @@ export class ModalCriarEtapaComponent {
 
   etapaForm = new FormGroup({
     etapa_descricao: new FormControl('', Validators.required),
+    /**etapa_data_inicio: new FormControl('', Validators.required), */
     etapa_status: new FormControl(1, Validators.required),
     disciplina_id: new FormControl(4, Validators.required),
-    etapa_id_pai: new FormControl(4, Validators.required),
+    /**etapa_id_pai: new FormControl(4, Validators.required), */
   });
 
-  constructor(private etapaService: EtapaService,
-    public dialogRef: MatDialogRef<ModalCriarEtapaComponent>
-  ) { }
+  constructor(private etapaService: EtapaService) { }
 
   onSubmit() {
     console.log(this.etapaForm.value);
@@ -32,10 +30,6 @@ export class ModalCriarEtapaComponent {
       },
       error: (error) => console.log(error),
     })
-  }
-
-  closeDialog(): void {
-    this.dialogRef.close();
   }
 
 }

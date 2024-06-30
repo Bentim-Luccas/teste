@@ -3,12 +3,12 @@ import { Component } from "@angular/core";
 import { ModalCriarProjetoComponent } from "../modal-criar-projeto.component";
 
 @Component({
-    selector: 'app-btn-modal-criar-projeto',
-    templateUrl: 'btn-modal-criar-projeto.component.html',
+    selector: 'app-button-modal-criar-projeto',
+    templateUrl: 'button-modal-criar-projeto.component.html',
     standalone: true,
     imports: [],
   })
-  export class BtnModalCriarProjeto {
+  export class ButtonModalCriarProjeto {
     constructor(public dialog: MatDialog) {}
   
     openDialog() {
