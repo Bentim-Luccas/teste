@@ -18,7 +18,7 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
   constructor(private etapaService: EtapaService) { }
 
   ngOnInit(): void {
-    this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(4, 5);
+    this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(Number(sessionStorage.getItem('id')), 4);
   }
 
   CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario: number, idDisciplina: number) {

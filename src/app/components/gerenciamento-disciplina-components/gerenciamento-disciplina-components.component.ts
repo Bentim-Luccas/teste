@@ -4,7 +4,7 @@ import { DisciplinaService } from '../../service/disciplina.service';
 import { ProjetoService } from '../../service/projeto.service';
 import { Projeto } from '../../interface/projeto';
 import { NgFor } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ModalCriarDisciplinaComponent } from "./modal-criar-disciplina/modal-criar-disciplina.component";
 import { ButtonModalEditarDisciplina } from "./modal-editar-disciplina/button/button-modal-editar-disciplina.component";
 import { EmpresaService } from '../../service/empresa.service';
@@ -24,19 +24,16 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     disciplina: Disciplina[] = [];
     listaDisciplinas: ArquivoUsuario[] = [];
     permissionamento: PermissionamentoUsuario[] = [];
-    selectedObject: any;
     
     constructor(
         private disciplinaService: DisciplinaService,
         private projetoService: ProjetoService,
-        private permissionamentoService: PermissionamentoService
+        private route: ActivatedRoute,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
-    const id = Number(sessionStorage.getItem('id'))
-    this.selectedObject = this.permissionamentoService.getSelectedObject();
-    this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(this.selectedObject.projeto_id, id)
-    this.permissionamentoService.setSelectedObject(this.selectedObject.projeto_id)
+    this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(Number(this.route.snapshot.paramMap.get('id')), Number(sessionStorage.getItem('id')))
     }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
@@ -74,4 +71,8 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
             );
         });
     }
+    onSelect(project: Disciplina): void {
+        const id = project.projeto_id
+        this.router.navigate(['/etapas', id]);
+      }
 }
