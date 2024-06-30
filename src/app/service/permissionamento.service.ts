@@ -22,6 +22,16 @@ export class PermissionamentoService {
       this.baseUrl = environment.apiServer + 'permissionamento';
   }
 
+    private selectedObject: any;
+
+  setSelectedObject(obj: any): void {
+    this.selectedObject = obj;
+  }
+
+  getSelectedObject(): any {
+    return this.selectedObject;
+  }
+
   post(permissionamento: Permissionamento): Observable<Permissionamento> {
       return this.http.post<Permissionamento>(this.baseUrl, permissionamento, httpOptions).pipe(
           catchError(this.handleError)

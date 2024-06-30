@@ -3,6 +3,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
 import { HomeArquivosComponentsComponent } from '../../components/home-arquivos-components/home-arquivos-components.component';
 import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
+import { CommonModule } from '@angular/common';
 import { BarraPesquisaComponent } from "../../components/gerenciamento-arquivos-components/barra-pesquisa/barra-pesquisa.component";
 import { BtnModalCriarProjeto } from "../../components/home-arquivos-components/modal-criar-projeto/button/btn--modal-criar-projeto.component";
 
@@ -17,6 +18,7 @@ import { BtnModalCriarProjeto } from "../../components/home-arquivos-components/
         HomeArquivosComponentsComponent,
         BreadcrumbComponent,
         BreadcrumbItemDirective,
+        CommonModule,
         BarraPesquisaComponent,
         BtnModalCriarProjeto
     ]
