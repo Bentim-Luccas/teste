@@ -12,7 +12,10 @@ module.exports = {
     }
   },
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin')({
+        charts: true,
+    }),
+    // ... other plugins
   ],
   safelist: [
     'text-red-400',

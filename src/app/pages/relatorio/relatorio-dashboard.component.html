@@ -10,7 +10,11 @@
       <div class="barra-esquerda"></div>
 
       <div class="secao1 mb-8">
-        <app-calendar></app-calendar>
+        <div class="breadcrumb-search">
+          <app-breadcrumb></app-breadcrumb>
+          <app-search></app-search>
+        </div>
+        <app-dropdown></app-dropdown>
       </div>
       <div class="secao2 mb-8">
         <div class="secao-cards mb-8" style="width: 75%;">
@@ -22,11 +26,11 @@
           ></app-cards>
            <div class="info-grafico" style="display: flex; flex-direction: row; gap: 1rem; width: 100%;">
             <app-user-info style="flex: 1;"></app-user-info>
-            <app-grafico style="flex: 1;margin-top: 1vw;"></app-grafico>
+            <!-- <app-grafico style="flex: 1;margin-top: 1vw;"></app-grafico> -->
           </div>
         </div>
         <div class="arquivos" style="width: 35%;">
-          <app-arquivos-recentes></app-arquivos-recentes>
+          <app-grafico></app-grafico>
         </div>
       </div>
     </div>
