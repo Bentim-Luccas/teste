@@ -3,6 +3,9 @@ import { PerfilUsuarioComponent } from '../perfil-usuario/perfil-usuario.compone
 import { PermissionamentoUsuarioComponent } from '../permissionamento-usuario/permissionamento-usuario.component';
 import { TabelaUsuariosComponent } from '../tabela-usuarios/tabela-usuarios.component';
 
+
+
+
 @Component({
   selector: 'app-tabs-usuario',
   standalone: true,
@@ -11,5 +14,8 @@ import { TabelaUsuariosComponent } from '../tabela-usuarios/tabela-usuarios.comp
   styleUrl: './tabs-usuario.component.css'
 })
 export class TabsUsuarioComponent {
+
+
+
 
 }

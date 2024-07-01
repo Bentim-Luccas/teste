@@ -1,4 +1,4 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-8 mt-4">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400">
       <tr>
@@ -8,62 +8,61 @@
         <th scope="col" class="px-6 py-3">
           Projeto
         </th>
-        <th scope="col" class="px-6 py-3 text-center">
+        <th scope="col" class="px-6 py-3">
           Status
         </th>
-        <th scope="col" class="px-6 py-3 text-center">
+        <th scope="col" class="px-6 py-3">
           Editar
         </th>
-        <th scope="col" class="px-6 py-3 text-center">
+        <th scope="col" class="px-6 py-3">
           Excluir
         </th>
       </tr>
     </thead>
-    <tbody *ngFor="let lista of listaDisciplinas">
+    <tbody *ngFor="let disciplina of disciplina">
       <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <th [routerLink]="['/etapas']" scope="row"
+        <th (click)="onSelect(disciplina)" scope="row"
           class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
           style="display: flex; align-items: center;">
           <img src="assets/images/icon etapa.png"
             style="width: 35px; height: 35px; margin-left: 10px; margin-right: 40px;" />
-          {{lista.disciplina_descricao}}
+          {{disciplina.disciplina_descricao}}
         </th>
         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          {{lista.projeto_id}}
+          {{disciplina.projeto_nome}}
         </td>
-        
         <td class="px-4 py-3">
-          @if(lista.disciplina_status==0){
+          @if(disciplina.disciplina_status==0){
           <span
             class="inline-flex items-center bg-red-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
             Inativo
           </span>
           }
-          @else if (lista.disciplina_status==1){
+          @else if (disciplina.disciplina_status==1){
           <span
             class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
             Ativo
           </span>
           }
         </td>
-        <td class="px-6 py-4 text-center">
+        <td class="px-6 py-4">
           <!--
           @if(disciplina.permissionamento_tipo!=null){
           @if(disciplina.permissionamento_tipo.includes("W")){
           -->
-          <app-button-modal-editar-disciplina></app-button-modal-editar-disciplina>
+          <app-btn-modal-editar-disciplina></app-btn-modal-editar-disciplina>
           <!--
           }
           }
           -->
         </td>
-        <td class="px-6 py-4 text-center">
+        <td class="px-6 py-4">
           <!--
           @if(disciplina.permissionamento_tipo!=null){
           @if(disciplina.permissionamento_tipo.includes("D")){
           -->
           <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            style="margin-left: 20px; cursor: pointer;" (click)="deletarDisciplina(lista.disciplina_id)">
+            style="margin-left: 20px; cursor: pointer;" (click)="deletarDisciplina(disciplina.disciplina_id)">
             <i class="fas fa-trash-alt mr-1"></i>
           </a>
           <!--

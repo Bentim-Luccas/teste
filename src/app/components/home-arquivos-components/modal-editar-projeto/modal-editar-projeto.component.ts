@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-editar-etapa',
@@ -9,6 +10,10 @@ import { Component } from '@angular/core';
 })
 export class ModalEditarProjetoComponent {
 
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<ModalEditarProjetoComponent>) { }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 
 }

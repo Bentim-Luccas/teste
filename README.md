@@ -47,3 +47,6 @@ Para acessar o sistema atualizado com proteção GUARD, siga as instruções aba
 Este processo garante que o token necessário para acessar o sistema seja armazenado de maneira segura no `sessionStorage` do navegador utilizado, permitindo o acesso conforme as permissões configuradas no sistema.
 
 Caso encontre dificuldades ou tenha dúvidas, entre em contato com o suporte técnico da sua organização para obter assistência adicional.
+
+# Email para acesso a aplicação
+superadmin@empresa.com

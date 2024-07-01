@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProjetoService } from '../../../service/projeto.service';
 import { Projeto } from '../../../interface/projeto';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-criar-projeto',
@@ -24,7 +25,9 @@ export class ModalCriarProjetoComponent {
 
   });
 
-  constructor(private projetoService: ProjetoService) {}
+  constructor(private projetoService: ProjetoService,
+    private dialogRef: MatDialogRef<ModalCriarProjetoComponent>
+) {}
 
   onSubmit() {
     console.log(this.projetoForm.value);
@@ -34,6 +37,10 @@ export class ModalCriarProjetoComponent {
       },
       error: (error) => console.log(error),
     })
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 
 }
