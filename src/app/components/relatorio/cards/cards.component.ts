@@ -15,6 +15,9 @@ export class CardsComponent implements OnInit{
   @Input() listaArquivosAprovados: Arquivo[] = []
   @Input() listaArquivosReprovados: Arquivo[] = []
   @Input() listaArquivosPendentes: Arquivo[] = []
+  @Input() listaUsuarios: any[] = []
+  @Input() listaEmpresas: any[] = []
+  @Input() listaProjetos: any[] = []
 
     constructor(private arquivoService: ArquivoService){}
 
