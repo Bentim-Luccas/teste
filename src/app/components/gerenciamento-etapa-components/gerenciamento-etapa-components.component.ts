@@ -2,20 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Etapa } from '../../interface/etapa';
 import { EtapaService } from '../../service/etapa.service';
-import { NgFor } from '@angular/common';
-import { BtnModalEditarEtapa } from "./modal-editar-etapa/button/btn-modal-editar-etapa.component";
+import { ModalEditEtapaComponent } from "./modal-edit-etapa/modal-edit-etapa.component";
+import { CommonModule } from '@angular/common';
+import { ModalEditDisciplinaComponent } from "../gerenciamento-disciplina-components/modal-edit-disciplina/modal-edit-disciplina.component";
+import { ProjetoService } from '../../service/projeto.service';
 
 @Component({
-    selector: 'app-gerenciamento-etapa-components',
-    standalone: true,
-    templateUrl: './gerenciamento-etapa-components.component.html',
-    styleUrl: './gerenciamento-etapa-components.component.css',
-    imports: [NgFor, RouterModule, BtnModalEditarEtapa]
+  selector: 'app-gerenciamento-etapa-components',
+  standalone: true,
+  templateUrl: './gerenciamento-etapa-components.component.html',
+  styleUrl: './gerenciamento-etapa-components.component.css',
+  imports: [CommonModule, RouterModule, ModalEditEtapaComponent, ModalEditDisciplinaComponent]
 })
 export class GerenciamentoEtapaComponentsComponent implements OnInit {
-  etapa: Etapa[] = [];
+  etapas: Etapa[] = [];
 
-  constructor(private etapaService: EtapaService) { }
+  constructor(private etapaService: EtapaService,
+    private projetoService: ProjetoService,
+  ) { }
 
   ngOnInit(): void {
     this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(Number(sessionStorage.getItem('id')), 4);
@@ -24,7 +28,7 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
   CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario: number, idDisciplina: number) {
     this.etapaService.findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario, idDisciplina).subscribe({
       next: (etapa) => {
-        this.etapa = etapa;
+        this.etapas = etapa;
       },
       error: (error) => console.log(error)
     });
@@ -32,7 +36,7 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
 
   deletarEtapa(idEtapa: number): void {
     this.etapaService.remove(idEtapa).subscribe(() => {
-      this.etapa = this.etapa.filter(
+      this.etapas = this.etapas.filter(
         (e) => e.etapa_id !== idEtapa
       );
     });

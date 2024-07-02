@@ -3,13 +3,9 @@ import { Disciplina } from '../../interface/disciplina';
 import { DisciplinaService } from '../../service/disciplina.service';
 import { ProjetoService } from '../../service/projeto.service';
 import { Projeto } from '../../interface/projeto';
-import { NgFor } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ModalCriarDisciplinaComponent } from "./modal-criar-disciplina/modal-criar-disciplina.component";
-import { ArquivoUsuario } from '../../interface/arquivo-usuario';
-import { PermissionamentoService } from '../../service/permissionamento.service';
-import { PermissionamentoUsuario } from '../../interface/permissionamento-usuario';
-import { BtnModalEditarDisciplina } from "./modal-editar-disciplina/button/btn-modal-editar-disciplina.component";
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalEditDisciplinaComponent } from "./modal-edit-disciplina/modal-edit-disciplina.component";
 
 
 @Component({
@@ -17,28 +13,26 @@ import { BtnModalEditarDisciplina } from "./modal-editar-disciplina/button/btn-m
     standalone: true,
     templateUrl: './gerenciamento-disciplina-components.component.html',
     styleUrls: ['./gerenciamento-disciplina-components.component.css'],
-    imports: [NgFor, RouterModule, ModalCriarDisciplinaComponent, BtnModalEditarDisciplina]
+    imports: [CommonModule, ModalEditDisciplinaComponent]
 })
 export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
-    disciplina: Disciplina[] = [];
-    listaDisciplinas: ArquivoUsuario[] = [];
-    permissionamento: PermissionamentoUsuario[] = [];
-    
+    disciplinas: Disciplina[] = [];
+
     constructor(
         private disciplinaService: DisciplinaService,
         private projetoService: ProjetoService,
-        private route: ActivatedRoute,
+        private activateRouter: ActivatedRoute,
         private router: Router
     ) { }
 
     ngOnInit(): void {
-    this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(Number(this.route.snapshot.paramMap.get('id')), Number(sessionStorage.getItem('id')))
+        this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(Number(this.activateRouter.snapshot.paramMap.get('id')), Number(sessionStorage.getItem('id')))
     }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
         this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario, idProjeto).subscribe({
             next: (disciplina) => {
-                this.disciplina = disciplina;
+                this.disciplinas = disciplina;
                 this.carregarProjetoNome(disciplina);
             },
             error: (error) => console.log(error)
@@ -65,13 +59,15 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
 
     deletarDisciplina(idDisciplina: number): void {
         this.disciplinaService.remove(idDisciplina).subscribe(() => {
-            this.disciplina = this.disciplina.filter(
+            this.disciplinas = this.disciplinas.filter(
                 (d) => d.disciplina_id !== idDisciplina
             );
         });
     }
+
     onSelect(project: Disciplina): void {
         const id = project.projeto_id
         this.router.navigate(['/etapas', id]);
-      }
+    }
+    
 }
