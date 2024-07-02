@@ -20,6 +20,7 @@ import { Projeto } from '../../interface/projeto';
 import { UsuarioService } from '../../service/usuario.service';
 import { EmpresaService } from '../../service/empresa.service';
 import { ProjetoService } from '../../service/projeto.service';
+import { BuscaComponent } from "../../components/busca/busca.component";
 
 @Component({
     selector: 'app-relatorio',
@@ -38,7 +39,8 @@ import { ProjetoService } from '../../service/projeto.service';
         NavbarComponent,
         MenuLateralComponent,
         GraficoComponent,
-        SearchComponent
+        SearchComponent,
+        BuscaComponent
     ]
 })
 export class RelatorioComponent implements OnInit{
