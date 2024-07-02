@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Empresa } from "../interface/empresa";
+import { ProjetoComDisciplinas } from "../interface/ProjetoComDisciplinas";
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class EmpresaService{
     constructor(private http: HttpClient) {
       this.baseUrl = environment.apiServer + 'Empresa';
     }
-
+;
     getEmpresa(): Observable<any>{
       return this.http.get<any[]>(this.baseUrl).pipe(
         catchError(this.handleError) // Handle potential errors
@@ -56,5 +57,11 @@ export class EmpresaService{
       return throwError(errorMessage); // Dispara um novo erro como um observável
     }
 
+
+  getProjetosComDisciplinas(idEmpresa: number): Observable<ProjetoComDisciplinas[]> {
+    return this.http.get<ProjetoComDisciplinas[]>(`${environment.apiServer}/projeto/empresa/${idEmpresa}/disciplinas`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 }

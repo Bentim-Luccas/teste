@@ -9,10 +9,13 @@ import { Arquivo } from '../interface/arquivo';
   providedIn: 'root'
 })
 export class RelatorioService {
-  private apiUrl = 'http://academico3.rj.senac.br/arquivo';
+  private apiUrl = 'http://localhost:3000/relatorios';
 
   constructor(private http: HttpClient) {}
 
+  getProjetoComArquivos(disciplinaId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/projeto/${disciplinaId}`);
+  }
   getArquivos(): Observable<Arquivo[]> {
     return this.http.get<Arquivo[]>(this.apiUrl);
   }

@@ -1,32 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { Relatorio } from '../../../interface/relatorio';
-import { RelatorioService } from '../../../service/relatorio.service';
 import { Arquivo } from '../../../interface/arquivo';
-import { ArquivoService } from '../../../service/arquivo.service';
 import { CommonModule } from '@angular/common';
-import { Disciplina } from '../../../interface/disciplina';
-import { ProjetoService } from '../../../service/projeto.service';
-import { Projeto } from '../../../interface/projeto';
 import * as XLSX from 'xlsx';
+import { Projeto } from '../../../interface/projeto';
+import { ProjetoService } from '../../../service/projeto.service';
+import { Empresa } from '../../../interface/empresa';
+import { FormsModule } from '@angular/forms';
+import { EmpresaService } from '../../../service/empresa.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ProjetoComDisciplinas } from '../../../interface/ProjetoComDisciplinas';
 
 @Component({
   selector: 'app-tabela',
   standalone: true,
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule,FormsModule]
 
 })
 export class TabelaComponent implements OnInit {
-   listaArquivos: Arquivo[] = []
-   constructor(private arquivoService: ArquivoService ,private projetoService: ProjetoService) { }
+    listaArquivos: Arquivo[] = [];
+    projetos: Projeto[] = [];
+    empresas: Empresa[] = [];
+    selectedEmpresaId: number | null = null;
 
-   ngOnInit() {
-    this.arquivoService.getArquivosPais().subscribe((data) => {
-      this.listaArquivos = data
-      // this.carregarProjetoDescricao(this.listaArquivos);
-    })
-  }
+   constructor(private empresaService: EmpresaService,
+    private projetoService: ProjetoService) { }
+
+    ngOnInit(): void {
+      this.projetoService.getProjetos().subscribe(projetos => {
+        this.projetos = projetos;
+        console.log('Projetos carregados:', this.projetos);
+      });
+    }
+
+    // onEmpresaChange(): void {
+    //   if (this.selectedEmpresaId !== null) {
+    //     this.projetoService.getProjetos(this.selectedEmpresaId).subscribe(projetos => {
+    //       this.projetos = projetos;
+    //     });
+    //   }
+    // }
+
+
   // carregarProjetoDescricao(arquivos: Arquivo[]): void {
   //   arquivos.forEach((arquivo: Arquivo) => {
   //     this.projetoService.findOne(arquivo.projeto_id).subscribe(
@@ -47,13 +63,11 @@ export class TabelaComponent implements OnInit {
 
 
   gerarRelatorio(): void {
-    // Array para armazenar os dados da tabela
     const dadosTabela: any[] = [];
 
-    // Obtém os cabeçalhos da tabela
-    const headers: string[] = ['Nome', 'Data', 'Projeto', 'Etapa', 'Autor'];
+    const headers: string[] = ['Projeto','', 'Disciplina', 'Etapa', 'Status'];
 
-    // Itera pelos arquivos e adiciona os dados à tabela
+
     this.listaArquivos.forEach(arquivo => {
       const rowData: any[] = [
         arquivo.arquivo_descricao,
@@ -65,18 +79,14 @@ export class TabelaComponent implements OnInit {
       dadosTabela.push(rowData);
     });
 
-    // Cria um workbook do Excel
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.aoa_to_sheet([headers].concat(dadosTabela));
 
-    // Adiciona a planilha ao workbook
     XLSX.utils.book_append_sheet(wb, ws, 'Relatório');
 
-    // Converte o workbook para um blob binário
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     const blob = new Blob([wbout], { type: 'application/octet-stream' });
 
-    // Cria um URL temporário e baixa o arquivo Excel
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
