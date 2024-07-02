@@ -46,13 +46,23 @@ export class PerfilUsuarioComponent {
 
   }
 
+  editarUsuario() {
+    if (this.usuario?.usuario_id){
+      this.usuarioService.deletarUsuario(this.usuario?.usuario_id).subscribe(
+        response => (console.log(response))
+      )
+    }
 
 
 
+    
+  }
 
-
+  
 
 
 
 
   }
+
+  

@@ -3,9 +3,6 @@ import { Usuario } from '../../../interface/usuario';
 import { UsuarioService } from '../../../service/usuario.service';
 import { TabsUsuarioComponent } from "../tabs-usuario/tabs-usuario.component";
 
-
-
-
 @Component({
     selector: 'app-tabela-usuarios',
     standalone: true,
@@ -15,19 +12,10 @@ import { TabsUsuarioComponent } from "../tabs-usuario/tabs-usuario.component";
 })
 export class TabelaUsuariosComponent implements OnInit {
 
-
-
-
   listaUsuarios: Usuario[] = []
   check = true
 
-
-
-
   constructor (private usuarioService : UsuarioService){}
-
-
-
 
   ngOnInit(): void {
     this.getUsuariosAdminEmpresa(4);
@@ -41,27 +29,13 @@ export class TabelaUsuariosComponent implements OnInit {
     });
   }
 
-
-
-
-
-
-
-
   detalharUsuario(usuario: Usuario) {
     console.log("setando o usuário ", usuario);
 
 
     this.usuarioService.setAutor(usuario);
 
-
-
-
-
-
   }
-
-
 
 
 }
