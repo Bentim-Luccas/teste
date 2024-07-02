@@ -20,8 +20,9 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
   arquivoSelecionado: Arquivo | null = null;
   arquivoSubscription: Subscription;
   autorSubscription: Subscription;
-  versoes!: Arquivo[]
+  versoes!: Arquivo[];
   autor: Usuario | null = null;
+  extensoes! : string [];
 
   constructor(private arquivoService: ArquivoService, private usuarioService: UsuarioService) {
     this.arquivoSubscription = this.arquivoService.arquivoSelecionado$.subscribe(
@@ -55,9 +56,29 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
       (data) => {
         console.log("id do arquivo",arquivoId)
         this.versoes = data;
+        this.identificarExtensoes(this.versoes)
         console.log("versoes:",data); // Certifique-se de que o autor foi buscado com sucesso
       }
     );
+
+  }
+
+  identificarExtensoes(versoes : Arquivo[]){
+    var lookup: string[] = [];
+    var items = versoes;
+    var result = [];
+
+    let name:string|undefined ;
+    versoes.forEach(item => {
+      name = item.arquivo_extensao;
+      if (name){
+        if (!(lookup.includes(name))){
+          lookup.push(name);
+        }
+      }
+
+    });
+    this.extensoes = lookup;
   }
 
   stringToDate(dateString: string | Date): Date {

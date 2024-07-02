@@ -79,6 +79,7 @@ export class ModalEnviarArquivoComponent implements OnInit{
   async onSubmit(){
     this.arquivo.arquivo_descricao = this.formulario.get('file_name')?.value
     // this.arquivo.arquivo_link = 'http://www.google.com'
+    this.arquivo.arquivo_extensao = this.selectedFileName?.split('.').pop()
     this.arquivo.arquivo_status = 0
     this.arquivo.usuario_id = 5
     this.arquivo.etapa_id = 1
