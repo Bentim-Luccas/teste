@@ -7,15 +7,23 @@ import { TabelaArquivosComponent } from '../../components/gerenciamento-arquivos
 import { NavbarComponent } from '../../components/navbar/navbar.component'
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
 import { TrackPageArquivoComponent } from '../../components/gerenciamento-arquivos-components/track-page-arquivo/track-page-arquivo.component'
+import { ModalArquivoListaCompartilhadaComponent } from '../../components/gerenciamento-arquivos-components/modal-arquivo-lista-compartilhada/modal-arquivo-lista-compartilhada.component';
+
 
 @Component({
   selector: 'app-gerenciamento-arquivos',
   standalone: true,
   imports: [ArquivoTagComponent, BarraPesquisaComponent, ModalButtonComponent,
-     ModalEnviarArquivoComponent, ModalMudarAcessoComponent, TabelaArquivosComponent, NavbarComponent, MenuLateralComponent, TrackPageArquivoComponent],
+     ModalEnviarArquivoComponent, ModalMudarAcessoComponent, TabelaArquivosComponent, NavbarComponent, MenuLateralComponent, TrackPageArquivoComponent,ModalArquivoListaCompartilhadaComponent],
   templateUrl: './gerenciamento-arquivos.component.html',
   styleUrl: './gerenciamento-arquivos.component.css'
 })
 export class GerenciamentoArquivosComponent {
+
+  dadosRecebidos: any;
+
+  onTesteChange(arquivo: any) {
+    this.dadosRecebidos = arquivo;
+  }
 
 }
