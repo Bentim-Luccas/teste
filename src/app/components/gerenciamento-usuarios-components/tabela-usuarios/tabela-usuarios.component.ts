@@ -29,4 +29,13 @@ export class TabelaUsuariosComponent implements OnInit {
     });
   }
 
+  detalharUsuario(usuario: Usuario) {
+    console.log("setando o usuário ", usuario);
+
+
+    this.usuarioService.setAutor(usuario);
+
+  }
+
+
 }

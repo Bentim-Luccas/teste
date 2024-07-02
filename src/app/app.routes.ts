@@ -24,40 +24,42 @@ export const routes: Routes = [
   },
   {
 
-    path: '',
-    component: HomeComponent
+    path: 'dashboard',
+    component: HomeComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Home' }
   },
-  { path: 'listaCompartilhada', component: ListaCompartilhadaComponent },
-  { path: 'loginemail', component: LoginemailComponent, canActivate: [emailGuard] },
+  { path: 'listaCompartilhada', component: ListaCompartilhadaComponent, data: { breadcrumb: 'Lista Compartilhada' }},
+  { path: 'loginemail', component: LoginemailComponent, canActivate: [emailGuard]},
   { path: 'logintoken', component: LogintokenComponent, canActivate: [tokenGuard] },
   { path: 'inicial', component: InicialComponent, canActivate: [inicialGuard] },
   {
-    path: 'etapas',
-    component: GerenciamentoEtapasComponent
+    path: 'etapas/:id',
+    component: GerenciamentoEtapasComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Etapas' }
   },
-  { path: 'loginjwt/:jwt', component: LoginjwtComponent },
+  { path: 'loginjwt/:jwt', component: LoginjwtComponent},
   {
-    path: 'disciplinas',
-    component: GerenciamentoDisciplinasComponent
+    path: 'disciplinas/:id',
+    component: GerenciamentoDisciplinasComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Disciplinas' }
   },
   {
     path: 'usuarios',
-    component: GerenciamentoUsuarioComponent
+    component: GerenciamentoUsuarioComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Usuarios' }
   },
   {
     path: 'arquivos',
-    component: GerenciamentoArquivosComponent
+    component: GerenciamentoArquivosComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Arquivos' }
   }
 , { path: 'relatorio',
-    component: RelatorioComponent
+    component: RelatorioComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Relatorio' }
 
     },
     {
       path: 'relatorio-arquivo',
-      component: RelatorioArquivoComponent,
+      component: RelatorioArquivoComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Relatorio de arquivo' }
     },
   {
-    path: 'notificacao', component: GerenciamentoNotificationComponent
+    path: 'notificacao', component: GerenciamentoNotificationComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Notificacao' }
 
-  }
+  },
+  { path: '', redirectTo: '/loginemail', pathMatch: 'full' },
+  { path: '**', redirectTo: '/loginemail' }
 ];

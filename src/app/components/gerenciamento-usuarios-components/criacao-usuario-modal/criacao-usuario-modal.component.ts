@@ -6,9 +6,14 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
+  MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { Usuario } from '../../../interface/usuario';
+import { UsuarioService } from '../../../service/usuario.service';
+import { create } from 'domain';
+import { CreateUsuarioDTO } from '../../../interface/create-usuario-dto';
 
 //BOTAO
 @Component({
@@ -33,6 +38,58 @@ export class CriacaoUsuarioModalButtonComponent {
   templateUrl: './criacao-usuario-modal.component.html',
 })
 export class CriacaoUsuarioModalComponent implements OnInit {
+  usuarioForm!: FormGroup;
 
-  ngOnInit():void{}
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private dialogRef: MatDialogRef<CriacaoUsuarioModalComponent>
+  ) {}
+
+  ngOnInit(): void {
+    this.usuarioForm = this.fb.group({
+      usuario_nome: ['', Validators.required],
+      usuario_email: ['', [Validators.required, Validators.email]],
+      usuario_cpf: ['', Validators.required],
+      usuario_cnpj: [''],
+      usuario_endereco: ['', Validators.required],
+      usuario_status: [0, Validators.required],
+      usuario_cargo: ['', Validators.required],
+      empresa_id: [0, Validators.required],
+      usuario_tipo: [0, Validators.required],
+    });
+  }
+
+  onSubmit(): void {
+    if (this.usuarioForm.valid) {
+      // const usuario: Usuario = this.usuarioForm.value;
+      const usuario = new CreateUsuarioDTO()
+      usuario.usuario_nome = this.usuarioForm.get("usuario_nome")?.value
+      usuario.usuario_email = this.usuarioForm.get("usuario_email")?.value
+      usuario.usuario_cpf = this.usuarioForm.get("usuario_cpf")?.value
+      usuario.usuario_cnpj = this.usuarioForm.get("usuario_cnpj")?.value
+      usuario.usuario_endereco = this.usuarioForm.get("usuario_endereco")?.value
+      usuario.usuario_status = this.usuarioForm.get("usuario_status")?.value
+      usuario.usuario_cargo = this.usuarioForm.get("usuario_cargo")?.value
+      usuario.empresa_id = this.usuarioForm.get("empresa_id")?.value
+      usuario.usuario_tipo = this.usuarioForm.get("usuario_tipo")?.value
+      console.log(usuario)
+      this.usuarioService.criarUsuario(usuario).subscribe({
+        next: (response) => {
+          console.log('Usuário criado com sucesso', response);
+          this.dialogRef.close(true);
+        }
+        ,
+        error: (error) => {
+          console.error('Erro ao criar usuário', error);
+        },
+        complete: () => {
+          console.log('Requisição de criação de usuário completa');
+        }
+      });
+    } else {
+      console.error('Formulário inválido');
+    }
+  
+  }
 }

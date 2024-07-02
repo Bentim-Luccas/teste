@@ -36,7 +36,7 @@ export class ProjetoService {
     //   return this.http.get<any[]>(`${this.baseUrl}/${idEmpresa}/projetos/disciplinas`);
     // }
     post(projeto: Projeto): Observable<Projeto> {
-        return this.http.post<Projeto>(this.baseUrl, projeto, httpOptions).pipe(
+        return this.http.post<Projeto>(this.baseUrl, projeto).pipe(
             catchError(this.handleError)
         );
     }

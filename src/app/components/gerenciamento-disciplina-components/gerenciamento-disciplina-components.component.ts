@@ -4,30 +4,39 @@ import { DisciplinaService } from '../../service/disciplina.service';
 import { ProjetoService } from '../../service/projeto.service';
 import { Projeto } from '../../interface/projeto';
 import { NgFor } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ModalCriarDisciplinaComponent } from "./modal-criar-disciplina/modal-criar-disciplina.component";
+import { ArquivoUsuario } from '../../interface/arquivo-usuario';
+import { PermissionamentoService } from '../../service/permissionamento.service';
+import { PermissionamentoUsuario } from '../../interface/permissionamento-usuario';
+import { BtnModalEditarDisciplina } from "./modal-editar-disciplina/button/btn-modal-editar-disciplina.component";
 
 
 @Component({
     selector: 'app-gerenciamento-disciplina-components',
     standalone: true,
-    imports: [NgFor, RouterModule],
     templateUrl: './gerenciamento-disciplina-components.component.html',
-    styleUrls: ['./gerenciamento-disciplina-components.component.css']
+    styleUrls: ['./gerenciamento-disciplina-components.component.css'],
+    imports: [NgFor, RouterModule, ModalCriarDisciplinaComponent, BtnModalEditarDisciplina]
 })
 export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     disciplina: Disciplina[] = [];
-
+    listaDisciplinas: ArquivoUsuario[] = [];
+    permissionamento: PermissionamentoUsuario[] = [];
+    
     constructor(
         private disciplinaService: DisciplinaService,
-        private projetoService: ProjetoService
+        private projetoService: ProjetoService,
+        private route: ActivatedRoute,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
-        this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(4, 4);
+    this.CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(Number(this.route.snapshot.paramMap.get('id')), Number(sessionStorage.getItem('id')))
     }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
-        this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto, idUsuario).subscribe({
+        this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario, idProjeto).subscribe({
             next: (disciplina) => {
                 this.disciplina = disciplina;
                 this.carregarProjetoNome(disciplina);
@@ -61,4 +70,8 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
             );
         });
     }
+    onSelect(project: Disciplina): void {
+        const id = project.projeto_id
+        this.router.navigate(['/etapas', id]);
+      }
 }

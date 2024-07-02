@@ -3,14 +3,14 @@ import { RouterModule } from '@angular/router';
 import { Etapa } from '../../interface/etapa';
 import { EtapaService } from '../../service/etapa.service';
 import { NgFor } from '@angular/common';
-import { DisciplinaService } from '../../service/disciplina.service';
+import { BtnModalEditarEtapa } from "./modal-editar-etapa/button/btn-modal-editar-etapa.component";
 
 @Component({
-  selector: 'app-gerenciamento-etapa-components',
-  standalone: true,
-  imports: [NgFor, RouterModule],
-  templateUrl: './gerenciamento-etapa-components.component.html',
-  styleUrl: './gerenciamento-etapa-components.component.css'
+    selector: 'app-gerenciamento-etapa-components',
+    standalone: true,
+    templateUrl: './gerenciamento-etapa-components.component.html',
+    styleUrl: './gerenciamento-etapa-components.component.css',
+    imports: [NgFor, RouterModule, BtnModalEditarEtapa]
 })
 export class GerenciamentoEtapaComponentsComponent implements OnInit {
   etapa: Etapa[] = [];
@@ -18,7 +18,7 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
   constructor(private etapaService: EtapaService) { }
 
   ngOnInit(): void {
-    this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(4, 5);
+    this.CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(Number(sessionStorage.getItem('id')), 4);
   }
 
   CarregarEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario: number, idDisciplina: number) {

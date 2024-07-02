@@ -1,9 +1,11 @@
 /* Div Principal */
 .principal {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin: 0 auto;  /* Centraliza o contêiner na página */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-content: center;
+  gap: 35px;
+  /* margin: 0 auto; Centraliza o contêiner na página */
+  margin-left: 15px;
   max-width: 1000px;  /* Define um limite máximo para a largura do contêiner */
   width: 100%;
   padding: 20px;  /* Adiciona um pouco de padding para espaçamento */

@@ -4,19 +4,18 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Projeto } from '../../interface/projeto';
 import { RouterModule } from '@angular/router';
-import { EmpresaService } from '../../service/empresa.service';
 import { Empresa } from '../../interface/empresa';
-import { Session } from 'node:inspector';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../service/usuario.service';
 import { Usuario } from '../../interface/usuario';
+import { BtnModalEditarProjeto } from "./modal-editar-projeto/button/btn-modal-editar-projeto.component";
 
 @Component({
-  selector: 'app-home-arquivos-components',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './home-arquivos-components.component.html',
-  styleUrl: './home-arquivos-components.component.css'
+    selector: 'app-home-arquivos-components',
+    standalone: true,
+    templateUrl: './home-arquivos-components.component.html',
+    styleUrl: './home-arquivos-components.component.css',
+    imports: [CommonModule, RouterModule, BtnModalEditarProjeto]
 })
 export class HomeArquivosComponentsComponent implements OnInit {
 
@@ -38,9 +37,11 @@ export class HomeArquivosComponentsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    /**
     let usuarioId = 4;
     let usuarioTipo = 2;   //1=comun e admin | 2=superadmin
-    this.getEmpresa(usuarioId, usuarioTipo);
+    this.getEmpresa(usuarioId, usuarioTipo); */
+    this.carregarProjeto(4, 4);
   }
 
   getEmpresa(usuarioId: number, usuarioTipo: number): void {
@@ -76,6 +77,18 @@ export class HomeArquivosComponentsComponent implements OnInit {
       error: (error)=> console.log(error),
     });
   }
+
+  deletarProjeto(idProjeto: number | undefined): void {
+    if (idProjeto === undefined) {
+        console.error("Não é possível excluir o projeto: idProjeto está indefinido");
+        return;
+    }
+    this.projetoService.remove(idProjeto).subscribe(() => {
+        this.projetos = this.projetos.filter(
+            (p) => p.projeto_id !== idProjeto
+        );
+    });
+}
 
   toggleDropdown(projeto: any): void {
     projeto.dropdownOpen = !projeto.dropdownOpen;
