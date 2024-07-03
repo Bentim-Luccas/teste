@@ -5,6 +5,7 @@ export class Arquivo {
   arquivo_data!: string | Date;
   arquivo_versao!: number;
   arquivo_link!: string;
+  arquivo_extensao!: string;
   local_id!: number;
   projeto_id!: number;
   etapa_id!: number;

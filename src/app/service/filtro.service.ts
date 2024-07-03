@@ -8,6 +8,7 @@ export class FiltroService {
   private criterioOrdenacao = new BehaviorSubject<string>('');
   private statusSelecionado = new BehaviorSubject<string[]>([]);
   private ultimaModificacao = new BehaviorSubject<string>('');
+  private tiposArquivo = new BehaviorSubject<string[]>([]);
 
 
   atualizarTermoPesquisa(novoValor: string) {
@@ -39,5 +40,13 @@ export class FiltroService {
 
   obterUltimaModificacao(): Observable<string> {
     return this.ultimaModificacao.asObservable();
+  }
+
+  atualizarTiposArquivoSelecionados(novosTipos: string[]) {
+    this.tiposArquivo.next(novosTipos);
+  }
+
+  obterTiposArquivoSelecionados(): Observable<string[]> {
+    return this.tiposArquivo.asObservable();
   }
 }

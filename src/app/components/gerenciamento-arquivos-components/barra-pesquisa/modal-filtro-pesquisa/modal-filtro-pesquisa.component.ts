@@ -23,6 +23,7 @@ export class ModalFiltroPesquisaComponent implements OnInit {
   currentDropdown: string | null = null;
   selectedOrdenacao: string = 'Última modificação';
   statusSelecionado: string[] = [];
+  tiposArquivoSelecionados: string[] = [];
   selectedUltimaModificacao: string = 'Selecione a opção';
 
   constructor(private fb: FormBuilder, private filtroService: FiltroService, public dialogRef: MatDialogRef<ModalFiltroPesquisaComponent>) {
@@ -32,6 +33,14 @@ export class ModalFiltroPesquisaComponent implements OnInit {
       ultimaModificacao: ['']
     });
   }
+
+  tipoArquivo: string[] = [
+
+    'jpg',
+    'pdf',
+    'dwg',
+
+  ]
 
   status: string[] = [
 
@@ -87,6 +96,18 @@ export class ModalFiltroPesquisaComponent implements OnInit {
     }
   }
 
+  onTipoArquivoChange(event: any) {
+    const checkbox = event.target;
+    if (checkbox.checked) {
+      this.tiposArquivoSelecionados.push(checkbox.value);
+    } else {
+      const index = this.tiposArquivoSelecionados.indexOf(checkbox.value);
+      if (index > -1) {
+        this.tiposArquivoSelecionados.splice(index, 1);
+      }
+    }
+  }
+
   toggleDropdown(dropdownId: string) {
       if (this.currentDropdown === dropdownId) {
           this.currentDropdown = null;
@@ -108,6 +129,8 @@ export class ModalFiltroPesquisaComponent implements OnInit {
 
     const ultimaModificacao = this.formulario.get('ultimaModificacao')?.value;
     this.filtroService.atualizarUltimaModificacao(ultimaModificacao);
+
+    this.filtroService.atualizarTiposArquivoSelecionados(this.tiposArquivoSelecionados);
 
     this.dialogRef.close();
   }

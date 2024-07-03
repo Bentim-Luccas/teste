@@ -23,6 +23,8 @@ export class TabelaArquivosComponent implements OnInit {
   usuarioId!: number;
   statusSelecionado: string[] = [];
   ultimaModificacao: string = '';
+  tiposArquivoSelecionados: string[] = [];
+
 
 
   constructor(private arquivoService: ArquivoService, private filtroService: FiltroService) {
@@ -38,6 +40,10 @@ export class TabelaArquivosComponent implements OnInit {
 
     this.filtroService.obterUltimaModificacao().subscribe(ultimaModificacao => {
       this.onUltimaModificacaoChange(ultimaModificacao);
+    });
+
+    this.filtroService.obterTiposArquivoSelecionados().subscribe(tipos => {
+      this.onTiposArquivoChange(tipos);
     });
   }
 
@@ -88,6 +94,10 @@ export class TabelaArquivosComponent implements OnInit {
       arquivosFiltrados = this.filtrarPorUltimaModificacao(arquivosFiltrados, this.ultimaModificacao);
     }
 
+    if (this.tiposArquivoSelecionados.length > 0) {
+      arquivosFiltrados = arquivosFiltrados.filter(arquivo =>
+        this.tiposArquivoSelecionados.includes(arquivo.arquivo_extensao!));
+    }
     this.listaFiltrada = this.ordenarArquivos(arquivosFiltrados, this.criterioOrdenacao);
   }
 
@@ -107,6 +117,11 @@ export class TabelaArquivosComponent implements OnInit {
 
   onUltimaModificacaoChange(ultimaModificacao: string) {
     this.ultimaModificacao = ultimaModificacao;
+    this.atualizarFiltro();
+  }
+
+  onTiposArquivoChange(tipos: string[]) {
+    this.tiposArquivoSelecionados = tipos;
     this.atualizarFiltro();
   }
 

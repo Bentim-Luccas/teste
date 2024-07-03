@@ -83,14 +83,12 @@
                     Tipo de Arquivo
                     </h6>
                     <div class="pt-4 flex gap-4">
+                      @for (tipo of tipoArquivo; track tipo) {
                         <div class="flex items-center">
-                            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
-                        </div>
+                            <input id="default-checkbox-{{tipo}}" type="checkbox" [value]="tipo" (change)="onTipoArquivoChange($event)" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                            <label for="default-checkbox-{{tipo}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{tipo}}</label>
+                          </div>
+                        }
                     </div>
                 </section>
                 <div class="flex justify-end">
