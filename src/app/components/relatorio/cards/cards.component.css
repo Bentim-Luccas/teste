@@ -1,14 +1,11 @@
-/* Div Principal */
 .principal {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   gap: 35px;
-  /* margin: 0 auto; Centraliza o contêiner na página */
   margin-left: 15px;
-  max-width: 1000px;  /* Define um limite máximo para a largura do contêiner */
+  max-width: 1000px;
   width: 100%;
-  padding: 20px;  /* Adiciona um pouco de padding para espaçamento */
+  padding: 20px;
 }
 
 .cards-cima, .cards-abaixo {

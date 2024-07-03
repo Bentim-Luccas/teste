@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { Arquivo } from '../../../interface/arquivo';
 import { ArquivoService } from '../../../service/arquivo.service';
 
@@ -16,6 +16,7 @@ export class CardsComponent implements OnInit{
   @Input() listaArquivosReprovados: Arquivo[] = []
   @Input() listaArquivosPendentes: Arquivo[] = []
   @Input() listaUsuarios: any[] = []
+  @Input() listaUsuariosAtivos: any[] = []
   @Input() listaEmpresas: any[] = []
   @Input() listaProjetos: any[] = []
 
