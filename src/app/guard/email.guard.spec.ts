@@ -4,7 +4,7 @@ import { CanActivateFn } from '@angular/router';
 import { emailGuard } from './email.guard';
 
 describe('emailGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
+  const executeGuard: CanActivateFn = (...guardParameters) =>
       TestBed.runInInjectionContext(() => emailGuard(...guardParameters));
 
   beforeEach(() => {

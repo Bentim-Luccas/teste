@@ -50,6 +50,7 @@ export class RelatorioComponent implements OnInit{
   listaArquivosReprovados: Arquivo[] = []
   listaArquivosPendentes: Arquivo[] = []
   listaUsuarios: Usuario[] = []
+  listaUsuariosAtivos: Usuario[] = []
   listaEmpresas: Empresa[] = []
   listaProjetos: Projeto[] = []
 
@@ -81,9 +82,19 @@ export class RelatorioComponent implements OnInit{
       }
     });
 
-    // Lista de Usuários
-    this.usuarioService.findAll().subscribe(data => {
-      this.listaUsuarios = data;
+  // Lista de Usuários
+  this.usuarioService.findAll().subscribe(data => {
+    this.listaUsuarios = data;
+
+    this.listaUsuariosAtivos = this.listaUsuarios.filter(usuario => usuario.usuario_status === 1);
+  });
+
+    this.listaUsuarios.forEach(usuario => {
+      switch(usuario.usuario_status){
+        case 1:
+          this.listaUsuariosAtivos.push(usuario)
+          break;
+      }
     });
 
     // Lista de Empresas
