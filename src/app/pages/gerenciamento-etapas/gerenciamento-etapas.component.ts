@@ -5,16 +5,23 @@ import { BarraPesquisaEtapaComponent } from "../../components/gerenciamento-etap
 import { GerenciamentoEtapaComponentsComponent } from "../../components/gerenciamento-etapa-components/gerenciamento-etapa-components.component";
 import { BuscarEtapaComponent } from '../../components/gerenciamento-etapa-components/buscar-etapa/buscar-etapa.component'
 import { TrackPageEtapaComponent } from '../../components/gerenciamento-etapa-components/track-page-etapa/track-page-etapa.component'
-import { MenuLateralComponent } from "../../components/menu-lateral/menu-lateral.component";
-import { BtnModalCriarEtapa } from "../../components/gerenciamento-etapa-components/modal-criar-etapa/button/btn-modal-criar-etapa.component";
 import { MenuLateralEtapaComponent } from "../../components/gerenciamento-etapa-components/menu-lateral-etapa/menu-lateral-etapa.component";
+import { ModalCreateEtapaComponent } from "../../components/gerenciamento-etapa-components/modal-create-etapa/modal-create-etapa.component";
 
 @Component({
     selector: 'app-gerenciamento-etapas',
     standalone: true,
     templateUrl: './gerenciamento-etapas.component.html',
     styleUrl: './gerenciamento-etapas.component.css',
-    imports: [NavbarComponent, BreadcrumbEtapaComponent, BarraPesquisaEtapaComponent, GerenciamentoEtapaComponentsComponent, BuscarEtapaComponent, TrackPageEtapaComponent, MenuLateralComponent, BtnModalCriarEtapa, MenuLateralEtapaComponent]
+    imports: [NavbarComponent,
+        BreadcrumbEtapaComponent,
+        BarraPesquisaEtapaComponent,
+        GerenciamentoEtapaComponentsComponent,
+        BuscarEtapaComponent,
+        TrackPageEtapaComponent,
+        MenuLateralEtapaComponent,
+        ModalCreateEtapaComponent
+    ]
 })
 export class GerenciamentoEtapasComponent {
 
