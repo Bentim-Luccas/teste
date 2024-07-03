@@ -1,4 +1,9 @@
 /* grafico.component.css */
+.custom-margin{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
 #donut-chart {
   max-width: 650px;
   margin: 35px auto;
