@@ -225,4 +225,7 @@ export class MenuLateralComponent implements OnInit {
   empresasrota() {
     this.router.navigate(['/']);
   }
+  disciplinas() {
+    this.router.navigate(['/disciplinas/:id']);
+  }
 }
