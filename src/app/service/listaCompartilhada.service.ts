@@ -43,7 +43,8 @@ export class ListaCompartilhadaService {
   }
 
   getArquivosListaCompartilhada(lista_compartilhada_id: string | null): Observable<any>{
-    return this.httpCliente.get<any>(`${this.baseUrl}/arquivosListaCompartilhada3/${lista_compartilhada_id}`).pipe(
+    const usuarioIdLogado = String(sessionStorage.getItem('id'));
+    return this.httpCliente.get<any>(`${this.baseUrl}/arquivosListaCompartilhada${usuarioIdLogado}/${lista_compartilhada_id}`).pipe(
       catchError(this.handleError)
     );
   }
