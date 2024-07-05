@@ -22,7 +22,7 @@ export class ModalFiltroPesquisaComponent implements OnInit {
   formulario: FormGroup;
   currentDropdown: string | null = null;
   selectedOrdenacao: string = 'Última modificação';
-  statusSelecionado: string[] = [];
+  statusSelecionado: number[] = [];
   tiposArquivoSelecionados: string[] = [];
   selectedUltimaModificacao: string = 'Selecione a opção';
 
@@ -32,6 +32,7 @@ export class ModalFiltroPesquisaComponent implements OnInit {
       status: [''],
       ultimaModificacao: ['']
     });
+    
   }
 
   tipoArquivo: string[] = [
@@ -42,14 +43,13 @@ export class ModalFiltroPesquisaComponent implements OnInit {
 
   ]
 
-  status: string[] = [
-
-    'Em Progresso',
-    'Completo',
-    'Liberado para Obra',
-    'Cancelado',
-
-  ]
+  statusMap: { [key: string]: number } = {
+    'Cancelado': -1,
+    'Inativo': 0,
+    'Ativo': 1,
+    'Aprovado': 2,
+    'Finalizado': 3
+  };
 
   ultimaModificacao: string[] = [
 
@@ -70,6 +70,12 @@ export class ModalFiltroPesquisaComponent implements OnInit {
 
   ]
 
+  statusKeys = Object.keys(this.statusMap);
+
+  getKeyByValue(object: { [key: string]: number }, value: number): string {
+    return Object.keys(object).find(key => object[key] === value) || '';
+  }
+
   setOrdenacao(event: Event, item: string) {
     event.preventDefault();
     this.formulario.get('ordenacao')?.setValue(item);
@@ -86,15 +92,17 @@ export class ModalFiltroPesquisaComponent implements OnInit {
 
   onStatusChange(event: any) {
     const checkbox = event.target;
+    const statusValue = this.statusMap[checkbox.value];
     if (checkbox.checked) {
-      this.statusSelecionado.push(checkbox.value);
+      this.statusSelecionado.push(statusValue);
     } else {
-      const index = this.statusSelecionado.indexOf(checkbox.value);
+      const index = this.statusSelecionado.indexOf(statusValue);
       if (index > -1) {
         this.statusSelecionado.splice(index, 1);
       }
     }
   }
+
 
   onTipoArquivoChange(event: any) {
     const checkbox = event.target;

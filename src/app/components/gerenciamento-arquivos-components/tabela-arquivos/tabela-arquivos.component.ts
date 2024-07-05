@@ -21,7 +21,7 @@ export class TabelaArquivosComponent implements OnInit {
   termoPesquisa: string = '';
   criterioOrdenacao: string = '';
   usuarioId!: number;
-  statusSelecionado: string[] = [];
+  statusSelecionado: number[] = [];
   ultimaModificacao: string = '';
   tiposArquivoSelecionados: string[] = [];
 
@@ -110,7 +110,7 @@ export class TabelaArquivosComponent implements OnInit {
     this.listaFiltrada = this.ordenarArquivos(this.listaFiltrada, criterio);
   }
 
-  onStatusChange(status: string[]) {
+  onStatusChange(status: number[]) {
     this.statusSelecionado = status;
     this.atualizarFiltro();
   }

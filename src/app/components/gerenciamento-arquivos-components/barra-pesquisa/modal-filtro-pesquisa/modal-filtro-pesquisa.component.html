@@ -31,10 +31,10 @@
                             Status
                     </h6>
                         <div class="pt-4 flex gap-6">
-                        @for (st of status; track st) {
+                        @for (status of statusKeys; track status) {
                                 <div class="flex items-center">
-                                  <input id="default-checkbox-{{st}}" type="checkbox" [value]="st" (change)="onStatusChange($event)" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
-                                  <label for="default-checkbox-{{st}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{st}}</label>
+                                  <input id="default-checkbox-{{status}}" type="checkbox" [value]="status" (change)="onStatusChange($event)" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                  <label for="default-checkbox-{{status}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{status}}</label>
                                 </div>
                             }
                         </div>
@@ -46,7 +46,7 @@
                             Última modificação
                         </h6>
                         <div class="pt-4 relative inline-block">
-                            <button (click)="toggleDropdown('dropdownData')" id="dropdownDataButton" data-dropdown-toggle="dropdownData" class="w-48 text-gray-900 border border-gray-400 bg-white hover:bg-gray-200 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center truncate" type="button">
+                            <button (click)="toggleDropdown('dropdownData')" id="dropdownDataButton" data-dropdown-toggle="dropdownData" class="w-48 text-gray-900 border border-[color:var(--cinza-border)] bg-white hover:border-[color:var(--text-black)] focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center truncate" type="button">
                                 <span class="truncate">{{selectedUltimaModificacao}}</span>
                                 <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -70,11 +70,9 @@
                         </h6>
                         <div class="relative pt-4 min-w-20 max-w-60">
                             <label for="labels-range-input" class="sr-only">Labels range</label>
-                            <input id="labels-range-input" type="range" value="1000" min="100" max="1500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
-                            <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min ($100)</span>
-                            <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$500</span>
-                            <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span>
-                            <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ($1500)</span>
+                            <input id="labels-range-input" type="range" value="1000" min="10" max="10000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 range-black">
+                            <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">10MB</span>
+                            <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">10GB</span>
                         </div>
                     </section>
                 </section>
@@ -84,10 +82,10 @@
                     </h6>
                     <div class="pt-4 flex gap-4">
                       @for (tipo of tipoArquivo; track tipo) {
-                        <div class="flex items-center">
-                            <input id="default-checkbox-{{tipo}}" type="checkbox" [value]="tipo" (change)="onTipoArquivoChange($event)" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
-                            <label for="default-checkbox-{{tipo}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{tipo}}</label>
-                          </div>
+                            <div class="flex items-center">
+                                <input id="default-checkbox-{{tipo}}" type="checkbox" [value]="tipo" (change)="onTipoArquivoChange($event)" class="w-4 h-4 text-black bg-gray-100 border-0 rounded focus:ring-0 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                <label for="default-checkbox-{{tipo}}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{tipo}}</label>
+                            </div>
                         }
                     </div>
                 </section>

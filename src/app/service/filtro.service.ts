@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class FiltroService {
   private termoPesquisa = new BehaviorSubject<string>('');
   private criterioOrdenacao = new BehaviorSubject<string>('');
-  private statusSelecionado = new BehaviorSubject<string[]>([]);
+  private statusSelecionado = new BehaviorSubject<number[]>([]);
   private ultimaModificacao = new BehaviorSubject<string>('');
   private tiposArquivo = new BehaviorSubject<string[]>([]);
 
@@ -26,11 +26,11 @@ export class FiltroService {
   obterCriterioOrdenacao(): Observable<string> {
     return this.criterioOrdenacao.asObservable();
   }
-  atualizarStatusSelecionado(novoStatus: string[]) {
+  atualizarStatusSelecionado(novoStatus: number[]) {
     this.statusSelecionado.next(novoStatus);
   }
 
-  obterStatusSelecionado(): Observable<string[]> {
+  obterStatusSelecionado(): Observable<number[]> {
     return this.statusSelecionado.asObservable();
   }
 
