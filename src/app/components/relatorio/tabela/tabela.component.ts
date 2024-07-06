@@ -7,6 +7,9 @@ import { ProjetoComDisciplinas } from '../../../interface/ProjetoComDisciplinas'
 import { Projeto } from '../../../interface/projeto';
 import { forkJoin } from 'rxjs';
 import { RelatorioService } from '../../../service/relatorio.service';
+
+
+
 @Component({
   selector: 'app-tabela',
   standalone: true,
@@ -57,38 +60,39 @@ export class TabelaComponent implements OnInit {
 
 
   GerarRelatorio(): void {
-    console.log("Exportando os seguintes projetos:", this.projetos); // Log para depuração
-    if (this.loadDados.length === 0) {
-      alert('Não há dados para exportar.');
-      return;
-    }
-    const dataForExport = this.projetos.map(projeto => ({
-      'Descrição do Projeto': projeto.projeto_descricao,
-      'Disciplinas Ativas': projeto.disciplinas_ativas,
-      'Disciplinas Inativas': projeto.disciplinas_inativas,
-      'Data de Início': projeto.projeto_data_inicio ? formatDate(projeto.projeto_data_inicio, 'mediumDate', 'pt-BR') : '',
-      'Data de Fim': projeto.projeto_data_fim ? formatDate(projeto.projeto_data_fim, 'mediumDate', 'pt-BR') : '',
-      'Orçamento': projeto.projeto_orcamento ? projeto.projeto_orcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Não informado'
-    }));
 
-    // Criando a planilha
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataForExport);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, 'ProjetosExportados');
+
+    const headers: string[] = ['Projeto', 'Disciplinas Ativas', 'Disciplinas Inativas', 'Data de Início', 'Data de Fim', 'Orçamento', 'Status'];
+    const dadosTabela: any[] = this.projetos.map(projeto => [
+      projeto.projeto_descricao,
+      projeto.disciplinas_ativas,
+      projeto.disciplinas_inativas,
+      projeto.projeto_data_inicio ? new Date(projeto.projeto_data_inicio).toLocaleDateString('pt-BR') : '',
+      projeto.projeto_data_fim ? new Date(projeto.projeto_data_fim).toLocaleDateString('pt-BR') : '',
+      projeto.projeto_orcamento ? `R$ ${projeto.projeto_orcamento.toLocaleString('pt-BR')}` : 'Não informado',
+      projeto.projeto_status === 1 ? 'Ativo' : 'Inativo'
+    ]);
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet([headers].concat(dadosTabela));
+    ws['!cols'] = [
+      { wch: 40 }, { wch: 20 }, { wch: 20 }, { wch: 15 }, { wch: 15 }, { wch: 20 }, { wch: 10 }
+    ];
+    XLSX.utils.book_append_sheet(wb, ws, 'Relatório de Projetos');
+
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], { type: 'application/octet-stream' });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    a.href = url;
+    a.download = 'relatorio_projetos.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, 0);
   }
-
-  private saveAsExcelFile(buffer: any, fileName: string): void {
-    const data: Blob = new Blob([buffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
-    });
-    const fileURL: string = window.URL.createObjectURL(data);
-    const anchor = document.createElement('a');
-    anchor.href = fileURL;
-    anchor.setAttribute('download', `${fileName}.xlsx`);
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-  }
-
 }
