@@ -1,17 +1,4 @@
-<!-- <div class="flex flex-col space-y-4">
-  <label for="empresaSelect" class="text-gray-700 font-medium">Selecione uma Empresa:</label>
-  <div class="relative inline-block w-64">
-    <select id="empresaSelect" [(ngModel)]="selectedEmpresaId" (change)="onEmpresaChange()"
-      class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-      <option *ngFor="let empresa of empresas" [value]="empresa.empresa_id">{{ empresa.empresa_nome }}</option>
-    </select>
-    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M7 10l5 5 5-5H7z"/>
-      </svg>
-    </div>
-  </div>
-</div> -->
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <div class="flex justify-end mb-4">
     <button type="button" (click)="GerarRelatorio()" [disabled]="!dadosCarregados"data-modal-target="modal-create" data-modal-toggle="modal-create" type="button"
@@ -82,8 +69,8 @@
     </div>
   </div>
 
-  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+  <table class="w-full text-sm text-left text-black dark:text-gray-400 sm:rounded-lg" >
+    <thead class="text-xs text-white uppercase bg-black rounded-lg dark:bg-gray-700 " >
       <tr>
 
         <th scope="col" class="px-6 py-3">Projeto</th>

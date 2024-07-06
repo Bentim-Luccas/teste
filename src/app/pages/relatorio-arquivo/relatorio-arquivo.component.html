@@ -1,11 +1,15 @@
 <app-navbar></app-navbar>
-<div class="flex h-[80%]">
-  <div id="SidBar" class="col-span-2 bg-gray-500 w-[13.50%]" >
+
+<div class="flex h-screen w-full">
+  <!-- Sidebar -->
+  <div id="Sidebar" class="bg-gray-500 flex-none w-64">
     <app-menu-lateral></app-menu-lateral>
   </div>
 
-
-<div class="p-4 bg-gray-100 flex-grow" style="max-height: full; overflow-y: auto; margin-top: 50px; margin-left: 2vw;">
-    <app-tabela></app-tabela>
-</div>
+  <!-- Conteúdo Principal -->
+  <div class="flex-grow overflow-y-auto bg-gray-100 p-4 max-w-9xl mx-auto my-5" style="margin-top: 4vw;">
+    <div class="">
+      <app-tabela></app-tabela>
+    </div>
+  </div>
 </div>
