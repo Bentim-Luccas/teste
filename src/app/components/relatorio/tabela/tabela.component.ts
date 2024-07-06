@@ -1,105 +1,94 @@
 import { Component, OnInit } from '@angular/core';
 import { Arquivo } from '../../../interface/arquivo';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import * as XLSX from 'xlsx';
-import { Projeto } from '../../../interface/projeto';
-import { ProjetoService } from '../../../service/projeto.service';
-import { Empresa } from '../../../interface/empresa';
-import { FormsModule } from '@angular/forms';
-import { EmpresaService } from '../../../service/empresa.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjetoComDisciplinas } from '../../../interface/ProjetoComDisciplinas';
-
+import { Projeto } from '../../../interface/projeto';
+import { forkJoin } from 'rxjs';
+import { RelatorioService } from '../../../service/relatorio.service';
 @Component({
   selector: 'app-tabela',
   standalone: true,
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
-  imports: [CommonModule,FormsModule]
+  imports: [CommonModule,
+    FormsModule,
+     ReactiveFormsModule ]
 
 })
 export class TabelaComponent implements OnInit {
     listaArquivos: Arquivo[] = [];
-    projetos: Projeto[] = [];
-    empresas: Empresa[] = [];
-    selectedEmpresaId: number | null = null;
+    projetosDisciplinas: ProjetoComDisciplinas[] = [];
+    empresaControl = new FormControl();
+    projetos: (Projeto & { disciplinas_ativas: number; disciplinas_inativas: number; projeto_status: number; })[] = [];
+    dadosCarregados = false;
+   constructor(private relatorioService: RelatorioService) {}
 
-   constructor(private empresaService: EmpresaService,
-    private projetoService: ProjetoService) { }
+   ngOnInit(): void {
+    this.loadDados(4);
+  }
 
-    ngOnInit(): void {
-      this.projetoService.getProjetos().subscribe(projetos => {
-        this.projetos = projetos;
-        console.log('Projetos carregados:', this.projetos);
-      });
-    }
-
-    // onEmpresaChange(): void {
-    //   if (this.selectedEmpresaId !== null) {
-    //     this.projetoService.getProjetos(this.selectedEmpresaId).subscribe(projetos => {
-    //       this.projetos = projetos;
-    //     });
-    //   }
-    // }
-
-
-  // carregarProjetoDescricao(arquivos: Arquivo[]): void {
-  //   arquivos.forEach((arquivo: Arquivo) => {
-  //     this.projetoService.findOne(arquivo.projeto_id).subscribe(
-  //       (projeto: Projeto) => {
-  //         if (projeto) {
-  //           arquivo.projeto_descricao = projeto.projeto_descricao || ''; // Atribui a descrição do projeto ao arquivo
-  //         } else {
-  //           arquivo.projeto_descricao = ''; // Se não encontrar projeto, deixa vazio
-  //         }
-  //       },
-  //       (error: any) => {
-  //         console.error(`Erro ao carregar descrição do projeto ${arquivo.projeto_id}:`, error);
-  //         arquivo.projeto_descricao = ''; // Trata erro, deixando o campo vazio
-  //       }
-  //     );
-  //   });
-  // }
-
-
-  gerarRelatorio(): void {
-    const dadosTabela: any[] = [];
-
-    const headers: string[] = ['Projeto','', 'Disciplina', 'Etapa', 'Status'];
-
-
-    this.listaArquivos.forEach(arquivo => {
-      const rowData: any[] = [
-        arquivo.arquivo_descricao,
-        this.stringToDate(arquivo.arquivo_data).toLocaleDateString(),
-        // arquivo.projeto_descricao || '',
-        // arquivo.etapa_descricao || '',
-        arquivo.autor
-      ];
-      dadosTabela.push(rowData);
+  loadDados(idEmpresa: number): void {
+    forkJoin({
+      projetosBasicos: this.relatorioService.findProjetosDaEmpresaId(idEmpresa),
+      projetosComDisciplinas: this.relatorioService.getProjetosComDisciplinas(idEmpresa)
+    }).subscribe({
+      next: ({ projetosBasicos, projetosComDisciplinas }) => {
+        this.projetos = projetosBasicos.map(projeto => {
+          const disciplinas = projetosComDisciplinas.find(p => p.projeto_id === projeto.projeto_id) || {
+            disciplinas_ativas: 0,
+            disciplinas_inativas: 0
+          };
+          return {
+            ...projeto,
+            disciplinas_ativas: disciplinas.disciplinas_ativas,
+            disciplinas_inativas: disciplinas.disciplinas_inativas
+          };
+        });
+        this.dadosCarregados = true; // Correto: definindo dentro do subscribe
+      },
+      error: error => {
+        console.error('Erro ao carregar dados:', error);
+        this.dadosCarregados = false;
+      }
     });
-
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.aoa_to_sheet([headers].concat(dadosTabela));
-
-    XLSX.utils.book_append_sheet(wb, ws, 'Relatório');
-
-    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    const blob = new Blob([wbout], { type: 'application/octet-stream' });
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'relatorio.xlsx';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    }, 0);
   }
 
-  stringToDate(stringDate: string | Date): Date {
-    return new Date(stringDate);
+
+  GerarRelatorio(): void {
+    console.log("Exportando os seguintes projetos:", this.projetos); // Log para depuração
+    if (this.loadDados.length === 0) {
+      alert('Não há dados para exportar.');
+      return;
+    }
+    const dataForExport = this.projetos.map(projeto => ({
+      'Descrição do Projeto': projeto.projeto_descricao,
+      'Disciplinas Ativas': projeto.disciplinas_ativas,
+      'Disciplinas Inativas': projeto.disciplinas_inativas,
+      'Data de Início': projeto.projeto_data_inicio ? formatDate(projeto.projeto_data_inicio, 'mediumDate', 'pt-BR') : '',
+      'Data de Fim': projeto.projeto_data_fim ? formatDate(projeto.projeto_data_fim, 'mediumDate', 'pt-BR') : '',
+      'Orçamento': projeto.projeto_orcamento ? projeto.projeto_orcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Não informado'
+    }));
+
+    // Criando a planilha
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataForExport);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, 'ProjetosExportados');
   }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+    });
+    const fileURL: string = window.URL.createObjectURL(data);
+    const anchor = document.createElement('a');
+    anchor.href = fileURL;
+    anchor.setAttribute('download', `${fileName}.xlsx`);
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }
+
 }

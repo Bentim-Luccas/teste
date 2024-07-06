@@ -4,6 +4,7 @@ import { environment } from "../../environments/environment.development";
 import { Projeto } from "../interface/projeto";
 import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
 import { Empresa } from "../interface/empresa";
+import { ProjetoComDisciplinas } from "../interface/ProjetoComDisciplinas";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,9 +33,6 @@ export class ProjetoService {
         );
     }
 
-    // getProjetosComDisciplinas(idEmpresa: number): Observable<any[]> {
-    //   return this.http.get<any[]>(`${this.baseUrl}/${idEmpresa}/projetos/disciplinas`);
-    // }
     post(projeto: Projeto): Observable<Projeto> {
         return this.http.post<Projeto>(this.baseUrl, projeto).pipe(
             catchError(this.handleError)

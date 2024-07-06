@@ -14,7 +14,7 @@
 </div> -->
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <div class="flex justify-end mb-4">
-    <button type="button" (click)="gerarRelatorio()" data-modal-target="modal-create" data-modal-toggle="modal-create" type="button"
+    <button type="button" (click)="GerarRelatorio()" [disabled]="!dadosCarregados"data-modal-target="modal-create" data-modal-toggle="modal-create" type="button"
         class="px-14 py-4 text-md font-semibold text-white inline-flex items-center bg-[color:var(--cinza-principal-escuro)] hover:bg-[color:var(--cinza-principal-medio)] rounded-lg text-center">
         <svg class="w-10 h-8 text-white text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -25,7 +25,6 @@
         Gerar relatório
     </button>
 </div>
-
 
   <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
     <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
@@ -83,6 +82,9 @@
     </div>
   </div>
 
+
+
+
   <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
@@ -113,7 +115,7 @@
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
           {{ projeto.projeto_descricao }}
         </th>
-        <td class="px-6 py-4 whitespace-nowrap">{{ projeto.disciplinas_em_processamento }}
+        <td class="px-6 py-4 whitespace-nowrap">{{ projeto.disciplinas_ativas }}
 
         </td>
         <td class="px-6 py-4 whitespace-nowrap">{{ projeto.disciplinas_inativas }}
@@ -129,22 +131,39 @@
           {{ projeto.projeto_orcamento| currency:'BRL' }}
         </td>
         <td class="px-4 py-3">
-          @if(projeto.projeto_status==-1){
-          <span
-              class="inline-flex items-center bg-red-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-              Inativo
-          </span>
-          }
-          @else if (projeto.projeto_status==1){
-          <span
-              class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-              Ativo
-          </span>
-          }
+          <span *ngIf="projeto.projeto_status === -1" class="bg-red-200 text-green-800 rounded-full px-2.5 py-0.5">Inativo</span>
+        <span *ngIf="projeto.projeto_status === 1" class="bg-green-200 text-green-800 rounded-full px-2.5 py-0.5">Ativo</span>
+
       </td>
       </tr>
       </div>
     </tbody>
   </table>
+  <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+    <span class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+    <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+        <li>
+            <a href="/relatorio-arquivo" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+        </li>
+        <li>
+            <a href="/relatorio-arquivo" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+        </li>
+        <li>
+            <a href="/relatorio-arquivo" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+        </li>
+        <li>
+            <a href="/relatorio-arquivo" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+        </li>
+        <li>
+            <a href="/relatorio-arquivo" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+        </li>
+        <li>
+            <a href="/relatorio-arquivo" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+        </li>
+        <li>
+    <a href="/relatorio-arquivo" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+        </li>
+    </ul>
+</nav>
 
 </div>

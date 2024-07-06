@@ -13,6 +13,5 @@ export interface Projeto {
     dropdownOpen: boolean;
     projeto_status: number;
     disciplinas_ativas: number;
-    disciplinas_em_processamento: number;
-    disciplinas_inativas: number;
+  disciplinas_inativas: number;
 }
