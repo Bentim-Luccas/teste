@@ -3,7 +3,7 @@
     <div  class="flex-wrap justify-center items-center pr-[3%] pl-[3%]  pt-[10px] " >
       <form [formGroup]="formBusca">
       <button type="button" class="flex items-center justify-between pt-[3%] mb-[5%] text-black bg-gray-50 pl-[10%] pb-[3%] pr-[10%] w-[100%] h-[45.37px] border-gray-200 border-[0.99px] rounded-[7.89px]">
-        <svg (click)="buscaEmpresaPorNome()"  class="w-[12px] h-[12px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+        <svg   class="w-[12px] h-[12px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
         <input formControlName="empresa_nome"  [placeholder]="placeholderText" type="text" class="ml-2 flex-1 p-0 bg-gray-50 border-none outline-none text-gray-500 w-[19%] text-[14px] font-['Open Sans'] placeholder-gray-500"/>
@@ -25,27 +25,34 @@
 
     <div  class="overflow-y-auto max-h-[400px] flex flex-wrap justify-center items-center scrollbar-thin">
         @for(projeto of projetos; track projeto.projeto_id){
-          <button type="button" (click)="onButtonClickDisciplinas(projeto.projeto_id!)" class="flex items-center mb-2 mt-1  w-[234.75px] text-black hover:bg-gray-200 font-[150] border-[0.99px]  border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]" >
+          <button type="button" (click)="onButtonClickDisciplinas(projeto.projeto_id!)" class="flex items-center mb-2 mt-1  w-[234.75px] text-black hover:bg-gray-200 font-[150] border-[0.99px]  border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] " >
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.111 20A3.111 3.111 0 0 1 4 16.889v-12C4 4.398 4.398 4 4.889 4h4.444a.89.89 0 0 1 .89.889v12A3.111 3.111 0 0 1 7.11 20Zm0 0h12a.889.889 0 0 0 .889-.889v-4.444a.889.889 0 0 0-.889-.89h-4.389a.889.889 0 0 0-.62.253l-3.767 3.665a.933.933 0 0 0-.146.185c-.868 1.433-1.581 1.858-3.078 2.12Zm0-3.556h.009m7.933-10.927 3.143 3.143a.889.889 0 0 1 0 1.257l-7.974 7.974v-8.8l3.574-3.574a.889.889 0 0 1 1.257 0Z"/>
             </svg>
-            <span (click)=disciplinas()  class="ml-3 font-['Opens Sans'] text-[12px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{projeto.projeto_descricao}}</span>
-            <svg class="w-3 h-3 absolute right-[28px]" text-left  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <span (click)=disciplinas()   class="hover:font-bold mr-3  ml-3 w-[150px] text-left font-['Opens Sans'] text-[12px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{projeto.projeto_descricao}}</span>
+
+
+          <div>
+            <svg     class="w-[13px] h-3 text-right" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg>
+          </div>
+
+
           </button>
           @if(projeto.disciplinas){
                <ul  *ngIf="isButtonActiveDisciplinas(projeto.projeto_id!)">
             @for(disciplina of projeto.disciplinas; track disciplina.disciplina_id){
                 <div class="flex flex-row-reverse items-center ml-[10px]">
-                  <button type="button" (click)="onButtonClickEtapas(disciplina.disciplina_id!)"class="flex items-center mb-2 mt-1  w-[230px] text-black hover:bg-gray-200 font-[150] border-[0.99px] border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+                  <button type="button" (click)="onButtonClickEtapas(disciplina.disciplina_id!)"class="flex items-center mb-2 mt-1  w-[230px] text-black hover:bg-gray-200 font-[150] border-[0.99px] border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px]">
                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                       <path fill-rule="evenodd" d="M3 6a2 2 0 0 1 2-2h5.532a2 2 0 0 1 1.536.72l1.9 2.28H3V6Zm0 3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9H3Z" clip-rule="evenodd"/>
                     </svg>
-                    <span (click)=disciplinas() class="ml-3 text-left font-['Opens Sans'] text-[12px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{disciplina.disciplina_descricao}}</span>
-                    <svg class="w-3 h-3 absolute right-[28px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <span (click)=etapas() class="hover:font-bold mr-3  ml-3 w-[150px] text-left font-['Opens Sans'] text-[12px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{disciplina.disciplina_descricao}}</span>
+                    <svg class="w-3 h-3 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
+
 
                   </button>
                 </div>
@@ -53,11 +60,11 @@
                   <ul  *ngIf="isButtonActiveEtapas(disciplina.disciplina_id!)">
                 @for(etapas of disciplina.etapas; track etapas.etapa_id){
                     <div class="flex flex-row-reverse items-center ml-[20px]">
-                      <button type="button" class="flex items-center mb-2 mt-1  w-[220px] text-black hover:bg-gray-200 font-[150] border-[0.99px]  border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px] pr-[14.8px]">
+                      <button type="button" class="flex items-center mb-2 mt-1  w-[220px] text-black hover:bg-gray-200 font-[150] border-[0.99px]  border-gray-200 rounded-[7.89px] h-[32.55px] pt-[4.93px] pl-[10.93px] pb-[4.93px]">
                         <svg class="w-6 h-6 text-black" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" fill="#e8eaed">
                           <path d="M120-120q-33 0-56.5-23.5T40-200v-520h80v520h680v80H120Zm160-160q-33 0-56.5-23.5T200-360v-440q0-33 23.5-56.5T280-880h200l80 80h280q33 0 56.5 23.5T920-720v360q0 33-23.5 56.5T840-280H280Zm0-80h560v-360H527l-80-80H280v440Zm0 0v-440 440Z" />
                         </svg>
-                        <span class="flex-1 ml-2 text-left font-['Opens Sans'] text-[12px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{etapas.etapa_descricao}}</span>
+                        <span (click)=arquivos() class="hover:font-bold mr-3  ml-3 w-[143px] text-left font-['Opens Sans'] text-[12px] font-normal overflow-hidden text-ellipsis whitespace-nowrap">{{etapas.etapa_descricao}}</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>

@@ -1,3 +1,4 @@
+import { MenuLateralComponent } from './../../components/menu-lateral/menu-lateral.component';
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { BreadcrumbDisciplinaComponent } from '../../components/gerenciamento-disciplina-components/breadcrumb-disciplina/breadcrumb-disciplina.component';
@@ -15,7 +16,7 @@ import { ModalCreateDisciplinaComponent } from "../../components/gerenciamento-d
     standalone: true,
     templateUrl: './gerenciamento-disciplinas.component.html',
     styleUrl: './gerenciamento-disciplinas.component.css',
-    imports: [
+    imports: [MenuLateralComponent,
         NavbarComponent,
         BreadcrumbDisciplinaComponent,
         GerenciamentoDisciplinaComponentsComponent,

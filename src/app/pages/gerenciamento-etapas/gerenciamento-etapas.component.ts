@@ -1,3 +1,4 @@
+import { MenuLateralComponent } from './../../components/menu-lateral/menu-lateral.component';
 import { Component } from '@angular/core';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { BreadcrumbEtapaComponent } from "../../components/gerenciamento-etapa-components/breadcrumb-etapa/breadcrumb-etapa.component";
@@ -13,7 +14,8 @@ import { ModalCreateEtapaComponent } from "../../components/gerenciamento-etapa-
     standalone: true,
     templateUrl: './gerenciamento-etapas.component.html',
     styleUrl: './gerenciamento-etapas.component.css',
-    imports: [NavbarComponent,
+    imports: [MenuLateralComponent,
+      NavbarComponent,
         BreadcrumbEtapaComponent,
         BarraPesquisaEtapaComponent,
         GerenciamentoEtapaComponentsComponent,
