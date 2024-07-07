@@ -7,18 +7,18 @@ import { ProjetoComDisciplinas } from '../../../interface/ProjetoComDisciplinas'
 import { Projeto } from '../../../interface/projeto';
 import { forkJoin } from 'rxjs';
 import { RelatorioService } from '../../../service/relatorio.service';
+import { BreadcrumbComponent } from "../breadcrumb/breadcrumb.component";
 
 
 
 @Component({
-  selector: 'app-tabela',
-  standalone: true,
-  templateUrl: './tabela.component.html',
-  styleUrls: ['./tabela.component.css'],
-  imports: [CommonModule,
-    FormsModule,
-     ReactiveFormsModule ]
-
+    selector: 'app-tabela',
+    standalone: true,
+    templateUrl: './tabela.component.html',
+    styleUrls: ['./tabela.component.css'],
+    imports: [CommonModule,
+        FormsModule,
+        ReactiveFormsModule, BreadcrumbComponent]
 })
 export class TabelaComponent implements OnInit {
     listaArquivos: Arquivo[] = [];
