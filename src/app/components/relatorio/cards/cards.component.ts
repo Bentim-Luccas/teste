@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, input } from '@angular/core';
 import { Arquivo } from '../../../interface/arquivo';
 import { ArquivoService } from '../../../service/arquivo.service';
-import { ArquivoSize } from '../../../interface/arquivoSize';
 import { CommonModule } from '@angular/common';
 
 @Component({
