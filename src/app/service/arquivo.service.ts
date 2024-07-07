@@ -7,7 +7,6 @@ import { ProjetoS3 } from '../interface/projetos3';
 import { ResponsePutArquivoS3 } from '../interface/reponseoutarquivos3';
 import { RequestGetArquivoS3 } from '../interface/request_get_arquivo_s3';
 import { ResponseGetArquivoS3 } from '../interface/response-get-arquivo-s3';
-import { ArquivoSize } from '../interface/arquivoSize';
 
 const httpOptions = {
   headers: new HttpHeaders({
