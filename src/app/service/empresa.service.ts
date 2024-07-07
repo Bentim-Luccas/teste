@@ -33,7 +33,7 @@ export class EmpresaService{
     }
 
     getEmpresaByUsuarioId(id: number): Observable<Empresa[]> {
-      return this.http.get<Empresa[]>(`${this.baseUrl}/empresaByUsuarioId/${id}/1`).pipe(
+      return this.http.get<Empresa[]>(`${this.baseUrl}/empresaByUsuarioId/${id}/2`).pipe(
         catchError(this.handleError) // Handle potential errors
       );
     }

@@ -1,76 +1,54 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-white uppercase bg-preto-tabela-tab dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-white uppercase bg-gray-900 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-0 py-3" style="padding-left: 90px;">
+                <th scope="col" class="px-6 py-3">
                     Nome da Etapa
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Data de cadastro
+                    Data de Cadastro
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="px-6 py-3">
                     Status
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="px-6 py-3">
                     Editar
                 </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                <th scope="col" class="px-6 py-3">
                     Excluir
                 </th>
             </tr>
         </thead>
-        <tbody *ngFor="let etapa of etapa">
-            <tr class="bg-white border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th [routerLink]="['/arquivos']" scope="row"
-                    class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
-                    style="display: flex; align-items: center;">
-                    <img src="assets/images/icon etapa.png"
-                        style="width: 35px; height: 35px; margin-left: 10px; margin-right: 40px;" />
+        <tbody>
+            @for (etapa of etapas; track etapa) {
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th routerLink="/arquivos"  scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
                     {{etapa.etapa_descricao}}
                 </th>
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{etapa.etapa_data_inicio}}
-                </td>
-                <td class="px-4 py-3 text-center">
-                    @if(etapa.etapa_status==0){
-                    <span
+                </th>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <span *ngIf="etapa.etapa_status == 0"
                         class="inline-flex items-center bg-red-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
                         Inativo
                     </span>
-                    }
-                    @else if (etapa.etapa_status==1){
-                    <span
+                    <span *ngIf="etapa.etapa_status == 1"
                         class="inline-flex items-center bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
                         Ativo
                     </span>
-                    }
-                </td>
-                <td class="px-6 py-4 text-center">
-                    <!--
-                    @if(etapa.permissionamento_tipo!=null){
-                    @if(etapa.permissionamento_tipo.includes("W")){
-                    -->
-                    <app-btn-modal-editar-etapa></app-btn-modal-editar-etapa>
-                    <!--
-                    }
-                    }
-                    -->
-                </td>
-                <td class="px-6 py-4 text-center">
-                    <!--
-                    @if(etapa.permissionamento_tipo!=null){
-                    @if(etapa.permissionamento_tipo.includes("D")){
-                    -->
-                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        style="margin-left: 20px; cursor: pointer;" (click)="deletarEtapa(etapa.etapa_id)">
-                        <i class="fas fa-trash-alt mr-1"></i>
+                </th>
+                <th scope="row" class="px-10 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <app-modal-edit-etapa></app-modal-edit-etapa>
+                </th>
+                <th scope="row" class="px-10 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <a class="font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
+                        (click)="deletarEtapa(etapa.etapa_id)">
+                        <i class="fas fa-trash-alt"></i>
                     </a>
-                    <!--
-                    }
-                    }
-                    -->
-                </td>
+                </th>
             </tr>
+            }
         </tbody>
     </table>
 </div>

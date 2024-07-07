@@ -21,6 +21,7 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
   arquivoSubscription: Subscription;
   autorSubscription: Subscription;
   versoes!: Arquivo[];
+  versoesFiltradas!: Arquivo[];
   autor: Usuario | null = null;
   extensoes! : string [];
 
@@ -56,12 +57,15 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
       (data) => {
         console.log("id do arquivo",arquivoId)
         this.versoes = data;
+        this.versoesFiltradas = data;
         this.identificarExtensoes(this.versoes)
         console.log("versoes:",data); // Certifique-se de que o autor foi buscado com sucesso
       }
     );
 
   }
+
+
 
   identificarExtensoes(versoes : Arquivo[]){
     var lookup: string[] = [];
@@ -81,6 +85,17 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
     this.extensoes = lookup;
   }
 
+
+
+  filtarArquivos(tipoExtensao: String){
+    console.log(tipoExtensao)
+
+    this.versoesFiltradas = this.versoes.filter((arquivo)=> arquivo.arquivo_extensao==tipoExtensao)
+
+    console.log(this.versoesFiltradas)
+
+  }
+
   stringToDate(dateString: string | Date): Date {
     return new Date(dateString);
   }
@@ -89,5 +104,8 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
     let partes = descricao.split('.');
     return partes[partes.length - 1];
   }
+
+
+
 
 }
