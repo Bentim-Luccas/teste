@@ -1,9 +1,10 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment.development";
 import { Projeto } from "../interface/projeto";
 import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
 import { Empresa } from "../interface/empresa";
+import { ProjetoComDisciplinas } from "../interface/ProjetoComDisciplinas";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,6 +25,12 @@ export class ProjetoService {
 
     constructor(private http: HttpClient) {
         this.baseUrl = environment.apiServer + 'projeto';
+    }
+    getProjetos(): Observable<Projeto[]> {
+      return this.http.get<Projeto[]>(this.baseUrl, httpOptions)
+        .pipe(
+          catchError(this.handleError)
+        );
     }
 
     post(projeto: Projeto): Observable<Projeto> {
@@ -56,15 +63,17 @@ export class ProjetoService {
         );
     }
 
-    private handleError(error: any): Observable<never> {
-        let errorMessage: string;
-        if (error.error instanceof ErrorEvent) {
-            errorMessage = 'Ocorreu um erro: ' + error.error.message;
-        } else {
-            errorMessage = `O backend retornou o código ${error.status}: ${error.message}`
-        }
-        console.error(errorMessage);
-        return throwError(errorMessage);
+    private handleError(error: HttpErrorResponse): Observable<never> {
+      let errorMessage = 'An unknown error occurred!';
+      if (error.error instanceof Error) {
+        // A client-side or network error occurred.
+        errorMessage = `Client-side error: ${error.error.message}`;
+      } else {
+        // The backend returned an unsuccessful response code.
+        errorMessage = `Server-side error: ${error.status} - ${error.message || error.statusText}`;
+      }
+      console.error(errorMessage);
+      return throwError(() => new Error(errorMessage));
     }
 
     findProjetosDaEmpresaId(idEmpresa : number): Observable<Projeto[]> {
