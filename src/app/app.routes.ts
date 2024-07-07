@@ -45,7 +45,7 @@ export const routes: Routes = [
     component: GerenciamentoUsuarioComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Usuarios' }
   },
   {
-    path: 'arquivos',
+    path: 'arquivos/:id',
     component: GerenciamentoArquivosComponent, canActivate: [inicialGuard], data: { breadcrumb: 'Arquivos' }
   }
 , { path: 'relatorio',

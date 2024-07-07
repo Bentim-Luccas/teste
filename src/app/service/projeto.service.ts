@@ -6,10 +6,10 @@ import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
 import { Empresa } from "../interface/empresa";
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'aplication/json',
-    //'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-  })
+    headers: new HttpHeaders({
+        'Content-Type': 'aplication/json',
+        //'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    })
 };
 
 @Injectable({
@@ -19,38 +19,38 @@ export class ProjetoService {
 
     private readonly baseUrl: string;
 
-    private empresaSelecionadaSubject = new BehaviorSubject<Empresa | null>(null);
-    empresaSelecionada$ = this.empresaSelecionadaSubject.asObservable();
+    private projetoSelecionadoSubject = new BehaviorSubject<Projeto | null>(null);
+    projetoSelecionado$ = this.projetoSelecionadoSubject.asObservable();
 
     constructor(private http: HttpClient) {
         this.baseUrl = environment.apiServer + 'projeto';
     }
 
-    post(projeto: Projeto): Observable<Projeto> {
+    cadastrarProjeto(projeto: Projeto): Observable<Projeto> {
         return this.http.post<Projeto>(this.baseUrl, projeto).pipe(
             catchError(this.handleError)
         );
     }
 
-    findAll(): Observable<Projeto[]> {
+    getProjetos(): Observable<Projeto[]> {
         return this.http.get<Projeto[]>(this.baseUrl).pipe(
             catchError(this.handleError)
         )
     }
 
-    findOne(id: number): Observable<Projeto> {
+    getProjetoById(id: number): Observable<Projeto> {
         return this.http.get<Projeto>(`${this.baseUrl}/${id}`).pipe(
             catchError(this.handleError)
         );
     }
 
-    patch(id: number, alteracoes: Partial<Projeto>): Observable<Projeto> {
-        return this.http.patch<Projeto>(`${this.baseUrl}/${id}`, alteracoes, httpOptions).pipe(
+    atualizarProjeto(projeto: Projeto, idProjeto: number): Observable<Projeto> {
+        return this.http.put<Projeto>(`${this.baseUrl}/${idProjeto}`, projeto).pipe(
             catchError(this.handleError)
         );
     }
 
-    remove(id: number): Observable<void> {
+    excluirProjeto(id: number): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/${id}`).pipe(
             catchError(this.handleError)
         );
@@ -67,30 +67,24 @@ export class ProjetoService {
         return throwError(errorMessage);
     }
 
-    findProjetosDaEmpresaId(idEmpresa : number): Observable<Projeto[]> {
-      return this.http.get<Projeto[]>(`${this.baseUrl}/empresa/${idEmpresa}`).pipe(
-        catchError(this.handleError)
-      );
-    }
-
     /* ======================= Services Baseados no Usuário ====================== */
 
-    findProjetosDaEmpresaDoUsuarioId(idUsuario: number): Observable<Projeto[]> {
-      return this.http.get<Projeto[]>(`${this.baseUrl}/projetosDaEmpresaDoUsuarioId/${idUsuario}`).pipe(
-          catchError(this.handleError)
-      );
+    getProjetosDaEmpresaId(idEmpresa: number): Observable<Projeto[]> {
+        return this.http.get<Projeto[]>(`${this.baseUrl}/empresa/${idEmpresa}`).pipe(
+            catchError(this.handleError)
+        );
     }
 
-    findProjetosDaEmpresaIdDoUsuarioId(idEmpresa: number, idUsuario: number): Observable<Projeto[]> {
-      return this.http.get<Projeto[]>(`${this.baseUrl}/projetosDaEmpresaIdDoUsuarioId/${idEmpresa}/${idUsuario}`).pipe(
-          catchError(this.handleError)
-      );
+    getProjetosDaEmpresaDoUsuarioId(idUsuario: number): Observable<Projeto[]> {
+        return this.http.get<Projeto[]>(`${this.baseUrl}/projetosDaEmpresaDoUsuarioId/${idUsuario}`).pipe(
+            catchError(this.handleError)
+        );
     }
 
     /* ======================== Service para comunicação de componentes=========== */
 
-    setEmpresaSelecionada(empresa: Empresa | null) {
-      this.empresaSelecionadaSubject.next(empresa);
+    setProjetoSelecionado(projeto: Projeto | null) {
+        this.projetoSelecionadoSubject.next(projeto);
     }
 
 }

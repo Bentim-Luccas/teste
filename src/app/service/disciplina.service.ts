@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment.development";
-import { Observable, catchError, throwError } from "rxjs";
+import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
 import { Disciplina } from "../interface/disciplina";
 
 const httpOptions = {
@@ -14,45 +14,43 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DisciplinaService {
+
   private readonly baseUrl: string;
+
+  private disciplinaSelecionadaSubject = new BehaviorSubject<Disciplina | null>(null);
+  disciplinaSelecionada$ = this.disciplinaSelecionadaSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.baseUrl = environment.apiServer + 'disciplina';
   }
 
-  getDisciplina(): Observable<any> {
-    return this.http.get<Disciplina[]>(this.baseUrl).pipe(
-      catchError(this.handleError) // Handle potential errors
-    );
-  }
-
-  post(disciplina: Disciplina): Observable<Disciplina> {
+  cadastrarDisciplina(disciplina: Disciplina): Observable<Disciplina> {
     return this.http.post<Disciplina>(this.baseUrl, disciplina).pipe(
       catchError(this.handleError)
     );
   }
 
-  findAll(): Observable<Disciplina[]> {
+  getDisciplinas(): Observable<any> {
     return this.http.get<Disciplina[]>(this.baseUrl).pipe(
-      catchError(this.handleError)
-    )
+      catchError(this.handleError) // Handle potential errors
+    );
   }
 
-  findOne(id: number): Observable<Disciplina> {
+  getDisciplinaById(id: number): Observable<Disciplina> {
     return this.http.get<Disciplina>(`${this.baseUrl}/${id}`).pipe(
       catchError(this.handleError) // Handle potential errors
     );
   }
 
-  patch(id: number, changes: Partial<Disciplina>): Observable<Disciplina> {
-    return this.http.patch<Disciplina>(`${this.baseUrl}/${id}`, changes, httpOptions).pipe(
+  atualizarDisciplina(disciplina: Disciplina, idDisciplina: number): Observable<Disciplina> {
+    return this.http.put<Disciplina>(`${this.baseUrl}/${idDisciplina}`, disciplina).pipe(
       catchError(this.handleError)
     );
   }
 
-  remove(id: number): Observable<void> {
+  excluirDisciplina(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`).pipe(
-      catchError(this.handleError) // Handle potential errors
+      catchError(this.handleError)
     );
   }
 
@@ -69,21 +67,22 @@ export class DisciplinaService {
 
   /* ======================= Services Baseados no Usuário ====================== */
 
-  findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario: number, idProjeto: number): Observable<Disciplina[]> {
+  getDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario: number, idProjeto: number): Observable<Disciplina[]> {
     return this.http.get<Disciplina[]>(`${this.baseUrl}/disciplinasDeProjetoIdDaEmpresaDoUsuarioId/${idUsuario}/${idProjeto}`).pipe(
       catchError(this.handleError)
     );
   }
-  findDisciplinasDeProjetoId(idProjeto: number): Observable<Disciplina[]> {
+  getDisciplinasDeProjetoId(idProjeto: number): Observable<Disciplina[]> {
     return this.http.get<Disciplina[]>(`${this.baseUrl}/projeto/${idProjeto}`).pipe(
       catchError(this.handleError)
     );
   }
-  // findDisciplinasDeProjetoIdDaEmpresa(idUsuario: number, idProjeto: number): Observable<Disciplina[]> {
-  //   return this.http.get<Disciplina[]>(`${this.baseUrl}/disciplinasDeProjetoIdDaEmpresaDoUsuarioId/${idUsuario}/${idProjeto}`).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
+
+  /* ======================== Service para comunicação de componentes =========== */
+
+  setDisciplinaSelecionada(disciplina: Disciplina | null) {
+    this.disciplinaSelecionadaSubject.next(disciplina);
+  }
 
 }
 

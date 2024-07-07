@@ -179,20 +179,20 @@ export class MenuLateralComponent implements OnInit {
         this.isEmpresaSelected = true;
         this.empresas = Array.isArray(response) ? response : [response];
         this.empresas.forEach((empresa) => {
-          this.projetoService.findProjetosDaEmpresaId(<number>empresa.empresa_id).subscribe({
+          this.projetoService.getProjetosDaEmpresaId(<number>empresa.empresa_id).subscribe({
               next: (response1) => {
                 this.placeholderText = empresa.empresa_nome;
                 this.projetos = response1;
                 empresa.projetos = response1;
                 empresa.projetos.forEach((projeto) => {
                   this.disciplinaService
-                    .findDisciplinasDeProjetoId(<number>projeto.projeto_id)
+                    .getDisciplinasDeProjetoId(<number>projeto.projeto_id)
                     .subscribe({
                       next: (response2) => {
                         projeto.disciplinas = response2;
                         projeto.disciplinas.forEach((disciplina) => {
                           this.etapaService
-                            .findEtapasDaDisciplinaId(
+                            .getEtapasDaDisciplinaId(
                               <number>disciplina.disciplina_id
                             )
                             .subscribe({

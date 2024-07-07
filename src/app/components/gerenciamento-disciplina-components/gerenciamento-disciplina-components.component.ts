@@ -6,6 +6,7 @@ import { Projeto } from '../../interface/projeto';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalEditDisciplinaComponent } from "./modal-edit-disciplina/modal-edit-disciplina.component";
+import { Etapa } from '../../interface/etapa';
 
 
 @Component({
@@ -16,7 +17,9 @@ import { ModalEditDisciplinaComponent } from "./modal-edit-disciplina/modal-edit
     imports: [CommonModule, ModalEditDisciplinaComponent]
 })
 export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
+
     disciplinas: Disciplina[] = [];
+    disciplinaSelecionada: Disciplina | null = null;
 
     constructor(
         private disciplinaService: DisciplinaService,
@@ -30,7 +33,7 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     }
 
     CarregarDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idProjeto: number, idUsuario: number) {
-        this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario, idProjeto).subscribe({
+        this.disciplinaService.getDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(idUsuario, idProjeto).subscribe({
             next: (disciplina) => {
                 this.disciplinas = disciplina;
                 this.carregarProjetoNome(disciplina);
@@ -39,9 +42,9 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
         });
     }
 
-    private carregarProjetoNome(disciplina: Disciplina[]): void {
+    carregarProjetoNome(disciplina: Disciplina[]): void {
         disciplina.forEach((disc: Disciplina) => {
-            this.projetoService.findOne(disc.projeto_id).subscribe(
+            this.projetoService.getProjetoById(disc.projeto_id).subscribe(
                 (projeto: Projeto) => {
                     if (projeto) {
                         disc.projeto_nome = projeto.projeto_descricao || '';
@@ -58,16 +61,23 @@ export class GerenciamentoDisciplinaComponentsComponent implements OnInit {
     }
 
     deletarDisciplina(idDisciplina: number): void {
-        this.disciplinaService.remove(idDisciplina).subscribe(() => {
+        this.disciplinaService.excluirDisciplina(idDisciplina).subscribe(() => {
             this.disciplinas = this.disciplinas.filter(
                 (d) => d.disciplina_id !== idDisciplina
             );
         });
     }
 
-    onSelect(project: Disciplina): void {
-        const id = project.projeto_id
+    onSelect(disciplina: Disciplina): void {
+        const id = disciplina.disciplina_id
         this.router.navigate(['/etapas', id]);
     }
-    
+
+    detalharDisciplina(disciplina: Disciplina) {
+        if (!this.disciplinaSelecionada) {
+            this.disciplinaService.setDisciplinaSelecionada(disciplina);
+            this.disciplinaSelecionada = disciplina;
+        }
+    }
+
 }

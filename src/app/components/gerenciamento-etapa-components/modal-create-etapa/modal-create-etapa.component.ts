@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EtapaService } from '../../../service/etapa.service';
 import { Etapa } from '../../../interface/etapa';
+import { DisciplinaService } from '../../../service/disciplina.service';
 
 @Component({
   selector: 'app-modal-create-etapa',
@@ -16,16 +17,16 @@ export class ModalCreateEtapaComponent {
 
   etapaForm = new FormGroup({
     etapa_descricao: new FormControl('', Validators.required),
-    etapa_status: new FormControl(1, Validators.required),
-    disciplina_id: new FormControl(4, Validators.required),
-    etapa_id_pai: new FormControl('etapa_status', Validators.required),
+    etapa_status: new FormControl('', Validators.required),
+    disciplina_id: new FormControl(2, Validators.required),
+    etapa_id_pai: new FormControl(1, Validators.required),// Inicialmente pode ser null
   });
 
   constructor(private etapaService: EtapaService) { }
 
   onSubmit() {
     console.log(this.etapaForm.value);
-    this.etapaService.post(<Etapa><unknown>this.etapaForm.value).subscribe({
+    this.etapaService.cadastrarEtapa(<Etapa>this.etapaForm.value).subscribe({
       next: (response) => {
         console.log(response);
         this.closeModal();

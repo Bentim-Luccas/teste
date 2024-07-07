@@ -23,7 +23,7 @@ export class ModalCreateDisciplinaComponent {
 
   onSubmit() {
     console.log(this.disciplinaForm.value);
-    this.disciplinaService.post(<Disciplina>this.disciplinaForm.value).subscribe({
+    this.disciplinaService.cadastrarDisciplina(<Disciplina>this.disciplinaForm.value).subscribe({
       next: (response) => {
         console.log(response);
         this.closeModal();

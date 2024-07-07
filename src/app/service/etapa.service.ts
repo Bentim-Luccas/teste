@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment.development";
-import { Observable, catchError, throwError } from "rxjs";
+import { BehaviorSubject, Observable, catchError, throwError } from "rxjs";
 import { Etapa } from "../interface/etapa";
 
 const httpOptions = {
@@ -16,35 +16,38 @@ const httpOptions = {
 export class EtapaService {
     private readonly baseUrl: string;
 
+    private etapaSelecionadaSubject = new BehaviorSubject<Etapa | null>(null);
+    etapaSelecionada$ = this.etapaSelecionadaSubject.asObservable();
+
     constructor(private http: HttpClient) {
         this.baseUrl = environment.apiServer + 'etapa';
     }
 
-    post(etapa: Etapa): Observable<Etapa> {
+    cadastrarEtapa(etapa: Etapa): Observable<Etapa> {
         return this.http.post<Etapa>(this.baseUrl, etapa).pipe(
-          catchError(this.handleError)
+            catchError(this.handleError)
         );
-      }
+    }
 
-    findAll(): Observable<Etapa[]> {
+    getEtapas(): Observable<Etapa[]> {
         return this.http.get<Etapa[]>(this.baseUrl).pipe(
             catchError(this.handleError)
         )
     }
 
-    findOne(id: number): Observable<Etapa> {
+    getEtapaById(id: number): Observable<Etapa> {
         return this.http.get<Etapa>(`${this.baseUrl}/${id}`).pipe(
             catchError(this.handleError)
         );
     }
 
-    patch(id: number, alteracoes: Partial<Etapa>): Observable<Etapa> {
-        return this.http.patch<Etapa>(`${this.baseUrl}/${id}`, alteracoes, httpOptions).pipe(
+    atualizarEtapa(etapa: Etapa, idEtapa: number): Observable<Etapa> {
+        return this.http.put<Etapa>(`${this.baseUrl}/${idEtapa}`, etapa).pipe(
             catchError(this.handleError)
         );
     }
 
-    remove(id: number): Observable<void> {
+    excluirEtapa(id: number): Observable<void> {
         return this.http.delete<void>(`${this.baseUrl}/${id}`).pipe(
             catchError(this.handleError)
         );
@@ -63,17 +66,22 @@ export class EtapaService {
 
     /* ======================= Services Baseados no Usuário ====================== */
 
-    findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario: number, idDisciplina: number): Observable<Etapa[]> {
-      return this.http.get<Etapa[]>(`${this.baseUrl}/etapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId/${idUsuario}/${idDisciplina}`).pipe(
-          catchError(this.handleError)
-      );
+    getEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(idUsuario: number, idDisciplina: number): Observable<Etapa[]> {
+        return this.http.get<Etapa[]>(`${this.baseUrl}/etapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId/${idUsuario}/${idDisciplina}`).pipe(
+            catchError(this.handleError)
+        );
     }
-    
-    findEtapasDaDisciplinaId(idDisciplina: number): Observable<Etapa[]> {
+
+    getEtapasDaDisciplinaId(idDisciplina: number): Observable<Etapa[]> {
         return this.http.get<Etapa[]>(`${this.baseUrl}/disciplina/${idDisciplina}`).pipe(
             catchError(this.handleError)
         );
-      }
+    }
 
+    /* ======================== Service para comunicação de componentes =========== */
+
+    setEtapaSelecionada(etapa: Etapa | null) {
+        this.etapaSelecionadaSubject.next(etapa);
+    }
 
 }

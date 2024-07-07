@@ -7,7 +7,6 @@ import { BarraPesquisaDisciplinaComponent } from '../../components/gerenciamento
 import { BuscarDisciplinaComponent } from '../../components/gerenciamento-disciplina-components/buscar-disciplina/buscar-disciplina.component';
 import { TrackPageDisciplinaComponent } from '../../components/gerenciamento-disciplina-components/track-page-disciplina/track-page-disciplina.component';
 import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
-import { MenuLateralDisciplinaComponent } from "../../components/gerenciamento-disciplina-components/menu-lateral-disciplina/menu-lateral-disciplina.component";
 import { BarraPesquisaComponent } from "../../components/gerenciamento-arquivos-components/barra-pesquisa/barra-pesquisa.component";
 import { ModalCreateDisciplinaComponent } from "../../components/gerenciamento-disciplina-components/modal-create-disciplina/modal-create-disciplina.component";
 
@@ -25,7 +24,6 @@ import { ModalCreateDisciplinaComponent } from "../../components/gerenciamento-d
         TrackPageDisciplinaComponent,
         BreadcrumbComponent,
         BreadcrumbItemDirective,
-        MenuLateralDisciplinaComponent,
         BarraPesquisaComponent,
         ModalCreateDisciplinaComponent
     ]
