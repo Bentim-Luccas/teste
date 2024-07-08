@@ -11,5 +11,6 @@ export class Arquivo {
   arquivo_id_pai!: string;
   arquivo_status!: number;
   autor!: string;
-  arquivo_extensao?:string
+  arquivo_extensao?:string;
+  arquivo_tamanho!: number;
 }

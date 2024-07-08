@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router,RouterModule } from '@angular/router';
 import { Etapa } from '../../interface/etapa';
 import { EtapaService } from '../../service/etapa.service';
 import { ModalEditEtapaComponent } from "./modal-edit-etapa/modal-edit-etapa.component";
@@ -19,6 +19,7 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
 
   constructor(private etapaService: EtapaService,
     private projetoService: ProjetoService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +33,11 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
       },
       error: (error) => console.log(error)
     });
+  }
+
+  onSelect(etapa: Etapa): void {
+    const id = etapa.etapa_id
+    this.router.navigate(['/arquivos', id]);
   }
 
   deletarEtapa(idEtapa: number): void {
