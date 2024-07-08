@@ -1,68 +1,52 @@
-<p align="center">
-  <a href="http://angular.io/" target="blank"><img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200" alt="Angular Logo" /></a>
-</p>
+# Sistema com Proteção GUARD
 
-<p align="center">
-  A web application framework for crafting dynamic single-page applications.
-</p>
-<p align="center">
-  <a href="https://www.npmjs.com/package/@angular/core" target="_blank"><img src="https://img.shields.io/npm/v/@angular/core" alt="NPM Version" /></a>
-  <a href="https://github.com/angular/angular-cli" target="_blank"><img src="https://img.shields.io/badge/angular-cli-blue.svg" alt="Angular CLI" /></a>
-  <a href="https://angular.io/guide/license" target="_blank"><img src="https://img.shields.io/npm/l/@angular/core" alt="License" /></a>
-  <a href="https://github.com/angular/angular-cli/actions/workflows/build.yml" target="_blank"><img src="https://github.com/angular/angular-cli/actions/workflows/build.yml/badge.svg" alt="Build Status" /></a>
-</p>
+Este sistema foi atualizado para incluir proteção GUARD. Para acessar o sistema, os usuários devem ter permissão. O token de acesso é enviado para o `sessionStorage` do navegador, permitindo o acesso sem a necessidade de um email real.
 
+## Acesso ao Sistema
 
+Para acessar o sistema atualizado com proteção GUARD, siga as instruções abaixo para o seu navegador:
 
+### Microsoft Edge
 
-# Gerenciador de Arquivos 
+1. **Abrir o Microsoft Edge**: Inicie o navegador Microsoft Edge clicando no ícone do navegador na barra de tarefas ou pesquisando por "Edge" no menu Iniciar.
+   
+2. **Acessar a URL do Sistema**: Digite a URL do sistema na barra de endereços e pressione Enter. A URL deve ser fornecida pela administração do sistema.
 
-Este projeto foi gerado com  [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+3. **Verificar Permissões**: Se você possui as permissões necessárias, você será redirecionado para a página de login do sistema.
 
-## Installation
+4. **Autenticar-se**: Siga o processo de login conforme instruído pelo sistema. 
 
-```bash
-$ npm install
-```
+5. **Token no sessionStorage**: Após a autenticação, o token será armazenado automaticamente no `sessionStorage` do seu navegador Edge. Para verificar, abra o DevTools pressionando `F12`, vá para a aba "Application" e clique em "sessionStorage". Você verá o token de acesso.
 
-## Servidor de Desenvolvimento
+### Google Chrome
 
-Execute
-```bash
-$ ng serve
-```
-para iniciar o servidor de desenvolvimento. Navegue para `http://localhost:4200/`. O aplicativo irá recarregar automaticamente se você modificar qualquer um dos arquivos fonte.
+1. **Abrir o Google Chrome**: Inicie o Google Chrome clicando no ícone do navegador na barra de tarefas ou pesquisando por "Chrome" no menu Iniciar.
 
-## Bibloteca de Componentes 
-- [Flowbite ](https://flowbite.com/#components)
-## Build
+2. **Acessar a URL do Sistema**: Digite a URL do sistema na barra de endereços e pressione Enter. A URL deve ser fornecida pela administração do sistema.
 
-Execute 
-```bash
-$ ng build
-```
-para construir o projeto. Os artefatos de construção serão armazenados no diretório `dist/`.
+3. **Verificar Permissões**: Se você possui as permissões necessárias, você será redirecionado para a página de login do sistema.
 
-## Executando Testes de Unidade
+4. **Autenticar-se**: Siga o processo de login conforme instruído pelo sistema. 
 
-Execute 
-```bash
-$ ng test
-```
-para executar os testes de unidade via [Karma](https://karma-runner.github.io).
+5. **Token no sessionStorage**: Após a autenticação, o token será armazenado automaticamente no `sessionStorage` do seu navegador Chrome. Para verificar, abra o DevTools pressionando `F12`, vá para a aba "Application" e clique em "sessionStorage". Você verá o token de acesso.
 
-## Executando Testes End-to-End
+### Mozilla Firefox
 
-Execute 
-```bash
-$ ng e2e
-```
-para executar os testes end-to-end através de uma plataforma de sua escolha. Para usar este comando, você precisa primeiro adicionar um pacote que implemente capacidades de teste end-to-end.
+1. **Abrir o Mozilla Firefox**: Inicie o Mozilla Firefox clicando no ícone do navegador na barra de tarefas ou pesquisando por "Firefox" no menu Iniciar.
 
-## Ajuda Adicional
+2. **Acessar a URL do Sistema**: Digite a URL do sistema na barra de endereços e pressione Enter. A URL deve ser fornecida pela administração do sistema.
 
-Para obter mais ajuda sobre o Angular CLI, use 
-```bash
-$ ng help
-```
-ou consulte a página [Angular CLI Overview and Command Reference](https://angular.io/cli).
+3. **Verificar Permissões**: Se você possui as permissões necessárias, você será redirecionado para a página de login do sistema.
+
+4. **Autenticar-se**: Siga o processo de login conforme instruído pelo sistema. 
+
+5. **Token no sessionStorage**: Após a autenticação, o token será armazenado automaticamente no `sessionStorage` do seu navegador Firefox. Para verificar, abra o DevTools pressionando `F12`, vá para a aba "Storage" e clique em "sessionStorage". Você verá o token de acesso.
+
+## Considerações Finais
+
+Este processo garante que o token necessário para acessar o sistema seja armazenado de maneira segura no `sessionStorage` do navegador utilizado, permitindo o acesso conforme as permissões configuradas no sistema.
+
+Caso encontre dificuldades ou tenha dúvidas, entre em contato com o suporte técnico da sua organização para obter assistência adicional.
+
+# Email para acesso a aplicação
+superadmin@empresa.com

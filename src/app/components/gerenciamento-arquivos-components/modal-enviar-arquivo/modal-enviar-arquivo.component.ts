@@ -1,3 +1,4 @@
+// import { Status } from './../../../../../../arquivosBackendNest/src/enums/usuario_tipo.enum';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +13,9 @@ import { MatIcon } from '@angular/material/icon';
 import { ArquivoService } from '../../../service/arquivo.service';
 import { Arquivo } from './../../../interface/arquivo';
 import { TagsComponent } from "./tags/tags.component";
+import { ProjetoS3 } from '../../../interface/projetos3';
+import { response } from 'express';
+import { MatDialogRef } from '@angular/material/dialog';
 
 // BOTAO
 @Component({
@@ -42,15 +46,17 @@ export class ModalEnviarArquivoComponent implements OnInit{
   formulario: FormGroup
   arquivo: Arquivo = new Arquivo();
   selectedFile!: File | null;
+  selectedFileType!:string;
+  link!:string
 
-  constructor(private arquivoService: ArquivoService, private fb: FormBuilder) {
+  constructor(private arquivoService: ArquivoService, private fb: FormBuilder, private dialogRef: MatDialogRef<ModalEnviarArquivoComponent>) {
     this.formulario = this.fb.group({
       file_name: ['', Validators.required]
   })
   }
 
   ngOnInit(): void {
-
+    this.formulario.controls['file_name'].disable()
   }
 
 
@@ -59,25 +65,51 @@ export class ModalEnviarArquivoComponent implements OnInit{
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
       this.selectedFileName = this.selectedFile.name;
+      this.selectedFileType = this.selectedFile.type;
+      this.formulario.controls['file_name'].setValue(this.selectedFileName)
+      console.log(this.selectedFileType)
+      console.log(this.selectedFile)
+
     } else {
       this.selectedFileName = null;
       this.selectedFile = null;
     }
   }
 
-  onSubmit(){
+  async onSubmit(){
     this.arquivo.arquivo_descricao = this.formulario.get('file_name')?.value
-    this.arquivo.arquivo_link = 'http://www.google.com'
+    // this.arquivo.arquivo_link = 'http://www.google.com'
+    this.arquivo.arquivo_extensao = this.selectedFileName?.split('.').pop()
     this.arquivo.arquivo_status = 0
     this.arquivo.usuario_id = 5
     this.arquivo.etapa_id = 1
     this.arquivo.projeto_id = 4
     console.log(this.selectedFile)
     console.log(this.arquivo)
-    this.arquivoService.postArquivo(this.arquivo).subscribe(response => {
-      console.log('Upload successful', response);
-      // Faça o que for necessário com a resposta do servidor
+
+    let projeto = new ProjetoS3()
+    projeto.projeto_id = this.arquivo.projeto_id
+    this.arquivoService.postPutArquivoS3(projeto).subscribe(response =>{
+      this.arquivo.arquivo_link = response.arquivo_link
+      this.link = response.s3_pre_signed_link
+      console.log(response)
+      console.log(this.link)
+      this.arquivoService.putArquivoInS3(this.selectedFile, this.link, this.selectedFileType).subscribe(response=>{
+        console.log(response)
+        if(response.status === 200){
+
+          this.arquivoService.postArquivo(this.arquivo).subscribe(response => {
+            console.log('Upload successful', response);
+            this.dialogRef.close();
+            // Faça o que for necessário com a resposta do servidor
+          })
+        }
+      })
     })
+
+
+
+
   }
 
   formatDate(date: Date): string {
@@ -90,4 +122,6 @@ export class ModalEnviarArquivoComponent implements OnInit{
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
+
+
 }

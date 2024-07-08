@@ -14,6 +14,23 @@
   --azul-claro: #4892BB;
   --azul-medio: #4381A7;
   --azul-escuro: #376184;
+
+  --preto-principal: #262626;
+  --cinza-selecionado: #F3F4F6;
+  --azul-selecao-tabela: #4381A72E;
+  --cinza-input: #F9FAFB;
+  --vermelho-deletar: #9B1C1C;
+  --vermelho-tenho-certeza: #C81E1E;
+  --vermelho-deletar-aviso: #FBD5D5;
+  --verde-criado-aviso: #DEF7EC;
+  --status-desativado: #FDF6B2;
+  --status-texto-desativado: #633112;
+  --status-bloqueado: #FDE8E8;
+  --status-texto-bloqueado: #9B1C1C;
+  --status-ativo: #DEF7EC;
+  --status-texto-ativo: #03543F;
+  --preto-tabela-tab: #262626;
+  --cinza-tabela-tab-texto: #9CA3AF;
 }
 
 html,
@@ -23,7 +40,8 @@ body {
 
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family:"Inter", sans-serif;
+
 }
 
 .material-symbols-outlined {
@@ -34,27 +52,3 @@ body {
     'opsz' 24
 }
 
-
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: var(--cinza-secundario);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--cinza-border);
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--cinza-principal-claro);
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

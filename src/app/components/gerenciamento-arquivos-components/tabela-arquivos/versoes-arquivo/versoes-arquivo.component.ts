@@ -15,15 +15,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './versoes-arquivo.component.html',
   styleUrl: './versoes-arquivo.component.css'
 })
-export class VersoesArquivoComponent implements OnChanges, OnDestroy {
+export class VersoesArquivoComponent implements  OnInit,OnChanges, OnDestroy {
 
   arquivoSelecionado: Arquivo | null = null;
-  arquivoSubscription: Subscription;
-  autorSubscription: Subscription;
-  versoes!: Arquivo[]
+  arquivoSubscription!: Subscription;
+  autorSubscription!: Subscription;
+  versoes!: Arquivo[];
+  versoesFiltradas!: Arquivo[];
   autor: Usuario | null = null;
+  extensoes! : string [];
 
   constructor(private arquivoService: ArquivoService, private usuarioService: UsuarioService) {
+  }
+  ngOnInit(): void { 
     this.arquivoSubscription = this.arquivoService.arquivoSelecionado$.subscribe(
       arquivo => {
         this.arquivoSelecionado = arquivo;
@@ -55,9 +59,43 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
       (data) => {
         console.log("id do arquivo",arquivoId)
         this.versoes = data;
+        this.versoesFiltradas = data;
+        this.identificarExtensoes(this.versoes)
         console.log("versoes:",data); // Certifique-se de que o autor foi buscado com sucesso
       }
     );
+
+  }
+
+
+
+  identificarExtensoes(versoes : Arquivo[]){
+    var lookup: string[] = [];
+    var items = versoes;
+    var result = [];
+
+    let name:string|undefined ;
+    versoes.forEach(item => {
+      name = item.arquivo_extensao;
+      if (name){
+        if (!(lookup.includes(name))){
+          lookup.push(name);
+        }
+      }
+
+    });
+    this.extensoes = lookup;
+  }
+
+
+
+  filtarArquivos(tipoExtensao: String){
+    console.log(tipoExtensao)
+
+    this.versoesFiltradas = this.versoes.filter((arquivo)=> arquivo.arquivo_extensao==tipoExtensao)
+
+    console.log(this.versoesFiltradas)
+
   }
 
   stringToDate(dateString: string | Date): Date {
@@ -68,5 +106,8 @@ export class VersoesArquivoComponent implements OnChanges, OnDestroy {
     let partes = descricao.split('.');
     return partes[partes.length - 1];
   }
+
+
+
 
 }

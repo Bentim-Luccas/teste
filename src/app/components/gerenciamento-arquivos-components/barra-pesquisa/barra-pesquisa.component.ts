@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TagsComponent } from '../modal-enviar-arquivo/tags/tags.component';
 import { FiltroService } from '../../../service/filtro.service';
 
+
 @Component({
   selector: 'app-barra-pesquisa',
   standalone: true,
