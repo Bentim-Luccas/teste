@@ -49,4 +49,4 @@ Este processo garante que o token necessário para acessar o sistema seja armaze
 Caso encontre dificuldades ou tenha dúvidas, entre em contato com o suporte técnico da sua organização para obter assistência adicional.
 
 # Email para acesso a aplicação
-superadmin@empresa.com
+superadmin@empresa.com ou admin@empresa.com
