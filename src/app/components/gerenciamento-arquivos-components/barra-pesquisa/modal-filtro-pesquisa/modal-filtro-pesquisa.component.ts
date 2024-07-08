@@ -36,11 +36,9 @@ export class ModalFiltroPesquisaComponent implements OnInit {
   }
 
   tipoArquivo: string[] = [
-
     'jpg',
     'pdf',
     'dwg',
-
   ]
 
   statusMap: { [key: string]: number } = {
@@ -86,8 +84,8 @@ export class ModalFiltroPesquisaComponent implements OnInit {
   setUltimaModificacao(event: Event, data: string) {
     event.preventDefault();
     this.formulario.get('ultimaModificacao')?.setValue(data);
-    this.selectedUltimaModificacao = data;  // Atualiza o texto do botão
-    this.currentDropdown = null;  // Fecha o dropdown
+    this.selectedUltimaModificacao = data; 
+    this.currentDropdown = null;  
   }
 
   onStatusChange(event: any) {
@@ -102,7 +100,6 @@ export class ModalFiltroPesquisaComponent implements OnInit {
       }
     }
   }
-
 
   onTipoArquivoChange(event: any) {
     const checkbox = event.target;
