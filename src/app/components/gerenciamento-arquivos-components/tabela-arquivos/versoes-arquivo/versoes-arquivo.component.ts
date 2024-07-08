@@ -15,17 +15,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './versoes-arquivo.component.html',
   styleUrl: './versoes-arquivo.component.css'
 })
-export class VersoesArquivoComponent implements OnChanges, OnDestroy {
+export class VersoesArquivoComponent implements  OnInit,OnChanges, OnDestroy {
 
   arquivoSelecionado: Arquivo | null = null;
-  arquivoSubscription: Subscription;
-  autorSubscription: Subscription;
+  arquivoSubscription!: Subscription;
+  autorSubscription!: Subscription;
   versoes!: Arquivo[];
   versoesFiltradas!: Arquivo[];
   autor: Usuario | null = null;
   extensoes! : string [];
 
   constructor(private arquivoService: ArquivoService, private usuarioService: UsuarioService) {
+  }
+  ngOnInit(): void { 
     this.arquivoSubscription = this.arquivoService.arquivoSelecionado$.subscribe(
       arquivo => {
         this.arquivoSelecionado = arquivo;

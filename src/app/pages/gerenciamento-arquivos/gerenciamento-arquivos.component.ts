@@ -8,13 +8,14 @@ import { NavbarComponent } from '../../components/navbar/navbar.component'
 import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral.component';
 import { TrackPageArquivoComponent } from '../../components/gerenciamento-arquivos-components/track-page-arquivo/track-page-arquivo.component'
 import { ModalArquivoListaCompartilhadaComponent } from '../../components/gerenciamento-arquivos-components/modal-arquivo-lista-compartilhada/modal-arquivo-lista-compartilhada.component';
+import { BotaoEnviarArquivoComponent } from '../../components/gerenciamento-arquivos-components/botao-enviar-arquivo/botao-enviar-arquivo.component';
 
 
 @Component({
   selector: 'app-gerenciamento-arquivos',
   standalone: true,
   imports: [ArquivoTagComponent, BarraPesquisaComponent, ModalButtonComponent,
-     ModalEnviarArquivoComponent, ModalMudarAcessoComponent, TabelaArquivosComponent, NavbarComponent, MenuLateralComponent, TrackPageArquivoComponent,ModalArquivoListaCompartilhadaComponent],
+     ModalEnviarArquivoComponent, ModalMudarAcessoComponent, TabelaArquivosComponent, NavbarComponent, MenuLateralComponent, TrackPageArquivoComponent,ModalArquivoListaCompartilhadaComponent, BotaoEnviarArquivoComponent],
   templateUrl: './gerenciamento-arquivos.component.html',
   styleUrl: './gerenciamento-arquivos.component.css'
 })
