@@ -22,7 +22,7 @@
         <tbody>
             @for (etapa of etapas; track etapa) {
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th (click)="onSelect(etapa)"  scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
+                <th (click)="onSelect(etapa)" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer">
                     {{etapa.etapa_descricao}}
                 </th>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -38,7 +38,7 @@
                         Ativo
                     </span>
                 </th>
-                <th scope="row" class="px-10 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="px-10 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" (click)="detalharEtapa(etapa)">
                     <app-modal-edit-etapa></app-modal-edit-etapa>
                 </th>
                 <th scope="row" class="px-10 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

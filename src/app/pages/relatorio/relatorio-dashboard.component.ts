@@ -103,7 +103,7 @@ export class RelatorioComponent implements OnInit{
     });
 
     // Lista de Projetos:
-    this.projetoService.findAll().subscribe(data => {
+    this.projetoService.getProjetos().subscribe(data => {
       this.listaProjetos = data;
     });
 

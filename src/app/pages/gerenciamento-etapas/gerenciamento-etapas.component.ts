@@ -6,7 +6,6 @@ import { BarraPesquisaEtapaComponent } from "../../components/gerenciamento-etap
 import { GerenciamentoEtapaComponentsComponent } from "../../components/gerenciamento-etapa-components/gerenciamento-etapa-components.component";
 import { BuscarEtapaComponent } from '../../components/gerenciamento-etapa-components/buscar-etapa/buscar-etapa.component'
 import { TrackPageEtapaComponent } from '../../components/gerenciamento-etapa-components/track-page-etapa/track-page-etapa.component'
-import { MenuLateralEtapaComponent } from "../../components/gerenciamento-etapa-components/menu-lateral-etapa/menu-lateral-etapa.component";
 import { ModalCreateEtapaComponent } from "../../components/gerenciamento-etapa-components/modal-create-etapa/modal-create-etapa.component";
 
 @Component({
@@ -21,7 +20,6 @@ import { ModalCreateEtapaComponent } from "../../components/gerenciamento-etapa-
         GerenciamentoEtapaComponentsComponent,
         BuscarEtapaComponent,
         TrackPageEtapaComponent,
-        MenuLateralEtapaComponent,
         ModalCreateEtapaComponent
     ]
 })

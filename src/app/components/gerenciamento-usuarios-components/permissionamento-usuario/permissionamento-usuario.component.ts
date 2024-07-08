@@ -22,17 +22,17 @@ constructor (private projetoService: ProjetoService, private disciplinaService: 
 
   getProjetosDaEmpresaDoUsuarioId(usuarioId: number) : void{
     //Obter os projetos do usuario baseado na empresaId
-    this.projetoService.findProjetosDaEmpresaDoUsuarioId(usuarioId).subscribe({
+    this.projetoService.getProjetosDaEmpresaDoUsuarioId(usuarioId).subscribe({
       next: (response)=> {
         response && (this.projetos = response);
         this.projetos.forEach(projeto => {
           //Obter as disciplinas de cada projeto
-          this.disciplinaService.findDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(usuarioId, <number>projeto.projeto_id).subscribe({
+          this.disciplinaService.getDisciplinasDeProjetoIdDaEmpresaDoUsuarioId(usuarioId, <number>projeto.projeto_id).subscribe({
             next: (response1)=> {
               projeto.disciplinas = response1;
               projeto.disciplinas.forEach(disciplina => {
                 //Obter as etapas de cada disciplina
-                this.etapaService.findEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(usuarioId, <number>disciplina.disciplina_id).subscribe({
+                this.etapaService.getEtapasDaDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(usuarioId, <number>disciplina.disciplina_id).subscribe({
                   next: (response2)=> {
                     disciplina.etapas = response2;
                   }

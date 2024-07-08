@@ -1,5 +1,5 @@
 <div class="grid grid-cols-1 md:grid-cols-2 px-4 py-4 gap-20 w-[1200px]">
-  @for (projeto of permissionamento; track projeto) {
+  @for (projeto of projetos; track projeto) {
   <a
     class="bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div class="flex flex-col md:flex-row justify-between items-start">
@@ -23,7 +23,7 @@
           </svg>
         </button>
         <!-- Dropdown menu -->
-        <div *ngIf="openedDropdownId === projeto.projeto_id" id="dropdownMenuIconButton"
+        <div *ngIf="openedDropdownProjetoId === projeto.projeto_id" id="dropdownMenuIconButton"
           class="z-10 absolute right-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
             <!--
@@ -31,8 +31,9 @@
                 @if(projeto.permissionamento_tipo.includes("W")){
                 -->
             <li>
-              <app-modal-edit-projeto></app-modal-edit-projeto>
+              <app-modal-edit-projeto (click)="detalharProjeto(projeto)"></app-modal-edit-projeto>
             </li>
+
             <!--
                 }
               }
@@ -41,7 +42,7 @@
                 -->
             <li>
               <a class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                (click)="deletarProjeto(projeto.projeto_id); toggleDropdown(null)">Excluir</a>
+                (click)="deletarProjeto(projeto.projeto_id); toggleDropdown(projeto.projeto_id)">Excluir</a>
             </li>
             <!--
                 }

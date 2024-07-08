@@ -1,91 +1,47 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { ProjetoService } from '../../service/projeto.service';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Projeto } from '../../interface/projeto';
-import { Empresa } from '../../interface/empresa';
-import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../service/usuario.service';
-import { Usuario } from '../../interface/usuario';
-import { PermissionamentoUsuario } from '../../interface/permissionamento-usuario';
-import { PermissionamentoService } from '../../service/permissionamento.service';
 import { ModalEditProjetoComponent } from "./modal-edit-projeto/modal-edit-projeto.component";
+import { Projeto } from '../../interface/projeto';
+import { Router } from '@angular/router';
+import { ProjetoService } from '../../service/projeto.service';
+import { Empresa } from '../../interface/empresa';
+import { EmpresaService } from '../../service/empresa.service';
 
 @Component({
-    selector: 'app-home-arquivos-components',
-    standalone: true,
-    templateUrl: './home-arquivos-components.component.html',
-    styleUrl: './home-arquivos-components.component.css',
-    imports: [CommonModule, ModalEditProjetoComponent]
+  selector: 'app-home-arquivos-components',
+  standalone: true,
+  templateUrl: './home-arquivos-components.component.html',
+  styleUrl: './home-arquivos-components.component.css',
+  imports: [CommonModule, ModalEditProjetoComponent]
 })
 export class HomeArquivosComponentsComponent implements OnInit {
 
-  /**
-  empresa!: Empresa;
-  lista = [];
-  empresaSelecionada : Empresa| null = null;
-  private empresaSubscription!: Subscription;
-  usuarioAutenticado : Usuario | null = null;
-  private usuarioAutenticadoSubscription!: Subscription;
-
-  constructor(private projetoService: ProjetoService, usuarioService: UsuarioService, private router: Router) {
-    this.usuarioAutenticadoSubscription = usuarioService.usuarioAutenticado$.subscribe(
-      usuario => {
-        this.usuarioAutenticado = usuario;
-      }
-    )
-  }
-
-  ngOnInit(): void {
-    let usuarioId = 4;
-    let usuarioTipo = 2;   //1=comun e admin | 2=superadmin
-    this.getEmpresa(usuarioId, usuarioTipo);
-    this.carregarProjeto(4, 4);
-  }
-  
-  carregarProjeto(empresaId: number, usuarioId: number) {
-    this.projetoService.findProjetosDaEmpresaIdDoUsuarioId(empresaId ,usuarioId).subscribe({
-      next: (projetos)=> {
-        this.projetos = projetos;
-      },
-      error: (error)=> console.log(error),
-    });
-  }
-
-  carregarProjetoSuperAdmin(empresaId: number) {
-    this.projetoService.findProjetosDaEmpresaId(empresaId).subscribe({
-      next: (projetos)=> {
-        this.projetos = projetos;
-      },
-      error: (error)=> console.log(error),
-    });
-  }
-  */
-
   email: string | null = null;
   idUsuario!: number;
-  permissionamento: PermissionamentoUsuario[] = [];
   projetos: Projeto[] = [];
-  openedDropdownId: number | null = null;
+  openedDropdownProjetoId: number | null = null;
+  projetoSelecionado: Projeto | null = null;
 
-  constructor(
+  constructor(private empresaService: EmpresaService,
     private projetoService: ProjetoService,
     private usuarioService: UsuarioService,
-    private permissionamentoService: PermissionamentoService,
     private router: Router,
-    private route: ActivatedRoute,
     private elementRef: ElementRef,
   ) { }
 
   ngOnInit(): void {
     this.email = sessionStorage.getItem('email');
-
     if (this.email) {
       this.usuarioService.getUsuarioPorEmail(this.email).subscribe(
         (usuario) => {
           this.idUsuario = usuario?.usuario_id;
-          sessionStorage.setItem("id", this.idUsuario.toString());
-          this.fetchProject(this.idUsuario);
+          const empresaId = usuario?.empresa_id;
+          if (this.idUsuario && empresaId) {
+            sessionStorage.setItem('id', this.idUsuario.toString());
+            sessionStorage.setItem('empresaId', empresaId.toString());
+            this.carregarProjetosDaEmpresaId(empresaId); // Carrega projetos da empresa do usuário
+          }
         },
         (error) => {
           console.error('Erro ao buscar usuário pelo email', error);
@@ -94,15 +50,28 @@ export class HomeArquivosComponentsComponent implements OnInit {
     }
   }
 
-  fetchProject(id: number): void {
-    this.permissionamentoService.getProjectById(id).subscribe((data: PermissionamentoUsuario[]) => {
-      this.permissionamento = data;
+  carregarProjetosDaEmpresaId(empresaId: number) {
+    this.projetoService.getProjetosDaEmpresaId(empresaId).subscribe({
+      next: (projetos) => {
+        this.projetos = projetos;
+        this.carregarEmpresaNome(projetos);
+      },
+      error: (error) => console.log(error),
     });
   }
 
-  onSelect(project: PermissionamentoUsuario): void {
-    const id = project.projeto_id
-    this.router.navigate(['/disciplinas', id]);
+  carregarEmpresaNome(projeto: Projeto[]): void {
+    projeto.forEach((proj: Projeto) => {
+      this.empresaService.getEmpresaById(proj.empresa_id).subscribe(
+        (empresa: Empresa) => {
+          if (projeto) {
+            proj.empresa_nome = empresa.empresa_nome || '';
+          } else {
+            proj.empresa_nome = '';
+          }
+        },
+      );
+    });
   }
 
   deletarProjeto(idProjeto: number | undefined): void {
@@ -110,27 +79,44 @@ export class HomeArquivosComponentsComponent implements OnInit {
       console.error("Não é possível excluir o projeto: idProjeto está indefinido");
       return;
     }
-    this.projetoService.remove(idProjeto).subscribe(() => {
+    this.projetoService.excluirProjeto(idProjeto).subscribe(() => {
       this.projetos = this.projetos.filter(
         (p) => p.projeto_id !== idProjeto
       );
     });
-    this.openedDropdownId = null;
+    this.openedDropdownProjetoId = null;
   }
 
-
-  toggleDropdown(projetoId: number | null) {
-    if (this.openedDropdownId === projetoId) {
-      this.openedDropdownId = null; // Fecha o dropdown se já estiver aberto
+  // Método para alternar o estado do dropdown com base no projeto selecionado
+  toggleDropdown(projetoId: number | undefined) {
+    const id = projetoId !== undefined ? projetoId : null;
+    // Verifica se o dropdown atualmente aberto é o mesmo do projetoId recebido
+    if (this.openedDropdownProjetoId === id) {
+      this.openedDropdownProjetoId = null; // Fecha o dropdown se já estiver aberto
     } else {
-      this.openedDropdownId = projetoId; // Abre o dropdown se estiver fechado
+      this.openedDropdownProjetoId = id; // Abre o dropdown se estiver fechado
     }
   }
 
+
+  // Listener para o evento de clique em todo o documento
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
+    // Verifica se o alvo do evento de clique está dentro do elemento deste componente
     if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.openedDropdownId = null; // Fecha o dropdown se clicar fora do card
+      this.openedDropdownProjetoId = null; // Fecha o dropdown se clicar fora do card
+    }
+  }
+
+  onSelect(projeto: Projeto): void {
+    const id = projeto.projeto_id
+    this.router.navigate(['/disciplinas', id]);
+  }
+
+  detalharProjeto(projeto: Projeto) {
+    if (!this.projetoSelecionado) {
+      this.projetoService.setProjetoSelecionado(projeto);
+      this.projetoSelecionado = projeto;
     }
   }
 

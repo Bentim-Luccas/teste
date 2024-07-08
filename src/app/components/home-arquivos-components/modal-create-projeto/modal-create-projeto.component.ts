@@ -19,7 +19,8 @@ export class ModalCreateProjetoComponent {
     //  projeto_data_inicio: new FormControl('', Validators.required),
     //  projeto_data_fim: new FormControl('', Validators.required),
     projeto_orcamento: new FormControl('', Validators.required),
-    empresa_id: new FormControl(4, Validators.required)
+    empresa_id: new FormControl(4, Validators.required),
+    projeto_status: new FormControl(1, Validators.required)
 
   });
 
@@ -28,7 +29,7 @@ export class ModalCreateProjetoComponent {
 
   onSubmit() {
     console.log(this.projetoForm.value);
-    this.projetoService.post(<Projeto>this.projetoForm.value).subscribe({
+    this.projetoService.cadastrarProjeto(<Projeto>this.projetoForm.value).subscribe({
       next: (response) => {
         console.log(response);
         this.closeModal();
