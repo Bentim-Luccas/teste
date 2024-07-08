@@ -9,7 +9,7 @@
           </svg>
         </button>
       </div>
-      <input type="text" id="simple-search" class="bg-white border border-[color:var(--cinza-border)] text-gray-900 text-sm rounded-s-lg focus:ring-blue-500 focus:border-blue-500 block w-[32rem] ps-10 p-2.5" placeholder="Pesquisar" required />
+      <input (input)="atualizarPesquisa($any($event.target).value)" type="search" id="simple-search earch-bar" class="bg-white border border-[color:var(--cinza-border)] text-gray-900 text-sm rounded-s-lg focus:ring-blue-500 focus:border-blue-500 block w-[32rem] ps-10 p-2.5" placeholder="Pesquisar" required />
     </div>
     <button type="submit" class="p-3 ps-3 text-sm font-medium text-white bg-[#282626] rounded-e-lg border hover:bg-gray-800">
       <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
