@@ -28,7 +28,7 @@ import { Projeto } from '../../interface/projeto';
 export class MenuLateralComponent implements OnInit {
 
   usuarioAutenticado: Usuario | null = null;
-  private usuarioAutenticadoSubscription!: Subscription;
+  usuarioAutenticadoSubscription!: Subscription;
 
   constructor(   private projetoService: ProjetoService,private disciplinaService: DisciplinaService,private empresaService: EmpresaService,private etapaService: EtapaService, private usuarioService: UsuarioService,private router: Router) {}
 
@@ -48,30 +48,21 @@ export class MenuLateralComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const storedUser = localStorage.getItem('usuarioAutenticado');
+    const storedUser = sessionStorage.getItem('usuarioAutenticado');
     if (storedUser) {
       this.usuarioAutenticado = JSON.parse(storedUser);
-      this.initializeComponent();
+      this.getEmpresas(this.usuarioAutenticado!.usuario_id);
     } else {
-
-      this.usuarioAutenticadoSubscription = this.usuarioService.usuarioAutenticado$.subscribe(
-        usuario => {
+      this.usuarioService.getUsuarioAutenticado().subscribe({
+        next: (usuario) => {
           this.usuarioAutenticado = usuario;
-          if (this.usuarioAutenticado) {
-            localStorage.setItem('usuarioAutenticado', JSON.stringify(this.usuarioAutenticado));
-            this.initializeComponent();
-          }
+          sessionStorage.setItem('usuarioAutenticado', JSON.stringify(usuario));
+          this.getEmpresas(this.usuarioAutenticado!.usuario_id);
         }
-      );
+      });
     }
   }
 
-  initializeComponent(): void {
-    if (this.usuarioAutenticado) {
-      this.getEmpresas(this.usuarioAutenticado.usuario_id);
-      console.log(this.usuarioAutenticado.empresa_id)
-    }
-  }
 
   // buscaEmpresaPorNome() {
   //   console.log(this.formBusca.value.empresa_nome);

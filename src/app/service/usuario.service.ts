@@ -35,10 +35,9 @@ export class UsuarioService {
   usuarioAutenticado$ = this.usuarioAutenticadoSubject.asObservable();
 
 
-
-
   private autorSelecionadoSubject = new BehaviorSubject<Usuario | null>(null);
   autor$ = this.autorSelecionadoSubject.asObservable();
+
   private revisorSelecionadoSubject = new BehaviorSubject<Usuario | null>(null);
   revisor$ = this.revisorSelecionadoSubject.asObservable();
 
@@ -96,8 +95,9 @@ export class UsuarioService {
 
   /* ======================== Service para comunicação de componentes=========== */
 
-
-
+  getUsuarioAutenticado(): Observable<Usuario | null> {
+    return this.usuarioAutenticado$;
+  }
 
   setUsuarioAutenticado(usuario: Usuario | null) {
     this.usuarioAutenticadoSubject.next(usuario);
