@@ -51,9 +51,9 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
 
   detalharEtapa(etapa: Etapa) {
     if (!this.etapaSelecionada) {
-        this.etapaService.setEtapaSelecionada(etapa);
-        this.etapaSelecionada = etapa;
+      this.etapaService.setEtapaSelecionada(etapa);
+      this.etapaSelecionada = etapa;
     }
-}
+  }
 
 }
