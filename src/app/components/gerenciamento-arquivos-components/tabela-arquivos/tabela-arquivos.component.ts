@@ -56,6 +56,21 @@ export class TabelaArquivosComponent implements OnInit {
 
   }
 
+  toggleDropdown(id: string) {
+    const dropdown = document.getElementById('dropdownDivider-' + id);
+    if (dropdown) {
+      dropdown.classList.toggle('hidden');
+    }
+  }
+
+  deletarArquivo(arquivo: any) {
+    // Sua lógica para deletar o arquivo
+  }
+
+  editarArquivo(arquivo: any) {
+    // Sua lógica para editar o arquivo
+  }
+
   // ngOnInit() {
   //   this.arquivoService.findAll().subscribe((data) => {
   //     this.listaArquivos = data.map(arquivo => ({ ...arquivo, mostrarDetalhes: false }));
