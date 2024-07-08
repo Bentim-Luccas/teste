@@ -1,6 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ArquivoMenuDropdownComponent } from '../arquivo-menu-dropdown/arquivo-menu-dropdown.component'
-import { TabsArquivosComponent } from '../tabs-arquivos/tabs-arquivos.component'
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { ArquivoMenuDropdownComponent } from '../arquivo-menu-dropdown/arquivo-menu-dropdown.component';
+import { TabsArquivosComponent } from '../tabs-arquivos/tabs-arquivos.component';
 import { ArquivoService } from '../../../service/arquivo.service';
 import { Arquivo } from '../../../interface/arquivo';
 import { log } from 'console';
@@ -8,52 +14,69 @@ import { CommonModule } from '@angular/common';
 import { VersoesArquivoComponent } from './versoes-arquivo/versoes-arquivo.component';
 import { ListaCompartilhadaService } from '../../../service/listaCompartilhada.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tabela-arquivos',
   standalone: true,
-  imports: [ArquivoMenuDropdownComponent, TabsArquivosComponent, CommonModule, VersoesArquivoComponent],
+  imports: [
+    ArquivoMenuDropdownComponent,
+    TabsArquivosComponent,
+    CommonModule,
+    VersoesArquivoComponent,
+  ],
   templateUrl: './tabela-arquivos.component.html',
-  styleUrl: './tabela-arquivos.component.css'
+  styleUrl: './tabela-arquivos.component.css',
 })
-export class TabelaArquivosComponent implements OnInit {
-
-  listaArquivos: Arquivo[] = []
+export class TabelaArquivosComponent implements OnInit, OnDestroy {
+  listaArquivos: Arquivo[] = [];
   usuarioId!: number;
+  arquivo!: Arquivo;
+  etapaId!: number;
 
   @Output() testeChange = new EventEmitter<Arquivo[]>();
 
-  listaArquivosMarcados :  Arquivo[] = [];
+  listaArquivosMarcados: Arquivo[] = [];
 
-
-  constructor(private arquivoService: ArquivoService, private listaCompartilhadaService: ListaCompartilhadaService, private router: ActivatedRoute) { }
-
+  constructor(
+    private arquivoService: ArquivoService,
+    private listaCompartilhadaService: ListaCompartilhadaService,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.router.params.subscribe(params => {
+      this.etapaId = params['id'];
+      console.log('etapaid',this.etapaId);
+    });
     this.router.queryParamMap.subscribe((params: ParamMap) => {
       if (params.has('listaId')) {
         const id = params.get('listaId');
-        this.listaCompartilhadaService.getArquivosListaCompartilhada(id).subscribe((data) => {
-          const seenIds = new Set();
-          const uniqueItems = data.filter((item: any) => {
-            if (seenIds.has(item.arquivo_id)) {
-              return false;
-            } else {
-              seenIds.add(item.arquivo_id);
-              return true;
-            }
+        this.listaCompartilhadaService
+          .getArquivosListaCompartilhada(id)
+          .subscribe((data) => {
+            const seenIds = new Set();
+            const uniqueItems = data.filter((item: any) => {
+              if (seenIds.has(item.arquivo_id)) {
+                return false;
+              } else {
+                seenIds.add(item.arquivo_id);
+                return true;
+              }
+            });
+            this.listaArquivos = uniqueItems;
           });
-          this.listaArquivos = uniqueItems;
-        })
       } else {
-        this.arquivoService.getArquivosPais().subscribe((data) => {
+        this.arquivoService.findByEtapaId(this.etapaId).subscribe((data) => {
           this.listaArquivos = data
-        })
+          console.log(this.listaArquivos);
+        });
       }
     });
+  }
 
-
-
+  ngOnDestroy(): void {
+    this.arquivoService.apagarArquivoSelecionado();
   }
 
   toggleDropdown(id: string) {
@@ -71,22 +94,15 @@ export class TabelaArquivosComponent implements OnInit {
     // Sua lógica para editar o arquivo
   }
 
-  // ngOnInit() {
-  //   this.arquivoService.findAll().subscribe((data) => {
-  //     this.listaArquivos = data.map(arquivo => ({ ...arquivo, mostrarDetalhes: false }));
-  //   });
-  // }
-
-
   detalharArquivo(arquivo: Arquivo) {
-    console.log("setando o arquivo ", arquivo);
+    console.log('setando o arquivo ', arquivo);
     // this.arquivoService.getVersaoRecente(4, arquivo.arquivo_descricao).subscribe(data => {
     //  console.log("setando o recente:", data)
     //  this.arquivoService.setArquivoRecente(data)
     // })
 
     this.arquivoService.setArquivoSelecionado(arquivo);
-
+    this.arquivo = arquivo;
   }
 
   stringToDate(stringDate: string | Date): Date {
@@ -108,33 +124,11 @@ export class TabelaArquivosComponent implements OnInit {
   }
 
   checkboxUnchecked(arquivo: any) {
-    const indice = this.listaArquivosMarcados.findIndex(a => a.arquivo_id === arquivo.arquivo_id);
+    const indice = this.listaArquivosMarcados.findIndex(
+      (a) => a.arquivo_id === arquivo.arquivo_id
+    );
     if (indice !== -1) {
-      this.listaArquivosMarcados.splice(indice, 1);}
+      this.listaArquivosMarcados.splice(indice, 1);
+    }
   }
-
-  pastas: Pasta[] = [
-    {
-      nome: 'Documentos'
-    },
-    {
-      nome: 'Planta Projeto'
-    },
-  ]
-  ;
-
-}
-export class Pasta {
-  nome!: string;
-}
-
-export class ArquivoMockado {
-  mostrarDetalhes!: boolean;
-}
-
-export class Versao {
-  arquivo_descricao!: string;
-  arquivo_data!: string;
-  arquivo_versao!: number;
-  arquivo_status!: string;
 }

@@ -33,6 +33,10 @@ export class ArquivoService {
   findAll() : Observable<Arquivo[]>  {
     return this.http.get<Arquivo[]>(this.baseUrl, httpOptions)
   }
+  
+  findByEtapaId(etapaId: number): Observable<Arquivo[]> {
+    return this.http.get<Arquivo[]>(`${this.baseUrl}/ArquivosEtapa/${etapaId}`)
+  }
 
   getVersoesPorId(arquivoId: string) : Observable<Arquivo[]> {
     return this.http.get<Arquivo[]>(`${this.baseUrl}/versoes/${arquivoId}`)
@@ -76,6 +80,11 @@ export class ArquivoService {
   getArquivoFromS3(link:string){
     return this.http.get(link,{responseType:'blob',observe:'response'})
   }
+
+  apagarArquivoSelecionado() {
+    this.arquivoSelecionadoSubject.next(null);
+  }
+
   getArquivosSizeByProjetoId(projetoId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/size-by-projeto/${projetoId}`);
   }
