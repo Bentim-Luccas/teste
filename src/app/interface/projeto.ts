@@ -11,4 +11,7 @@ export interface Projeto {
     disciplinas : Disciplina[];
     permissionamento_tipo : string;
     dropdownOpen: boolean;
+    projeto_status: number;
+    disciplinas_ativas: number;
+  disciplinas_inativas: number;
 }

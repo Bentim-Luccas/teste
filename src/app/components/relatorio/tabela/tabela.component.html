@@ -1,6 +1,7 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <app-breadcrumb></app-breadcrumb>
   <div class="flex justify-end mb-4">
-    <button type="button" (click)="gerarRelatorio()" data-modal-target="modal-create" data-modal-toggle="modal-create" type="button"
+    <button type="button" (click)="GerarRelatorio()" [disabled]="!dadosCarregados"data-modal-target="modal-create" data-modal-toggle="modal-create" type="button"
         class="px-14 py-4 text-md font-semibold text-white inline-flex items-center bg-[color:var(--cinza-principal-escuro)] hover:bg-[color:var(--cinza-principal-medio)] rounded-lg text-center">
         <svg class="w-10 h-8 text-white text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -11,6 +12,7 @@
         Gerar relatório
     </button>
 </div>
+
   <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
     <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
       <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -67,49 +69,35 @@
     </div>
   </div>
 
-
-  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+  <table class="w-full text-sm text-left text-black dark:text-gray-400 sm:rounded-lg" >
+    <thead class="text-xs text-white uppercase bg-black rounded-lg dark:bg-gray-700 " >
       <tr>
-        <th scope="col" class="p-4">
-          <div class="flex items-center">
-            <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-all-search" class="sr-only">checkbox</label>
-          </div>
-        </th>
-        <th scope="col" class="px-6 py-3">Nome</th>
-        <th scope="col" class="px-6 py-3">Data</th>
+
         <th scope="col" class="px-6 py-3">Projeto</th>
-        <th scope="col" class="px-6 py-3">Etapa</th>
-        <th scope="col" class="px-6 py-3">Autor</th>
+        <th scope="col" class="px-6 py-3">Disciplinas ativas</th>
+        <th scope="col" class="px-6 py-3">Disciplinas inativas</th>
+        <th scope="col" class="px-6 py-3">Data de inicio</th>
+        <th scope="col" class="px-6 py-3">Data de fim</th>
+        <th scope="col" class="px-6 py-3">Projeto orçamento</th>
+        <th scope="col" class="px-6 py-3">Status</th>
       </tr>
     </thead>
     <tbody>
-      @for (arquivo of listaArquivos; track arquivo){
-      <tr  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td class="w-4 p-4">
-          <div class="flex items-center">
-            <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-          </div>
-        </td>
+      <tr *ngFor="let projeto of projetos" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          {{ arquivo.arquivo_descricao }}
+          {{ projeto.projeto_descricao }}
         </th>
-        <td class="px-6 py-4">
-          {{ arquivo.arquivo_data | date:'dd/MM/yyyy' }}
+        <td class="px-6 py-4 whitespace-nowrap">{{ projeto.disciplinas_ativas }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">{{ projeto.disciplinas_inativas }}</td>
+        <td class="px-6 py-4">{{ projeto.projeto_data_inicio | date: 'mediumDate' }}</td>
+        <td class="px-6 py-4">{{ projeto.projeto_data_fim | date: 'mediumDate' }}</td>
+        <td class="px-6 py-4">{{ projeto.projeto_orcamento | currency:'BRL' }}</td>
+        <td class="px-4 py-3">
+          <span *ngIf="projeto.projeto_status === -1" class="bg-red-200 text-green-800 rounded-full px-2.5 py-0.5">Inativo</span>
+          <span *ngIf="projeto.projeto_status === 1" class="bg-green-200 text-green-800 rounded-full px-2.5 py-0.5">Ativo</span>
         </td>
-        <td class="px-6 py-4">
-          <!-- {{ arquivo.projeto_descricao }} -->
-        </td>
-        <td class="px-6 py-4">
-          <!-- {{ arquivo.etapa_descricao }} -->
-        </td>
-        <td class="px-6 py-4">
-          {{ arquivo.autor }}
-        </td>
-      </tr>}
+      </tr>
     </tbody>
   </table>
-
 </div>

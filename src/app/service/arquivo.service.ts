@@ -1,6 +1,6 @@
 import { HttpBackend, HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { Arquivo } from '../interface/arquivo';
 import { environment } from '../../environments/environment';
 import { ProjetoS3 } from '../interface/projetos3';
@@ -32,6 +32,10 @@ export class ArquivoService {
 
   findAll() : Observable<Arquivo[]>  {
     return this.http.get<Arquivo[]>(this.baseUrl, httpOptions)
+  }
+  
+  findByEtapaId(etapaId: number): Observable<Arquivo[]> {
+    return this.http.get<Arquivo[]>(`${this.baseUrl}/ArquivosEtapa/${etapaId}`)
   }
 
   getVersoesPorId(arquivoId: string) : Observable<Arquivo[]> {
@@ -76,6 +80,15 @@ export class ArquivoService {
   getArquivoFromS3(link:string){
     return this.http.get(link,{responseType:'blob',observe:'response'})
   }
+
+  apagarArquivoSelecionado() {
+    this.arquivoSelecionadoSubject.next(null);
+  }
+
+  getArquivosSizeByProjetoId(projetoId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/size-by-projeto/${projetoId}`);
+  }
+
 }
 
 

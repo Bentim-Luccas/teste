@@ -13,12 +13,20 @@
     <div class="meio space-y-8">
       <div class="barra-esquerda"></div>
 
-      <div class="secao1 mb-8 ml-8">
-        <app-calendar></app-calendar>
+      <div class="secao1 mb-8">
+        <!-- <div class="breadcrumb-search"> -->
+          <!-- <app-breadcrumb></app-breadcrumb> -->
+          <!-- <app-search></app-search> -->
+        <!-- </div> -->
+        <app-dropdown></app-dropdown>
       </div>
       <div class="secao2 mb-8">
         <div class="secao-cards mb-8" style="width: 75%;">
           <app-cards
+            [listaUsuarios]="listaUsuarios"
+            [listaUsuariosAtivos]="listaUsuariosAtivos"
+            [listaEmpresas]="listaEmpresas"
+            [listaProjetos]="listaProjetos"
             [listaArquivos]="listaArquivos"
             [listaArquivosAprovados]="listaArquivosAprovados"
             [listaArquivosReprovados]="listaArquivosReprovados"
@@ -29,7 +37,8 @@
           </div>
         </div>
         <div class="arquivos" style="width: 35%;">
-          <app-arquivos-recentes></app-arquivos-recentes>
+          <!-- <app-grafico style="flex: 1;margin-top: 1vw;"></app-grafico> -->
+          <app-grafico></app-grafico>
         </div>
       </div>
     </div>

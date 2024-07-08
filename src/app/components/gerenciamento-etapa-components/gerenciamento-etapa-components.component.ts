@@ -24,6 +24,7 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
     private activateRouter: ActivatedRoute,
     private router: Router) { }
 
+
   ngOnInit(): void {
     this.CarregarEtapasDeDisciplinaIdDeProjetoDaEmpresaDoUsuarioId(Number(this.activateRouter.snapshot.paramMap.get('id')), Number(sessionStorage.getItem('id')))
   }
@@ -36,7 +37,6 @@ export class GerenciamentoEtapaComponentsComponent implements OnInit {
       error: (error) => console.log(error)
     });
   }
-
 
   deletarEtapa(idEtapa: number): void {
     this.etapaService.excluirEtapa(idEtapa).subscribe(() => {

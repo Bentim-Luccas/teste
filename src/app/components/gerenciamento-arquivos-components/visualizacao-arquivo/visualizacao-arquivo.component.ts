@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ArquivoTagComponent } from '../arquivo-tag/arquivo-tag.component'
 import { Subscription } from 'rxjs';
 import { Arquivo } from '../../../interface/arquivo';
@@ -15,32 +15,32 @@ import { RequestGetArquivoS3 } from '../../../interface/request_get_arquivo_s3';
   templateUrl: './visualizacao-arquivo.component.html',
   styleUrl: './visualizacao-arquivo.component.css'
 })
-export class VisualizacaoArquivoComponent implements OnDestroy {
+export class VisualizacaoArquivoComponent implements OnInit,OnDestroy {
 
   arquivoSelecionado: Arquivo | null = null;
-  private arquivoSubscription: Subscription;
+  private arquivoSubscription!: Subscription;
   autor: Usuario | null = null;
   arquivoRecente!: Arquivo;
   extensao: string = '';
 
   constructor(private arquivoService: ArquivoService, private usuarioService: UsuarioService) {
+  }
 
+  ngOnInit(): void {
     this.arquivoSubscription = this.arquivoService.arquivoSelecionado$.subscribe(
-      arquivo => {
-        this.arquivoSelecionado = arquivo;
-        console.log('Arquivo selecionado: ', this.arquivoSelecionado);
-        if (arquivo) {
-          this.buscarAutor(arquivo.usuario_id);
-          this.arquivoService.getVersaoRecente(4, this.arquivoSelecionado!.arquivo_descricao).subscribe(data => {
-            this.arquivoRecente = data[0]
-            console.log('arquivo recente', this.arquivoRecente);
-            this.extensao = this.getFileExtension(this.arquivoRecente.arquivo_descricao)!.toUpperCase()
-            console.log('extensao:',this.extensao)
-          })
-        }
+    arquivo => {
+      this.arquivoSelecionado = arquivo;
+      console.log('Arquivo selecionado: ', this.arquivoSelecionado);
+      if (arquivo) {
+        this.buscarAutor(arquivo.usuario_id);
+        this.arquivoService.getVersaoRecente(4, this.arquivoSelecionado!.arquivo_descricao).subscribe(data => {
+          this.arquivoRecente = data[0]
+          console.log('arquivo recente', this.arquivoRecente);
+          this.extensao = this.getFileExtension(this.arquivoRecente.arquivo_descricao)!.toUpperCase()
+          console.log('extensao:',this.extensao)
+        })
       }
-    );
-    // this.arquivoService.getVersaoRecente(4, this.arquivoSelecionado!.arquivo_descricao)
+    });
   }
 
   ngOnDestroy() {
@@ -49,8 +49,6 @@ export class VisualizacaoArquivoComponent implements OnDestroy {
       this.autor = null
     }
   }
-
-
 
   buscarAutor(usuarioId: number) {
     this.usuarioService.findByid(usuarioId).subscribe(
@@ -94,14 +92,8 @@ export class VisualizacaoArquivoComponent implements OnDestroy {
           document.body.removeChild(link);
 
         }
-
-
       })
     })
-
-
   }
-
-
 }
 
