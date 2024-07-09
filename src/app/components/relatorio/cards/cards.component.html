@@ -1,52 +1,52 @@
 <div class="principal">
-  <div class="cards-cima">
-    <!-- Card 1 -->
-    <div class="card max-w-custom p-6 bg-cards border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="/usuarios">
-        <h5 class="mb-2 text-2x1 font-semibold tracking-tight text-gray-900 dark:text-white">Total de Usuários</h5>
+  <div class="cards flex flex-wrap justify-around">
+    <div class="card">
+      <div class="card-content">
+        <a href="/usuarios">
+        <h5 class="card-title">Total de usuários</h5></a>
+        <h3 class="card-number">{{ listaUsuarios.length }} / 80</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <h5 class="card-title">Empresas</h5>
+        <h3 class="card-number">{{ listaEmpresas.length }} / 60</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <a href="/relatorio-arquivo">
+
+        <h5 class="card-title">Projetos</h5></a>
+        <h3 class="card-number">{{ listaProjetos.length | number }}</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <a href="/arquivos/1">
+        <h5 class="card-title">Arquivos</h5>
       </a>
-      <h3>{{listaUsuarios.length}}</h3>
+        <h3 class="card-number">{{ listaArquivos.length | number }}</h3>
+      </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="card max-w-custom p-6 bg-cards border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <h5 class="mb-2 text-2x1 font-semibold tracking-tight text-gray-900 dark:text-white">Empresas</h5>
-      <h3>{{listaEmpresas.length}}</h3>
+    <div class="card">
+      <div class="card-content">
+        <h5 class="card-title">Espaço Usado</h5>
+        <h3 class="card-number">{{ tamanhoTotalProjeto ? tamanhoTotalProjeto + ' MB' : 'Dados não disponíveis' }}</h3> <!-- Conditional data display -->
+      </div>
     </div>
 
-    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-content">
+        <a href="/usuarios">
 
-    <div class="card max-w-custom p-6 bg-cards border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="/relatorio-arquivo">
-        <h5 class="mb-2 text-2x1 font-semibold tracking-tight text-gray-900 dark:text-white">Quantidade de Projetos</h5>
-      </a>
-      <h3>{{listaProjetos.length}}</h3>
-    </div>
-  </div>
-
-  <div class="cards-abaixo">
-    <!-- Card 4 -->
-    <div class="card max-w-custom p-6 bg-cards border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="/arquivos">
-        <h5 class="mb-2 text-2x1 font-semibold tracking-tight text-gray-900 dark:text-white">Total de Arquivos</h5>
-      </a>
-      <h3>{{listaArquivos.length}}</h3>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="card max-w-custom p-6 bg-cards border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-      <h5 class="mb-2 text-2x1 font-semibold tracking-tight text-gray-900 dark:text-white">Consumo total</h5>
-
-        <h3>{{ tamanhoTotalProjeto ? tamanhoTotalProjeto + ' MB' : 'Dados não disponíveis' }}</h3>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="card max-w-custom p-6 bg-cards border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="/usuarios">
-        <h5 class="mb-2 text-2x1 font-semibold tracking-tight text-gray-900 dark:text-white">Usuários Ativos</h5>
-      </a>
-      <h3>{{listaUsuariosAtivos.length}}</h3>
+        <h5 class="card-title">Usuarios Ativos</h5></a>
+        <h3 class="card-number">{{listaUsuariosAtivos.length}}</h3>
+      </div>
     </div>
   </div>
 </div>
