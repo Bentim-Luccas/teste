@@ -53,10 +53,10 @@ export class CriacaoUsuarioModalComponent implements OnInit {
       usuario_cpf: ['', Validators.required],
       usuario_cnpj: [''],
       usuario_endereco: ['', Validators.required],
-      usuario_status: [0, Validators.required],
       usuario_cargo: ['', Validators.required],
-      empresa_id: [0, Validators.required],
-      usuario_tipo: [0, Validators.required],
+      usuario_status: [1, Validators.required],
+      empresa_id: [4, Validators.required],
+      usuario_tipo: [1, Validators.required],
     });
   }
 
