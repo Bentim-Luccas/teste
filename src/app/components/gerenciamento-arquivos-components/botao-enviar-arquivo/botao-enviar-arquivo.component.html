@@ -24,7 +24,7 @@
           </div>
 
           <!-- Modal body Form -->
-          <form  class="p-4 md:p-5">
+          <form [formGroup]="formulario" class="p-4 md:p-5">
             <div class="grid gap-6 mb-6">
               <div>
                 <label for="file_name" class="block mb-2 text-sm font-medium text-[color:var(--cinza-principal-escuro)] ">Nome
@@ -39,6 +39,11 @@
                 <input type="text" id="file_comment"
                   class="bg-white border border-[color:var(--cinza-border)]text-[color:var(--cinza-principal-escuro)] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   placeholder="Comentário" required />
+              </div>
+              <div class="mb-6">
+                @if(formulario.invalid){
+                <p class="mt-1 text-sm text-red-500 dark:text-red-300" id="erro_formulario">Preencha todos os campos</p>
+                }
               </div>
               <div>
                 <label class="block mb-2 text-sm font-medium text-[color:var(--cinza-principal-escuro)]"

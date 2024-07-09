@@ -8,7 +8,7 @@ import { ProjetoS3 } from '../../../interface/projetos3';
 @Component({
   selector: 'app-botao-enviar-arquivo',
   standalone: true,
-  imports: [],
+  imports: [FormsModule,ReactiveFormsModule],
   templateUrl: './botao-enviar-arquivo.component.html',
   styleUrl: './botao-enviar-arquivo.component.css'
 })
@@ -71,7 +71,7 @@ export class BotaoEnviarArquivoComponent {
 
           this.arquivoService.postArquivo(this.arquivo).subscribe(response => {
             console.log('Upload successful', response);
-            
+
             // Faça o que for necessário com a resposta do servidor
           })
         }
