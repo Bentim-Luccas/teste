@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArquivoTagComponent } from '../../components/gerenciamento-arquivos-components/arquivo-tag/arquivo-tag.component'
 import { BarraPesquisaComponent } from '../../components/gerenciamento-arquivos-components/barra-pesquisa/barra-pesquisa.component'
 import { ModalButtonComponent, ModalEnviarArquivoComponent } from '../../components/gerenciamento-arquivos-components/modal-enviar-arquivo/modal-enviar-arquivo.component'
@@ -9,6 +9,7 @@ import { MenuLateralComponent } from '../../components/menu-lateral/menu-lateral
 import { TrackPageArquivoComponent } from '../../components/gerenciamento-arquivos-components/track-page-arquivo/track-page-arquivo.component'
 import { ModalArquivoListaCompartilhadaComponent } from '../../components/gerenciamento-arquivos-components/modal-arquivo-lista-compartilhada/modal-arquivo-lista-compartilhada.component';
 import { BotaoEnviarArquivoComponent } from '../../components/gerenciamento-arquivos-components/botao-enviar-arquivo/botao-enviar-arquivo.component';
+import { initFlowbite } from 'flowbite';
 
 
 @Component({
@@ -19,12 +20,16 @@ import { BotaoEnviarArquivoComponent } from '../../components/gerenciamento-arqu
   templateUrl: './gerenciamento-arquivos.component.html',
   styleUrl: './gerenciamento-arquivos.component.css'
 })
-export class GerenciamentoArquivosComponent {
+export class GerenciamentoArquivosComponent implements OnInit{
+
+
 
   dadosRecebidos: any;
 
   onTesteChange(arquivo: any) {
     this.dadosRecebidos = arquivo;
   }
-
+  ngOnInit(): void {
+    initFlowbite()
+  }
 }

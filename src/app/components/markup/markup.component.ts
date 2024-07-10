@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { RequestPutMarkupS3 } from '../../interface/request-put-s3-markup.dto';
 import { response } from 'express';
 import { CreateMarkUpDto } from '../../interface/create-mark-up.dto';
+import { initFlowbite } from 'flowbite';
 
 
 export class MeuModulo { }
@@ -22,7 +23,7 @@ export class MeuModulo { }
   templateUrl: './markup.component.html',
   styleUrls: ['./markup.component.css']
 })
-export class MarkupComponent{
+export class MarkupComponent implements OnInit{
 
   markups: ComentarioMarkup[] = [];
   // @ViewChild('novoMarkup') novoMarkupInput!: ElementRef;
@@ -54,6 +55,9 @@ export class MarkupComponent{
       file_name :['', Validators.required],
       comentario :['', Validators.required]
     })
+  }
+  ngOnInit(): void {
+    initFlowbite()
   }
 
 
