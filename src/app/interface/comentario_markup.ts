@@ -16,5 +16,8 @@ export interface ComentarioMarkup {
         arquivo_comentario_markup_data: Date | null,
         arquivo_comentario_id: number
     }
-  ]
+  ];
+  usuario: {
+    usuario_nome: string
+  }
 }
