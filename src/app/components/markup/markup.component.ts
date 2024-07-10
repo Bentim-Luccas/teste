@@ -1,3 +1,4 @@
+import { Usuario } from './../../interface/usuario';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MarkupService } from '../../service/markup.service';
 // import { Markup } from '../../interface/markup';
@@ -11,6 +12,7 @@ import { RequestPutMarkupS3 } from '../../interface/request-put-s3-markup.dto';
 import { response } from 'express';
 import { CreateMarkUpDto } from '../../interface/create-mark-up.dto';
 
+
 export class MeuModulo { }
 
 @Component({
@@ -20,7 +22,7 @@ export class MeuModulo { }
   templateUrl: './markup.component.html',
   styleUrls: ['./markup.component.css']
 })
-export class MarkupComponent  {
+export class MarkupComponent{
 
   markups: ComentarioMarkup[] = [];
   // @ViewChild('novoMarkup') novoMarkupInput!: ElementRef;
@@ -54,9 +56,8 @@ export class MarkupComponent  {
     })
   }
 
-  // ngOnInit(): void {
-  //   this.carregarMarkups();
-  // }
+
+
 
   limpaForm(){
 
@@ -78,7 +79,14 @@ export class MarkupComponent  {
         console.log(res)
         if(res.status==200){
           var markup = new CreateMarkUpDto()
-          markup.usuario_id = 7
+          let usuarioAutenticado = sessionStorage.getItem('usuarioAutenticado')
+          if(usuarioAutenticado){
+            let usuario:Usuario = JSON.parse(usuarioAutenticado)
+            markup.usuario_id = usuario.usuario_id
+
+          }
+
+
           markup.arquivo_id = this.arquivoSelecionado?.arquivo_id
           markup.arquivo_comentario_markup_link_s3 = response.markup_link
           markup.arquivo_comentario_markup_descricao = this.formulario.get("comentario")?.value

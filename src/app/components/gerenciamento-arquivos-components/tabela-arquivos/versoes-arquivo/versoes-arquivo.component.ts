@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../../../service/usuario.service';
 import { Usuario } from '../../../../interface/usuario';
 import { CommonModule } from '@angular/common';
+import { RequestGetArquivoS3 } from '../../../../interface/request_get_arquivo_s3';
 
 @Component({
   selector: 'app-versoes-arquivo',
@@ -27,7 +28,7 @@ export class VersoesArquivoComponent implements  OnInit,OnChanges, OnDestroy {
 
   constructor(private arquivoService: ArquivoService, private usuarioService: UsuarioService) {
   }
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.arquivoSubscription = this.arquivoService.arquivoSelecionado$.subscribe(
       arquivo => {
         this.arquivoSelecionado = arquivo;
@@ -105,6 +106,32 @@ export class VersoesArquivoComponent implements  OnInit,OnChanges, OnDestroy {
   getExtensao(descricao: string): string {
     let partes = descricao.split('.');
     return partes[partes.length - 1];
+  }
+
+  downloadFile(arquivo:Arquivo){
+    console.log(arquivo?.arquivo_link)
+    let req = new RequestGetArquivoS3()
+    if(arquivo?.arquivo_descricao && arquivo.arquivo_link){
+      req.arquivo_descricao = arquivo?.arquivo_descricao
+      req.arquivo_link = arquivo.arquivo_link
+    }
+    this.arquivoService.getArquivoS3(req).subscribe((res)=>{
+      this.arquivoService.getArquivoFromS3(res.s3_pre_signed_link).subscribe((response)=>{
+        console.log(response)
+        if(response.body){
+          const newBlob = new Blob([response.body], { type: response.body.type})
+          const data = window.URL.createObjectURL(newBlob);
+          const link = document.createElement("a");
+          link.href = data;
+          if(this.arquivoSelecionado)
+            link.download = this.arquivoSelecionado.arquivo_descricao;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+        }
+      })
+    })
   }
 
 
