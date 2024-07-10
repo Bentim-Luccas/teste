@@ -97,17 +97,7 @@ export class HomeArquivosComponentsComponent implements OnInit {
       this.openedDropdownProjetoId = id; // Abre o dropdown se estiver fechado
     }
   }
-
-
-  // Listener para o evento de clique em todo o documento
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    // Verifica se o alvo do evento de clique está dentro do elemento deste componente
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.openedDropdownProjetoId = null; // Fecha o dropdown se clicar fora do card
-    }
-  }
-
+  
   onSelect(projeto: Projeto): void {
     const id = projeto.projeto_id
     this.router.navigate(['/disciplinas', id]);
